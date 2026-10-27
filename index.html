@@ -1,315 +1,1237 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر 3Lrehab | المنصة الذكية المتكاملة</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { 50: '#ecfdf5', 500: '#10b981', 600: '#059669', 700: '#047857' }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-    .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 26s linear infinite; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    @media print { body * { visibility: hidden; } #invoice-printable, #invoice-printable * { visibility: visible; } #invoice-printable { position: absolute; left: 0; top: 0; width: 100%; } }
-    .glass-effect { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-    @keyframes floatSlow { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-6px) scale(1.01); } }
-    .animate-float { animation: floatSlow 4s ease-in-out infinite; }
-    .editable-text-highlight { position: relative; cursor: pointer; outline: 1.5px dashed #10b981; outline-offset: 3px; border-radius: 4px; transition: all 0.2s ease; }
-    .editable-text-highlight:hover { background-color: rgba(16, 185, 129, 0.15); outline-color: #34d399; }
-    .editable-text-highlight::after { content: "✏️"; font-size: 10px; margin-right: 4px; opacity: 0.8; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجر 3Lrehab | المنصة الذكية المتكاملة</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- مكتبة html2canvas لتحويل الفواتير وبوالص الشحن لصور عالية الجودة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+tailwind.config = {
+darkMode: 'class',
+theme: {
+extend: {
+colors: {
+brand: {
+50: '#ecfdf5',
+500: '#10b981',
+600: '#059669',
+700: '#047857',
+}
+}
+}
+}
+}
+</script>
+<style>
+@keyframes marquee {
+0% { transform: translateX(0%); }
+100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+display: inline-block;
+white-space: nowrap;
+animation: marquee 26s linear infinite;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+@media print {
+body * { visibility: hidden; }
+#invoice-printable, #invoice-printable * { visibility: visible; }
+#invoice-printable { position: absolute; left: 0; top: 0; width: 100%; }
+}
+.glass-effect {
+backdrop-filter: blur(14px);
+-webkit-backdrop-filter: blur(14px);
+}
+@keyframes floatSlow {
+0%, 100% { transform: translateY(0px) scale(1); }
+50% { transform: translateY(-6px) scale(1.01); }
+}
+.animate-float {
+animation: floatSlow 4s ease-in-out infinite;
+}
+.editable-text-highlight {
+position: relative;
+cursor: pointer;
+outline: 1.5px dashed #10b981;
+outline-offset: 3px;
+border-radius: 4px;
+transition: all 0.2s ease;
+}
+.editable-text-highlight:hover {
+background-color: rgba(16, 185, 129, 0.15);
+outline-color: #34d399;
+}
+.editable-text-highlight::after {
+content: "✏️";
+font-size: 10px;
+margin-right: 4px;
+opacity: 0.8;
+}
+</style>
 </head>
 <body class="min-h-screen bg-[#070B14] text-slate-100 font-sans pb-24 overflow-x-hidden selection:bg-emerald-500 selection:text-slate-950 transition-colors duration-300">
+​<!-- الدخلة الترحيبية السينمائية -->
+<div id="splash-entrance" class="fixed inset-0 z-50 flex items-center justify-center bg-[#050811]/98 backdrop-blur-2xl p-4 transition-all duration-700">
+<div class="relative max-w-md w-full rounded-3xl bg-gradient-to-b from-[#111A30] via-[#0D1424] to-[#070B14] border border-emerald-500/30 p-6 sm:p-8 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] animate-float">
+<div class="absolute -top-16 left-1/2 -translate-x-1/2 w-36 h-36 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+​<div class="relative w-20 h-20 mx-auto mb-4 rounded-3xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-500 p-[2px] shadow-xl shadow-emerald-500/20">
+<div class="w-full h-full bg-[#090E1D] rounded-3xl flex items-center justify-center font-black text-3xl text-emerald-400">
+3L
+</div>
+</div>
+​<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-3">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+<span data-txt="splash_badge">المنصة المعتمدة الأولى لضمان المشتري</span>
+</div>
+​<h1 class="text-2xl sm:text-3xl font-black text-white leading-tight mb-2">
+<span data-txt="splash_welcome">أهلاً بك في متجر</span> 
 
-  <div id="splash-entrance" class="fixed inset-0 z-50 flex items-center justify-center bg-[#050811]/98 backdrop-blur-2xl p-4 transition-all duration-700">
-    <div class="relative max-w-md w-full rounded-3xl bg-gradient-to-b from-[#111A30] via-[#0D1424] to-[#070B14] border border-emerald-500/30 p-6 sm:p-8 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] animate-float">
-      <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-36 h-36 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="relative w-20 h-20 mx-auto mb-4 rounded-3xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-500 p-[2px] shadow-xl shadow-emerald-500/20">
-        <div class="w-full h-full bg-[#090E1D] rounded-3xl flex items-center justify-center font-black text-3xl text-emerald-400">3L</div>
-      </div>
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-3">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span data-txt="splash_badge">المنصة المعتمدة الأولى لضمان المشتري</span>
-      </div>
-      <h1 class="text-2xl sm:text-3xl font-black text-white leading-tight mb-2">
-        <span data-txt="splash_welcome">أهلاً بك في متجر</span> <br>
-        <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent" data-txt="store_title">3Lrehab Smart Store</span>
-      </h1>
-      <p class="text-xs text-slate-300 leading-relaxed mb-5 max-w-sm mx-auto" data-txt="splash_desc">تسوق بأعلى درجات الأمان: افحص وجرب طلبك عملياً يداً بيد أمام مندوب الشحن قبل سداد باقي الحساب!</p>
-      <button onclick="enterStore()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/30 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer group">
-        <span data-txt="splash_btn_text">ابدأ التسوق وتصفح العروض الآن</span>
-      </button>
-    </div>
-  </div>
+<span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent" data-txt="store_title">3Lrehab Smart Store</span>
+</h1>
+​<p class="text-xs text-slate-300 leading-relaxed mb-5 max-w-sm mx-auto" data-txt="splash_desc">
+تسوق بأعلى درجات الأمان: افحص وجرب طلبك عملياً يداً بيد أمام مندوب الشحن قبل سداد باقي الحساب!
+</p>
+​<div class="grid grid-cols-2 gap-2 text-[10px] text-slate-300 font-bold mb-6 text-right">
+<div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+<span class="text-emerald-400 text-sm">🛡️</span>
+<span data-txt="splash_feature_1">ضمان أصلي واستبدال 14 يوم</span>
+</div>
+<div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+<span class="text-cyan-400 text-sm">🚚</span>
+<span data-txt="splash_feature_2">شحن فوري لكافة المحافظات</span>
+</div>
+<div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+<span class="text-amber-400 text-sm">🎓</span>
+<span data-txt="splash_feature_3">خصومات طلاب وكوادر طبية</span>
+</div>
+<div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+<span class="text-rose-400 text-sm">🔒</span>
+<span data-txt="splash_feature_4">حماية وسرية تامة للمشتري</span>
+</div>
+</div>
+​<button onclick="enterStore()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/30 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer group">
+<span data-txt="splash_btn_text">ابدأ التسوق وتصفح العروض الآن</span>
+<svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5m7 7l-7-7 7-7"></path></svg>
+</button>
+</div>
+</div>
+​<!-- نظام الإشعارات المنبثقة التفاعلية -->
+<div id="toast-container" class="fixed top-4 left-4 right-4 z-50 flex flex-col items-center gap-2 pointer-events-none sm:items-end sm:right-6 sm:left-auto"></div>
+​<!-- شريط الإعلانات الترويجي العلوي -->
+<aside class="bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 text-slate-950 font-black py-1.5 overflow-hidden whitespace-nowrap border-b border-emerald-400/30 shadow-md">
+<div id="ticker-container" class="inline-block animate-marquee text-[11px] tracking-wide font-bold">
+<span id="ticker-text" data-txt="ticker_text"></span>
+    •    
+<span id="ticker-text-copy" data-txt="ticker_text"></span>
+</div>
+</aside>
+​<!-- الهيدر الرئيسي -->
+<header class="p-3 bg-[#0C1222]/95 border-b border-slate-800 sticky top-0 z-30 shadow-lg glass-effect">
+<div class="max-w-5xl mx-auto flex justify-between items-center">
+<div onclick="handleSecretAdminClick()" class="cursor-pointer select-none group flex items-center gap-2.5" title="3Lrehab">
+<div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center font-black text-slate-950 text-base shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-all">
+3L
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h1 id="store-name-header" class="font-black text-sm text-white tracking-wide group-hover:text-emerald-400 transition-colors" data-txt="store_name">3Lrehab</h1>
+<span class="text-[9px] bg-emerald-500/20 text-emerald-400 font-bold px-1.5 py-0.2 rounded-full border border-emerald-500/30" data-txt="verified_badge">موثق 🛡️</span>
+</div>
+<p id="admin-status-text" class="text-[9px] text-slate-400 font-medium" data-txt="tagline_text">نظام المعاينة والفحص المسبق قبل السداد</p>
+</div>
+</div>
+​<div class="flex items-center gap-1.5">
+<div id="admin-actions" class="hidden items-center gap-1.5">
+<button id="btn-toggle-live-edit" onclick="toggleLiveEditMode()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer flex items-center gap-1">
+<span>✏️</span>
+<span id="live-edit-status-label">تعديل الكلام</span>
+</button>
+<button onclick="openFolderModal()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-bold px-2 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer">
+📁 المجلدات
+</button>
+<button onclick="openProductModal()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-[10px] font-black px-2 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer">
++ منتج
+</button>
+<button onclick="openModal('settings-modal')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer">
+⚙️ الإدارة
+</button>
+<button onclick="toggleAdmin(false)" title="قفل وضع القيادة" class="p-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 border border-rose-500/30 rounded-xl active:scale-95 transition cursor-pointer">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+</button>
+</div>
+​<button onclick="toggleThemeMode()" class="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700/60 active:scale-95 transition cursor-pointer" title="تبديل المظهر">
+<span id="theme-icon">🌙</span>
+</button>
+​<button onclick="openModal('track-order-modal')" class="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700/60 active:scale-95 transition cursor-pointer" title="تتبع شحنتك">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+</button>
+​<button onclick="openWishlistModal()" class="relative p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-xl border border-rose-500/20 active:scale-95 transition cursor-pointer" title="المفضلة">
+<svg class="w-4 h-4 fill-rose-500 text-rose-500" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+<span id="wishlist-badge" class="hidden absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow">0</span>
+</button>
+​<button onclick="openCart()" class="relative p-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-xl border border-emerald-500/30 active:scale-95 transition cursor-pointer" title="سلة التسوق">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+<span id="cart-badge" class="hidden absolute -top-1 -right-1 bg-emerald-500 text-slate-950 text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow">0</span>
+</button>
+</div>
+</div>
+</header>
+​<!-- واجهة الهيرو والعروض -->
+<section class="p-3 max-w-5xl mx-auto">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0E172E] via-[#101D3D] to-[#0A1021] border border-slate-800 p-5 sm:p-7 shadow-2xl">
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="space-y-3 text-center md:text-right flex-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+<span data-txt="hero_badge">عروض حصرية وخصومات الموسم 2026</span>
+</div>
+<h2 class="text-xl sm:text-3xl font-black text-white leading-tight">
+<span data-txt="hero_heading_1">تسوق براحة بال وتأكيد ذكي</span> 
 
-  <div id="toast-container" class="fixed top-4 left-4 right-4 z-50 flex flex-col items-center gap-2 pointer-events-none sm:items-end sm:right-6 sm:left-auto"></div>
-
-  <aside class="bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 text-slate-950 font-black py-1.5 overflow-hidden whitespace-nowrap border-b border-emerald-400/30 shadow-md">
-    <div id="ticker-container" class="inline-block animate-marquee text-[11px] tracking-wide font-bold">
-      <span id="ticker-text" data-txt="ticker_text"></span> &nbsp;&nbsp;&nbsp; • &nbsp;&nbsp;&nbsp; <span id="ticker-text-copy" data-txt="ticker_text"></span>
-    </div>
-  </aside>
-
-  <header class="p-3 bg-[#0C1222]/95 border-b border-slate-800 sticky top-0 z-30 shadow-lg glass-effect">
-    <div class="max-w-5xl mx-auto flex justify-between items-center">
-      <div onclick="handleSecretAdminClick()" class="cursor-pointer select-none group flex items-center gap-2.5" title="3Lrehab">
-        <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center font-black text-slate-950 text-base shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-all">3L</div>
-        <div>
-          <div class="flex items-center gap-1.5">
-            <h1 id="store-name-header" class="font-black text-sm text-white tracking-wide" data-txt="store_name">3Lrehab</h1>
-            <span class="text-[9px] bg-emerald-500/20 text-emerald-400 font-bold px-1.5 py-0.2 rounded-full border border-emerald-500/30" data-txt="verified_badge">موثق 🛡️</span>
-          </div>
-          <p id="admin-status-text" class="text-[9px] text-slate-400 font-medium" data-txt="tagline_text">نظام المعاينة والفحص المسبق قبل السداد</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-1.5">
-        <div id="admin-actions" class="hidden items-center gap-1.5">
-          <button id="btn-toggle-live-edit" onclick="toggleLiveEditMode()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer flex items-center gap-1">
-            <span>✏️</span><span id="live-edit-status-label">تعديل الكلام</span>
-          </button>
-          <button onclick="openFolderModal()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-bold px-2 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer">📁 المجلدات</button>
-          <button onclick="openProductModal()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-[10px] font-black px-2 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer">+ منتج</button>
-          <button onclick="openModal('settings-modal')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-xl shadow active:scale-95 transition cursor-pointer">⚙️ الإدارة</button>
-          <button onclick="toggleAdmin(false)" title="قفل وضع القيادة" class="p-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 border border-rose-500/30 rounded-xl active:scale-95 transition cursor-pointer">🔒</button>
-        </div>
-        <button onclick="toggleThemeMode()" class="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700/60 active:scale-95 transition cursor-pointer"><span id="theme-icon">🌙</span></button>
-        <button onclick="openModal('track-order-modal')" class="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700/60 active:scale-95 transition cursor-pointer" title="تتبع شحنتك">🚚</button>
-        <button onclick="openWishlistModal()" class="relative p-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-xl border border-rose-500/20 active:scale-95 transition cursor-pointer" title="المفضلة">❤️<span id="wishlist-badge" class="hidden absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow">0</span></button>
-        <button onclick="openCart()" class="relative p-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-xl border border-emerald-500/30 active:scale-95 transition cursor-pointer" title="السلة">🛒<span id="cart-badge" class="hidden absolute -top-1 -right-1 bg-emerald-500 text-slate-950 text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow">0</span></button>
-      </div>
-    </div>
-  </header>
-
-  <section class="p-3 max-w-5xl mx-auto">
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0E172E] via-[#101D3D] to-[#0A1021] border border-slate-800 p-5 sm:p-7 shadow-2xl">
-      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-3 text-center md:text-right flex-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span data-txt="hero_badge">عروض حصرية وخصومات الموسم 2026</span>
-          </div>
-          <h2 class="text-xl sm:text-3xl font-black text-white leading-tight">
-            <span data-txt="hero_heading_1">تسوق براحة بال وتأكيد ذكي</span> <br>
-            <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent" data-txt="hero_heading_2">افحص وجرّب طلبك عملياً قبل سداد باقي الحساب!</span>
-          </h2>
-          <div class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 leading-relaxed max-w-xl">
-            ✨ <strong class="text-emerald-400" data-txt="hero_deposit_title">نظام الحجز الذكي وضمان الجدية:</strong> <span data-txt="hero_deposit_desc">قسط تأكيد تجهيز الشحنة (50%)، واستكمال باقي المبلغ المتبقي يد بيد بعد الفحص الشامل وتجربة المنتج أمام مندوب التسليم.</span>
-          </div>
-          <div class="pt-1 flex flex-wrap gap-2 justify-center md:justify-start">
-            <a href="#products-section" class="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs rounded-xl shadow-lg transition-all"><span data-txt="btn_explore_offers">استكشف العروض الآن ↓</span></a>
-            <button onclick="setFilter('deal')" class="px-4 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-amber-400 border border-amber-500/30 font-bold text-xs rounded-xl transition-all"><span data-txt="btn_flash_deals">⚡ عروض اليوم الخاطفة</span></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="p-3 max-w-5xl mx-auto">
-    <div class="flex justify-between items-center mb-2 px-1">
-      <div class="flex items-center gap-2">
-        <span class="text-xs font-black text-white flex items-center gap-1.5"><span class="text-emerald-400">📁</span><span data-txt="catalog_title">كتالوج المجلدات والأقسام:</span></span>
-        <span class="text-[10px] text-slate-400" id="current-folder-label">(عرض الكل)</span>
-      </div>
-    </div>
-    <div id="folders-grid" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
-  </section>
-
-  <section id="products-section" class="p-3 max-w-5xl mx-auto space-y-3 mt-1">
-    <div class="flex flex-col sm:flex-row gap-2">
-      <div class="relative flex-1">
-        <input type="text" id="product-search" oninput="handleSearch(this.value)" placeholder="ابحث باسم المنتج، المواصفات، أو نوع العرض..." class="w-full p-2.5 pr-9 bg-[#0C1222] border border-slate-800 rounded-2xl text-xs text-white placeholder-slate-500 outline-none focus:border-emerald-500 transition-all">
-      </div>
-    </div>
-    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-      <button onclick="setFilter('all')" id="btn-filter-all" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-black bg-emerald-500 text-slate-950 shadow transition cursor-pointer">🌟 الكل (<span id="count-all">0</span>)</button>
-      <button onclick="setFilter('deal')" id="btn-filter-deal" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 transition cursor-pointer">🔥 عروض اليوم</button>
-      <button onclick="setFilter('students')" id="btn-filter-students" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 transition cursor-pointer">🎓 عروض الطلاب</button>
-    </div>
-  </section>
-
-  <main id="products-grid" class="p-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-w-5xl mx-auto min-h-[160px]"></main>
-
-  <!-- الدليل الشامل: 200 ميزة استثنائية كاملة -->
-  <section class="p-4 max-w-5xl mx-auto mt-6">
-    <div class="p-6 bg-[#0E172E] rounded-3xl border border-slate-800 shadow-xl" dir="rtl">
-      <div class="text-center mb-8 border-b border-slate-800 pb-4">
-        <h2 class="text-xl sm:text-2xl font-black text-white mb-2">الدليل الشامل: 200 ميزة استثنائية لمتجر الإكسسوارات الرجالي والحريمي</h2>
-        <p class="text-xs text-slate-400">تم مراجعة وتدقيق جميع المميزات لضمان الجودة، الاحترافية، والتكامل التقني.</p>
-      </div>
-      <div class="space-y-8 text-xs">
-        <div>
-          <h3 class="font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">أولاً: تجارب تكنولوجية ومميزات افتراضية خارقة وتفاعلية (001 - 025)</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">001. غرفة قياس إكسسوارات الواقع المختلط (MR)</span><span class="text-slate-400 text-[10px]">رؤية القطعة متحركة وثلاثية الأبعاد على اليد أو الرقبة.</span></div>
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">002. مرآة ذكية افتراضية بـ AR</span><span class="text-slate-400 text-[10px]">تجربة 5 قطع معاً عبر كاميرا الموبايل قبل الشراء.</span></div>
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">003. أداة مطابقة لون البشرة (Skin Tone AI)</span><span class="text-slate-400 text-[10px]">اقتراح الفضي أو الذهبي حسب لون بشرة العميل.</span></div>
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">004. مستكشف دلالة الأحجار بالذكاء الاصطناعي</span><span class="text-slate-400 text-[10px]">ترشيح إكسسوار يحمل طاقة حجر مناسبة للحالة المزاجية.</span></div>
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">005. مساعد الهدايا التفاعلي المتقدم (AI Concierge)</span><span class="text-slate-400 text-[10px]">اقتراح بوكس هدية متكامل بناءً على السن والميزانية.</span></div>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">ثانياً: أفكار تسويقية تحفيزية وحيل بيعية شرسة (026 - 055)</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">026. نظام "الـ Streaks اليومي"</span><span class="text-slate-400 text-[10px]">فتح المتجر لأيام متتالية يكسب نقاطاً وخصومات سرية.</span></div>
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">027. سلة الشراء الجماعية للأصدقاء (Group Buy)</span><span class="text-slate-400 text-[10px]">مشاركة لينك سلة الشراء لزيادة الخصم مع زيادة العدد.</span></div>
-            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">028. مزاد "الـ 60 ثانية" السريع</span><span class="text-slate-400 text-[10px]">عداد تنازلي يومي على قطعة نادرة بسعر متناقص سريع.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="p-4 bg-[#070B14] border-t border-slate-800 space-y-3 text-xs max-w-5xl mx-auto mt-4 rounded-3xl">
-    <div class="flex justify-between items-center">
-      <p class="font-bold text-slate-300">أرقام التواصل والتحويل المعتمدة (كاش وإنستاباي):</p>
-    </div>
-    <div id="footer-phones-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
-    <div class="pt-3 text-center border-t border-slate-800/80 text-[10px] text-slate-500">جميع الحقوق محفوظة لمنصة 3Lrehab التجارة الذكية © 2026</div>
-  </footer>
-
-  <script>
-    const defaultSiteTexts = {
-      splash_badge: "المنصة المعتمدة الأولى لضمان المشتري",
-      splash_welcome: "أهلاً بك في متجر",
-      store_title: "3Lrehab Smart Store",
-      splash_desc: "تسوق بأعلى درجات الأمان: افحص وجرب طلبك عملياً يداً بيد أمام مندوب الشحن قبل سداد باقي الحساب!",
-      store_name: "3Lrehab",
-      verified_badge: "موثق 🛡️",
-      tagline_text: "نظام المعاينة والفحص المسبق قبل السداد"
-    };
-
-    const defaultSettings = {
-      name: "3Lrehab",
-      tagline: "نظام المعاينة والفحص المسبق قبل سداد باقي الحساب",
-      adminPin: "123456"
-    };
-
-    const defaultPhoneNumbers = [
-      { id: 1, label: "فودافون كاش / إنستاباي (أساسي)", number: "01030084281", isPrimary: true }
-    ];
-
-    const defaultFolders = [
-      { id: "all", name: "كل الأقسام", icon: "🌟" },
-      { id: "watches", name: "الساعات والإكسسوار", icon: "⌚" }
-    ];
-
-    const defaultProducts = [
-      { id: 1, name: "ساعة ألترا تيتانيوم 2026", price: 850, oldPrice: 1100, folderId: "watches", category: "deal", desc: "شاشة AMOLED تدعم المكالمات، مقاومة للماء مع ضمان 12 شهراً.", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" }
-    ];
-
-    let s = JSON.parse(localStorage.getItem('3l_cfg_v10')) || defaultSettings;
-    let siteTexts = JSON.parse(localStorage.getItem('3l_texts_v10')) || defaultSiteTexts;
-    let phoneNumbers = JSON.parse(localStorage.getItem('3l_phones_v10')) || defaultPhoneNumbers;
-    let folders = JSON.parse(localStorage.getItem('3l_folders_v10')) || defaultFolders;
-    let products = JSON.parse(localStorage.getItem('3l_pr_v10')) || defaultProducts;
-
-    let isAdmin = false;
-    let isLiveEditActive = false;
-    let activeFolderId = 'all';
-    let currentFilter = 'all';
-    let searchQuery = '';
-
-    function enterStore() {
-      const splash = document.getElementById('splash-entrance');
-      if (splash) splash.classList.add('hidden');
-    }
-
-    let logoClicks = 0;
-    function handleSecretAdminClick() {
-      logoClicks++;
-      if (logoClicks >= 5) {
-        logoClicks = 0;
-        let pin = prompt("أدخل رمز المالك (الباسورد الافتراضي هو 123456):");
-        if (pin === (s.adminPin || "123456")) {
-          isAdmin = true;
-          updateStoreUI();
-          alert("تم فتح لوحة القيادة بنجاح!");
-        } else {
-          alert("رمز PIN غير صحيح!");
-        }
-      }
-    }
-
-    function toggleAdmin(val) {
-      isAdmin = val;
-      updateStoreUI();
-    }
-
-    function toggleLiveEditMode() {
-      isLiveEditActive = !isLiveEditActive;
-      applyTextBindings();
-    }
-
-    function applyTextBindings() {
-      document.querySelectorAll('[data-txt]').forEach(el => {
-        const key = el.getAttribute('data-txt');
-        if (siteTexts[key]) el.textContent = siteTexts[key];
-      });
-    }
-
-    function renderPhonesUI() {
-      const footerContainer = document.getElementById('footer-phones-container');
-      if (footerContainer) {
-        footerContainer.innerHTML = phoneNumbers.map(p => `
-          <div class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between text-amber-400 font-bold">
-            <span class="text-slate-300 text-[10px]">${p.label}:</span>
-            <a href="tel:${p.number}" class="text-emerald-400 font-mono">${p.number}</a>
-          </div>
-        `).join('');
-      }
-    }
-
-    function renderProducts() {
-      const grid = document.getElementById('products-grid');
-      let filtered = [...products];
-      if (activeFolderId !== 'all') filtered = filtered.filter(p => p.folderId === activeFolderId);
-      if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
-      if (searchQuery) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery));
-
-      grid.innerHTML = filtered.map(p => `
-        <div class="bg-[#0D1424] border border-slate-800 p-2.5 rounded-2xl flex flex-col justify-between shadow relative">
-          <div>
-            <div class="w-full aspect-square rounded-xl overflow-hidden mb-2 bg-slate-950 flex items-center justify-center">
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" />
-            </div>
-            <h3 class="font-bold text-xs text-white">${p.name}</h3>
-            <p class="text-[10px] text-slate-400">${p.desc}</p>
-          </div>
-          <div class="mt-2 pt-1 border-t border-slate-800 flex items-center justify-between">
-            <span class="text-xs font-black text-emerald-400">${p.price} ج.م</span>
-            <button onclick="alert('تمت الإضافة للسلة')" class="bg-emerald-500 text-slate-950 p-1 rounded font-bold text-[10px]">أضف للسلة</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function setFilter(cat) { currentFilter = cat; renderProducts(); }
-    function handleSearch(val) { searchQuery = val.trim().toLowerCase(); renderProducts(); }
-
-    function updateStoreUI() {
-      document.getElementById('store-name-header').textContent = s.name;
-      const adminActions = document.getElementById('admin-actions');
-      if (isAdmin) adminActions.classList.remove('hidden'), adminActions.classList.add('flex');
-      else adminActions.classList.add('hidden'), adminActions.classList.remove('flex');
-      renderPhonesUI();
-      renderProducts();
-    }
-
-    updateStoreUI();
-  </script>
+<span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent" data-txt="hero_heading_2">
+افحص وجرّب طلبك عملياً قبل سداد باقي الحساب!
+</span>
+</h2>
+<div class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 leading-relaxed max-w-xl">
+✨ <strong class="text-emerald-400" data-txt="hero_deposit_title">نظام الحجز الذكي وضمان الجدية:</strong> <span data-txt="hero_deposit_desc">قسط تأكيد تجهيز الشحنة (50%)، واستكمال باقي المبلغ المتبقي يد بيد بعد الفحص الشامل وتجربة المنتج أمام مندوب التسليم.</span>
+</div>
+<div class="pt-1 flex flex-wrap gap-2 justify-center md:justify-start">
+<a href="#products-section" class="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs rounded-xl shadow-lg shadow-emerald-500/25 active:scale-95 transition-all">
+<span data-txt="btn_explore_offers">استكشف العروض الآن ↓</span>
+</a>
+<button onclick="setFilter('deal')" class="px-4 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-amber-400 border border-amber-500/30 font-bold text-xs rounded-xl active:scale-95 transition-all">
+<span data-txt="btn_flash_deals">⚡ عروض اليوم الخاطفة</span>
+</button>
+</div>
+</div>
+​<div class="bg-slate-950/90 border border-slate-800 p-4 rounded-2xl text-center min-w-[210px] shadow-2xl backdrop-blur-sm">
+<div class="flex items-center justify-center gap-1 text-[11px] font-bold text-amber-400 mb-2">
+<span>⏳</span>
+<span data-txt="countdown_label">انتهاء عروض اليوم الفورية:</span>
+</div>
+<div class="flex items-center justify-center gap-2 font-mono text-base font-black text-white">
+<div class="bg-slate-900 px-2.5 py-1.5 rounded-xl border border-slate-800">
+<span id="timer-h">06</span>
+<span class="text-[8px] block text-slate-400 font-sans mt-0.5">ساعة</span>
+</div>
+<span class="text-emerald-400 font-bold">:</span>
+<div class="bg-slate-900 px-2.5 py-1.5 rounded-xl border border-slate-800">
+<span id="timer-m">38</span>
+<span class="text-[8px] block text-slate-400 font-sans mt-0.5">دقيقة</span>
+</div>
+<span class="text-emerald-400 font-bold">:</span>
+<div class="bg-slate-900 px-2.5 py-1.5 rounded-xl border border-slate-800">
+<span id="timer-s">44</span>
+<span class="text-[8px] block text-slate-400 font-sans mt-0.5">ثانية</span>
+</div>
+</div>
+<p class="text-[9px] text-slate-400 mt-2.5" data-txt="free_shipping_notice">🚚 شحن مجاني عند الطلب بـ 1000 ج.م أو أكثر</p>
+</div>
+</div>
+</div>
+</section>
+​<!-- كتالوج المجلدات -->
+<section class="p-3 max-w-5xl mx-auto">
+<div class="flex justify-between items-center mb-2 px-1">
+<div class="flex items-center gap-2">
+<span class="text-xs font-black text-white flex items-center gap-1.5">
+<span class="text-emerald-400">📁</span>
+<span data-txt="catalog_title">كتالوج المجلدات والأقسام:</span>
+</span>
+<span class="text-[10px] text-slate-400" id="current-folder-label">(عرض الكل)</span>
+</div>
+<div id="admin-folder-quick-btn" class="hidden">
+<button onclick="openFolderModal()" class="text-[10px] text-cyan-400 hover:underline font-bold bg-cyan-500/10 px-2 py-0.5 rounded-lg border border-cyan-500/20">
++ مجلد كتالوج جديد
+</button>
+</div>
+</div>
+<div id="folders-grid" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
+</section>
+​<!-- بنر الموثوقية -->
+<section class="px-3 max-w-5xl mx-auto">
+<div class="bg-gradient-to-r from-slate-900/90 via-[#0e162b]/80 to-slate-900/90 border border-slate-800/80 rounded-2xl p-3 flex flex-wrap items-center justify-around gap-2 text-center text-[10px] text-slate-300 shadow">
+<div class="flex items-center gap-1.5"><span class="text-amber-400 font-bold" data-txt="trust_1">🛡 ضمان أصلي معتمد</span></div>
+<span class="text-slate-700 hidden sm:inline">|</span>
+<div class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold" data-txt="trust_2">📦 فحص ومعاينة حقيقية قبل السداد</span></div>
+<span class="text-slate-700 hidden sm:inline">|</span>
+<div class="flex items-center gap-1.5"><span class="text-cyan-400 font-bold" data-txt="trust_3">🚚 شحن سريع لجميع محافظات مصر</span></div>
+<span class="text-slate-700 hidden sm:inline">|</span>
+<div class="flex items-center gap-1.5"><span class="text-indigo-400 font-bold" data-txt="trust_4">🔒 تشفير بيانات العميل 100%</span></div>
+</div>
+</section>
+​<!-- شريط البحث والفلاتر -->
+<section id="products-section" class="p-3 max-w-5xl mx-auto space-y-3 mt-1">
+<div class="flex flex-col sm:flex-row gap-2">
+<div class="relative flex-1">
+<input type="text" id="product-search" oninput="handleSearch(this.value)" placeholder="ابحث باسم المنتج، المواصفات، أو نوع العرض..." class="w-full p-2.5 pr-9 bg-[#0C1222] border border-slate-800 rounded-2xl text-xs text-white placeholder-slate-500 outline-none focus:border-emerald-500 transition-all shadow-inner">
+<svg class="w-4 h-4 text-slate-500 absolute top-3.5 right-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+</div>
+<div class="flex gap-2">
+<select id="sort-select" onchange="handleSort(this.value)" class="p-2.5 bg-[#0C1222] border border-slate-800 rounded-2xl text-xs text-slate-300 outline-none focus:border-emerald-500 cursor-pointer">
+<option value="default">الترتيب الافتراضي</option>
+<option value="price-asc">السعر: من الأقل للأعلى</option>
+<option value="price-desc">السعر: من الأعلى للأقل</option>
+<option value="discount">الأعلى نسبة خصم %</option>
+</select>
+</div>
+</div>
+​<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+<button onclick="setFilter('all')" id="btn-filter-all" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-black bg-emerald-500 text-slate-950 shadow transition cursor-pointer">
+🌟 الكل (<span id="count-all">0</span>)
+</button>
+<button onclick="setFilter('deal')" id="btn-filter-deal" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition cursor-pointer">
+🔥 <span data-txt="filter_deals">عروض اليوم</span>
+</button>
+<button onclick="setFilter('students')" id="btn-filter-students" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition cursor-pointer">
+🎓 <span data-txt="filter_students">عروض الطلاب</span>
+</button>
+<button onclick="setFilter('doctors')" id="btn-filter-doctors" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition cursor-pointer">
+🩺 <span data-txt="filter_doctors">أطباء وتمريض</span>
+</button>
+<button onclick="setFilter('bundles')" id="btn-filter-bundles" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition cursor-pointer">
+🎁 <span data-txt="filter_bundles">باقات التوفير</span>
+</button>
+</div>
+</section>
+​<!-- شبكة عرض المنتجات -->
+<main id="products-grid" class="p-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-w-5xl mx-auto min-h-[160px]"></main>
+​<!-- ================================================================= -->
+<!-- دليل الـ 200 ميزة للمتجر (مدمج بدون أخطاء وتصميم احترافي متناسق) -->
+<!-- ================================================================= -->
+<section class="p-4 max-w-5xl mx-auto mt-6">
+<div class="p-6 bg-[#0E172E] rounded-3xl border border-slate-800 shadow-xl" dir="rtl">
+<div class="text-center mb-8 border-b border-slate-800 pb-4">
+<h2 class="text-xl sm:text-2xl font-black text-white mb-2">الدليل الشامل: 200 ميزة استثنائية لمتجر الإكسسوارات الرجالي والحريمي</h2>
+<p class="text-xs text-slate-400">تم مراجعة وتدقيق جميع المميزات لضمان الجودة، الاحترافية، والتكامل التقني.</p>
+</div>
+​<div class="space-y-8">
+<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+أولاً: تجارب تكنولوجية ومميزات افتراضية خارقة وتفاعلية (001 - 025)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">001. غرفة قياس إكسسوارات الواقع المختلط (MR)</span><span class="text-slate-400 text-[10px]">رؤية القطعة متحركة وثلاثية الأبعاد على اليد أو الرقبة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">002. مرآة ذكية افتراضية بـ AR</span><span class="text-slate-400 text-[10px]">تجربة 5 قطع معاً عبر كاميرا الموبايل قبل الشراء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">003. أداة مطابقة لون البشرة (Skin Tone AI)</span><span class="text-slate-400 text-[10px]">اقتراح الفضي أو الذهبي حسب لون بشرة العميل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">004. مستكشف دلالة الأحجار بالذكاء الاصطناعي</span><span class="text-slate-400 text-[10px]">ترشيح إكسسوار يحمل طاقة حجر مناسبة للحالة المزاجية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">005. مساعد الهدايا التفاعلي المتقدم (AI Concierge)</span><span class="text-slate-400 text-[10px]">اقتراح بوكس هدية متكامل بناءً على السن والميزانية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">006. مُصمم الحلي المخصص (Custom Charm Builder)</span><span class="text-slate-400 text-[10px]">تجميع الحروف والتعليقات ورؤية التصميم بشكل فوري.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">007. عارض تفاعلي للوزن والملمس</span><span class="text-slate-400 text-[10px]">فيديو مسرع يوضح سُمك وسلاسة القطعة ووزنها في اليد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">008. منصة تجميع "الأطقم المتطابقة" للجنسين</span><span class="text-slate-400 text-[10px]">اختيار إكسسوارات متطابقة (Couples) مع نقش الأسماء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">009. فلتر "ستايل الشارع" (Streetwear Vibe)</span><span class="text-slate-400 text-[10px]">إكسسوارات هيب هوب وشباب جريئة مع أفكار تنسيق ملابس.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">010. وضع "تأثير الظلام الحقيقي"</span><span class="text-slate-400 text-[10px]">عرض توضيحي للقطع التي تضيء في الظلام أو تحتوي على فوسفور.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">011. مقارنة تفصيلية بين مقاومة الصدأ</span><span class="text-slate-400 text-[10px]">توضيح الفروق بين التيتانيوم، الإستانلس 316L، والفضة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">012. معاينة الإكسسوار بجوار مقاس العملة</span><span class="text-slate-400 text-[10px]">توضيح الحجم الحقيقي بدقة بجانب عملة معدنية قياسية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">013. أداة قياس الخواتم بالكاميرا</span><span class="text-slate-400 text-[10px]">تحديد مقاس الخاتم بدقة مليمترية عبر الشاشة وبطاقة ائتمان.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">014. زر "هات لي زي دي بالضبط"</span><span class="text-slate-400 text-[10px]">رفع صورة إكسسوار للبحث عن قطعة مطابقة أو قريبة منها.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">015. حاسبة استدامة وتغير الألوان</span><span class="text-slate-400 text-[10px]">نسبة توضح مقاومة القطعة للعوامل الجوية والعطور بدقة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">016. غرفة قياس افتراضية عامة</span><span class="text-slate-400 text-[10px]">تخيل شكل السلسلة أو الخاتم بالذكاء الاصطناعي العام.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">017. فلتر "المناسبات الخاصة" السريع</span><span class="text-slate-400 text-[10px]">تقسيم الإكسسوارات حسب المناسبة (عمل، سهرة، عيد ميلاد).</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">018. وضع التصفح الليلي والمريح</span><span class="text-slate-400 text-[10px]">واجهة خفيفة ومظلمة مناسبة لتصفح مريح ليلاً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">019. إمكانية طلب "حفر بالليزر خاص"</span><span class="text-slate-400 text-[10px]">حفر الأسماء والتواريخ والكلمات على القطع أونلاين.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">020. عرض المنتج 360 درجة</span><span class="text-slate-400 text-[10px]">صور متحركة لرؤية كل زوايا ولمعان القطعة بوضوح.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">021. استشاري أناقة بالـ AI</span><span class="text-slate-400 text-[10px]">شات بوت يحلل لون البشرة وشكل الوجه لاقتراح الإكسسوار.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">022. مطابقة الإكسسوار مع الملابس</span><span class="text-slate-400 text-[10px]">رفع صورة الطقم ليقترح السيستم الإكسسوار المكمل له.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">023. فلتر الميزانية الذكي (Slider)</span><span class="text-slate-400 text-[10px]">تحديد المبلغ المتاح لعرض القطع الملائمة للميزانية بدقة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">024. وضع المعاينة في ضوء الشمس</span><span class="text-slate-400 text-[10px]">فيديو يوضح لمعان الإكسسوار تحت ضوء الشمس الطبيعي.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">025. ميزة حفر البصمة الحقيقية</span><span class="text-slate-400 text-[10px]">إرسال صورة بصمة الإصبع لحفرها بدقة على خاتم أو ميدالية.</span></div>
+</div>
+</div>
+​<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+ثانياً: أفكار تسويقية تحفيزية وحيل بيعية شرسة (026 - 055)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">026. نظام "الـ Streaks اليومي"</span><span class="text-slate-400 text-[10px]">فتح المتجر لأيام متتالية يكسب نقاطاً وخصومات سرية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">027. سلة الشراء الجماعية للأصدقاء (Group Buy)</span><span class="text-slate-400 text-[10px]">مشاركة لينك سلة الشراء لزيادة الخصم مع زيادة العدد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">028. مزاد "الـ 60 ثانية" السريع</span><span class="text-slate-400 text-[10px]">عداد تنازلي يومي على قطعة نادرة بسعر متناقص سريع.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">029. عرض "أنت وخطيبك/صاحبتك"</span><span class="text-slate-400 text-[10px]">شراء قطعة والحصول على الثانية بخصم 70% للقطعة الأرخص.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">030. لعبة "تخمين سعر القطعة"</span><span class="text-slate-400 text-[10px]">تخمين سعر الخاتم أو الإكسسوار لكسب كوبون خصم فوري.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">031. تنبيهات مشتريات حية للمتصفحين</span><span class="text-slate-400 text-[10px]">شريط متحرك يوضح عمليات الشراء الحية لزيادة الثقة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">032. برنامج الولاء بالدرجات (فضي، ذهبي، ماسي)</span><span class="text-slate-400 text-[10px]">مزايا حصرية وشحن مجاني دائم لعملاء الدرجة العليا.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">033. ميزة "إهداء مجهول الهوية" (Secret Admirer)</span><span class="text-slate-400 text-[10px]">إرسال هدية بدون اسم المرسل مع كرت مشفر خاص.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">034. عروض "ساعة الحظ الخاطفة" (Happy Hour)</span><span class="text-slate-400 text-[10px]">تخفيضات عشوائية تفتح في أوقات غير متوقعة لفترة قصيرة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">035. مكافأة "التقييم بالفيديو الصوتي"</span><span class="text-slate-400 text-[10px]">نقاط رصيد حقيقية بالمحفظة عند نشر فيديو Unboxing وتقييم.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">036. قسيمة "تدمير السعر" العشوائية</span><span class="text-slate-400 text-[10px]">كرت خدش رقمي يظهر للعميل الذي يقضي وقتاً طويلاً يتصفح.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">037. مسابقة "نسّق وطكّس" الشهرية</span><span class="text-slate-400 text-[10px]">مسابقة لأفضل صورة تنسيق إكسسوارات مع جوائز وتثبيت بالمتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">038. خدمة "الاشتراك الشهري للإكسسوارات"</span><span class="text-slate-400 text-[10px]">استلام بوكس مفاجأة شهري يضم قطعاً فخمة ومختلفة باشتراك.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">039. ميزة "حفظ السلة للأبد"</span><span class="text-slate-400 text-[10px]">عدم مسح محتويات السلة أبداً حتى لو عاد العميل بعد شهر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">040. تخفيضات أعياد ميلاد المتابعين التلقائية</span><span class="text-slate-400 text-[10px]">إرسال كود هدية بقيمة مالية لرسائل العميل يوم ميلاده.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">041. إشعارات الكمية المحدودة (FOMO)</span><span class="text-slate-400 text-[10px]">تنبيه فوري بأن المنتج لم يبقَ منه سوى قطعتين فقط.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">042. نظام النقاط الذهبية للاستبدال</span><span class="text-slate-400 text-[10px]">تجميع نقاط مع كل شراء وتحويلها لخصومات حقيقية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">043. برنامج سفراء المتجر وأكواد الخصم</span><span class="text-slate-400 text-[10px]">منح العملاء المميزين أكواد خصم خاصة ونسبة أرباح.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">044. برنامج خصم "ادعُ صديقك"</span><span class="text-slate-400 text-[10px]">مكافآت ورصيد متبادل عند دعوة أصدقاء جدد للمتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">045. عجلة الحظ التفاعلية الفورية</span><span class="text-slate-400 text-[10px]">نافذة منبثقة تفاعلية لكسب خصومات وشحن مجاني لحظي.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">046. عرض اشتري قطعة واحصل على الثانية بنصف السعر</span><span class="text-slate-400 text-[10px]">عروض تلقائية بالسلة لتحفيز رفع قيمة الطلب.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">047. شريط الشحن المجاني التصاعدي</span><span class="text-slate-400 text-[10px]">تنبيه تفاعلي بالباقي للحصول على شحن مجاني تماماً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">048. عداد الصفقات الخاطفة اليومية</span><span class="text-slate-400 text-[10px]">خصومات قوية ومجنونة لفترة محددة جداً كل يوم.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">049. ميزة "احفظ السلة وأرسلها لصديق"</span><span class="text-slate-400 text-[10px]">إرسال رابط السلة كهدية مقترحة لشخص آخر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">050. نظام المزاد أسبوعي على القطع النادرة</span><span class="text-slate-400 text-[10px]">إكسسوارات ليمتد إيديشن تبدأ بسعر رمزي وتتصاعد.</span></div>
+</div>
+</div>
+​<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+ثالثاً: تجربة التغليف والـ Unboxing الفاخرة والمبتكرة (051 - 075)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">051. ختم الشمع الملكي البارز</span><span class="text-slate-400 text-[10px]">إغلاق بوكس الهدية بشمع حراري وختم شعار المتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">052. تعطير البوكس برائحة مميزة (فانيليا أو عود)</span><span class="text-slate-400 text-[10px]">تعطير الصندوق الداخلي لتكون هوية حسية لا تنسى.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">053. بطاقة خدش (Scratch Card) هدية</span><span class="text-slate-400 text-[10px]">بطاقة خدش مع الطلب تكشف عن خصم للطلب القادم.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">054. ستيكرز ميمز وأيقونات شبابية</span><span class="text-slate-400 text-[10px]">استيكرز فخمة وكول تلتصق بالموبايلات واللابتوب هدية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">055. أكياس قطيفة فاخرة لكل قطعة</span><span class="text-slate-400 text-[10px]">كيس حماية مخملي يحافظ على كل إكسسوار بشكل منفرد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">056. بطاقة "قصة تصميم القطعة"</span><span class="text-slate-400 text-[10px]">نبذة إبداعية مرفقة توضح قصة وفلسفة تصميم القطعة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">057. بوكس خشب طبيعي محفور بالليزر</span><span class="text-slate-400 text-[10px]">ترقية اختيارية لبوكس هدايا خشبي أنيق وعالي الجودة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">058. شريط سحب سهل (Easy Tear/Pull)</span><span class="text-slate-400 text-[10px]">تصميم علبة الشحن لتفتح بسلاسة وبدون أدوات حادة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">059. كرت إهداء مصمم بصوتك (Audio QR)</span><span class="text-slate-400 text-[10px]">باركود يمسحه المستلم ليسمع تسجيلك الصوتي بالتهنئة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">060. كيس حماية خارجي ضد المطر</span><span class="text-slate-400 text-[10px]">تغليف إضافي يضمن وصول الطرد آمناً تماماً مهما كانت الطقس.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">061. تغليف فاخر مجاني للمناسبات</span><span class="text-slate-400 text-[10px]">اختيار شريطة وكرت إهداء مجاني أو رمزي أثناء الدفع.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">062. رسالة شكر شخصية بخط اليد</span><span class="text-slate-400 text-[10px]">كرت شكر مطبوع بخط شبيه باليد ومخصص باسم العميل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">063. علبة حفظ إكسسوارات مقاومة للرطوبة</span><span class="text-slate-400 text-[10px]">تصميم علبة خاصة تحافظ على بريق القطع من التغيير.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">064. قطعة قماش مخملية مجانية للتنظيف</span><span class="text-slate-400 text-[10px]">هدية مخصصة لتلميع الفضة والإستانلس والجلد بانتظام.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">065. عطر مميز و ثابت لعلبة الشحن</span><span class="text-slate-400 text-[10px]">أول ما يلاحظه العميل عند فتح الصندوق برائحة مميزة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">066. علبة أكريليك شفافة فاخرة للعرض</span><span class="text-slate-400 text-[10px]">بوكس أنيق يظهر محتويات الإكسسوار كأنه معروض ببوتيك.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">067. مظاريف سوداء فخمة للفواتير</span><span class="text-slate-400 text-[10px]">ورق مقوى أسود مطفي بختم ذهبي لحفظ الضمان والفاتورة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">068. أكياس هدايا ورقية بمقابض قماشية</span><span class="text-slate-400 text-[10px]">شنطة تسوق متينة وأنيقة لتقديم الهدية بكل فخر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">069. كارت نصائح الحفاظ على اللمعان</span><span class="text-slate-400 text-[10px]">إرشادات قصيرة لإبعاد القطع عن العطور والمياه الخاطئة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">070. بوكس هدايا عائلي مبهج</span><span class="text-slate-400 text-[10px]">بوكسات مخصصة تحتوي هدايا لعدة أفراد بتصميم مبهج.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">071. فقاعات حماية مزدوجة (Bubble Wrap)</span><span class="text-slate-400 text-[10px]">تغليف أسود فاخر يضمن عدم تحرك القطعة أثناء الشحن.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">072. كرت تهنئة رقمي بالفيديو</span><span class="text-slate-400 text-[10px]">مسح باركود الهدية ليظهر فيديو أو صوت مرسل الهدية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">073. خدمة تغليف الهدية أمام الكاميرا</span><span class="text-slate-400 text-[10px]">تصوير فيديو قصير لتجهيز البوكس وإرساله للمشتري قبل الشحن.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">074. باقة الهدايا الاقتصادية الجاهزة</span><span class="text-slate-400 text-[10px]">قطع أنيقة جداً ومناسبة للميزانيات الهادئة والهدايا الجماعية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">075. بطاقة الضمان البلاتينية المرفقة</span><span class="text-slate-400 text-[10px]">كارت رسمي يثبت جودة المعادن وفترة الصيانة أو الاستبدال.</span></div>
+</div>
+</div>
+​<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+رابعاً: فئات منتجات استثنائية وتشيكلات "نيتش" لا تقاوم (076 - 110)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">076. سلاسل الكوبل المغناطيسية (نصفين)</span><span class="text-slate-400 text-[10px]">قلادة تنجذب للأخرى عند التقارب لتشكيل قلب أو شكل كامل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">077. إكسسوارات الجيم المانعة للتعرق والماء</span><span class="text-slate-400 text-[10px]">سيليكون عالي الجودة وستانلس للرياضيين ضد الصدأ.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">078. خواتم المزاج (Mood Rings) المتغيرة</span><span class="text-slate-400 text-[10px]">خواتم تتغير ألوانها حسب حرارة وحالة مرتديها.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">079. سلاسل الحروف الكورية واليابانية</span><span class="text-slate-400 text-[10px]">تصاميم استريت وwear عصري مخصصة لجيل الشباب.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">080. إكسسوارات الجوثيك والروك (Gothic)</span><span class="text-slate-400 text-[10px]">تشكيلات جريئة وغامضة لعشاق الستايل المختلف.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">081. أساور الأبراج الفلكية المضيئة</span><span class="text-slate-400 text-[10px]">رموز الأبراج بتصميم فوسفوري يضيء في الظلام الخافت.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">082. سبح رجالية أنيقة وفخمة</span><span class="text-slate-400 text-[10px]">سبح شبابي ورجالي بتصاميم عصرية وإضافات فضية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">083. سلاسل النظارات الشمسية الـ Chic</span><span class="text-slate-400 text-[10px]">سلاسل معدنية وخرز حريمي ورجالي لتعليق النظارات بأناقة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">084. حافظات المفاتيح الجلدية الفاخرة</span><span class="text-slate-400 text-[10px]">محافظ مدمجة لتنظيم المفاتيح والإكسسوارات الصغيرة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">085. أطقم المانيكير وحفظ الأظافر المصغرة</span><span class="text-slate-400 text-[10px]">أدوات جيب معدنية تناسب إطلالات السفر والجامعة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">086. مجموعة الثنائيات المتطابقة (Couples)</span><span class="text-slate-400 text-[10px]">إكسسوارات رجالي وحريمي مكملة لبعضها البعض.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">087. إكسسوارات مقاومة للماء (Waterproof)</span><span class="text-slate-400 text-[10px]">ستانلس ستيل مخصص للوضوء والسباحة بدون خلع.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">088. قسم المينيمليست الهادئ والناعم</span><span class="text-slate-400 text-[10px]">تصاميم بسيطة ورفيعة تناسب الموظفين وطلبة الجامعات.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">089. إكسسوارات السفر والرحلات المحمولة</span><span class="text-slate-400 text-[10px]">حافظات صغيرة تحمي الساعات والقطع من التشابك.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">090. إكسسوارات الجيم والرياضة المقاومة للصدأ</span><span class="text-slate-400 text-[10px]">إكسسوارات خفيفة لا تتأثر بالعرق أثناء التمرين.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">091. سلاسل الكوبل المغناطيسية المزدوجة</span><span class="text-slate-400 text-[10px]">قلادتان تنجذبان لتشكيل قلب أو سهم متكامل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">092. خواتم التيتانيوم المضادة للخدش</span><span class="text-slate-400 text-[10px]">خواتم رجالية صلبة جداً لا تتأثر بالصدمات أو الشغل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">093. سلاسل مفاتيح السيارات الفاخرة</span><span class="text-slate-400 text-[10px]">ميداليات جلد ومعدن تليق ببرستيج السيارات الحديثة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">094. أساور الأبراج الفلكية الحجرية</span><span class="text-slate-400 text-[10px]">أساور جلد ومعدن مصممة برموز وأحجار كل برج.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">095. إكسسوارات السلاسل متعددة الطبقات</span><span class="text-slate-400 text-[10px]">موضة السلاسل النسائية المتداخلة بطولين لإطلالة سهرة جذابة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">096. قسم الإكسسوارات المضادة للحساسية</span><span class="text-slate-400 text-[10px]">تشكيلات آمنة بنسبة 100% لأصحاب البشرة الحساسة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">097. تصميم بوكس المحفظة والساعة الخشبي</span><span class="text-slate-400 text-[10px]">بوكسات تجمع الساعة، السوار، والمحفظة الرجالي بطقم واحد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">098. أطقم هدايا العائلات المتكاملة</span><span class="text-slate-400 text-[10px]">سلسلة للأم، سوار للأخت، خاتم للأب أو الأخ بتنسيق دافئ.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">099. إكسسوارات إصدار محدود (Limited Edition)</span><span class="text-slate-400 text-[10px]">قطع تنزل بعدد محدود جداً ولا تعود مرة أخرى لزيادة قيمتها.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">100. النقش الصوتي المخصص (Sound Wave)</span><span class="text-slate-400 text-[10px]">نقش موجة صوتية حقيقية لكلمة سرية على إسورة أو خاتم.</span></div>
+</div>
+</div>
+​<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+خامساً: تكنولوجيا الخدمة وثقة العملاء الخارقة (101 - 135)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">101. فيديو مباشر لتجهيز طلبك على الواتساب</span><span class="text-slate-400 text-[10px]">إرسال فيديو قصير للعميل أثناء عمل الـ باكينج لبوكسه.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">102. ضمان استبدال فوري بدون أسئلة</span><span class="text-slate-400 text-[10px]">ثقة تامة في الجودة وأسهل سياسة إرجاع بالسوق.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">103. خدمة "احصل على استشارتي مجاناً"</span><span class="text-slate-400 text-[10px]">ركن يرسل فيه العميل صورة لبسه لنساعده في اختيار القطعة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">104. تتبع الدليفري على الخريطة لايف</span><span class="text-slate-400 text-[10px]">معرفة مكان مندوب الشحن لحظة بلحظة لترتيب الاستلام.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">105. ميزة الفحص ومعاينة الشحنة قبل الدفع</span><span class="text-slate-400 text-[10px]">تأكيد بحرية فتح البوكس ومراجعته مع المندوب تماماً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">106. أرشيف مشترياتي الرقمي</span><span class="text-slate-400 text-[10px]">بروفايل يحفظ تاريخ كل قطعة شراها العميل ومقاساته.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">107. زر "اتصل بي الآن" الفوري</span><span class="text-slate-400 text-[10px]">طلب مكالمة سريعة من خدمة العملاء خلال دقيقة واحدة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">108. هدايا "الـ Streak" للعملاء المتكررين</span><span class="text-slate-400 text-[10px]">مكافآت تتضاعف كلما اشترك العميل شهرياً بالمتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">109. قسم "أصلحتها بنفسي" (DIY Maintenance)</span><span class="text-slate-400 text-[10px]">فيديوهات قصيرة تعلم العميل تصليح قفل أو توسيع سوار بالبيت.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">110. فاتورة وضمان مشفر بـ QR Code</span><span class="text-slate-400 text-[10px]">مسح الكود بالموبايل لظهور ضمان القطعة وفاتورتها رسمياً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">111. كارت ضمان تغيير اللون الموثوق</span><span class="text-slate-400 text-[10px]">سياسة صيانة واستبدال واضحة ضد تغير ألوان الإكسسوار.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">112. صيانة وتلميع مدى الحياة</span><span class="text-slate-400 text-[10px]">خدمة صيانة وتلميع مجانية للعملاء القدامى والدائمين.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">113. متابعة الجودة عبر رسائل الواتساب</span><span class="text-slate-400 text-[10px]">اطمئنان آلي على وصول الطلب ورأي العميل بعد الاستلام.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">114. استبدال و إرجاع بضغطة زر</span><span class="text-slate-400 text-[10px]">روابط سريعة ومباشرة لطلبات الإرجاع بدون مكالمات طويلة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">115. دليل العناية بالإكسسوارات مرفق</span><span class="text-slate-400 text-[10px]">إرشادات لحمايتها من العطور والمواد الكيميائية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">116. تنبيهات الشحن الفورية بالواتساب</span><span class="text-slate-400 text-[10px]">تتبع رقم البوليصة وحالة الشحنة لحظة بلحظة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">117. تفعيل الدفع بالتقسيط المريح</span><span class="text-slate-400 text-[10px]">تسهيل شراء الساعات والقطع ذات القيمة على أقساط شهرية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">118. ميزة "احجز أونلاين واستلم من الفرع"</span><span class="text-slate-400 text-[10px]">لمن يحب المعاينة المباشرة قبل دفع المبلغ كاملاً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">119. تقييمات بالصور والفيديو الحقيقي</span><span class="text-slate-400 text-[10px]">عرض صور حقيقية التقطها العملاء لزيادة ثقة المشترين الجدد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">120. البحث الذكي بالصورة (Visual Search)</span><span class="text-slate-400 text-[10px]">رفع صورة إكسسوار للعثور على شبيهه في المتجر فوراً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">121. حاسبة الشحن الفوري في سلة الشراء</span><span class="text-slate-400 text-[10px]">معرفة تكلفة الشحن وموعد الوصول بدقة حسب مدينة العميل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">122. خيار إخفاء السعر في الفاتورة</span><span class="text-slate-400 text-[10px]">مفيدة جداً عندما تُرسل الهدية مباشرة لشخص آخر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">123. تنبيه توفر المنتج المنفذ (Notify Me)</span><span class="text-slate-400 text-[10px]">تسجيل رقم الموبايل لإرسال تنبيه فور عودة القطعة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">124. خيارات الدفع الآمن والتحقق الإلكتروني</span><span class="text-slate-400 text-[10px]">طرق دفع موثوقة وسهلة للعملاء الجدد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">125. التصنيف المتقدم بنوع الخامة والمعدن</span><span class="text-slate-400 text-[10px]">فلترة سريعة حسب الفضة، الستانلس، والجلد الطبيعي.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">126. خدمة العملاء وما بعد البيع المبتكرة</span><span class="text-slate-400 text-[10px]">دعم مستمر للرد على أي استفسار مقاس أو لون بسرعة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">127. سياسة استبدال مرنة وبسيطة</span><span class="text-slate-400 text-[10px]">إجراءات ميسرة لراحة العميل وكسب ثقته الكاملة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">128. دعم فني ذكي بالذكاء الاصطناعي 24/7</span><span class="text-slate-400 text-[10px]">رد آلي فوري على المقاسات والألوان طوال اليوم.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">129. زر الدعم الفوري العائم (واتساب دائم)</span><span class="text-slate-400 text-[10px]">أيقونة واتساب لا تختفي أبداً أثناء تصفح المتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">130. خاصية متابعة طلبي المباشرة</span><span class="text-slate-400 text-[10px]">متابعة خط سير الطلب بدون الحاجة لمكالمات هاتفية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">131. خدمة تعديل المقاسات الفورية</span><span class="text-slate-400 text-[10px]">إرشادات وتسهيلات لضبط مقاس السوار أو الخاتم بسهولة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">132. تقارير جودة المنتجات الدورية</span><span class="text-slate-400 text-[10px]">فحص وتأكيد جودة المعادن قبل إرسالها للعميل نهائياً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">133. حماية بيانات العملاء والخصوصية</span><span class="text-slate-400 text-[10px]">تأمين تام لكافة تفاصيل وعناوين وأرقام العملاء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">134. نظام إشعارات ذكي ومتطور</span><span class="text-slate-400 text-[10px]">تنبيهات مخصصة لحالة الطلبات والعروض الجديدة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">135. أزرار الشكاوي والمقترحات المباشرة</span><span class="text-slate-400 text-[10px]">قنوات مخصصة لتلقي مقترحات وشكاوي العملاء وسرعة حلها.</span></div>
+</div>
+</div>
+​<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+سادساً: المحتوى، التسويق، وتجربة المستخدم المتقدمة (136 - 170)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">136. مدونة "دليل الموضة والأناقة"</span><span class="text-slate-400 text-[10px]">مقالات لتنسيق الإكسسوارات ورفع ظهور المتجر بمحركات البحث.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">137. قسم "الأكثر مبيعاً هذا الأسبوع"</span><span class="text-slate-400 text-[10px]">تسهيل عملية الاختيار على العميل المتردد.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">138. أطقم الخروج السريع الجاهزة</span><span class="text-slate-400 text-[10px]">باقات تضم (ساعة + سوار + خاتم) بتنسيق مميز وسعر أرخص.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">139. خدمة تنسيق "الطقم الكامل"</span><span class="text-slate-400 text-[10px]">عرض المنتجات المتناسقة معاً بزر شراء واحد بخصم.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">140. شريط المفضلات السريع (Wishlist Drawer)</span><span class="text-slate-400 text-[10px]">حفظ ومقارنة القطع التي تعجب العميل بسهولة تامة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">141. خريطة هدايا المشاهير والتيك توك</span><span class="text-slate-400 text-[10px]">قسم خاص يضم القطع التريند التي ظهرت مع المؤثرين.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">142. أداة "اصنع طقمك بنفسك" التفاعلية</span><span class="text-slate-400 text-[10px]">اختيار وتجميع القطع المراد شراؤها ورؤيتها معاً بالسلة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">143. حملة "إكسسوارك القديم بهدية جديدة"</span><span class="text-slate-400 text-[10px]">استبدال الإكسسوارات القديمة التالفة بخصم قوي على الجديدة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">144. شراكة مع صالونات الحلاقة والتجميل</span><span class="text-slate-400 text-[10px]">وضع بوكسات مصغرة من إكسسوارات الرجال بالباربرشوبس الشهيرة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">145. مسابقات وتحديات تيك توك وريلز</span><span class="text-slate-400 text-[10px]">تشجيع صناع المحتوى على تصوير فيديوهات بالمنتجات لهدايا.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">146. إرسال بوكسات للمؤثرين والبلوجرز</span><span class="text-slate-400 text-[10px]">هدايا فخمة للميكب أرتست لضمان تصوير الـ Unboxing بصدق.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">147. مبادرة إكسسوار الخريجين والمناسبات</span><span class="text-slate-400 text-[10px]">خصومات خاصة لفترة التخرج وأعياد الحب ورأس السنة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">148. حفلة تدشين المنتجات الجديدة أونلاين</span><span class="text-slate-400 text-[10px]">بث مباشر قصير لعرض القطع الجديدة مع خصومات حصرية للمشاهدين.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">149. برنامج مكافآت سفراء الجامعات (Campus)</span><span class="text-slate-400 text-[10px]">اختيار طالب بكل جامعة لتوزيع كودات الخصم مقابل أرباح.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">150. فيديوهات "كيف تُصنع الإكسسوارات"</span><span class="text-slate-400 text-[10px]">محتوى خلف الكواليس يوضح اختيار الخامات لزيادة الثقة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">151. عروض تخفيضات الفجر (Midnight Drops)</span><span class="text-slate-400 text-[10px]">خصومات قوية جداً تبدأ الساعة 12 منتصف الليل لفترة محدودة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">152. حملة "كل قطعة لها قصة" التسويقية</span><span class="text-slate-400 text-[10px]">إرفاق قصة وراء تصميم كل إكسسوار لزيادة قيمته النفسية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">153. كارت شكر وتهنئة في الأعياد الدينية</span><span class="text-slate-400 text-[10px]">رسالة واتساب آلية لكل العملاء بالأعياد مع كوبون هدية معايدة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">154. ميزة "حفظ الهدية لموعد لاحق"</span><span class="text-slate-400 text-[10px]">شراء الهدية الآن وجدولة وصولها للطرف الآخر بيوم ميلاده بدقة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">155. تصميم هوية بصرية موحدة (Visual Identity)</span><span class="text-slate-400 text-[10px]">استخدام درجات ألوان فاخرة (أسود، ذهبي، بيج) لإيحاء فوري بالفخامة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">156. تصويتات العملاء على التصاميم القادمة</span><span class="text-slate-400 text-[10px]">استطلاعات دورية على السوشيال ميديا لاختيار الموديلات لإنتاجها.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">157. إطلاق "نادي عشاق لمستنا" السري</span><span class="text-slate-400 text-[10px]">مجموعة خاصة للعملاء المميزين لتلقي العروض السرية أولاً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">158. مساعد الهدايا الذكي (Gift Finder Quiz)</span><span class="text-slate-400 text-[10px]">أسئلة قصيرة ليقترح المتجر الهدية المناسبة للشخص والميزانية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">159. دليل مقاسات تفصيلي بالصور والخطوات</span><span class="text-slate-400 text-[10px]">طريقة قياس منزلية سهلة باستخدام الخيط لتقليل المرتجعات.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">160. إشعارات المنتجات قليلة العدد</span><span class="text-slate-400 text-[10px]">تنبيهات تلقائية بخلو المخزون الوشيك لسرعة اتخاذ قرار الشراء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">161. ميزة مقارنة المنتجات جنباً إلى جنب</span><span class="text-slate-400 text-[10px]">مقارنة الأسعار، الخامات، والأشكال بكل سهولة للعميل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">162. شريط تنبيهات علوي للإعلانات الهامة</span><span class="text-slate-400 text-[10px]">إعلان العروض والشحن المجاني بأعلى المتجر بوضوح.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">163. تصفية سريعة باللون والمقاس والمعدن</span><span class="text-slate-400 text-[10px]">فلاتر بحث ذكية وسريعة للوصول للمنتج المطلوب بثوانٍ.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">164. صفحة "من نحن" تحكي قصة البراند</span><span class="text-slate-400 text-[10px]">بناء الثقة العاطفية مع العميل من خلال قصة النجاح.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">165. روابط سريعة لوسائل التواصل الاجتماعي</span><span class="text-slate-400 text-[10px]">وصول سهل لصفحات انستجرام وفيسبوك وتيك توك من المتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">166. سياسة استرجاع وخصوصية واضحة</span><span class="text-slate-400 text-[10px]">عرض الشروط بأسلوب شفاف ومريح يزيد طمأنينة المشتري.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">167. نظام تقييمات نجوم تفاعلي للمنتجات</span><span class="text-slate-400 text-[10px]">إظهار آراء العملاء السابقين بوضوح تحت كل منتج.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">168. ميزة العرض السريع للمنتج (Quick View)</span><span class="text-slate-400 text-[10px]">معاينة تفاصيل المنتج وإضافته للسلة بدون فتح صفحة جديدة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">169. تفعيل ميزة الإكمال التلقائي للبحث</span><span class="text-slate-400 text-[10px]">إظهار اقتراحات المنتجات بمجرد كتابة أول حروف للعميل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">170. واجهة مستخدم متجاوبة تماماً (Responsive)</span><span class="text-slate-400 text-[10px]">سرعة عرض خارقة وتصميم مثالي على جميع الهواتف الذكية.</span></div>
+</div>
+</div>
+​<div>
+<h3 class="text-sm font-bold text-emerald-400 mb-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+سابعاً: لمسات نهائية، أمان، وتنظيم متقدم للمتجر (171 - 200)
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">171. نظام التحقق من الطلب عبر الواتساب</span><span class="text-slate-400 text-[10px]">تأكيد تفاصيل الشحن والمدينة قبل خروج الدليفري لتفادي الأخطاء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">172. أزرار الدفع الإلكتروني وفودافون كاش المنظمة</span><span class="text-slate-400 text-[10px]">عرض الأرقام المتاحة بوضوح مع إبقاء المحافظ المتوقفة مؤقتاً بتنبيه.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">173. أزرار الشكاوي والمقترحات المنفصلة والواضحة</span><span class="text-slate-400 text-[10px]">توجيه الشكاوي للقسم المختص لحل أي مشكلة للعميل فوراً.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">174. سرعة تحميل صفحات فائقة (Fast Loading)</span><span class="text-slate-400 text-[10px]">ضغط الصور وأكواد برمجية خفيفة لفتح المتجر في جزء من الثانية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">175. شهادة الأمان الحماية (SSL Secure)</span><span class="text-slate-400 text-[10px]">تأمين تصفح العميل وبياناته بالكامل برمز القفل الموثوق.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">176. وضع الحفظ التلقائي لبيانات الشحن</span><span class="text-slate-400 text-[10px]">تسهيل عملية الشراء المتكرر للعملاء الدائمين بدون إعادة إدخال.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">177. زر الرجوع السريع لأعلى الصفحة (Scroll to Top)</span><span class="text-slate-400 text-[10px]">تسهيل التنقل والتصفح السريع للعميل داخل المتجر الطويل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">178. تفعيل رسائل الخطأ الودية والواضحة</span><span class="text-slate-400 text-[10px]">إظهار إرشادات لطيفة للعميل عند نسيان خانة أو إدخال خاطئ.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">179. إدارة المخزون التلقائية (Stock Sync)</span><span class="text-slate-400 text-[10px]">إخفاء القطع المنتهية تلقائياً لعدم إحراج العميل وقت الطلب.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">180. حاسبة إجمالية دقيقة للأسعار والضرائب</span><span class="text-slate-400 text-[10px]">حساب تفصيلي لقيمة المنتجات والشحن والخصومات بوضوح تام بالسلة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">181. تنبيهات صوتية أو بصرية لطيفة عند الإضافة للسلة</span><span class="text-slate-400 text-[10px]">تأكيد بصري تفاعلي بأن المنتج أضيف بنجاح لسلة التسوق.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">182. عرض باركود المتجر السريع (QR Code)</span><span class="text-slate-400 text-[10px]">لتسهيل مشاركة رابط المتجر عبر الكروت المطبوعة والدليفري.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">183. خاصية تصفية المنتجات حسب الأكثر شهرة</span><span class="text-slate-400 text-[10px]">ترتيب المنتجات تلقائياً حسب تفضيلات وقبول العملاء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">184. خاصية تصفية المنتجات حسب الأحدث نزولاً</span><span class="text-slate-400 text-[10px]">رؤية أحدث الإكسسوارات فور دخولها المتجر مباشرة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">185. خاصية تصفية المنتجات حسب الأقل سعراً والأعلى</span><span class="text-slate-400 text-[10px]">مرونة كاملة للعميل في ترتيب النتائج حسب ميزانيته.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">186. تنبيهات منبثقة ذكية للعروض الحصرية</span><span class="text-slate-400 text-[10px]">إظهار كود خصم ترحيبي للزائر الجديد عند دخوله لأول مرة.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">187. دعم خاص للغة العربية الفصحى المبسطة والواضحة</span><span class="text-slate-400 text-[10px]">صياغة نصوص المتجر بأسلوب احترافي ومحبب للجمهور العربي.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">188. إمكانية نسخ تفاصيل وطريقة الدفع بضغطة زر</span><span class="text-slate-400 text-[10px]">تسهيل نسخ رقم فودافون كاش أو الكود بدون أخطاء بشرية.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">189. نظام تقارير زوار المتجر وتحليل السلوك</span><span class="text-slate-400 text-[10px]">معرفة أكثر المنتجات التي شاهدها العملاء لتحسين المعروضات.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">190. تكامل برمجى مع وسائل التواصل الاجتماعي</span><span class="text-slate-400 text-[10px]">مشاركة أي منتج بسهولة على واتساب وفيسبوك بضغطة زر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">191. تصميم الفوتر الاحترافي المتكامل</span><span class="text-slate-400 text-[10px]">تضمين وسائل الدفع، روابط الدعم، وساعات العمل أسفل المتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">192. خطوط عربية حديثة ونظيفة ومريحة للعين</span><span class="text-slate-400 text-[10px]">استخدام تايبوجرافي فخم يليق ببراند إكسسوارات راقي.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">193. توزيع بصري متناسق ومسافات بيضاء مريحة</span><span class="text-slate-400 text-[10px]">تصميم نظيف يخلو من التشتت ويسهل عملية الشراء.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">194. إخفاء العناصر غير الضرورية أثناء إتمام الطلب</span><span class="text-slate-400 text-[10px]">تركيز تام للعميل في صفحة الدفع لمنع تشتيته وخروجه.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">195. نظام إشعارات البريد أو الرسائل التلقائية</span><span class="text-slate-400 text-[10px]">تأكيد نجاح الطلب فور إتمامه لراحة وحماس العميل.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">196. ميزة "الأقسام السريعة المنسدلة" (Mega Menu)</span><span class="text-slate-400 text-[10px]">سهولة التنقل بين (رجالي، حريمي، هدايا، ساعات، أساور) بثوانٍ.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">197. صور بانر متحركة للعروض الكبرى</span><span class="text-slate-400 text-[10px]">جذب انتباه الزائر لأقوى الخصومات فور دخوله للمتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">198. خاصية "المنتجات المشابهة" أسفل كل منتج</span><span class="text-slate-400 text-[10px]">تحفيز العميل لاستعراض قطع إضافية وزيادة مبيعات المتجر.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">199. لوحة تحكم سهلة وسلسة لإدارة المنتجات</span><span class="text-slate-400 text-[10px]">تمكنك من إضافة وتعديل الأسعار والمخزون بدون تعقيد برمجى.</span></div>
+<div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800"><span class="font-bold text-white block mb-1">200. خططة تطوير وتحديث دورية للمتجر</span><span class="text-slate-400 text-[10px]">متابعة أحدث تريندات السوق والإكسسوارات لإضافتها بشكل مستمر.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+​<!-- قسم آراء المشترين -->
+<section class="p-4 bg-[#0A0F1D] border-t border-slate-800/80 mt-6 space-y-3 max-w-5xl mx-auto rounded-3xl">
+<div class="flex justify-between items-center px-1">
+<div>
+<h3 class="font-bold text-xs text-white flex items-center gap-1.5">
+<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+<span data-txt="reviews_heading">تجارب العملاء والمشترين الموثقة:</span>
+</h3>
+<p class="text-[10px] text-slate-400" data-txt="reviews_subheading">تقييمات واقعية بعد المعاينة والاستلام العملي للطلب</p>
+</div>
+<button onclick="openModal('review-modal')" class="text-[11px] text-amber-400 font-bold hover:underline cursor-pointer bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20">
++ أضف تجربتك
+</button>
+</div>
+<div id="reviews-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+</section>
+​<!-- الفوتر -->
+<footer class="p-4 bg-[#070B14] border-t border-slate-800 space-y-3 text-xs max-w-5xl mx-auto mt-4 rounded-3xl">
+<div class="flex justify-between items-center">
+<p class="font-bold text-slate-300" data-txt="footer_contacts_title">أرقام التواصل والتحويل المعتمدة (كاش وإنستاباي):</p>
+<span class="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">خدمة عملاء نشطة 24/7</span>
+</div>
+<div id="footer-phones-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+<div class="flex flex-wrap justify-center gap-2 text-[11px] font-bold pt-1">
+<a id="link-fb" href="#" target="_blank" rel="noreferrer" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-blue-400 hover:bg-slate-800 transition flex items-center gap-1.5"><span>📘</span> فيسبوك</a>
+<a id="link-tiktok" href="#" target="_blank" rel="noreferrer" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-rose-300 hover:bg-slate-800 transition flex items-center gap-1.5"><span>🎵</span> تيك توك</a>
+<a id="link-ig" href="#" target="_blank" rel="noreferrer" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-pink-400 hover:bg-slate-800 transition flex items-center gap-1.5"><span>📸</span> إنستجرام</a>
+<a id="link-tg" href="#" target="_blank" rel="noreferrer" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-cyan-400 hover:bg-slate-800 transition flex items-center gap-1.5"><span>✈️</span> تليجرام</a>
+<a id="link-wa" href="#" target="_blank" rel="noreferrer" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-emerald-400 hover:bg-slate-800 transition flex items-center gap-1.5"><span>💬</span> واتساب</a>
+</div>
+<div class="pt-3 text-center border-t border-slate-800/80 text-[10px] text-slate-500">
+جميع الحقوق محفوظة لمنصة 3Lrehab التجارة الذكية © 2026
+</div>
+</footer>
+​<!-- شريط الملاحة السفلي -->
+<nav class="fixed bottom-0 inset-x-0 bg-[#0C1222]/95 border-t border-slate-800 py-2 px-4 flex justify-around items-center z-40 backdrop-blur-md">
+<a href="#" class="flex flex-col items-center gap-0.5 text-emerald-400 text-[10px] font-bold">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+الرئيسية
+</a>
+<button onclick="setFilter('deal')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-amber-400 text-[10px] font-bold">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+العروض
+</button>
+<button onclick="openWishlistModal()" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-rose-400 text-[10px] font-bold">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+المفضلة
+</button>
+<button onclick="openCart()" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-emerald-400 text-[10px] font-bold relative">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+السلة
+</button>
+<a id="link-direct-support" href="#" target="_blank" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-emerald-400 text-[10px] font-bold">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+واتساب
+</a>
+</nav>
+​<!-- سلة المشتريات -->
+<div id="cart-drawer" class="fixed inset-0 z-50 hidden justify-end">
+<div onclick="closeCart()" class="fixed inset-0 bg-black/80 backdrop-blur-xs"></div>
+<div class="relative w-full max-w-sm h-full bg-[#0B101D] p-4 flex flex-col justify-between text-xs z-10 border-r border-slate-800 shadow-2xl overflow-y-auto no-scrollbar">
+<div>
+<div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
+<span class="font-black text-sm flex items-center gap-1.5 text-white">سلة المشتريات</span>
+<button onclick="closeCart()" class="text-slate-400 hover:text-white cursor-pointer bg-slate-900 p-1 rounded-lg">✕</button>
+</div>
+<div class="pt-3 pb-1">
+<div class="flex justify-between text-[10px] text-slate-300 font-bold mb-1">
+<span id="free-shipping-text">أضف بـ 1000 ج.م للحصول على شحن مجاني 🚚</span>
+<span id="free-shipping-percent">0%</span>
+</div>
+<div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800">
+<div id="free-shipping-bar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-300"></div>
+</div>
+</div>
+<div id="cart-items-container" class="divide-y divide-slate-800/80 py-2"></div>
+</div>
+​<div id="cart-checkout-area" class="border-t border-slate-800 pt-3 space-y-2.5">
+<div class="flex gap-1.5">
+<input type="text" id="coupon-code-input" placeholder="كود الخصم (مثل: 3L)" class="flex-1 p-2 bg-slate-950 border border-slate-800 rounded-xl text-white uppercase text-[10px] outline-none focus:border-emerald-500" />
+<button onclick="applyCoupon()" class="px-3 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold rounded-xl text-[10px] cursor-pointer">تطبيق</button>
+</div>
+<p id="coupon-status" class="text-[9px] text-emerald-400 hidden"></p>
+​<div class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl space-y-1.5 text-[11px]">
+<p class="text-amber-400 font-black">نظام تأكيد الحجز والشحن (50%)</p>
+<p class="text-slate-300 text-[10px]">مطلوب تحويل: <strong id="cart-deposit-amount" class="text-emerald-400 font-bold">0 ج.م</strong> عبر فودافون كاش أو إنستاباي.</p>
+<select id="cart-payment-phone-select" class="w-full bg-slate-950 p-1.5 rounded-lg text-emerald-400 font-mono font-bold text-xs outline-none border border-slate-800"></select>
+</div>
+​<form onsubmit="handleCheckoutForm(event)" class="space-y-2">
+<input id="order-cust-name" required placeholder="الاسم الحقيقي الثلاثي *" class="w-full p-2 bg-slate-900 border border-slate-800 rounded-xl text-white outline-none focus:border-emerald-500 text-xs" />
+<input id="order-cust-phone" required type="tel" maxlength="11" placeholder="رقم الهاتف (11 رقم) *" class="w-full p-2 bg-slate-900 border border-slate-800 rounded-xl font-bold text-white outline-none focus:border-emerald-500 font-mono text-xs" />
+<input id="order-cust-address" required placeholder="العنوان التفصيلي *" class="w-full p-2 bg-slate-900 border border-slate-800 rounded-xl text-white outline-none focus:border-emerald-500 text-[11px]" />
+​<div class="p-2.5 bg-slate-950 border border-dashed border-emerald-500/40 rounded-xl text-center">
+<label class="block text-amber-400 text-[10px] font-black mb-1">📷 إرفاق إيصال التحويل (إجباري):</label>
+<input type="file" id="order-receipt-file" accept="image/*" required class="text-[10px] text-slate-400 w-full cursor-pointer" />
+<p id="receipt-status" class="text-[9px] text-emerald-400 mt-1 font-bold hidden">✅ تم الإرفاق</p>
+</div>
+​<div class="flex justify-between font-black text-sm pt-1">
+<span>الإجمالي المطلوب:</span>
+<span id="cart-total-amount" class="text-emerald-400">0 ج.م</span>
+</div>
+​<button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-2.5 rounded-xl cursor-pointer shadow-lg">
+إنشاء الفاتورة وإرسالها للمالك
+</button>
+</form>
+</div>
+</div>
+</div>
+​<!-- نافذة الفاتورة -->
+<div id="invoice-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 bg-black/85 backdrop-blur-md overflow-y-auto">
+<div class="bg-slate-900 border border-slate-800 p-4 rounded-3xl w-full max-w-md text-xs space-y-3 my-auto shadow-2xl">
+<div class="flex justify-between items-center border-b border-slate-800 pb-2">
+<h3 class="font-bold text-white text-sm">فاتورة وبوليصة تأكيد الطلب المعتمدة</h3>
+<button onclick="closeModal('invoice-modal')" class="text-slate-400 hover:text-white cursor-pointer bg-slate-800 p-1 rounded-lg">✕</button>
+</div>
+​<div id="invoice-printable" class="bg-white text-slate-900 p-4 rounded-2xl shadow space-y-3 font-sans">
+<div class="flex justify-between items-start border-b border-slate-200 pb-2">
+<div>
+<h2 id="inv-store-name" class="font-black text-base text-slate-950">3Lrehab</h2>
+<p class="text-[10px] text-slate-600">بوليصة شحن وتأكيد معاينة مشروطة</p>
+</div>
+<div class="text-left text-[10px] text-slate-600">
+<p>رقم الفاتورة: <strong id="inv-number" class="font-mono text-slate-900">#---</strong></p>
+<p id="inv-date">---</p>
+</div>
+</div>
+<div class="text-[11px] space-y-0.5 text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+<p><strong>العميل:</strong> <span id="inv-cust-name" class="font-bold text-slate-900">---</span></p>
+<p><strong>الهاتف:</strong> <span id="inv-cust-phone" class="font-mono font-bold text-slate-900">---</span></p>
+<p><strong>العنوان:</strong> <span id="inv-cust-address">---</span></p>
+</div>
+<div class="border border-slate-200 rounded-lg overflow-hidden">
+<table class="w-full text-right text-[11px]">
+<thead class="bg-slate-100 text-slate-800 border-b border-slate-200">
+<tr>
+<th class="p-1.5">المنتج</th>
+<th class="p-1.5 text-center">الكمية</th>
+<th class="p-1.5 text-left">الإجمالي</th>
+</tr>
+</thead>
+<tbody id="inv-items-table" class="divide-y divide-slate-100 text-slate-800"></tbody>
+</table>
+</div>
+<div class="space-y-1 text-[11px] pt-1 border-t border-slate-200">
+<div class="flex justify-between font-bold"><span>الإجمالي:</span><span id="inv-total-price">0 ج.م</span></div>
+<div class="flex justify-between text-emerald-700 font-bold"><span>قسط الحجز المحول:</span><span id="inv-deposit-price">0 ج.م</span></div>
+<div class="flex justify-between text-amber-800 font-black border-t border-dashed border-slate-300 pt-1"><span>المتبقي عند الاستلام:</span><span id="inv-remaining-price">0 ج.م</span></div>
+</div>
+</div>
+​<button id="btn-send-whatsapp-final" onclick="dispatchOrderToWhatsAppMandatory()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-2.5 rounded-xl cursor-pointer shadow-lg">
+📲 إرسال البوليصة إلى واتساب المالك
+</button>
+</div>
+</div>
+​<!-- نافذة الرمز السري للمالك -->
+<div id="admin-pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+<div class="bg-slate-900 border border-slate-800 p-5 rounded-3xl w-full max-w-xs text-xs space-y-3 text-center shadow-2xl relative">
+<h3 class="font-bold text-white text-sm">تسجيل دخول المالك</h3>
+<input type="password" id="secret-pin-input" placeholder="••••••••" maxlength="16" class="w-full text-center tracking-widest text-lg font-mono p-2 bg-slate-950 border border-slate-800 rounded-xl text-emerald-400 outline-none" />
+<p id="pin-error-alert" class="text-[10px] text-rose-400 font-bold hidden"></p>
+<div class="flex gap-2 pt-1">
+<button onclick="verifySecretPin()" class="flex-1 bg-emerald-500 text-slate-950 font-black py-2 rounded-xl cursor-pointer">تأكيد</button>
+<button onclick="closeModal('admin-pin-modal')" class="px-3 bg-slate-800 text-slate-300 rounded-xl cursor-pointer">إلغاء</button>
+</div>
+</div>
+</div>
+​<!-- لوحة الإدارة الشاملة -->
+<div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 bg-black/85 backdrop-blur-md overflow-y-auto">
+<div class="bg-[#0C1222] border border-slate-800 p-4 rounded-3xl w-full max-w-lg text-xs space-y-3 my-auto max-h-[92vh] overflow-y-auto no-scrollbar shadow-2xl">
+<div class="flex justify-between items-center border-b border-slate-800 pb-2">
+<h3 class="font-bold text-white text-sm">⚙️ لوحة الإدارة الشاملة</h3>
+<button onclick="closeModal('settings-modal')" class="text-slate-400 hover:text-white cursor-pointer bg-slate-800 p-1 rounded-lg">✕</button>
+</div>
+​<div class="flex gap-1.5 overflow-x-auto no-scrollbar border-b border-slate-800 pb-2">
+<button onclick="switchAdminTab('general')" id="tab-btn-general" class="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-[10px]">البيانات</button>
+<button onclick="switchAdminTab('phones')" id="tab-btn-phones" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-[10px]">📞 الأرقام</button>
+<button onclick="switchAdminTab('social')" id="tab-btn-social" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-[10px]">السوشيال</button>
+<button onclick="switchAdminTab('security')" id="tab-btn-security" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-[10px]">🔒 الأمان</button>
+</div>
+​<div id="admin-tab-general" class="space-y-2">
+<div><label class="block text-slate-400 text-[10px]">اسم المتجر:</label><input id="cfg-name" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" /></div>
+<div><label class="block text-slate-400 text-[10px]">الشعار:</label><input id="cfg-tagline" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" /></div>
+<div><label class="block text-slate-400 text-[10px]">نسبة القسط (%):</label><input id="cfg-deposit-percent" type="number" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-emerald-400" /></div>
+</div>
+​<div id="admin-tab-phones" class="space-y-2.5 hidden">
+<div class="p-3 bg-slate-950 border border-slate-800 rounded-xl space-y-2">
+<p class="font-bold text-amber-400 text-[11px]">+ إضافة رقم:</p>
+<input id="new-phone-label" placeholder="اسم الرقم" class="p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs w-full mb-1" />
+<input id="new-phone-number" placeholder="010xxxxxxxx" class="p-2 bg-slate-900 border border-slate-800 rounded-lg text-emerald-400 text-xs w-full mb-1 font-mono" />
+<button type="button" onclick="handleAddPhoneNumber()" class="w-full py-2 bg-emerald-500 text-slate-950 font-bold rounded-lg cursor-pointer">حفظ الرقم</button>
+</div>
+<div id="admin-phones-list" class="space-y-1.5"></div>
+</div>
+​<div id="admin-tab-social" class="space-y-2 hidden">
+<div><label class="block text-slate-400 text-[10px]">تيك توك:</label><input id="cfg-tiktok-link" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-rose-300 font-mono" /></div>
+<div><label class="block text-slate-400 text-[10px]">فيسبوك:</label><input id="cfg-fb-link" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-blue-400" /></div>
+</div>
+​<div id="admin-tab-security" class="space-y-2.5 hidden">
+<div><label class="block text-slate-400 text-[10px]">رمز PIN السري للمالك:</label><input id="cfg-admin-pin" type="text" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-rose-400 font-mono font-bold" /></div>
+</div>
+​<div class="pt-2 border-t border-slate-800 flex gap-2">
+<button onclick="saveAllSettings()" class="flex-1 bg-emerald-500 text-slate-950 font-black py-2.5 rounded-xl cursor-pointer">حفظ التعديلات</button>
+</div>
+</div>
+</div>
+​<!-- نافذة إضافة المنتجات -->
+<div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 bg-black/80 backdrop-blur-sm overflow-y-auto">
+<form onsubmit="handleSaveProduct(event)" class="bg-[#0C1222] border border-slate-800 p-4 rounded-3xl w-full max-w-xs text-xs space-y-2.5 my-auto shadow-2xl">
+<div class="flex justify-between items-center border-b border-slate-800 pb-2">
+<h3 id="product-modal-title" class="font-bold text-white text-sm">إضافة منتج جديد</h3>
+<button type="button" onclick="closeModal('product-modal')" class="text-slate-400 hover:text-white cursor-pointer bg-slate-800 p-1 rounded-lg">✕</button>
+</div>
+<input type="hidden" id="prod-edit-id" value="" />
+<input id="prod-name" required placeholder="اسم المنتج *" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-xl text-white outline-none" />
+<div class="grid grid-cols-2 gap-2">
+<input id="prod-price" required type="number" placeholder="السعر *" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-xl text-emerald-400 font-bold outline-none" />
+<input id="prod-old-price" type="number" placeholder="قبل الخصم" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-400 outline-none" />
+</div>
+<select id="prod-category" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-xl text-white outline-none">
+<option value="all">عام (عادي)</option>
+<option value="deal">🔥 عرض اليوم الخاطف</option>
+<option value="students">🎓 عروض الطلاب</option>
+<option value="doctors">🩺 أطباء وتمريض</option>
+<option value="bundles">🎁 باقة توفير</option>
+</select>
+<input id="prod-desc" placeholder="المواصفات والضمان" class="w-full p-2 bg-slate-950 border border-slate-800 rounded-xl text-white outline-none" />
+<input id="prod-image-url" placeholder="رابط الصورة المباشر https://..." class="w-full p-2 bg-slate-950 border border-slate-800 rounded-xl text-white outline-none" />
+<button type="submit" class="w-full bg-emerald-500 text-slate-950 font-black py-2 rounded-xl cursor-pointer">حفظ المنتج</button>
+</form>
+</div>
+​<!-- نافذة تعديل النصوص المباشرة -->
+<div id="edit-text-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+<div class="bg-slate-900 border border-slate-800 p-5 rounded-3xl w-full max-w-sm text-xs space-y-3 shadow-2xl">
+<h3 class="font-bold text-amber-400 text-sm">✏️ تعديل النص مباشرة</h3>
+<input type="hidden" id="edit-text-key" />
+<textarea id="edit-text-value" rows="3" class="w-full p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold outline-none"></textarea>
+<button onclick="saveLiveTextChange()" class="w-full bg-amber-400 text-slate-950 font-black py-2 rounded-xl cursor-pointer">حفظ وتطبيق</button>
+</div>
+</div>
+​<script>
+const defaultSiteTexts = {
+splash_badge: "المنصة المعتمدة الأولى لضمان المشتري",
+splash_welcome: "أهلاً بك في متجر",
+store_title: "3Lrehab Smart Store",
+splash_desc: "تسوق بأعلى درجات الأمان: افحص وجرب طلبك عملياً يداً بيد أمام مندوب الشحن قبل سداد باقي الحساب!",
+splash_feature_1: "ضمان أصلي واستبدال 14 يوم",
+splash_feature_2: "شحن فوري لكافة المحافظات",
+splash_feature_3: "خصومات طلاب وكوادر طبية",
+splash_feature_4: "حماية وسرية تامة للمشتري",
+splash_btn_text: "ابدأ التسوق وتصفح العروض الآن",
+ticker_text: "🔥 خصومات حصرية 2026 • فحص وتجربة عملية قبل إتمام السداد • قسط تأكيد الحجز 50% والباقي عند الاستلام • شحن سريع لكافة المحافظات 🚚",
+store_name: "3Lrehab",
+verified_badge: "موثق 🛡️",
+tagline_text: "نظام المعاينة والفحص المسبق قبل السداد",
+hero_badge: "عروض حصرية وخصومات الموسم 2026",
+hero_heading_1: "تسوق براحة بال وتأكيد ذكي",
+hero_heading_2: "افحص وجرّب طلبك عملياً قبل سداد باقي الحساب!",
+hero_deposit_title: "نظام الحجز الذكي وضمان الجدية:",
+hero_deposit_desc: "قسط تأكيد تجهيز الشحنة (50%)، واستكمال باقي المبلغ المتبقي يد بيد بعد الفحص الشامل وتجربة المنتج أمام مندوب التسليم.",
+btn_explore_offers: "استكشف العروض الآن ↓",
+btn_flash_deals: "⚡ عروض اليوم الخاطفة",
+countdown_label: "انتهاء عروض اليوم الفورية:",
+free_shipping_notice: "🚚 شحن مجاني عند الطلب بـ 1000 ج.م أو أكثر",
+catalog_title: "كتالوج المجلدات والأقسام:",
+trust_1: "🛡 ضمان أصلي معتمد",
+trust_2: "📦 فحص ومعاينة حقيقية قبل السداد",
+trust_3: "🚚 شحن سريع لجميع محافظات مصر",
+trust_4: "🔒 تشفير بيانات العميل 100%",
+filter_deals: "عروض اليوم",
+filter_students: "عروض الطلاب",
+filter_doctors: "أطباء وتمريض",
+filter_bundles: "باقات التوفير",
+reviews_heading: "تجارب العملاء والمشترين الموثقة:",
+reviews_subheading: "تقييمات واقعية بعد المعاينة والاستلام العملي للطلب",
+footer_contacts_title: "أرقام التواصل والتحويل المعتمدة (كاش وإنستاباي):"
+};
+​const defaultSettings = {
+name: "3Lrehab",
+tagline: "نظام المعاينة والفحص المسبق قبل سداد باقي الحساب",
+ticker: defaultSiteTexts.ticker_text,
+depositPercent: 50,
+adminPin: "123456",
+tiktokLink: "https://www.tiktok.com/@3lrehab",
+fbPage: "https://facebook.com",
+igPage: "https://instagram.com",
+tgGroup: "https://t.me",
+waGroup: "https://chat.whatsapp.com"
+};
+​const defaultPhoneNumbers = [
+{ id: 1, label: "فودافون كاش / إنستاباي (أساسي)", number: "01030084281", isPrimary: true },
+{ id: 2, label: "اتصالات كاش (احتياطي)", number: "01123456789", isPrimary: false }
+];
+​const defaultFolders = [
+{ id: "all", name: "كل الأقسام", icon: "🌟" },
+{ id: "watches", name: "الساعات والإكسسوار", icon: "⌚" },
+{ id: "chargers", name: "الشواحن والباور بانك", icon: "⚡" },
+{ id: "audio", name: "السماعات والصوتيات", icon: "🎧" },
+{ id: "medical", name: "القسم الطبي والصحي", icon: "🩺" }
+];
+​const defaultProducts = [
+{ id: 1, name: "ساعة ألترا تيتانيوم 2026", price: 850, oldPrice: 1100, folderId: "watches", category: "deal", desc: "شاشة AMOLED تدعم المكالمات، مقاومة للماء مع ضمان 12 شهراً.", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" },
+{ id: 2, name: "شاحن GaN 65W النبضي الذكي", price: 490, oldPrice: 650, folderId: "chargers", category: "students", desc: "شحن فائق السرعة ثلاثي المنافذ للابتوب والموبايل.", image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&q=80" },
+{ id: 3, name: "سماعة إلغاء الضوضاء الطبية", price: 620, oldPrice: 850, folderId: "audio", category: "doctors", desc: "عزل صوتي فائق وبطارية 40 ساعة متواصلة.", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" }
+];
+​const defaultReviews = [
+{ id: 1, name: "أحمد حسام الدين", rating: 5, text: "الساعة وصلت وجربتها وفحصتها قدام المندوب، خامتها محترمة جداً." },
+{ id: 2, name: "د. هبة رضوان الشامي", rating: 5, text: "السماعة عزلها ممتاز ومريحة جداً في النبطشيات." }
+];
+​let s = JSON.parse(localStorage.getItem('3l_cfg_v10')) || defaultSettings;
+let siteTexts = JSON.parse(localStorage.getItem('3l_texts_v10')) || defaultSiteTexts;
+let phoneNumbers = JSON.parse(localStorage.getItem('3l_phones_v10')) || defaultPhoneNumbers;
+let folders = JSON.parse(localStorage.getItem('3l_folders_v10')) || defaultFolders;
+let products = JSON.parse(localStorage.getItem('3l_pr_v10')) || defaultProducts;
+let reviews = JSON.parse(localStorage.getItem('3l_revs_v10')) || defaultReviews;
+let cart = JSON.parse(localStorage.getItem('3l_cart_v10')) || [];
+let wishlist = JSON.parse(localStorage.getItem('3l_wishlist_v10')) || [];
+let orders = JSON.parse(localStorage.getItem('3l_orders_v10')) || [];
+​let appliedDiscountPercent = 0;
+let isAdmin = false;
+let isLiveEditActive = false;
+let isDarkMode = true;
+let activeFolderId = 'all';
+let currentFilter = 'all';
+let currentSort = 'default';
+let searchQuery = '';
+let tempReceiptImage = "";
+let currentInvoiceData = null;
+​function enterStore() {
+const splash = document.getElementById('splash-entrance');
+if (splash) {
+splash.style.opacity = '0';
+splash.style.transform = 'scale(1.04)';
+setTimeout(() => { splash.classList.add('hidden'); }, 600);
+}
+}
+​function showToast(message, type = 'info') {
+const container = document.getElementById('toast-container');
+const toast = document.createElement('div');
+const colors = {
+success: 'bg-emerald-600 text-white border-emerald-400',
+error: 'bg-rose-600 text-white border-rose-400',
+info: 'bg-slate-800 text-white border-slate-700'
+};
+toast.className = p-3 rounded-2xl shadow-2xl border text-xs font-bold transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto flex items-center gap-2 max-w-sm ${colors[type] || colors.info};
+toast.innerHTML = <span>${type === 'success' ? '✅' : type === 'error' ? '⚠️' : 'ℹ️'}</span><span>${message}</span>;
+container.appendChild(toast);
+requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+setTimeout(() => {
+toast.classList.add('opacity-0', 'translate-y-2');
+setTimeout(() => toast.remove(), 350);
+}, 4000);
+}
+​let logoClicks = 0;
+let logoTimer = null;
+function handleSecretAdminClick() {
+logoClicks++;
+clearTimeout(logoTimer);
+logoTimer = setTimeout(() => { logoClicks = 0; }, 1500);
+if (logoClicks >= 5) {
+logoClicks = 0;
+openModal('admin-pin-modal');
+document.getElementById('pin-error-alert').classList.add('hidden');
+document.getElementById('secret-pin-input').value = '';
+document.getElementById('secret-pin-input').focus();
+}
+}
+​function verifySecretPin() {
+const inputPin = document.getElementById('secret-pin-input').value.trim();
+const masterPin = s.adminPin || "123456";
+if (inputPin === masterPin) {
+toggleAdmin(true);
+closeModal('admin-pin-modal');
+showToast("👑 أهلاً بك يا ملك! تم فتح لوحة القيادة.", "success");
+} else {
+const alertBox = document.getElementById('pin-error-alert');
+alertBox.textContent = "❌ الرمز السري غير صحيح (الباسورد الافتتاحي هو 123456)";
+alertBox.classList.remove('hidden');
+showToast("رمز PIN غير صحيح!", "error");
+}
+}
+​function toggleAdmin(active) {
+isAdmin = active;
+if (!isAdmin) isLiveEditActive = false;
+updateStoreUI();
+}
+​function toggleLiveEditMode() {
+if (!isAdmin) return;
+isLiveEditActive = !isLiveEditActive;
+const statusLabel = document.getElementById('live-edit-status-label');
+const toggleBtn = document.getElementById('btn-toggle-live-edit');
+if (isLiveEditActive) {
+statusLabel.textContent = "إيقاف التعديل";
+toggleBtn.className = "bg-rose-500 text-white text-[10px] font-black px-2 py-1.5 rounded-xl shadow animate-pulse cursor-pointer flex items-center gap-1";
+showToast("✏️ نمط التعديل المباشر مفعل! اضغط على أي نص لتعديله.", "info");
+} else {
+statusLabel.textContent = "تعديل الكلام";
+toggleBtn.className = "bg-amber-500 text-slate-950 text-[10px] font-black px-2 py-1.5 rounded-xl shadow cursor-pointer flex items-center gap-1";
+showToast("تم إيقاف التعديل المباشر", "info");
+}
+applyTextBindings();
+}
+​function applyTextBindings() {
+document.querySelectorAll('[data-txt]').forEach(el => {
+const key = el.getAttribute('data-txt');
+if (siteTexts[key] !== undefined) {
+el.textContent = siteTexts[key];
+}
+if (isAdmin && isLiveEditActive) {
+el.classList.add('editable-text-highlight');
+el.onclick = function(e) {
+e.stopPropagation();
+e.preventDefault();
+openLiveTextModal(key, el.textContent);
+};
+} else {
+el.classList.remove('editable-text-highlight');
+el.onclick = null;
+}
+});
+}
+​function openLiveTextModal(key, val) {
+document.getElementById('edit-text-key').value = key;
+document.getElementById('edit-text-value').value = val.trim();
+openModal('edit-text-modal');
+}
+​function saveLiveTextChange() {
+const key = document.getElementById('edit-text-key').value;
+const val = document.getElementById('edit-text-value').value.trim();
+if (!key || !val) return;
+siteTexts[key] = val;
+localStorage.setItem('3l_texts_v10', JSON.stringify(siteTexts));
+if (key === 'store_name') s.name = val;
+if (key === 'tagline_text') s.tagline = val;
+if (key === 'ticker_text') s.ticker = val;
+localStorage.setItem('3l_cfg_v10', JSON.stringify(s));
+closeModal('edit-text-modal');
+applyTextBindings();
+updateStoreUI();
+showToast("✅ تم تحديث النص بنجاح!", "success");
+}
+​function handleAddPhoneNumber() {
+const label = document.getElementById('new-phone-label').value.trim();
+const num = document.getElementById('new-phone-number').value.trim();
+if (!label || !num) {
+showToast("املأ اسم ورقم الموبايل", "error");
+return;
+}
+phoneNumbers.push({ id: Date.now(), label, number: num, isPrimary: false });
+localStorage.setItem('3l_phones_v10', JSON.stringify(phoneNumbers));
+document.getElementById('new-phone-label').value = '';
+document.getElementById('new-phone-number').value = '';
+renderPhonesUI();
+showToast("تمت إضافة الرقم بنجاح", "success");
+}
+​function renderPhonesUI() {
+const footerContainer = document.getElementById('footer-phones-container');
+if (footerContainer) {
+footerContainer.innerHTML = phoneNumbers.map(p => <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-xl flex items-center justify-between text-amber-400 font-bold"> <span class="text-slate-300 text-[10px]">${p.label}:</span> <a href="tel:${p.number}" class="text-emerald-400 font-mono">${p.number}</a> </div>).join('');
+}
+const cartSelect = document.getElementById('cart-payment-phone-select');
+if (cartSelect) {
+cartSelect.innerHTML = phoneNumbers.map(p => <option value="${p.number}">${p.label} - ${p.number}</option>).join('');
+}
+const adminList = document.getElementById('admin-phones-list');
+if (adminList) {
+adminList.innerHTML = phoneNumbers.map(p => <div class="p-2 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-between text-xs mb-1"> <span class="text-white">${p.label}: <strong class="text-emerald-400">${p.number}</strong></span> <button type="button" onclick="phoneNumbers = phoneNumbers.filter(x=>x.id !== ${p.id}); localStorage.setItem('3l_phones_v10', JSON.stringify(phoneNumbers)); renderPhonesUI();" class="text-rose-400 font-bold">حذف</button> </div>).join('');
+}
+}
+​function renderProducts() {
+const grid = document.getElementById('products-grid');
+let filtered = [...products];
+if (activeFolderId !== 'all') filtered = filtered.filter(p => p.folderId === activeFolderId);
+if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
+if (searchQuery) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery));
+​if (filtered.length === 0) {
+grid.innerHTML = <div class="col-span-full py-12 text-center text-slate-500 font-bold">لا توجد منتجات مطابقة حالياً</div>;
+return;
+}
+​grid.innerHTML = filtered.map(p => <div class="bg-[#0D1424] border border-slate-800 p-2.5 rounded-2xl flex flex-col justify-between shadow relative group"> <div> <div class="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-slate-950 flex items-center justify-center"> <img src="${p.image || 'https://via.placeholder.com/300'}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" /> ${isAdmin ?<button onclick="products = products.filter(x=>x.id !== ${p.id}); localStorage.setItem('3l_pr_v10', JSON.stringify(products)); renderProducts();" class="absolute top-1.5 left-1.5 bg-rose-600 text-white p-1 rounded font-bold text-[10px]">حذف</button>: ''} </div> <h3 class="font-bold text-xs truncate text-white">${p.name}</h3> <p class="text-[10px] text-slate-400 line-clamp-1 mt-0.5">${p.desc || ''}</p> </div> <div class="mt-2.5 pt-1.5 border-t border-slate-800 flex items-center justify-between"> <span class="text-xs font-black text-emerald-400">${p.price} ج.م</span> <button onclick="addToCart(${p.id})" class="bg-emerald-500 text-slate-950 p-1.5 rounded-xl font-bold text-[10px] cursor-pointer">أضف للسلة</button> </div> </div>).join('');
+}
+​function openProductModal() {
+document.getElementById('prod-edit-id').value = "";
+document.getElementById('prod-name').value = "";
+document.getElementById('prod-price').value = "";
+document.getElementById('prod-old-price').value = "";
+document.getElementById('prod-desc').value = "";
+document.getElementById('prod-image-url').value = "";
+openModal('product-modal');
+}
+​function handleSaveProduct(e) {
+e.preventDefault();
+const name = document.getElementById('prod-name').value.trim();
+const price = Number(document.getElementById('prod-price').value);
+const oldPrice = Number(document.getElementById('prod-old-price').value) || Math.round(price * 1.25);
+const category = document.getElementById('prod-category').value;
+const desc = document.getElementById('prod-desc').value.trim();
+const image = document.getElementById('prod-image-url').value.trim() || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80";
+​products.unshift({ id: Date.now(), name, price, oldPrice, category, folderId: activeFolderId, desc, image });
+localStorage.setItem('3l_pr_v10', JSON.stringify(products));
+closeModal('product-modal');
+renderProducts();
+showToast("تم حفظ المنتج بنجاح!", "success");
+}
+​function addToCart(productId) {
+const prod = products.find(p => p.id === productId);
+if (!prod) return;
+const existing = cart.find(i => i.id === productId);
+if (existing) existing.qty += 1;
+else cart.push({ ...prod, qty: 1 });
+localStorage.setItem('3l_cart_v10', JSON.stringify(cart));
+showToast(تمت إضافة "${prod.name}" للسلة, "success");
+openCart();
+updateStoreUI();
+}
+​function renderCart() {
+const container = document.getElementById('cart-items-container');
+if (cart.length === 0) {
+container.innerHTML = <p class="text-center py-8 text-slate-500 font-bold">سلتك فارغة</p>;
+return;
+}
+container.innerHTML = cart.map(item => <div class="py-2 flex justify-between items-center"> <span class="text-white font-bold">${item.name} (${item.qty})</span> <span class="text-emerald-400 font-bold">${item.price * item.qty} ج.م</span> </div>).join('');
+const rawTotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+const total = rawTotal - Math.round((rawTotal * appliedDiscountPercent) / 100);
+const deposit = Math.round((total * (s.depositPercent || 50)) / 100);
+document.getElementById('cart-total-amount').textContent = total + " ج.م";
+document.getElementById('cart-deposit-amount').textContent = deposit + " ج.م";
+}
+​function openCart() { document.getElementById('cart-drawer').classList.remove('hidden'); document.getElementById('cart-drawer').classList.add('flex'); renderCart(); }
+function closeCart() { document.getElementById('cart-drawer').classList.add('hidden'); document.getElementById('cart-drawer').classList.remove('flex'); }
+​document.getElementById('order-receipt-file').addEventListener('change', function(e) {
+const file = e.target.files[0];
+if (file) {
+const reader = new FileReader();
+reader.onload = function(evt) {
+tempReceiptImage = evt.target.result;
+document.getElementById('receipt-status').classList.remove('hidden');
+showToast("✅ تم إرفاق الإيصال", "success");
+};
+reader.readAsDataURL(file);
+}
+});
+​function handleCheckoutForm(e) {
+e.preventDefault();
+const custName = document.getElementById('order-cust-name').value.trim();
+const custPhone = document.getElementById('order-cust-phone').value.trim();
+const custAddress = document.getElementById('order-cust-address').value.trim();
+const selectedPhone = document.getElementById('cart-payment-phone-select').value;
+​if (!tempReceiptImage) {
+showToast("يجب إرفاق إيصال التحويل أولاً!", "error");
+return;
+}
+​const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+const deposit = Math.round((total * s.depositPercent) / 100);
+const invoiceNum = 'INV-' + Math.floor(100000 + Math.random() * 900000);
+​currentInvoiceData = {
+number: invoiceNum, name: custName, phone: custPhone, address: custAddress,
+items: [...cart], total, deposit, remaining: total - deposit, selectedPhone
+};
+​orders.unshift(currentInvoiceData);
+localStorage.setItem('3l_orders_v10', JSON.stringify(orders));
+​document.getElementById('inv-store-name').textContent = s.name;
+document.getElementById('inv-number').textContent = invoiceNum;
+document.getElementById('inv-date').textContent = new Date().toLocaleDateString('ar-EG');
+document.getElementById('inv-cust-name').textContent = custName;
+document.getElementById('inv-cust-phone').textContent = custPhone;
+document.getElementById('inv-cust-address').textContent = custAddress;
+document.getElementById('inv-total-price').textContent = total + " ج.م";
+document.getElementById('inv-deposit-price').textContent = deposit + " ج.م";
+document.getElementById('inv-remaining-price').textContent = (total - deposit) + " ج.م";
+​document.getElementById('inv-items-table').innerHTML = cart.map(i => <tr><td class="p-1.5">${i.name}</td><td class="p-1.5 text-center">${i.qty}</td><td class="p-1.5 text-left">${i.price * i.qty} ج</td></tr>).join('');
+​cart = [];
+localStorage.removeItem('3l_cart_v10');
+closeCart();
+openModal('invoice-modal');
+showToast("تم إنشاء بوليصة الشحنة بنجاح!", "success");
+updateStoreUI();
+}
+​function dispatchOrderToWhatsAppMandatory() {
+if (!currentInvoiceData) return;
+const primaryPhone = phoneNumbers.find(p => p.isPrimary)?.number || phoneNumbers[0]?.number || "01030084281";
+let msg = 🧾 *بوليصة شحنة مؤكدة من متجر ${s.name}*\n;
+msg += 🔢 رقم الفاتورة: ${currentInvoiceData.number}\n;
+msg += 👤 العميل: ${currentInvoiceData.name}\n;
+msg += 📱 الهاتف: ${currentInvoiceData.phone}\n;
+msg += 📍 العنوان: ${currentInvoiceData.address}\n;
+msg += 💰 الإجمالي: ${currentInvoiceData.total} ج.م (قسط الحجز: ${currentInvoiceData.deposit} ج)\n;
+window.open(https://wa.me/2${primaryPhone}?text=${encodeURIComponent(msg)}, '_blank');
+}
+​function setFilter(cat) { currentFilter = cat; renderProducts(); }
+function handleSearch(val) { searchQuery = val.trim().toLowerCase(); renderProducts(); }
+function handleSort(val) { currentSort = val; renderProducts(); }
+​function openWishlistModal() {
+const container = document.getElementById('wishlist-items-container');
+const favProducts = products.filter(p => wishlist.includes(p.id));
+container.innerHTML = favProducts.length ? favProducts.map(p => <div class="py-2 text-white">${p.name}</div>).join('') : <p class="text-center text-slate-500 py-4">المفضلة فارغة</p>;
+openModal('wishlist-modal');
+}
+​function toggleWishlist(id) {
+if (wishlist.includes(id)) wishlist = wishlist.filter(x => x !== id);
+else wishlist.push(id);
+localStorage.setItem('3l_wishlist_v10', JSON.stringify(wishlist));
+updateStoreUI();
+}
+​function applyCoupon() {
+const code = document.getElementById('coupon-code-input').value.trim().toUpperCase();
+if (code === "3L") {
+appliedDiscountPercent = 10;
+document.getElementById('coupon-status').textContent = "✅ تم تطبيق خصم 10% بنجاح";
+document.getElementById('coupon-status').classList.remove('hidden');
+showToast("تم تطبيق خصم الكوبون", "success");
+renderCart();
+} else {
+showToast("كود الخصم غير صالح", "error");
+}
+}
+​function switchAdminTab(tab) {
+['general', 'phones', 'social', 'security'].forEach(t => {
+document.getElementById(admin-tab-${t}).classList.add('hidden');
+document.getElementById(tab-btn-${t}).className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-[10px]";
+});
+document.getElementById(admin-tab-${tab}).classList.remove('hidden');
+document.getElementById(tab-btn-${tab}).className = "px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-[10px]";
+}
+​function saveAllSettings() {
+s.name = document.getElementById('cfg-name').value.trim() || s.name;
+s.tagline = document.getElementById('cfg-tagline').value.trim() || s.tagline;
+s.depositPercent = Number(document.getElementById('cfg-deposit-percent').value) || 50;
+s.adminPin = document.getElementById('cfg-admin-pin').value.trim() || s.adminPin;
+localStorage.setItem('3l_cfg_v10', JSON.stringify(s));
+closeModal('settings-modal');
+updateStoreUI();
+showToast("✅ تم حفظ الإعدادات بنجاح!", "success");
+}
+​function toggleThemeMode() {
+isDarkMode = !isDarkMode;
+document.getElementById('theme-icon').textContent = isDarkMode ? "🌙" : "☀️";
+}
+​function openModal(id) {
+const modal = document.getElementById(id);
+if (!modal) return;
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+if (id === 'settings-modal') {
+document.getElementById('cfg-name').value = s.name;
+document.getElementById('cfg-tagline').value = s.tagline;
+document.getElementById('cfg-deposit-percent').value = s.depositPercent || 50;
+document.getElementById('cfg-admin-pin').value = s.adminPin || "123456";
+renderPhonesUI();
+}
+}
+​function closeModal(id) {
+const modal = document.getElementById(id);
+if (!modal) return;
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+}
+​function updateStoreUI() {
+document.getElementById('store-name-header').textContent = s.name;
+document.getElementById('admin-status-text').textContent = isAdmin ? "👑 وضع القيادة مفعّل (المالك)" : s.tagline;
+document.getElementById('ticker-text').textContent = s.ticker;
+document.getElementById('ticker-text-copy').textContent = s.ticker;
+​const adminActions = document.getElementById('admin-actions');
+if (isAdmin) adminActions.classList.remove('hidden'), adminActions.classList.add('flex');
+else adminActions.classList.add('hidden'), adminActions.classList.remove('flex');
+​applyTextBindings();
+renderPhonesUI();
+renderProducts();
+renderCart();
+}
+​updateStoreUI();
+</script>
 </body>
-</html>
+  </html>
