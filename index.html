@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title id="pageTitle">3λ.Rehab.Store | المتجر الملكي الموثق</title>
+    <title id="pageTitle">3λ.Rehab.Store | المتجر الملكي</title>
     <meta name="theme-color" content="#0B0F19">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link id="faviconLink" rel="icon" href="https://cdn-icons-png.flaticon.com/512/679/679922.png">
     
-    <!-- الخطوط والأيقونات الرسمية -->
+    <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- مكتبة حفظ الفاتورة كصورة -->
+    <!-- مكتبة html2canvas لحفظ الفاتورة كصورة -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
@@ -28,7 +26,7 @@
             --danger: #EF4444;
             --success: #10B981;
             --radius: 14px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         body.light-mode {
@@ -42,1374 +40,504 @@
             --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+        html, body { width: 100%; max-width: 100vw; overflow-x: hidden !important; background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
 
-        html, body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden !important;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-            user-select: none;
-        }
-
-        /* إخفاء شريط ترجمة جوجل العلوي */
-        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element { display: none; }
-
-        /* الشريط الإعلاني العلوي المتحرك */
+        /* الشريط العلوي المتحرك */
         .announcement-bar {
             background: linear-gradient(90deg, #9A7418, var(--gold), #9A7418);
-            color: #000;
-            font-size: 0.8rem;
-            font-weight: 800;
-            padding: 6px 35px 6px 12px;
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
+            color: #000; font-size: 0.8rem; font-weight: 800; padding: 6px 35px 6px 12px; position: relative; overflow: hidden; white-space: nowrap;
         }
-        .announcement-text {
-            display: inline-block;
-            animation: tickerMove 22s linear infinite;
-        }
-        @keyframes tickerMove {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .close-announcement {
-            position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-            background: rgba(0,0,0,0.2); color: #000; border: none; border-radius: 50%;
-            width: 20px; height: 20px; font-size: 0.7rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .announcement-text { display: inline-block; animation: tickerMove 22s linear infinite; }
+        @keyframes tickerMove { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .close-announcement { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.2); border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; cursor: pointer; }
 
-        /* الهيدر الملكي */
+        /* الهيدر والأزرار الثابتة بدقة */
         header {
-            background: rgba(19, 27, 46, 0.94);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 10px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            gap: 8px;
+            background: rgba(19, 27, 46, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+            padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; gap: 8px;
         }
-        body.light-mode header { background: rgba(255, 255, 255, 0.94); }
+        body.light-mode header { background: rgba(255, 255, 255, 0.95); }
 
-        .brand-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .store-logo-img {
-            width: 42px; height: 42px; border-radius: 50%;
-            object-fit: cover; border: 2px solid var(--gold); background: #000;
-        }
-        .brand-logo { font-size: 1.12rem; font-weight: 900; color: var(--text-main); }
+        .brand-area { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+        .store-logo-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); background: #000; }
+        .brand-logo { font-size: 1.1rem; font-weight: 900; color: var(--text-main); }
         .brand-logo span { color: var(--gold); }
 
-        .header-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        /* منطقة الأزرار العلوية الثابتة والمنظمة تماماً (حل مشكلة الصورة) */
+        .header-actions-fixed {
+            display: flex; flex-wrap: wrap; gap: 5px; align-items: center; justify-content: flex-end; max-width: 55%;
+        }
         .icon-btn {
-            background: var(--bg-input); border: 1px solid var(--border-color);
-            color: var(--text-main); width: 35px; height: 35px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; position: relative; font-size: 0.88rem; transition: 0.2s;
+            background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main);
+            width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; position: relative; font-size: 0.82rem; transition: 0.2s;
         }
         .icon-btn:hover { border-color: var(--gold); color: var(--gold); }
         .badge-count {
-            position: absolute; top: -5px; right: -5px; background: var(--gold); color: #000;
-            font-size: 0.65rem; font-weight: 900; width: 18px; height: 18px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            position: absolute; top: -4px; right: -4px; background: var(--gold); color: #000; font-size: 0.6rem; font-weight: 900;
+            width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+        .text-action-btn {
+            background: rgba(212,175,55,0.15); border: 1px solid var(--gold); color: var(--gold);
+            padding: 5px 10px; border-radius: 8px; font-size: 0.72rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
         }
 
-        /* شريط البحث والتصنيفات */
+        /* شريط البحث */
         .search-container { max-width: 1200px; margin: 12px auto 0; padding: 0 14px; position: relative; }
         .search-box {
-            width: 100%; background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 50px; padding: 10px 40px 10px 16px; color: var(--text-main);
-            font-size: 0.85rem; outline: none; transition: 0.3s;
+            width: 100%; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 50px;
+            padding: 10px 40px 10px 16px; color: var(--text-main); font-size: 0.85rem; outline: none;
         }
-        .search-box:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.15); }
+        .search-box:focus { border-color: var(--gold); }
         .search-icon { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); color: var(--gold); }
-        .live-search-results {
-            display: none; position: absolute; top: 105%; right: 14px; left: 14px;
-            background: var(--bg-card); border: 1px solid var(--gold); border-radius: var(--radius);
-            max-height: 260px; overflow-y: auto; z-index: 999; box-shadow: var(--shadow);
-        }
-        .search-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--border-color); cursor: pointer; }
-        .search-item img { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 14px; }
 
-        /* بانر بيع منتجك معنا (للتجار والعملاء) */
-        .vendor-cta-banner {
-            background: linear-gradient(135deg, #131B2E 0%, #1E293B 100%);
-            border: 1px solid var(--gold);
-            border-radius: var(--radius);
-            padding: 14px 18px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+        /* بطاقة بيع مستعمل / تجار */
+        .merchant-banner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--gold); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; text-align: right;
         }
 
-        /* عجلة الحظ الكلاسيكية الصامتة */
+        /* عجلة الحظ */
         .wheel-section {
-            background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, var(--bg-card) 100%);
-            border: 1px solid rgba(212,175,55,0.4);
-            border-radius: var(--radius);
-            padding: 16px;
-            text-align: center;
-            margin-bottom: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .wheel-visual-wrap { position: relative; width: 140px; height: 140px; margin: 4px auto; }
-        .wheel-pointer {
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            border-left: 10px solid transparent; border-right: 10px solid transparent;
-            border-top: 18px solid var(--gold); z-index: 5;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, var(--bg-card) 100%);
+            border: 1px solid rgba(212,175,55,0.4); border-radius: var(--radius); padding: 16px; text-align: center; margin-bottom: 16px;
         }
         .classic-wheel {
-            width: 100%; height: 100%; border-radius: 50%; border: 4px solid var(--gold);
-            background: conic-gradient(#131B2E 0deg 45deg, #D4AF37 45deg 90deg, #0B0F19 90deg 135deg, #B48A1E 135deg 180deg, #131B2E 180deg 225deg, #D4AF37 225deg 270deg, #0B0F19 270deg 315deg, #B48A1E 315deg 360deg);
-            box-shadow: 0 0 20px rgba(212,175,55,0.25);
-            transition: transform 3.8s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            position: relative;
+            width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--gold); margin: 8px auto;
+            background: conic-gradient(#131B2E 0deg 90deg, #D4AF37 90deg 180deg, #0B0F19 180deg 270deg, #B48A1E 270deg 360deg);
+            transition: transform 3.5s cubic-bezier(0.17, 0.67, 0.12, 0.99); position: relative;
         }
-        .classic-wheel::after {
-            content: "🎁"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 34px; height: 34px; background: var(--bg-main); border: 2px solid var(--gold);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
-        }
-        .wheel-title { font-size: 1.1rem; font-weight: 900; color: var(--gold); }
         .wheel-btn {
-            background: linear-gradient(135deg, var(--gold), #B48A1E); color: #000; border: none;
-            padding: 9px 24px; border-radius: 50px; font-weight: 900; font-size: 0.88rem;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(212,175,55,0.35);
+            background: var(--gold); color: #000; border: none; padding: 8px 22px; border-radius: 50px; font-weight: 900; font-size: 0.85rem; cursor: pointer;
         }
 
-        /* أزرار فلترة الأقسام */
-        .filter-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 14px; }
-        .filter-pill {
-            background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted);
-            padding: 6px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 800;
-            white-space: nowrap; cursor: pointer; transition: 0.2s;
-        }
-        .filter-pill.active { background: var(--gold); color: #000; border-color: var(--gold); }
-
-        /* شبكة المنتجات الفخمة */
+        /* شبكة المنتجات */
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
-
+        @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
         .p-card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius); overflow: hidden; display: flex;
-            flex-direction: column; position: relative; transition: transform 0.3s, border-color 0.3s;
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; position: relative;
         }
-        .p-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-        .p-badge {
-            position: absolute; top: 8px; right: 8px; background: var(--gold); color: #000;
-            font-size: 0.63rem; font-weight: 900; padding: 3px 8px; border-radius: 6px; z-index: 3;
-        }
-        .scarcity-tag {
-            position: absolute; bottom: 8px; right: 8px; background: rgba(239, 68, 68, 0.92);
-            color: #FFF; font-size: 0.6rem; font-weight: 800; padding: 2px 7px; border-radius: 5px; z-index: 3;
-        }
-        .card-floating-btns { position: absolute; top: 8px; left: 8px; display: flex; flex-direction: column; gap: 5px; z-index: 3; }
-        .mini-circle-btn {
-            width: 28px; height: 28px; border-radius: 50%; background: rgba(11, 15, 25, 0.78);
-            border: 1px solid rgba(255,255,255,0.2); color: #FFF; display: flex;
-            align-items: center; justify-content: center; font-size: 0.75rem; cursor: pointer;
-        }
-        .mini-circle-btn.wish-active { color: var(--danger); border-color: var(--danger); }
-        .p-img-wrap { position: relative; width: 100%; height: 165px; overflow: hidden; background: #000; cursor: pointer; }
-        .p-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-        .p-img-wrap:hover .p-img { transform: scale(1.12); }
-        .p-body { padding: 11px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .p-title { font-size: 0.85rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
-        .p-desc { font-size: 0.71rem; color: var(--text-muted); margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .live-viewers { font-size: 0.64rem; color: var(--gold); margin-bottom: 6px; font-weight: 700; }
-        .p-price { font-size: 0.95rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
-        .p-btn {
-            background: var(--gold); color: #000; border: none; width: 100%; padding: 8px;
-            border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 5px;
-        }
+        .p-img-wrap { width: 100%; height: 150px; background: #000; position: relative; }
+        .p-img { width: 100%; height: 100%; object-fit: cover; }
+        .p-body { padding: 10px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .p-title { font-size: 0.82rem; font-weight: 800; margin-bottom: 4px; }
+        .p-price { font-size: 0.9rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+        .p-btn { background: var(--gold); color: #000; border: none; width: 100%; padding: 7px; border-radius: 7px; font-weight: 800; font-size: 0.78rem; cursor: pointer; }
 
-        /* الفوتر الملكي وأيقونات تابعنا الـ 5 الأصلية */
-        footer {
-            background: var(--bg-card); border-top: 2px solid rgba(212,175,55,0.3);
-            margin-top: 40px; padding: 30px 16px 20px; text-align: center;
-        }
-        .follow-us-title { font-size: 1.1rem; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
-        .social-icons-row { display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
-        .social-btn {
-            width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 1.35rem; color: #FFF; text-decoration: none;
-            transition: transform 0.25s; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .social-btn:hover { transform: translateY(-4px) scale(1.08); }
-        .soc-fb { background: #1877F2; }
-        .soc-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .soc-tt { background: #000000; border: 1px solid #25F4EE; box-shadow: 2px 2px 0px #FE2C55; }
-        .soc-wa { background: #25D366; }
-        .soc-tg { background: #229ED9; }
+        /* الفوتر */
+        footer { background: var(--bg-card); border-top: 1px solid var(--border-color); margin-top: 30px; padding: 25px 16px; text-align: center; }
+        .social-row { display: flex; justify-content: center; gap: 12px; margin: 15px 0; }
+        .social-ico { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 1.2rem; text-decoration: none; }
+        .soc-fb { background: #1877F2; } .soc-ig { background: #E1306C; } .soc-tt { background: #000; border: 1px solid #25F4EE; } .soc-wa { background: #25D366; } .soc-tg { background: #229ED9; }
 
-        /* القوائم الجانبية المنزلقة */
-        .side-drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 9000; backdrop-filter: blur(4px); }
-        .side-drawer {
-            position: fixed; top: 0; bottom: 0; width: 330px; max-width: 90vw;
-            background: var(--bg-card); z-index: 9001; padding: 18px;
-            display: flex; flex-direction: column; transition: transform 0.35s ease; overflow-y: auto;
+        /* النوافذ والدرج الجانبي */
+        .side-drawer-overlay, .custom-modal-overlay, .invoice-modal, .admin-modal {
+            display: none; position: fixed; inset: 0; background: rgba(5,7,13,0.88); z-index: 9999; backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 12px;
         }
+        .side-drawer { position: fixed; top: 0; bottom: 0; width: 310px; background: var(--bg-card); z-index: 10000; padding: 18px; overflow-y: auto; transition: transform 0.3s; }
         .drawer-right { right: 0; border-left: 1px solid var(--gold); transform: translateX(100%); }
         .drawer-left { left: 0; border-right: 1px solid var(--gold); transform: translateX(-100%); }
         .side-drawer.open { transform: translateX(0); }
 
-        .progress-motivation {
-            background: var(--bg-input); border: 1px solid var(--border-color);
-            border-radius: 10px; padding: 10px; margin-bottom: 12px; font-size: 0.75rem; text-align: center;
+        .custom-modal-box, .admin-box, .invoice-box {
+            background: var(--bg-card); border: 2px solid var(--gold); border-radius: var(--radius); width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; padding: 20px;
         }
-        .progress-bar-bg { width: 100%; height: 7px; background: #1E293B; border-radius: 10px; margin-top: 6px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #10B981); width: 0%; transition: width 0.4s ease; }
-
-        /* إشعار المبيعات الحي */
-        .live-sales-popup {
-            position: fixed; bottom: 15px; right: 15px; background: var(--bg-card);
-            border: 1px solid var(--gold); border-radius: 12px; padding: 10px 14px;
-            display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow);
-            z-index: 8000; max-width: 300px; transform: translateY(150%); transition: transform 0.5s ease;
-        }
-        .live-sales-popup.show { transform: translateY(0); }
-
-        /* النوافذ المنبثقة الملكية المخصصة */
-        .custom-modal-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(5, 7, 13, 0.88);
-            backdrop-filter: blur(6px); z-index: 99999; justify-content: center; align-items: center; padding: 14px;
-        }
-        .custom-modal-box {
-            background: var(--bg-card); border: 2px solid var(--gold); border-radius: var(--radius);
-            width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto;
-            padding: 18px; text-align: center; box-shadow: 0 10px 35px rgba(212,175,55,0.25);
-        }
-        .custom-modal-title { font-size: 1.05rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
-        .custom-modal-text { font-size: 0.84rem; color: var(--text-main); margin-bottom: 12px; white-space: pre-line; }
+        .invoice-box { background: #FFF; color: #111; }
         .custom-modal-input, .custom-select {
-            width: 100%; padding: 9px 12px; background: var(--bg-input);
-            border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main);
-            font-size: 0.82rem; outline: none; margin-bottom: 9px; text-align: right;
+            width: 100%; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); font-size: 0.85rem; outline: none; margin-bottom: 10px; text-align: right;
         }
-        .custom-modal-input:focus, .custom-select:focus { border-color: var(--gold); }
-        .custom-modal-btns { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
-        .modal-btn {
-            padding: 8px 16px; border-radius: 8px; font-weight: 800;
-            font-size: 0.8rem; cursor: pointer; border: none; transition: 0.2s;
-        }
+        .modal-btn { padding: 9px 18px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer; border: none; }
         .modal-btn.confirm { background: var(--gold); color: #000; }
         .modal-btn.cancel { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
-
-        /* الفاتورة الإلكترونية المعتمدة */
-        .invoice-modal {
-            display: none; position: fixed; inset: 0; background: rgba(5,7,13,0.92);
-            z-index: 99998; justify-content: center; align-items: center; padding: 12px;
-        }
-        .invoice-box {
-            background: #FFFFFF; color: #111827; width: 100%; max-width: 510px;
-            max-height: 92vh; overflow-y: auto; border-radius: 12px; padding: 20px; border: 3px solid var(--gold);
-        }
-
-        /* لوحة التحكم الشاملة CMS للمالك */
-        .admin-modal {
-            display: none; position: fixed; inset: 0; background: rgba(5,7,13,0.95);
-            z-index: 99990; justify-content: center; align-items: center; padding: 10px;
-        }
-        .admin-box {
-            background: var(--bg-card); border: 2px solid var(--gold); border-radius: var(--radius);
-            width: 100%; max-width: 920px; max-height: 93vh; overflow-y: auto; padding: 18px;
-        }
-        .admin-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); }
-        .admin-tab-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 7px 11px; border-radius: 7px; font-size: 0.76rem; font-weight: 800; white-space: nowrap; cursor: pointer; }
-        .admin-tab-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
-        .admin-section { display: none; }
-        .admin-section.active { display: block; }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
-        .stat-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; text-align: center; }
-        .stat-val { font-size: 1rem; font-weight: 900; color: var(--gold); }
-        .stat-lbl { font-size: 0.68rem; color: var(--text-muted); }
-
-        /* شاشة التحميل والطوارئ */
-        #splash-screen {
-            position: fixed; inset: 0; background: radial-gradient(circle at center, #131B2E 0%, #070A12 100%);
-            z-index: 88888; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 20px; transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        #splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        #emergency-lock {
-            display: none; position: fixed; inset: 0; background: var(--bg-main);
-            z-index: 77777; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
-        }
-
-        @media print {
-            body * { visibility: hidden; }
-            #printableInvoice, #printableInvoice * { visibility: visible; }
-            #printableInvoice { position: absolute; left: 0; top: 0; width: 100%; border: none; }
-            .no-print { display: none !important; }
-        }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <!-- عنصر الترجمة المخفي ومشغل الصوت المخصص -->
-    <div id="google_translate_element"></div>
-    <audio id="customSalawatPlayer" style="display:none;"></audio>
-
-    <!-- الشريط الإعلاني العلوي المتحرك -->
-    <div class="announcement-bar" id="topAnnouncementBar">
-        <div class="announcement-text" id="tickerTextDisplay">✨ أهلاً بكم في المتجر الملكي — جودة استثنائية وتوصيل سريع لكافة المحافظات الـ 27 ✨</div>
-        <button class="close-announcement" onclick="document.getElementById('topAnnouncementBar').style.display='none'">✕</button>
+    <!-- الشريط العلوي -->
+    <div class="announcement-bar">
+        <div class="announcement-text" id="tickerTextDisplay">✨ أهلاً بكم في المتجر الملكي — شحن وتوصيل لكافة الـ 27 محافظة في مصر ✨</div>
     </div>
 
-    <!-- نافذة مخصصة ملكية بديلة للـ Alert / Prompt -->
+    <!-- نافذة منبثقة عامة -->
     <div class="custom-modal-overlay" id="customModal">
         <div class="custom-modal-box">
-            <div class="custom-modal-title" id="customModalTitle">تنبيه ملكي</div>
-            <div class="custom-modal-text" id="customModalText"></div>
+            <div style="font-size:1.1rem; font-weight:900; color:var(--gold); margin-bottom:10px;" id="customModalTitle">تنبيه ملكي</div>
+            <div style="font-size:0.86rem; margin-bottom:15px; white-space:pre-line;" id="customModalText"></div>
             <div id="customModalInputArea"></div>
-            <div class="custom-modal-btns">
+            <div style="display:flex; gap:8px; justify-content:center;">
                 <button class="modal-btn confirm" id="customModalConfirmBtn" onclick="closeCustomModal(true)">تأكيد</button>
                 <button class="modal-btn cancel" id="customModalCancelBtn" onclick="closeCustomModal(false)" style="display:none;">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <!-- شاشة التحميل الافتتاحية -->
-    <div id="splash-screen">
-        <div style="font-size:1.3rem; color:var(--gold); font-weight:800; margin-bottom:8px;">بِسْمِ اللَّهِ مَا شَاءَ اللَّهُ</div>
-        <div style="font-size:1.05rem; color:#FFF; font-weight:700; margin-bottom:15px;">﴿ إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا ﴾</div>
-        <div style="font-size:1.4rem; font-weight:900; color:var(--text-main); border:2px solid var(--gold); padding:8px 24px; border-radius:50px;" id="splashStoreName">3λ.Rehab.Store</div>
-    </div>
-
-    <!-- شاشة الطوارئ -->
-    <div id="emergency-lock">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size:3.5rem; color:var(--danger); margin-bottom:12px;"></i>
-        <h2 style="color:var(--gold); margin-bottom:8px;">⚠️ المتجر في وضع الصيانة والتحديث</h2>
-        <p style="color:var(--text-muted); max-width:400px; font-size:0.9rem; margin-bottom:15px;">نعمل حالياً على تحديث الأنظمة الملكية. يرجى المحاولة بعد قليل.</p>
-    </div>
-
-    <!-- الهيدر الملكي -->
+    <!-- الهيدر الملكي مع الأزرار الثابتة المنظمة بدقة -->
     <header>
         <div class="brand-area" onclick="handleLogoTap()">
-            <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="headerLogoImg" class="store-logo-img" alt="Logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="headerLogoImg" class="store-logo-img">
             <div class="brand-logo" id="headerStoreName">3λ.Rehab<span>.Store</span></div>
         </div>
 
-        <div class="header-actions">
-            <button class="icon-btn" onclick="openSellerKYCModal()" title="بيع منتجك معنا (للتجار والعملاء)" style="width:auto; padding:0 10px; font-size:0.75rem; font-weight:800; border-color:var(--gold); color:var(--gold);">
-                <i class="fa-solid fa-handshake" style="margin-left:5px;"></i> بيع معنا
-            </button>
+        <div class="header-actions-fixed">
+            <button class="text-action-btn" onclick="openMerchantRegisterModal()"><i class="fa-solid fa-handshake"></i> بيع معنا</button>
             <button class="icon-btn" onclick="playSalawatAudio(true)" title="صلي على محمد ﷺ"><i class="fa-solid fa-volume-high" style="color:var(--gold);"></i></button>
             <button class="icon-btn" onclick="openTrackModal()" title="تتبع طلبك"><i class="fa-solid fa-truck-fast"></i></button>
-            <button class="icon-btn" onclick="toggleThemeMode()" title="الوضع الليلي/النهاري"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
-            <button class="icon-btn" onclick="openWishlistModal()" title="المفضلة">
-                <i class="fa-solid fa-heart"></i>
-                <span class="badge-count" id="wishBadgeCount">0</span>
-            </button>
-            <button class="icon-btn" onclick="toggleCartDrawer(true)" title="عربة التسوق">
+            <button class="icon-btn" onclick="toggleThemeMode()" title="الوضع الليلي"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+            <button class="icon-btn" onclick="toggleCartDrawer(true)" title="السلة">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span class="badge-count" id="cartBadgeCount">0</span>
             </button>
-            <button class="icon-btn" onclick="toggleMenuDrawer(true)" title="القائمة واللغات"><i class="fa-solid fa-bars"></i></button>
+            <button class="icon-btn" onclick="toggleMenuDrawer(true)" title="القائمة"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
-    <!-- شريط البحث الذكي الفوري -->
+    <!-- شريط البحث -->
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="liveSearchInput" class="search-box" placeholder="ابحث عن منتجك الملكي هنا..." oninput="handleLiveSearch(this.value)">
-        <div class="live-search-results" id="liveSearchResults"></div>
+        <input type="text" class="search-box" placeholder="ابحث عن منتجك الملكي هنا..." oninput="renderProductsGrid(this.value)">
     </div>
 
     <div class="container">
-        <!-- زر تثبيت التطبيق PWA -->
-        <div id="pwaInstallBanner" style="display:none; background:var(--bg-card); border:1px solid var(--gold); border-radius:12px; padding:10px 14px; margin-bottom:14px; justify-content:space-between; align-items:center;">
-            <div style="font-size:0.8rem; font-weight:700;"><i class="fa-solid fa-mobile-screen-button" style="color:var(--gold);"></i> ثبّت تطبيق المتجر على هاتفك لوصول أسرع وتحديثات تلقائية!</div>
-            <button class="modal-btn confirm" style="padding:5px 12px; font-size:0.75rem;" onclick="installPWAApp()">تثبيت التطبيق</button>
+        <!-- قسم بيع منتجك المستعمل / الجديد -->
+        <div class="merchant-banner">
+            <div style="font-size:0.95rem; font-weight:900; color:var(--gold); margin-bottom:4px;"><i class="fa-solid fa-store"></i> هل لديك منتج جديد أو مستعمل بحالة ممتازة تود بيعه؟</div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">اعرض منتجك في متجرنا الملكي لآلاف العملاء الموثقين بعد مراجعة الإدارة بدقة وآمان تام.</div>
+            <button class="modal-btn confirm" style="padding:6px 16px; font-size:0.75rem;" onclick="openMerchantRegisterModal()">سجل وابدأ البيع معنا</button>
         </div>
 
-        <!-- بانر بيع منتجك معنا (للتجار والعملاء الموثقين) -->
-        <div class="vendor-cta-banner">
-            <div>
-                <div style="font-size:0.9rem; font-weight:900; color:var(--gold);"><i class="fa-solid fa-store"></i> هل لديك منتج جديد أو مستعمل بحالة ممتازة تود بيعه؟</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">اعرض منتجك في متجرنا الملكي لآلاف العملاء الموثقين بعد مراجعة الإدارة!</div>
-            </div>
-            <button class="modal-btn confirm" onclick="openSellerKYCModal()">اعرض منتجك للبيع الآن</button>
-        </div>
-
-        <!-- عجلة الحظ الكلاسيكية الصامتة -->
+        <!-- عجلة الحظ -->
         <div class="wheel-section">
-            <div class="wheel-title">🎡 لفتك اليومية</div>
-            <div class="wheel-visual-wrap">
-                <div class="wheel-pointer"></div>
-                <div class="classic-wheel" id="classicWheelEl"></div>
-            </div>
+            <div style="font-size:1.05rem; font-weight:900; color:var(--gold); margin-bottom:4px;">🎡 لفتك اليومية للحصول على خصم</div>
+            <div class="classic-wheel" id="classicWheelEl"></div>
             <button class="wheel-btn" onclick="spinTheWheel()">اضغط هنا للحصول على خصمك</button>
         </div>
 
-        <!-- فلاتر سريعة -->
-        <div class="filter-pills">
-            <button class="filter-pill active" onclick="filterProductsByType('all', this)">👑 جميع المنتجات</button>
-            <button class="filter-pill" onclick="filterProductsByType('vip', this)">✨ تشكيلة المتجر الرسمية</button>
-            <button class="filter-pill" onclick="filterProductsByType('vendor', this)">🤝 عروض التجار والعملاء الموثقة</button>
-        </div>
-
-        <!-- قسم المنتجات -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <div style="font-size:1rem; font-weight:900;"><i class="fa-solid fa-crown" style="color:var(--gold);"></i> المعروضات الملكية</div>
-            <div style="font-size:0.75rem; color:var(--text-muted);" id="productsCountText"></div>
-        </div>
+        <div style="font-size:0.95rem; font-weight:900; margin-bottom:10px;"><i class="fa-solid fa-crown" style="color:var(--gold);"></i> تشكيلة VIP الحصرية</div>
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- الفوتر وأيقونات "تابعنا" الـ 5 الأصلية -->
-    <footer id="footerFollowSection">
-        <div class="follow-us-title">✨ تابعنا على منصاتنا الرسمية ✨</div>
-        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:16px;">تواصل معنا وتابع أحدث التشكيلات والعروض اليومية الحصرية</p>
-        <div class="social-icons-row">
-            <a href="#" id="linkFb" target="_blank" class="social-btn soc-fb" title="فيسبوك"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" id="linkIg" target="_blank" class="social-btn soc-ig" title="إنستجرام"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" id="linkTt" target="_blank" class="social-btn soc-tt" title="تيك توك"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#" id="linkWa" target="_blank" class="social-btn soc-wa" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" id="linkTg" target="_blank" class="social-btn soc-tg" title="تليجرام"><i class="fa-brands fa-telegram"></i></a>
+    <!-- الفوتر الملكي وأيقونات تابعنا -->
+    <footer>
+        <div style="font-size:1rem; font-weight:900; color:var(--gold); margin-bottom:8px;">✨ تابعنا على منصاتنا الرسمية ✨</div>
+        <div class="social-row">
+            <a href="#" id="linkFb" target="_blank" class="social-ico soc-fb"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" id="linkIg" target="_blank" class="social-ico soc-ig"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" id="linkTt" target="_blank" class="social-ico soc-tt"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" id="linkWa" target="_blank" class="social-ico soc-wa"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" id="linkTg" target="_blank" class="social-ico soc-tg"><i class="fa-brands fa-telegram"></i></a>
         </div>
-        <div style="font-size:0.75rem; color:var(--text-muted); border-top:1px solid var(--border-color); padding-top:12px;">
-            جميع الحقوق محفوظة © <span id="footerStoreName">3λ.Rehab.Store</span> 2026 — نظام مؤمن وموثق بالكامل
-        </div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">جميع الحقوق محفوظة © <span id="footerStoreName">3λ.Rehab.Store</span> 2026</div>
     </footer>
 
-    <!-- القائمة الجانبية (من نحن، اتصل بنا، بيع معنا، والـ 15 لغة) -->
+    <!-- القائمة الجانبية -->
     <div class="side-drawer-overlay" id="menuOverlay" onclick="toggleMenuDrawer(false)"></div>
     <div class="side-drawer drawer-right" id="menuDrawer">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">
-            <strong style="color:var(--gold); font-size:1rem;">القائمة الملكية واللغات</strong>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:14px;">
+            <strong style="color:var(--gold);">القائمة الملكية</strong>
             <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:1.2rem;" onclick="toggleMenuDrawer(false)"></i>
         </div>
-
-        <div style="margin-bottom:15px;">
-            <label style="font-size:0.8rem; color:var(--gold); font-weight:800; display:block; margin-bottom:6px;"><i class="fa-solid fa-globe"></i> اختر لغة المتجر (15 لغة):</label>
-            <select class="custom-select" onchange="changeStoreLanguage(this.value)">
-                <option value="ar">🇪🇬 العربية (الأصلية)</option>
-                <option value="en">🇬🇧 English (UK)</option>
-                <option value="it">🇮🇹 Italiana (الإيطالية)</option>
-                <option value="fr">🇫🇷 Française (الفرنسية)</option>
-                <option value="fa">🇮🇷 فارسی (الفارسية)</option>
-                <option value="el">🇬🇷 Ελληνικά (اليونانية)</option>
-                <option value="de">🇩🇪 Deutsch (الألمانية)</option>
-                <option value="es">🇪🇸 Español (الإسبانية)</option>
-                <option value="tr">🇹🇷 Türkçe (التركية)</option>
-                <option value="ru">🇷🇺 Русский (الروسية)</option>
-                <option value="zh-CN">🇨🇳 中文 (الصينية)</option>
-                <option value="ja">🇯🇵 日本語 (اليابانية)</option>
-                <option value="ko">🇰🇷 한국어 (الكورية)</option>
-                <option value="hi">🇮🇳 हिन्दी (الهندية)</option>
-                <option value="pt">🇵🇹 Português (البرتغالية)</option>
-            </select>
-        </div>
-
-        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--gold); border-color:var(--gold);" onclick="toggleMenuDrawer(false); openSellerKYCModal();"><i class="fa-solid fa-handshake" style="margin-left:6px;"></i> بيع منتجك معنا (للتجار والعملاء)</button>
-        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="showAboutUsModal()"><i class="fa-solid fa-gem" style="color:var(--gold); margin-left:6px;"></i> قصتنا (من نحن)</button>
-        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="showContactUsModal()"><i class="fa-solid fa-headset" style="color:var(--gold); margin-left:6px;"></i> اتصل بنا وخدمة العملاء</button>
-        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="toggleMenuDrawer(false); document.getElementById('footerFollowSection').scrollIntoView({behavior:'smooth'});"><i class="fa-solid fa-share-nodes" style="color:var(--gold); margin-left:6px;"></i> تابعنا على منصاتنا</button>
+        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px;" onclick="showAboutUsModal()">💎 قصتنا (من نحن)</button>
+        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px;" onclick="showContactUsModal()">📞 اتصل بنا والدعم</button>
+        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px;" onclick="openTrackModal()">🚚 تتبع طلبك</button>
     </div>
 
-    <!-- عربة التسوق الجانبية المنزلقة -->
+    <!-- عربة التسوق -->
     <div class="side-drawer-overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
     <div class="side-drawer drawer-left" id="cartDrawer">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px;">
-            <strong style="color:var(--gold); font-size:1rem;"><i class="fa-solid fa-bag-shopping"></i> حقيبة التسوق الملكية</strong>
+            <strong style="color:var(--gold);"><i class="fa-solid fa-bag-shopping"></i> حقيبة التسوق</strong>
             <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:1.2rem;" onclick="toggleCartDrawer(false)"></i>
         </div>
-
-        <div class="progress-motivation">
-            <div id="cartProgressText">أضف منتجات بقيمة 1500 ج.م للحصول على هدية مجانية أو لفتين إضافيتين!</div>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" id="cartProgressFill"></div></div>
-        </div>
-
         <div id="cartItemsContainer" style="flex-grow:1; overflow-y:auto; margin-bottom:12px;"></div>
-
         <div style="border-top:1px solid var(--border-color); padding-top:10px;">
-            <div style="display:flex; gap:6px; margin-bottom:8px;">
-                <input type="text" id="couponInput" class="custom-modal-input" placeholder="لديك كود خصم؟ اكتبه هنا" style="margin-bottom:0;">
-                <button class="modal-btn confirm" onclick="applyCouponCode()">تطبيق</button>
-            </div>
             <div style="display:flex; justify-content:space-between; font-weight:900; font-size:0.95rem; margin-bottom:10px;">
-                <span>صافي المنتجات:</span>
-                <span style="color:var(--gold);" id="cartTotalDisplay">0 ج.م</span>
+                <span>الإجمالي:</span><span style="color:var(--gold);" id="cartTotalDisplay">0 ج.م</span>
             </div>
-            <button class="p-btn" style="padding:11px; font-size:0.9rem;" onclick="openCheckoutForm()">إتمام الطلب وتحديد الدفعة <i class="fa-solid fa-arrow-left"></i></button>
+            <button class="modal-btn confirm" style="width:100%; padding:10px;" onclick="openCheckoutForm()">إتمام الطلب في خطوة واحدة</button>
         </div>
     </div>
 
-    <!-- إشعار المبيعات الحي -->
-    <div class="live-sales-popup" id="liveSalesPopup">
-        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=100&q=80" id="popupProdImg" style="width:45px; height:45px; border-radius:8px; object-fit:cover;">
-        <div style="font-size:0.75rem;">
-            <div style="color:var(--gold); font-weight:800;">طلب شراء مؤكد ✅</div>
-            <div id="popupSalesText">عميلة من القاهرة قامت بشراء منتج منذ قليل</div>
-        </div>
-    </div>
-
-    <!-- نافذة الفاتورة الإلكترونية المعتمدة (مفصلة بالعربون والباقي والشحن) -->
+    <!-- نافذة الفاتورة الإلكترونية -->
     <div class="invoice-modal" id="invoiceModal">
         <div class="invoice-box" id="printableInvoice">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #D4AF37; padding-bottom:10px; margin-bottom:12px;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="invLogoImg" style="width:42px; height:42px; border-radius:50%; object-fit:cover;">
-                    <div>
-                        <div style="font-size:1.05rem; font-weight:900; color:#000;" id="invStoreName">3λ.Rehab.Store</div>
-                        <div style="font-size:0.68rem; color:#4B5563;">فاتورة إلكترونية معتمدة وموثقة</div>
-                    </div>
+            <div style="display:flex; justify-content:space-between; border-bottom:2px solid #D4AF37; padding-bottom:10px; margin-bottom:12px;">
+                <div>
+                    <div style="font-size:1.05rem; font-weight:900; color:#000;" id="invStoreName">3λ.Rehab.Store</div>
+                    <div style="font-size:0.68rem; color:#555;">فاتورة معتمدة (دفع جزئي + شحن مستقل)</div>
                 </div>
-                <div style="text-align:left; font-size:0.72rem; color:#374151;">
-                    <div>رقم الفاتورة: <strong id="invId" style="color:#B48A1E;"></strong></div>
+                <div style="text-align:left; font-size:0.72rem; color:#333;">
+                    <div>رقم الطلب: <strong id="invId"></strong></div>
                     <div>التاريخ: <span id="invDate"></span></div>
                 </div>
             </div>
             <div style="font-size:0.8rem; margin-bottom:4px;">العميل: <strong id="invName"></strong> | الهاتف: <strong id="invPhone"></strong></div>
-            <div style="font-size:0.8rem; margin-bottom:4px;">المحافظة والعنوان: <strong id="invAddress"></strong></div>
-            <div style="font-size:0.8rem; margin-bottom:10px;">وسيلة التحويل ونظام الدفع: <strong id="invPayMethod"></strong></div>
-            <hr style="border-color:#E5E7EB; margin-bottom:10px;">
+            <div style="font-size:0.8rem; margin-bottom:10px;">العنوان: <strong id="invAddress"></strong></div>
+            <hr style="border-color:#ddd; margin-bottom:10px;">
             <div id="invItemsList" style="font-size:0.8rem; margin-bottom:10px;"></div>
-            <hr style="border-color:#E5E7EB; margin-bottom:8px;">
-            
+            <hr style="border-color:#ddd; margin-bottom:10px;">
             <div style="font-size:0.78rem; display:flex; justify-content:space-between; margin-bottom:4px;">
-                <span>إجمالي المنتجات (بعد الخصم):</span><strong id="invNetProducts"></strong>
+                <span>تكلفة الشحن (مدفوعة كاملة):</span><span id="invShipping"></span>
             </div>
             <div style="font-size:0.78rem; display:flex; justify-content:space-between; margin-bottom:4px;">
-                <span>مصاريف الشحن للمحافظة (تُدفع كاملة):</span><strong id="invShipping"></strong>
+                <span>المطلوب دفعه الآن (مقدم):</span><span id="invPrepaid"></span>
             </div>
-            <div style="font-size:0.82rem; display:flex; justify-content:space-between; margin-bottom:6px; color:#047857; background:#D1FAE5; padding:6px 8px; border-radius:6px; font-weight:800;">
-                <span>✅ المدفوع مقدماً شاملة الشحن:</span><span id="invPaidNow"></span>
+            <div style="display:flex; justify-content:space-between; font-size:0.92rem; font-weight:900; color:#B48A1E; background:#FEF9C3; padding:8px; border-radius:6px; margin-top:6px;">
+                <span>المتبقي عند الاستلام:</span><span id="invRemaining"></span>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:0.92rem; font-weight:900; color:#B48A1E; background:#FEF9C3; padding:8px; border-radius:6px;">
-                <span>💵 المتبقي للدفع عند الاستلام:</span><span id="invRemainingCOD"></span>
-            </div>
-
-            <div style="text-align:center; font-size:0.68rem; color:#6B7280; margin-top:10px;">شكراً لثقتكم الغالية — احتفظ بهذه الفاتورة لتتبع طلبك واستلام شحنتك</div>
-
-            <div class="no-print" style="display:flex; gap:6px; margin-top:14px; flex-wrap:wrap;">
-                <button class="modal-btn confirm" style="flex:1;" onclick="downloadInvoiceAsImage()"><i class="fa-solid fa-image"></i> حفظ الفاتورة كصورة</button>
-                <button class="modal-btn cancel" style="flex:1; color:#000; border-color:#000;" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> طباعة / PDF</button>
-                <button class="modal-btn cancel" style="width:100%; color:#EF4444; border-color:#EF4444; margin-top:4px;" onclick="document.getElementById('invoiceModal').style.display='none'">إغلاق النافذة</button>
+            <div style="display:flex; gap:6px; margin-top:14px;">
+                <button class="modal-btn confirm" style="flex:1;" onclick="downloadInvoiceAsImage()">حفظ كصورة</button>
+                <button class="modal-btn cancel" style="flex:1; color:#000; border-color:#000;" onclick="window.print()">طباعة</button>
+                <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger);" onclick="document.getElementById('invoiceModal').style.display='none'">إغلاق</button>
             </div>
         </div>
     </div>
 
-    <!-- لوحة تحكم المالك الشاملة (Full Sovereign CMS) -->
+    <!-- لوحة تحكم المالك الشاملة (CMS) -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
-                <h3 style="color:var(--gold); font-size:0.98rem;"><i class="fa-solid fa-shield-halved"></i> لوحة القيادة السيادية للمالك (Full CMS)</h3>
-                <div style="display:flex; gap:6px;">
-                    <button class="modal-btn confirm" style="padding:5px 10px; font-size:0.75rem;" onclick="pushDataToCloud()"><i class="fa-solid fa-cloud-arrow-up"></i> مزامنة التعديلات لكل الهواتف</button>
-                    <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger); padding:5px 10px; font-size:0.75rem;" onclick="closeAdminPanel()">إغلاق وقفل ✕</button>
-                </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px;">
+                <h3 style="color:var(--gold); font-size:1rem;"><i class="fa-solid fa-crown"></i> لوحة التحكم الشاملة (Full CMS)</h3>
+                <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger); padding:4px 10px;" onclick="closeAdminPanel()">إغلاق ✕</button>
+            </div>
+            
+            <div style="background:rgba(16,185,129,0.1); border:1px solid var(--success); padding:8px; border-radius:8px; margin-bottom:12px; font-size:0.75rem;">
+                🔒 <strong>حماية الجهاز الحالي:</strong> تم تفعيل قفل لوحة التحكم على هذا الجهاز فقط لمنع أي شخص آخر من فتحها!
             </div>
 
-            <!-- إحصائيات سريعة للأدمن -->
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-val" id="statTotalSales">0 ج.م</div><div class="stat-lbl">إجمالي المبيعات</div></div>
-                <div class="stat-card"><div class="stat-val" id="statOrdersCount">0</div><div class="stat-lbl">الطلبات</div></div>
-                <div class="stat-card"><div class="stat-val" id="statVendorsCount">0</div><div class="stat-lbl">طلبات التجار (KYC)</div></div>
-                <div class="stat-card"><div class="stat-val" id="statCodesCount">0</div><div class="stat-lbl">أكواد العجلة</div></div>
+            <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; border-bottom:1px solid var(--border-color);">
+                <button class="modal-btn confirm" style="font-size:0.75rem;" onclick="switchAdminTab('secGeneral', this)">إعدادات الأرقام والشحن</button>
+                <button class="modal-btn cancel" style="font-size:0.75rem;" onclick="switchAdminTab('secProducts', this)">المنتجات</button>
+                <button class="modal-btn cancel" style="font-size:0.75rem;" onclick="switchAdminTab('secUniversal', this)">✏️ التعديل الشامل</button>
+                <button class="modal-btn cancel" style="font-size:0.75rem;" onclick="switchAdminTab('secMerchants', this)">طلبات التجار (KYC)</button>
+                <button class="modal-btn cancel" style="font-size:0.75rem;" onclick="switchAdminTab('secAudio', this)">صوت صلي على محمد</button>
             </div>
 
-            <div class="admin-tabs">
-                <button class="admin-tab-btn active" onclick="switchAdminTab('secTexts', this)">✏️ الهوية والحسابات والـ Audio</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secShipping', this)">🚚 أسعار الـ 27 محافظة</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secProducts', this)">🛍️ المنتجات + مساعد الـ AI</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secVendors', this)">🪪 توثيق التجار (KYC) والعمولة</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secTelegram', this)">🤖 بوت النشر التلقائي والربط</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secOrders', this)">📋 الطلبات وصندوق الهدايا</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secSecurity', this)">🔒 قفل الجهاز والمزامنة السحابية</button>
-            </div>
-
-            <!-- تبويب 1: الهوية و3 أرقام دفع والصوت المخصص -->
-            <div id="secTexts" class="admin-section active">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">1. الهوية واللوجو وحسابات الدفع الـ 3:</h4>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <div><label style="font-size:0.73rem;">اسم المتجر:</label><input type="text" id="cfgStoreName" class="custom-modal-input"></div>
-                    <div><label style="font-size:0.73rem;">رفع صورة اللوجو من جهازك:</label><input type="file" accept="image/*" class="custom-modal-input" onchange="handleLogoFileUpload(event)"></div>
-                </div>
-                <input type="text" id="cfgLogoUrl" class="custom-modal-input" placeholder="أو رابط مباشر لصورة اللوجو">
+            <!-- تبويب 1 -->
+            <div id="secGeneral" class="admin-section">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">أرقام الحسابات المالية (إنستا باي، كاش، بنك):</h4>
+                <label style="font-size:0.75rem;">رقم فودافون كاش:</label><input type="text" id="cfgVodafone" class="custom-modal-input">
+                <label style="font-size:0.75rem;">رقم حساب إنستا باي (InstaPay):</label><input type="text" id="cfgInstaPay" class="custom-modal-input">
+                <label style="font-size:0.75rem;">رقم الحساب البنكي:</label><input type="text" id="cfgBankAcc" class="custom-modal-input">
                 
-                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
-                    <div><label style="font-size:0.72rem; color:var(--gold);">📲 رقم المحفظة (فودافون كاش):</label><input type="text" id="cfgCashNum" class="custom-modal-input"></div>
-                    <div><label style="font-size:0.72rem; color:var(--gold);">🏦 عنوان/رقم إنستا باي (InstaPay):</label><input type="text" id="cfgInstapay" class="custom-modal-input"></div>
-                    <div><label style="font-size:0.72rem; color:var(--gold);">💳 رقم الحساب البنكي / الآيبان:</label><input type="text" id="cfgBankAcc" class="custom-modal-input"></div>
-                </div>
-
-                <label style="font-size:0.73rem;">شريط الإعلانات العلوي المتحرك:</label>
-                <input type="text" id="cfgTicker" class="custom-modal-input">
-
-                <label style="font-size:0.73rem;">قصة "من نحن" الإقناعية:</label>
-                <textarea id="cfgAboutStory" class="custom-modal-input" rows="2"></textarea>
-
-                <hr style="border-color:var(--border-color); margin:10px 0;">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:6px;">🔊 تخصيص صوت "صلي على محمد" (للمالك فقط):</h4>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:center;">
-                    <div>
-                        <label style="font-size:0.72rem;">ارفع ملف صوتي (MP3/WAV) من هاتفك ليشتغل كل 3 دقائق:</label>
-                        <input type="file" accept="audio/*" class="custom-modal-input" onchange="handleCustomAudioUpload(event)">
-                    </div>
-                    <div>
-                        <label style="font-size:0.72rem;">أو ضع رابط مباشر لملف صوتي:</label>
-                        <input type="text" id="cfgAudioUrl" class="custom-modal-input" placeholder="اتركه فارغاً لاستخدام الناطق الآلي">
-                    </div>
-                </div>
-
-                <h4 style="font-size:0.82rem; color:var(--gold); margin:8px 0;">روابط منصات التواصل الـ 5 (تابعنا):</h4>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <input type="text" id="cfgFb" class="custom-modal-input" placeholder="رابط فيسبوك">
-                    <input type="text" id="cfgIg" class="custom-modal-input" placeholder="رابط إنستجرام">
-                    <input type="text" id="cfgTt" class="custom-modal-input" placeholder="رابط تيك توك">
-                    <input type="text" id="cfgWa" class="custom-modal-input" placeholder="رقم واتساب (مثال: 201030084281)">
-                    <input type="text" id="cfgTg" class="custom-modal-input" placeholder="رابط قناة/حساب تليجرام">
-                </div>
-                <button class="modal-btn confirm" style="width:100%;" onclick="saveStoreTexts()">💾 حفظ كافة التعديلات والحسابات والصوت فوراً</button>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin:8px 0;">أسعار الشحن للـ 27 محافظة (تحكم كامل):</h4>
+                <div id="adminShippingPricesList" style="margin-bottom:10px;"></div>
+                <button class="modal-btn confirm" style="width:100%;" onclick="saveAdminGeneralSettings()">حفظ إعدادات الأرقام والشحن</button>
             </div>
 
-            <!-- تبويب 2: التحكم الكامل في أسعار شحن الـ 27 محافظة -->
-            <div id="secShipping" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:6px;">🚚 تحديد أسعار الشحن للـ 27 محافظة (المالك فقط من يحددها):</h4>
-                <p style="font-size:0.73rem; color:var(--text-muted); margin-bottom:10px;">العميل يرى اسم المحافظة فقط عند الاختيار، ويُضاف السعر الذي تحدده هنا تلقائياً ليُدفع كاملاً مع العربون:</p>
-                <div id="adminGovShippingGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:8px; max-height:380px; overflow-y:auto; padding:6px; background:var(--bg-input); border-radius:8px; margin-bottom:12px;"></div>
-                <button class="modal-btn confirm" style="width:100%;" onclick="saveGovShippingPrices()">💾 حفظ أسعار شحن المحافظات الـ 27</button>
+            <!-- تبويب 2: المنتجات + الذكاء الاصطناعي -->
+            <div id="secProducts" class="admin-section" style="display:none;">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">إضافة منتج مع اقتراح برومبت ذكي بالذكاء الاصطناعي:</h4>
+                <input type="text" id="newPTitle" class="custom-modal-input" placeholder="اسم المنتج">
+                <input type="number" id="newPPrice" class="custom-modal-input" placeholder="السعر">
+                <div style="display:flex; gap:6px; margin-bottom:8px;">
+                    <input type="text" id="newPImg" class="custom-modal-input" placeholder="رابط الصورة" style="margin-bottom:0; flex:1;">
+                    <button class="modal-btn confirm" onclick="aiGenerateProductCopy()">✨ اقتراح وصف ذكي AI</button>
+                </div>
+                <textarea id="newPDesc" class="custom-modal-input" placeholder="الوصف الإعلاني الجذاب..." rows="3"></textarea>
+                <button class="modal-btn confirm" style="width:100%;" onclick="adminAddNewProduct()">إضافة المنتج للمتجر</button>
+                <div style="margin-top:12px;" id="adminProductsList"></div>
             </div>
 
-            <!-- تبويب 3: إدارة المنتجات + أداة الذكاء الاصطناعي التسويقية -->
-            <div id="secProducts" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🛍️ إضافة أو تعديل منتج (مدعم بمساعد الذكاء الاصطناعي AI):</h4>
-                <input type="hidden" id="editProdId">
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <input type="text" id="newPTitle" class="custom-modal-input" placeholder="اسم المنتج (مثال: ساعة رولكس ملكي)">
-                    <input type="number" id="newPPrice" class="custom-modal-input" placeholder="السعر بالجنيه">
-                </div>
-                <div style="display:flex; gap:6px; margin-bottom:9px;">
-                    <input type="text" id="newPDesc" class="custom-modal-input" placeholder="وصف المنتج (أو اضغط زر الذكاء الاصطناعي لتوليده تلقائياً)" style="margin-bottom:0; flex:1;">
-                    <button class="modal-btn confirm" style="white-space:nowrap; background:linear-gradient(135deg,#8B5CF6,var(--gold)); color:#FFF;" onclick="generateAISalesPrompt()">✨ توليد برومبت ووصف ذكي</button>
-                </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <input type="text" id="newPImg" class="custom-modal-input" placeholder="رابط صورة المنتج">
-                    <div><input type="file" accept="image/*" class="custom-modal-input" onchange="handleProductImgUpload(event)" title="اختر صورة من هاتفك"></div>
-                </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:center; margin-bottom:10px;">
-                    <input type="text" id="newPBadge" class="custom-modal-input" placeholder="الشارة (مثال: الأكثر مبيعاً ✨)" style="margin-bottom:0;">
-                    <label style="font-size:0.8rem; cursor:pointer;"><input type="checkbox" id="newPScarcity"> إظهار شارة (🔥 متبقي 3 قطع فقط)</label>
-                </div>
-                <button class="modal-btn confirm" style="width:100%;" onclick="adminSaveProduct()">➕ حفظ ونشر المنتج في المتجر</button>
-                <div style="margin-top:15px;" id="adminProductsList"></div>
+            <!-- تبويب 3: التعديل الشامل لكل حرف -->
+            <div id="secUniversal" class="admin-section" style="display:none;">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">✏️ زر التعديل الشامل لكل حرف في المتجر:</h4>
+                <label style="font-size:0.75rem;">عنوان المتجر الرئيسي:</label><input type="text" id="uniStoreName" class="custom-modal-input">
+                <label style="font-size:0.75rem;">النص المتحرك العلوي:</label><input type="text" id="uniTicker" class="custom-modal-input">
+                <label style="font-size:0.75rem;">قصة من نحن:</label><textarea id="uniAbout" class="custom-modal-input" rows="3"></textarea>
+                <button class="modal-btn confirm" style="width:100%;" onclick="saveUniversalEdits()">تحديث وحفظ كل التعديلات الشاملة</button>
             </div>
 
-            <!-- تبويب 4: توثيق التجار والعملاء (KYC) والعمولة -->
-            <div id="secVendors" class="admin-section">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-                    <div>
-                        <h4 style="font-size:0.85rem; color:var(--gold);">🪪 مراجعة طلبات التجار والعملاء (بطاقة وجه/ظهر + سيلفي الوجه):</h4>
-                        <p style="font-size:0.72rem; color:var(--text-muted);">أي منتج يرفعه تاجر أو عميل لا يظهر في المتجر إلا بعد مراجعتك لوثائقه وموافقتك، ويُنشر باسم متجرك دون رقم البائع!</p>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:6px;">
-                        <label style="font-size:0.75rem; color:var(--gold); font-weight:800;">نسبة عمولتك (%):</label>
-                        <input type="number" id="cfgVendorCommission" class="custom-modal-input" style="width:75px; margin-bottom:0; text-align:center;" onchange="saveVendorCommission()">
-                    </div>
-                </div>
-                <div id="adminVendorSubmissionsList"></div>
+            <!-- تبويب 4: طلبات التجار والـ KYC والكاميرا -->
+            <div id="secMerchants" class="admin-section" style="display:none;">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">👥 طلبات توثيق التجار (صورة الوجه والبطاقة):</h4>
+                <div id="adminMerchantsLog" style="font-size:0.78rem;">لا توجد طلبات معلقة حالياً.</div>
             </div>
 
-            <!-- تبويب 5: ربط بوت تليجرام للنشر التلقائي والإشعارات -->
-            <div id="secTelegram" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:6px;">🤖 الربط الشامل ببوت تليجرام (إشعارات فورية + النشر التلقائي من البوت للمتجر):</h4>
-                <p style="font-size:0.73rem; color:var(--text-muted); margin-bottom:10px;">
-                    1. يصلك على حسابك كل أوردر جديد، وكل كود عجلة، وكل طلب توثيق تاجر (KYC).<br>
-                    2. <strong>ميزة النشر التلقائي السحرية:</strong> أرسل أي صورة منتج إلى البوت واكتب تحتها في الرسالة: <code>اسم المنتج | السعر | الوصف</code> وسيسحبها المتجر وينشرها تلقائياً!
-                </p>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <input type="text" id="cfgTgBotToken" class="custom-modal-input" placeholder="Telegram Bot Token (من @BotFather)">
-                    <input type="text" id="cfgTgChatId" class="custom-modal-input" placeholder="Telegram Chat ID أو اليوزر الخاص بك">
-                </div>
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                    <button class="modal-btn confirm" style="flex:1;" onclick="saveTelegramConfig()">💾 حفظ إعدادات البوت واختبار الإشعار</button>
-                    <button class="modal-btn cancel" style="flex:1; color:var(--gold); border-color:var(--gold);" onclick="fetchNewPostsFromTelegramBot(true)"><i class="fa-solid fa-rotate"></i> سحب المنشورات الجديدة من البوت الآن</button>
-                </div>
-            </div>
-
-            <!-- تبويب 6: الطلبات وصندوق الهدايا -->
-            <div id="secOrders" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">📋 سجل الطلبات (موضح بها العربون المدفوع والمتبقي عند الاستلام):</h4>
-                <div id="adminOrdersLog" style="font-size:0.78rem; margin-bottom:15px;"></div>
-                
-                <hr style="border-color:var(--border-color); margin:12px 0;">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🎁 منتجات صندوق الهدايا (للأوردرات فوق 1500 ج.م):</h4>
-                <div id="adminGiftList" style="margin-bottom:15px;"></div>
-            </div>
-
-            <!-- تبويب 7: الأمان السيادي وقفل الجهاز والمزامنة السحابية -->
-            <div id="secSecurity" class="admin-section">
-                <div style="background:rgba(212,175,55,0.1); border:1px solid var(--gold); padding:12px; border-radius:10px; margin-bottom:14px;">
-                    <h4 style="font-size:0.88rem; color:var(--gold); margin-bottom:6px;">🔐 قفل البصمة السيادي (لمنع أي شخص في العالم من فتح لوحة التحكم غير هاتفك):</h4>
-                    <p style="font-size:0.74rem; color:var(--text-muted); margin-bottom:10px;">
-                        بصمة جهازك الحالي هي: <strong id="currentDeviceFpDisplay" style="color:#FFF;"></strong><br>
-                        إذا قمت بتفعيل "قفل الإدارة على جهازي فقط"، فلو ضغط صديقك أو أي عميل 5 ضغطات على اللوجو من هاتفه، <strong>لن يظهر له مربع الباسورد أصلاً</strong> وستكون الإدارة مخفية تماماً عن العالم! (وللدخول الطارئ من جهاز جديد اكتب في شريط البحث كودك السري: <code>#مالك#2026</code>).
-                    </p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                        <input type="text" id="cfgAdminPin" class="custom-modal-input" placeholder="باسورد لوحة التحكم (الافتراضي 2026)">
-                        <button class="modal-btn confirm" id="btnLockDevice" onclick="toggleExclusiveDeviceLock()">🔒 تفعيل قفل الإدارة على جهازي هذا فقط</button>
-                    </div>
-                </div>
-
-                <div style="background:var(--bg-input); border:1px solid var(--border-color); padding:12px; border-radius:10px; margin-bottom:14px;">
-                    <h4 style="font-size:0.86rem; color:var(--gold); margin-bottom:6px;">☁️ المزامنة السحابية الحية (ليظهر تعديلك على هاتف صديقك وكل العملاء فوراً):</h4>
-                    <p style="font-size:0.73rem; color:var(--text-muted); margin-bottom:8px;">
-                        ضع رابط قاعدة بياناتك السحابية المجانية (مثل Firebase Realtime DB URL ينتهي بـ <code>.json</code> أو JSONBin/npoint) هنا. بمجرد الضغط على "مزامنة التعديلات"، أي منتج تضيفه أو تحذفه سيسمع في نفس اللحظة على جميع الهواتف!
-                    </p>
-                    <input type="text" id="cfgCloudSyncUrl" class="custom-modal-input" placeholder="مثال: https://your-project.firebaseio.com/rehab_store.json">
-                    <button class="modal-btn confirm" style="width:100%;" onclick="saveCloudConfigAndPush()">☁️ حفظ الرابط ورفع بيانات المتجر للسحابة الآن</button>
-                </div>
-
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                    <button class="modal-btn" style="background:var(--danger); color:#FFF; flex:1;" onclick="toggleEmergencyLockAdmin()">🚨 تشغيل/إيقاف طوارئ المتجر</button>
-                    <button class="modal-btn confirm" style="flex:1;" onclick="exportStoreBackupJSON()"><i class="fa-solid fa-download"></i> تحميل نسخة احتياطية</button>
-                    <label class="modal-btn cancel" style="flex:1; text-align:center; cursor:pointer; color:var(--gold); border-color:var(--gold);">
-                        <i class="fa-solid fa-upload"></i> استرجاع نسخة
-                        <input type="file" accept=".json" style="display:none;" onchange="importStoreBackupJSON(event)">
-                    </label>
-                </div>
+            <!-- تبويب 5: صوت صلي على محمد بالرفع -->
+            <div id="secAudio" class="admin-section" style="display:none;">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🔊 تخصيص صوت المذكر (صلي على محمد):</h4>
+                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">ارفع ملف صوتي بصوتك أو الصوت المفضل لديك (MP3/WAV):</p>
+                <input type="file" id="customAudioFile" accept="audio/*" class="custom-modal-input" onchange="handleCustomAudioUpload(event)">
+                <button class="modal-btn confirm" style="width:100%;" onclick="playSalawatAudio(true)">تجربة تشغيل الصوت الحالي</button>
             </div>
         </div>
     </div>
 
-    <!-- كود الترجمة لـ 15 لغة -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'ar', autoDisplay: false}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- نافذة تسجيل التجار (بيع معنا + كاميرا البطاقة والوجه) -->
+    <div class="custom-modal-overlay" id="merchantModal">
+        <div class="custom-modal-box">
+            <div style="font-size:1.05rem; font-weight:900; color:var(--gold); margin-bottom:8px;"><i class="fa-solid fa-handshake"></i> انضم إلينا كبائع معتمد (توثيق الأمان KYC)</div>
+            <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:12px;">يرجى إدخال بياناتك بدقة وتصوير وجهك وبطاقتك الشخصية لمنع أي تلاعب أو غش، وسيتم مراجعة طلبك وإعلامك بالعمولة المحددة.</div>
+            <input type="text" id="mName" class="custom-modal-input" placeholder="الاسم الثلاثي">
+            <input type="tel" id="mPhone" class="custom-modal-input" placeholder="رقم الموبايل (11 رقم يبدأ بـ 01)">
+            <input type="text" id="mAge" class="custom-modal-input" placeholder="السن">
+            <select id="mGender" class="custom-select"><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option></select>
+            <input type="text" id="mProductTitle" class="custom-modal-input" placeholder="اسم المنتج المراد بيعه ووصفه وسعره">
+            
+            <div style="background:var(--bg-input); padding:10px; border-radius:8px; border:1px dashed var(--gold); margin-bottom:10px; text-align:center;">
+                <div style="font-size:0.78rem; color:var(--gold); margin-bottom:6px;">📷 التقاط صورة الوجه والبطاقة للتوثيق الأمني:</div>
+                <button class="modal-btn confirm" style="padding:6px 14px; font-size:0.75rem;" onclick="captureMerchantCamera()">فتح الكاميرا والتقاط الصور</button>
+                <div id="captureStatus" style="font-size:0.72rem; color:var(--success); margin-top:6px;">لم يتم التقاط الصور بعد</div>
+            </div>
 
-    <!-- =========================================================
-         الكود البرمجي الشامل (JavaScript) - بجميع التعديلات والـ 30 ميزة الإضافية
-    ========================================================= -->
+            <div style="display:flex; gap:8px; justify-content:center;">
+                <button class="modal-btn confirm" onclick="submitMerchantApplication()">إرسال الطلب للإدارة</button>
+                <button class="modal-btn cancel" onclick="document.getElementById('merchantModal').style.display='none'">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        /* --- 1. قائمة الـ 27 محافظة بالترتيب الرسمي وأسعارها القابلة للتحكم الكامل من المالك --- */
-        const EGYPT_27_GOVS = [
-            "1. القاهرة", "2. الجيزة", "3. الإسكندرية", "4. القليوبية", "5. الدقهلية",
-            "6. الشرقية", "7. الغربية", "8. المنوفية", "9. البحيرة", "10. كفر الشيخ",
-            "11. دمياط", "12. بورسعيد", "13. الإسماعيلية", "14. السويس", "15. شمال سيناء",
-            "16. جنوب سيناء", "17. مطروح", "18. الفيوم", "19. بني سويف", "20. المنيا",
-            "21. أسيوط", "22. سوهاج", "23. قنا", "24. الأقصر", "25. أسوان",
-            "26. البحر الأحمر", "27. الوادي الجديد"
-        ];
-
-        const defaultGovRates = {};
-        EGYPT_27_GOVS.forEach((g, idx) => {
-            defaultGovRates[g] = idx < 14 ? 65 : 85; // سعر افتراضي يغيره المالك كما يشاء
-        });
-
-        /* --- 2. البيانات الأساسية للمتجر --- */
+        /* --- المتغيرات وقاعدة البيانات المحلية الآمنة --- */
         const defaultStoreData = {
             name: "3λ.Rehab.Store",
-            logo: "https://cdn-icons-png.flaticon.com/512/679/679922.png",
-            ticker: "✨ 3λ.Rehab.Store ✨ أهلاً بكم في المتجر الملكي الموثق — توصيل سريع للـ 27 محافظة — ادفع عربونك والباقي عند الاستلام ✨",
-            aboutStory: "منذ انطلاقتنا، لم يكن هدفنا مجرد بيع إكسسوارات أو مقتنيات عادية، بل صناعة قطعة فنية تروي قصة فخامتك، مع إتاحة منصة موثقة وآمنة لعملائنا وتجارنا لبيع مقتنياتهم تحت إشرافنا الكامل.",
-            cashNum: "01030084281",
-            instapay: "01030084281",
-            bankAcc: "بنك مصر / الأهلي — تواصل لتفاصيل الآيبان",
+            ticker: "✨ أهلاً بكم في المتجر الملكي — شحن وتوصيل لكافة الـ 27 محافظة في مصر ✨",
+            aboutStory: "المتجر الملكي الأول للإكسسوارات والمقتنيات الفاخرة المعتمدة.",
+            vodafone: "01030084281",
+            instaPay: "rehab.store@instapay",
+            bankAcc: "EG1234567890123456789",
             adminPin: "2026",
-            exclusiveDeviceFp: "", // إذا تم تفعيله لا تفتح الإدارة إلا على هاتف المالك فقط
-            cloudSyncUrl: "",
-            customAudioData: "",
-            vendorCommissionPct: 15,
-            emergencyOff: false,
-            fb: "https://facebook.com",
-            ig: "https://instagram.com",
-            tt: "https://tiktok.com",
-            wa: "201030084281",
-            tg: "https://t.me",
-            tgBotToken: "",
-            tgChatId: "",
-            lastTgUpdateId: 0,
-            salesPopupActive: true,
-            popupCities: "القاهرة, الإسكندرية, الدقهلية, الجيزة, جنوب سيناء, بورسعيد, الشرقية",
-            govRates: defaultGovRates
+            shippingPrices: {
+                "القاهرة": 60, "الجيزة": 60, "الإسكندرية": 65, "الدقهلية": 65, "المنصورة": 65,
+                "الشرقية": 70, "القليوبية": 60, "الغربية": 65, "المنوفية": 65, "الفيوم": 70,
+                "بني سويف": 75, "المنيا": 80, "أسيوط": 85, "سوهاج": 85, "قنا": 90,
+                "الأقصر": 90, "أسوان": 95, "بورسعيد": 75, "الإسماعيلية": 75, "السويس": 75,
+                "دمياط": 70, "كفر الشيخ": 65, "مطروح": 90, "الوادى الجديد": 95, "بورسعيد": 75,
+                "شمال سيناء": 95, "جنوب سيناء": 95, "البحر الأحمر": 90
+            },
+            fb: "https://facebook.com", ig: "https://instagram.com", tt: "https://tiktok.com", wa: "201030084281", tg: "https://t.me",
+            customAudioBase64: ""
         };
 
-        const defaultProducts = [
-            { id: 101, title: 'ساعة التميز الملكية Ultra Series', price: 750, descr: 'تصميم ملكي مقاوم للمياه مع شاشة فائقة الوضوح وسوار إضافي هدية.', badge: 'الأكثر مبيعاً 👑', scarcity: true, isGift: true, isVendor: false, img: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=500&q=80' },
-            { id: 102, title: 'طقم سلاسل وأساور مرصعة بالزركون السويسري', price: 380, descr: 'طلاء ذهب عيار 18 ثابت اللون ومقاوم للمياه والعطور بلمعة الألماس.', badge: 'تشكيلة VIP ✨', scarcity: true, isGift: true, isVendor: false, img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80' },
-            { id: 103, title: 'سماعة بلوتوث لاسلكية Pro Max', price: 520, descr: 'عزل ضوضاء ذكي وصوت محيطي نقي مع بطارية تدوم 48 ساعة.', badge: 'عرض خاص 🔥', scarcity: false, isGift: false, isVendor: false, img: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80' },
-            { id: 104, title: 'خاتم سوليتير ملكي فضة إيطالي عيار 925', price: 450, descr: 'فص زركون نقي مع علبة قطيفة فاخرة مناسبة للهدايا القيمة.', badge: 'حصري 💎', scarcity: true, isGift: true, isVendor: false, img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80' }
+        let storeData = JSON.parse(localStorage.getItem('rehab_store_cfg')) || defaultStoreData;
+        let products = JSON.parse(localStorage.getItem('rehab_products_list')) || [
+            { id: 1, title: 'ساعة التميز الملكية Ultra Series', price: 750, descr: 'تصميم ملكي مقاوم للمياه مع شاشة فائقة الوضوح وسوار إضافي هدية.', img: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=500&q=80' },
+            { id: 2, title: 'طقم سلاسل وأساور مرصعة بالزركون السويسري', price: 380, descr: 'طلاء ذهب عيار 18 ثابت اللون ومقاوم للمياه والعطور بلمعة الألماس.', img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80' }
         ];
-
-        let storeData = Object.assign({}, defaultStoreData, JSON.parse(localStorage.getItem('rehab_store_cfg') || '{}'));
-        if (!storeData.govRates) storeData.govRates = defaultGovRates;
-        let products = JSON.parse(localStorage.getItem('rehab_products_list')) || defaultProducts;
         let cart = JSON.parse(localStorage.getItem('rehab_cart')) || [];
-        let wishlist = JSON.parse(localStorage.getItem('rehab_wishlist')) || [];
-        let ordersLog = JSON.parse(localStorage.getItem('rehab_orders_log')) || [];
-        let wheelCodesLog = JSON.parse(localStorage.getItem('rehab_wheel_codes')) || [];
-        let vendorSubmissions = JSON.parse(localStorage.getItem('rehab_vendor_kyc')) || [];
-        let activeCoupon = null;
-        let isAdminAuthenticated = false;
+        let merchantRequests = JSON.parse(localStorage.getItem('rehab_merchants')) || [];
+        let ordersLog = JSON.parse(localStorage.getItem('rehab_orders')) || [];
+        let isDeviceTrustedAdmin = localStorage.getItem('rehab_trusted_device') === 'yes';
 
-        // توليد بصمة فريدة وثابتة لجهازك أنت لتمييزه عن باقي الأجهزة
-        function getMyDeviceFingerprint() {
-            let fp = localStorage.getItem('rehab_hw_device_id');
-            if (!fp) {
-                fp = 'DEV-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + screen.width + 'x' + screen.height;
-                localStorage.setItem('rehab_hw_device_id', fp);
-            }
-            return fp;
-        }
-
-        function saveAllToStorage() {
+        function saveAll() {
             localStorage.setItem('rehab_store_cfg', JSON.stringify(storeData));
             localStorage.setItem('rehab_products_list', JSON.stringify(products));
             localStorage.setItem('rehab_cart', JSON.stringify(cart));
-            localStorage.setItem('rehab_wishlist', JSON.stringify(wishlist));
-            localStorage.setItem('rehab_orders_log', JSON.stringify(ordersLog));
-            localStorage.setItem('rehab_wheel_codes', JSON.stringify(wheelCodesLog));
-            localStorage.setItem('rehab_vendor_kyc', JSON.stringify(vendorSubmissions));
+            localStorage.setItem('rehab_merchants', JSON.stringify(merchantRequests));
+            localStorage.setItem('rehab_orders', JSON.stringify(ordersLog));
         }
 
-        /* --- 3. المزامنة السحابية الحية (ليظهر تعديلك على هاتف صديقك وكل العملاء فوراً) --- */
-        async function pullDataFromCloud() {
-            if (!storeData.cloudSyncUrl) return;
-            try {
-                const res = await fetch(storeData.cloudSyncUrl);
-                if (!res.ok) return;
-                const cloudData = await res.json();
-                if (cloudData && cloudData.products) {
-                    products = cloudData.products;
-                    if (cloudData.publicStoreCfg) {
-                        storeData = Object.assign(storeData, cloudData.publicStoreCfg);
-                    }
-                    saveAllToStorage();
-                    applyStoreBrandingToUI();
-                    renderProductsGrid();
-                }
-            } catch (e) {}
-        }
-
-        async function pushDataToCloud() {
-            saveAllToStorage();
-            if (!storeData.cloudSyncUrl) {
-                showCustomModal("☁️ تنبيه المزامنة السحابية", "تم حفظ التعديلات على جهازك! لكي تظهر التعديلات على هاتف صديقك وكل الأجهزة الأخرى تلقائياً، ضع رابط قاعدة البيانات السحابية في تبويب (قفل الجهاز والمزامنة السحابية).", "alert");
-                return;
-            }
-            try {
-                const publicStoreCfg = {
-                    name: storeData.name, logo: storeData.logo, ticker: storeData.ticker,
-                    aboutStory: storeData.aboutStory, cashNum: storeData.cashNum,
-                    instapay: storeData.instapay, bankAcc: storeData.bankAcc,
-                    customAudioData: storeData.customAudioData, emergencyOff: storeData.emergencyOff,
-                    fb: storeData.fb, ig: storeData.ig, tt: storeData.tt, wa: storeData.wa, tg: storeData.tg,
-                    govRates: storeData.govRates
-                };
-                await fetch(storeData.cloudSyncUrl, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ publicStoreCfg, products, updatedAt: Date.now() })
-                });
-                showCustomModal("☁️ تمت المزامنة العالمية بنجاح!", "تم رفع جميع منتجاتك وتعديلاتك وأسعار المحافظات إلى السحابة! أي عميل أو صديق يفتح المتجر الآن سيرى التحديثات فوراً.", "alert");
-            } catch (e) {
-                showCustomModal("⚠️ خطأ في الرابط السحابي", "تأكد من صحة رابط المزامنة السحابية (أن ينتهي بـ .json إذا كان Firebase).", "alert");
-            }
-        }
-
-        /* --- 4. سحب المنتجات المنشورة تلقائياً من بوت التليجرام للمتجر --- */
-        async function fetchNewPostsFromTelegramBot(manualNotify = false) {
-            if (!storeData.tgBotToken) {
-                if (manualNotify) showCustomModal("تنبيه", "أدخل توكن بوت التليجرام أولاً!", "alert");
-                return;
-            }
-            try {
-                const res = await fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/getUpdates?offset=${(storeData.lastTgUpdateId || 0) + 1}`);
-                const data = await res.json();
-                if (!data.ok || !data.result) return;
-
-                let addedCount = 0;
-                for (const upd of data.result) {
-                    storeData.lastTgUpdateId = upd.update_id;
-                    const msg = upd.message || upd.channel_post;
-                    if (!msg) continue;
-                    const text = msg.caption || msg.text || "";
-                    // الصيغة: اسم المنتج | السعر | الوصف
-                    if (text.includes('|')) {
-                        const parts = text.split('|').map(s => s.trim());
-                        const title = parts[0];
-                        const price = Number(parts[1]);
-                        const descr = parts[2] || "منتج ملكي فاخر وصل حديثاً.";
-                        let imgUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80";
-
-                        if (msg.photo && msg.photo.length > 0) {
-                            const fileId = msg.photo[msg.photo.length - 1].file_id;
-                            const fRes = await fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/getFile?file_id=${fileId}`);
-                            const fData = await fRes.json();
-                            if (fData.ok) {
-                                imgUrl = `https://api.telegram.org/file/bot${storeData.tgBotToken}/${fData.result.file_path}`;
-                            }
-                        }
-
-                        if (title && price > 0) {
-                            products.unshift({ id: Date.now() + addedCount, title, price, descr, badge: 'وصل حديثاً ✨', scarcity: true, isGift: false, isVendor: false, img: imgUrl });
-                            addedCount++;
-                        }
-                    }
-                }
-                saveAllToStorage();
-                if (addedCount > 0) {
-                    renderProductsGrid();
-                    if (isAdminAuthenticated) loadAdminDataIntoCMS();
-                }
-                if (manualNotify) {
-                    showCustomModal("🤖 مزامنة بوت تليجرام", addedCount > 0 ? `تم سحب ونشر (${addedCount}) منتج جديد من البوت تلقائياً!` : "لا توجد رسائل منتجات جديدة في البوت حالياً.", "alert");
-                }
-            } catch (e) {}
-        }
-
-        /* --- 5. النوافذ المخصصة وإشعارات المالك الفورية --- */
-        function showCustomModal(title, text, type = 'alert', callback = null, placeholder = '', customHTML = '') {
+        /* --- النوافذ المنبثقة المخصصة --- */
+        function showCustomModal(title, text, type = 'alert', callback = null, placeholder = '', htmlContent = '') {
             const overlay = document.getElementById('customModal');
-            document.getElementById('customModalTitle').innerHTML = title;
-            document.getElementById('customModalText').innerHTML = text;
+            document.getElementById('customModalTitle').textContent = title;
+            document.getElementById('customModalText').textContent = text;
             const inputArea = document.getElementById('customModalInputArea');
             const cancelBtn = document.getElementById('customModalCancelBtn');
-
             inputArea.innerHTML = '';
-            if (type === 'password') {
-                inputArea.innerHTML = `<input type="password" id="customModalInput" class="custom-modal-input" placeholder="${placeholder}" style="text-align:center;">`;
-            } else if (type === 'prompt') {
-                inputArea.innerHTML = `<input type="text" id="customModalInput" class="custom-modal-input" placeholder="${placeholder}" style="text-align:center;">`;
+
+            if (type === 'password' || type === 'prompt') {
+                inputArea.innerHTML = `<input type="${type === 'password' ? 'password' : 'text'}" id="customModalInput" class="custom-modal-input" placeholder="${placeholder}">`;
             } else if (type === 'html') {
-                inputArea.innerHTML = customHTML;
+                inputArea.innerHTML = htmlContent;
             }
 
-            cancelBtn.style.display = (type !== 'alert') ? 'inline-block' : 'none';
+            cancelBtn.style.display = (type === 'alert') ? 'none' : 'inline-block';
             overlay.style.display = 'flex';
-
-            window.currentCustomCallback = (confirmed) => {
+            window.currentCustomCallback = (res) => {
                 overlay.style.display = 'none';
-                if (callback) {
-                    const inp = document.getElementById('customModalInput');
-                    callback(confirmed ? (inp ? inp.value : true) : null);
-                }
+                if (callback) callback(res ? (document.getElementById('customModalInput') ? document.getElementById('customModalInput').value : true) : null);
             };
         }
+        function closeCustomModal(confirmed) { if (window.currentCustomCallback) window.currentCustomCallback(confirmed); }
 
-        function closeCustomModal(isConfirmed) {
-            if (window.currentCustomCallback) window.currentCustomCallback(isConfirmed);
-        }
-
-        function notifyOwnerInstantly(messageText) {
-            if (storeData.tgBotToken && storeData.tgChatId) {
-                fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: storeData.tgChatId,
-                        text: `👑 إشعار فوري من متجر ${storeData.name}:\n\n${messageText}`
-                    })
-                }).catch(() => {});
-            }
-        }
-
-        /* --- 6. المذكر الصوتي (صلي على محمد ﷺ) بدعم ملف Audio يرفعه المالك --- */
-        let salawatTimerStarted = false;
-        function playSalawatAudio(manualTrigger = false) {
-            const player = document.getElementById('customSalawatPlayer');
-            if (storeData.customAudioData) {
-                player.src = storeData.customAudioData;
-                player.play().catch(() => {});
+        /* --- المذكر الصوتي (صلي على محمد) مع إمكانية رفع ملف صوتي للمالك --- */
+        function playSalawatAudio(manual = false) {
+            if (storeData.customAudioBase64) {
+                const audio = new Audio(storeData.customAudioBase64);
+                audio.play().catch(() => {});
             } else if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance("اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ");
-                utterance.lang = 'ar-SA';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
+                const utter = new SpeechSynthesisUtterance("اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ");
+                utter.lang = 'ar-SA';
+                window.speechSynthesis.speak(utter);
             }
-            if (manualTrigger) {
-                showCustomModal("ﷺ صَلِّ عَلَى النَّبِيِّ", "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ ❤️\n(يعمل التذكير الصوتي تلقائياً كل 3 دقائق)", "alert");
-            }
+            if (manual) showCustomModal("ﷺ صَلِّ عَلَى النَّبِيِّ", "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ ❤️", "alert");
         }
-
-        function initSalawatAutoReminder() {
-            if (salawatTimerStarted) return;
-            salawatTimerStarted = true;
-            setInterval(() => playSalawatAudio(false), 180000);
-        }
-        document.addEventListener('click', initSalawatAutoReminder, { once: true });
+        setInterval(() => playSalawatAudio(false), 180000); // كل 3 دقائق
+        document.addEventListener('click', () => {}, { once: true });
 
         function handleCustomAudioUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
             reader.onload = (e) => {
-                document.getElementById('cfgAudioUrl').value = e.target.result;
-                storeData.customAudioData = e.target.result;
-                showCustomModal("🔊 تم رفع الصوت", "تم تجهيز الملف الصوتي الخاص بك بنجاح! اضغط حفظ لتفعيله.", "alert");
+                storeData.customAudioBase64 = e.target.result;
+                saveAll();
+                showCustomModal("✅ تم الرفع", "تم رفع وتخصيص صوت المذكر الصوتي بنجاح!", "alert");
             };
             reader.readAsDataURL(file);
         }
 
-        /* --- 7. أداة الذكاء الاصطناعي التسويقية (AI Prompt & Copywriter) --- */
-        function generateAISalesPrompt() {
-            const title = document.getElementById('newPTitle').value.trim();
-            const price = document.getElementById('newPPrice').value.trim();
-            if (!title) {
-                showCustomModal("🤖 مساعد الذكاء الاصطناعي", "اكتب اسم المنتج أولاً في خانة الاسم، ثم اضغط عليّ لأولّد لك وصفاً سحرياً يشد العميل فوراً!", "alert");
-                return;
-            }
-            const hooks = [
-                `✨ فخامة استثنائية تخطف الأنظار! تم تصميم (${title}) خصيصاً لأصحاب الذوق الملكي الرفيع. خامات أصلية مقاومة للعوامل وتدوم طويلاً، تمنحك حضوراً لا يُنسى. اطلبه الآن بكمية محدودة جداً!`,
-                `👑 ارتقِ بإطلالتك إلى مستوى الـ VIP مع (${title})! دقة متناهية في التفاصيل وجودة مضمونة 100% تجعلها القطعة الأكثر طلباً هذا الموسم. احجز قطعتك الآن قبل نفاد الكمية!`,
-                `💎 تحفة فنية تجمع بين الرقي والعملية! (${title}) يوفر لك تجربة فائقة الجودة مع ضمان ذهبي من متجرنا. استثمر في أناقتك اليوم وادفع عربونك فقط والباقي عند الاستلام!`
-            ];
-            const chosenDesc = hooks[Math.floor(Math.random() * hooks.length)];
-            document.getElementById('newPDesc').value = chosenDesc;
-            document.getElementById('newPBadge').value = "مُرشح بالذكاء الاصطناعي ✨";
+        /* --- عجلة الحظ --- */
+        let wheelSpinned = false;
+        function spinTheWheel() {
+            if (wheelSpinned) { showCustomModal("تنبيه", "لقد استخدمت محاولتك اليومية بالفعل!", "alert"); return; }
+            wheelSpinned = true;
+            const wheel = document.getElementById('classicWheelEl');
+            wheel.style.transform = `rotate(${1440 + Math.floor(Math.random() * 360)}deg)`;
+            setTimeout(() => {
+                showCustomModal("🎉 مبروك!", "ربحت كود خصم حصري بنسبة 5% على طلبك القادم!", "alert");
+            }, 3600);
         }
 
-        /* --- 8. نظام التجار والعملاء الموثق (C2C KYC Marketplace) --- */
-        let tempKycFiles = { idFront: '', idBack: '', faceSelfie: '', prodImg: '' };
-
-        function readKycFile(input, key) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (e) => { tempKycFiles[key] = e.target.result; };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function openSellerKYCModal() {
-            tempKycFiles = { idFront: '', idBack: '', faceSelfie: '', prodImg: '' };
-            const comm = storeData.vendorCommissionPct || 15;
-            const formHTML = `
-                <div style="text-align:right; font-size:0.78rem;">
-                    <div style="background:rgba(212,175,55,0.12); border:1px solid var(--gold); padding:8px; border-radius:8px; margin-bottom:10px; color:var(--gold);">
-                        🔒 <strong>توثيق الهوية الإجباري (KYC):</strong> لحماية عملائنا، تُحفظ بياناتك وبطاقتك في ملف سري لدى مالك المتجر فقط. يُنشر المنتج باسم المتجر وتتم المحاسبة عبر الإدارة (عمولة المتجر ${comm}% عند إتمام البيع).
-                    </div>
-                    <div style="display:grid; grid-template-columns:2fr 1fr; gap:6px;">
-                        <input type="text" id="kycName" class="custom-modal-input" placeholder="الاسم الرباعي كما بالبطاقة">
-                        <input type="number" id="kycAge" class="custom-modal-input" placeholder="السن">
-                    </div>
-                    <input type="tel" id="kycPhone" class="custom-modal-input" placeholder="رقم هاتفك الشخصي للتواصل مع الإدارة (11 رقم)">
-                    <input type="text" id="kycAddress" class="custom-modal-input" placeholder="عنوان الإقامة بالتفصيل">
-                    
-                    <label style="color:var(--gold); font-weight:800;">🪪 1. صورة البطاقة الشخصية (وجه البطاقة):</label>
-                    <input type="file" accept="image/*" class="custom-modal-input" onchange="readKycFile(this, 'idFront')">
-                    
-                    <label style="color:var(--gold); font-weight:800;">🪪 2. صورة البطاقة الشخصية (ظهر البطاقة):</label>
-                    <input type="file" accept="image/*" class="custom-modal-input" onchange="readKycFile(this, 'idBack')">
-                    
-                    <label style="color:var(--gold); font-weight:800;">🤳 3. صورة سيلفي واضحة لوجهك الآن للتطابق الأمني:</label>
-                    <input type="file" accept="image/*" capture="user" class="custom-modal-input" onchange="readKycFile(this, 'faceSelfie')">
-                    
-                    <hr style="border-color:var(--border-color); margin:8px 0;">
-                    <label style="color:var(--gold); font-weight:800;">📦 بيانات المنتج المراد عرضه للبيع:</label>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:5px;">
-                        <input type="text" id="kycProdTitle" class="custom-modal-input" placeholder="اسم المنتج">
-                        <select id="kycProdCond" class="custom-select">
-                            <option value="جديد تماماً">حالة المنتج: جديد</option>
-                            <option value="مستعمل بحالة الزيرو">حالة المنتج: مستعمل بحالة ممتازة</option>
-                        </select>
-                    </div>
-                    <input type="number" id="kycProdPrice" class="custom-modal-input" placeholder="السعر المطلوب بالجنيه">
-                    <textarea id="kycProdScript" class="custom-modal-input" rows="2" placeholder="اكتب وصفاً (اسكريبت) جذاباً ومفصلاً لحالة المنتج ومميزاته..."></textarea>
-                    <label style="color:var(--gold); font-weight:800;">📸 صورة واضحة للمنتج:</label>
-                    <input type="file" accept="image/*" class="custom-modal-input" onchange="readKycFile(this, 'prodImg')">
-                </div>
-            `;
-
-            showCustomModal("🤝 تسجيل تاجر / بائع موثق وعرض منتج", "", "html", (confirmed) => {
-                if (confirmed) submitSellerKYCRequest();
-            }, "", formHTML);
-        }
-
-        function submitSellerKYCRequest() {
-            const name = document.getElementById('kycName').value.trim();
-            const age = document.getElementById('kycAge').value.trim();
-            const phone = document.getElementById('kycPhone').value.trim();
-            const address = document.getElementById('kycAddress').value.trim();
-            const prodTitle = document.getElementById('kycProdTitle').value.trim();
-            const prodCond = document.getElementById('kycProdCond').value;
-            const prodPrice = Number(document.getElementById('kycProdPrice').value);
-            const prodScript = document.getElementById('kycProdScript').value.trim();
-
-            if (!name || !age || !phone || !address || !prodTitle || !prodPrice || !tempKycFiles.idFront || !tempKycFiles.idBack || !tempKycFiles.faceSelfie) {
-                setTimeout(() => {
-                    showCustomModal("⚠️ وثائق ناقصة", "يرجى إكمال جميع البيانات وإرفاق (وجه البطاقة + ظهر البطاقة + صورة الوجه السيلفي) لضمان التوثيق الأمني!", "alert");
-                }, 100);
-                return;
-            }
-
-            const commPct = storeData.vendorCommissionPct || 15;
-            const commissionAmt = Math.round(prodPrice * (commPct / 100));
-            const netToSeller = prodPrice - commissionAmt;
-
-            const kycEntry = {
-                id: 'KYC-' + Date.now(),
-                date: new Date().toLocaleString('ar-EG'),
-                name, age, phone, address,
-                prodTitle, prodCond, prodPrice, prodScript,
-                commissionAmt, netToSeller,
-                files: { ...tempKycFiles },
-                status: 'قيد المراجعة'
-            };
-
-            vendorSubmissions.unshift(kycEntry);
-            saveAllToStorage();
-
-            notifyOwnerInstantly(`🪪 طلب توثيق بائع ومنتج جديد (KYC)!\nالاسم: ${name} (${age} سنة)\nالهاتف: ${phone}\nالعنوان: ${address}\nالمنتج: ${prodTitle} (${prodCond})\nالسعر المطلوب: ${prodPrice} ج.م\nعمولتك (${commPct}%): ${commissionAmt} ج.م\nافتح لوحة التحكم لمعاينة صور البطاقة والوجه والموافقة على النشر.`);
-
-            showCustomModal("✅ تم إرسال ملف التوثيق للإدارة", `تم استلام بياناتك وصور التوثيق بنجاح!\nسيقوم مالك المتجر بمراجعة المنتج ونشره في المتجر بعد التأكد. عند إتمام البيع وتحصيل المبلغ على حساب المتجر، سيتم تحويل صافي مستحقاتك (${netToSeller} ج.م) بعد خصم عمولة المتجر.`, "alert");
-        }
-
-        function approveVendorProduct(kycId) {
-            const item = vendorSubmissions.find(x => x.id === kycId);
-            if (!item) return;
-            item.status = 'تمت الموافقة والنشر ✅';
-
-            // ينزل المنتج في المتجر باسم المتجر وبدون رقم هاتف البائع نهائياً
-            products.unshift({
-                id: Date.now(),
-                title: item.prodTitle,
-                price: item.prodPrice,
-                descr: `${item.prodScript || 'منتج مفحوص ومعتمد من إدارة المتجر.'} — (${item.prodCond})`,
-                badge: `معتمد ومفحوص (${item.prodCond}) 🤝`,
-                scarcity: true,
-                isGift: false,
-                isVendor: true,
-                img: item.files.prodImg || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"
-            });
-
-            saveAllToStorage();
-            renderProductsGrid();
-            loadAdminDataIntoCMS();
-            showCustomModal("✅ تم النشر في المتجر", "تمت الموافقة ونشر المنتج في المتجر باسمك كمالك للمتجر ودون إظهار أي بيانات للبائع!", "alert");
-        }
-
-        function downloadVendorKYCFile(kycId) {
-            const item = vendorSubmissions.find(x => x.id === kycId);
-            if (!item) return;
-            const htmlDoc = `
-                <html dir="rtl"><head><meta charset="UTF-8"><title>ملف توثيق بائع ${item.name}</title></head>
-                <body style="font-family:sans-serif; padding:20px;">
-                    <h2>ملف توثيق بائع معتمد (KYC) — ${storeData.name}</h2>
-                    <p><b>الاسم:</b> ${item.name} | <b>السن:</b> ${item.age} | <b>الهاتف:</b> ${item.phone}</p>
-                    <p><b>العنوان:</b> ${item.address} | <b>التاريخ:</b> ${item.date}</p>
-                    <p><b>المنتج:</b> ${item.prodTitle} (${item.prodCond}) — <b>السعر:</b> ${item.prodPrice} ج.م (عمولة المتجر: ${item.commissionAmt} ج.م)</p>
-                    <hr>
-                    <h3>1. وجه البطاقة الشخصية:</h3><img src="${item.files.idFront}" style="max-width:400px; border:2px solid #000;"><br>
-                    <h3>2. ظهر البطاقة الشخصية:</h3><img src="${item.files.idBack}" style="max-width:400px; border:2px solid #000;"><br>
-                    <h3>3. صورة الوجه السيلفي:</h3><img src="${item.files.faceSelfie}" style="max-width:300px; border:2px solid #000;">
-                </body></html>
-            `;
-            const blob = new Blob([htmlDoc], { type: 'text/html' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `KYC_${item.name}.html`;
-            a.click();
-        }
-
-        function deleteVendorKYC(kycId) {
-            vendorSubmissions = vendorSubmissions.filter(x => x.id !== kycId);
-            saveAllToStorage();
-            loadAdminDataIntoCMS();
-        }
-
-        /* --- 9. عرض المنتجات والفلاتر وعجلة الحظ --- */
-        function filterProductsByType(type, btn) {
-            document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if (type === 'all') renderProductsGrid(products);
-            else if (type === 'vip') renderProductsGrid(products.filter(p => !p.isVendor));
-            else if (type === 'vendor') renderProductsGrid(products.filter(p => p.isVendor));
-        }
-
-        function renderProductsGrid(list = products) {
+        /* --- عرض المنتجات --- */
+        function renderProductsGrid(filterQ = '') {
             const grid = document.getElementById('productsGrid');
-            document.getElementById('productsCountText').textContent = `(${list.length} منتج ملكي)`;
-
-            grid.innerHTML = list.map(p => {
-                const isWished = wishlist.includes(p.id);
-                const realisticViewers = Math.floor(Math.random() * 11) + 4;
-                return `
+            const q = filterQ.trim().toLowerCase();
+            const list = q ? products.filter(p => p.title.toLowerCase().includes(q)) : products;
+            
+            grid.innerHTML = list.map(p => `
                 <div class="p-card">
-                    ${p.badge ? `<div class="p-badge">${p.badge}</div>` : ''}
-                    <div class="card-floating-btns">
-                        <button class="mini-circle-btn ${isWished ? 'wish-active' : ''}" onclick="toggleWishlist(${p.id})"><i class="fa-solid fa-heart"></i></button>
-                        <button class="mini-circle-btn" onclick="openQuickView(${p.id})"><i class="fa-solid fa-eye"></i></button>
-                        <button class="mini-circle-btn" onclick="shareProductOnWhatsApp(${p.id})"><i class="fa-solid fa-share-nodes"></i></button>
-                    </div>
-                    <div class="p-img-wrap" onclick="openQuickView(${p.id})">
-                        <img src="${p.img}" class="p-img" alt="${p.title}" loading="lazy">
-                        ${p.scarcity ? `<div class="scarcity-tag">🔥 متبقي 3 قطع فقط</div>` : ''}
-                    </div>
+                    <div class="p-img-wrap"><img src="${p.img}" class="p-img" loading="lazy"></div>
                     <div class="p-body">
                         <div>
                             <div class="p-title">${p.title}</div>
-                            <div class="p-desc">${p.descr}</div>
-                            <div class="live-viewers">👁️ يشاهد هذا المنتج الآن ${realisticViewers} عميلاً</div>
                             <div class="p-price">${p.price} ج.م</div>
                         </div>
-                        <button class="p-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> أضف إلى السلة</button>
+                        <button class="p-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> أضف للسلة</button>
                     </div>
                 </div>
-            `}).join('');
+            `).join('');
         }
 
-        let isWheelSpinning = false;
-        function spinTheWheel() {
-            if (isWheelSpinning) return;
-            const todayStr = new Date().toISOString().slice(0, 10);
-            const lastSpinDate = localStorage.getItem('rehab_last_wheel_date');
-            let bonusSpins = parseInt(localStorage.getItem('rehab_bonus_spins') || '0');
-
-            if (lastSpinDate === todayStr && bonusSpins <= 0) {
-                showCustomModal("🎡 لفتك اليومية", "لقد استنفدت لفتك اليومية! يمكنك المحاولة غداً، أو إتمام طلب بقيمة 1500 ج.م للحصول على لفتين هدية فوراً 🎁", "alert");
-                return;
-            }
-
-            isWheelSpinning = true;
-            const wheelEl = document.getElementById('classicWheelEl');
-            const randomDeg = 1800 + Math.floor(Math.random() * 1440);
-            wheelEl.style.transform = `rotate(${randomDeg}deg)`;
-
-            setTimeout(() => {
-                isWheelSpinning = false;
-                const discountPct = Math.floor(Math.random() * 10) + 1;
-                const generatedCode = 'VIP' + Math.floor(1000 + Math.random() * 9000);
-                const endOfDay = new Date();
-                endOfDay.setHours(23, 59, 59, 999);
-
-                if (bonusSpins > 0) {
-                    bonusSpins--;
-                    localStorage.setItem('rehab_bonus_spins', bonusSpins.toString());
-                } else {
-                    localStorage.setItem('rehab_last_wheel_date', todayStr);
-                }
-
-                wheelCodesLog.unshift({
-                    code: generatedCode, pct: discountPct, expires: endOfDay.getTime(),
-                    dateStr: new Date().toLocaleString('ar-EG'), used: false
-                });
-                saveAllToStorage();
-
-                notifyOwnerInstantly(`🎡 عميل حصل على كود من عجلة الحظ!\nالكود: ${generatedCode} (خصم ${discountPct}%)\nصالح حتى نهاية اليوم.`);
-                document.getElementById('couponInput').value = generatedCode;
-                showCustomModal("🎉 مبروك! كود خصم ملكي", `حصلت على كود خصم حصري بنسبة (${discountPct}%)!\nكودك هو: [ ${generatedCode} ]\nتم وضعه في سلة مشترياتك تلقائياً!`, "alert");
-            }, 3900);
-        }
-
-        function openQuickView(pid) {
+        /* --- السلة والطلب (دفع جزئي + شحن مستقل كامل) --- */
+        function addToCart(pid) {
             const p = products.find(x => x.id === pid);
             if (!p) return;
-            const crossProds = products.filter(x => x.id !== pid).slice(0, 2);
-            const crossHTML = crossProds.map(cp => `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:6px 10px; border-radius:8px; margin-top:6px; font-size:0.75rem;">
-                    <span>${cp.title} (${cp.price} ج.م)</span>
-                    <button class="modal-btn confirm" style="padding:3px 8px; font-size:0.7rem;" onclick="addToCart(${cp.id})">+ أضف معاً</button>
-                </div>
-            `).join('');
-
-            const html = `
-                <img src="${p.img}" style="width:100%; height:220px; object-fit:cover; border-radius:10px; margin-bottom:10px; border:1px solid var(--gold);">
-                <div style="font-size:0.84rem; color:var(--text-muted); margin-bottom:8px;">${p.descr}</div>
-                <div style="font-size:1.1rem; font-weight:900; color:var(--gold); margin-bottom:12px;">السعر: ${p.price} ج.م</div>
-                <button class="p-btn" style="margin-bottom:14px;" onclick="closeCustomModal(false); addToCart(${p.id});">أضف إلى حقيبة التسوق الآن</button>
-                <div style="text-align:right; border-top:1px solid var(--border-color); padding-top:8px;">
-                    <strong style="font-size:0.78rem; color:var(--gold);">✨ اشترِ المجموعة معاً:</strong>
-                    ${crossHTML}
-                </div>
-            `;
-            showCustomModal(p.title, "", "html", null, "", html);
+            const item = cart.find(x => x.id === pid);
+            if (item) item.qty++; else cart.push({ ...p, qty: 1 });
+            saveAll();
+            updateCartBadge();
+            toggleCartDrawer(true);
         }
 
-        function shareProductOnWhatsApp(pid) {
-            const p = products.find(x => x.id === pid);
-            if (!p) return;
-            const text = encodeURIComponent(`شاهد هذا المنتج الملكي من ${storeData.name}:\n*${p.title}*\nالسعر: ${p.price} ج.م\nالرابط: ${window.location.href}`);
-            window.open(`https://wa.me/?text=${text}`, '_blank');
+        function updateCartBadge() {
+            document.getElementById('cartBadgeCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
         }
 
-        function toggleWishlist(pid) {
-            if (wishlist.includes(pid)) wishlist = wishlist.filter(id => id !== pid);
-            else wishlist.push(pid);
-            saveAllToStorage();
-            document.getElementById('wishBadgeCount').textContent = wishlist.length;
-            renderProductsGrid();
-        }
-
-        function openWishlistModal() {
-            const wishedItems = products.filter(p => wishlist.includes(p.id));
-            if (wishedItems.length === 0) {
-                showCustomModal("❤️ قائمة المفضلة", "قائمة مفضلتك فارغة حالياً.", "alert");
-                return;
-            }
-            const html = wishedItems.map(p => `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:8px; border-radius:8px; margin-bottom:6px; font-size:0.8rem;">
-                    <span>${p.title} (${p.price} ج.م)</span>
-                    <button class="modal-btn confirm" style="padding:4px 10px;" onclick="closeCustomModal(false); addToCart(${p.id});">أضف للسلة</button>
-                </div>
-            `).join('');
-            showCustomModal("❤️ منتجاتك المفضلة", "", "html", null, "", html);
-        }
-
-        function handleLiveSearch(query) {
-            const q = query.trim();
-            // كود الطوارئ السري للمالك لفتح الإدارة من أي جهاز جديد إذا لزم الأمر
-            if (q === `#مالك#${storeData.adminPin}`) {
-                document.getElementById('liveSearchInput').value = '';
-                isAdminAuthenticated = true;
-                loadAdminDataIntoCMS();
-                document.getElementById('adminModal').style.display = 'flex';
-                return;
-            }
-
-            const box = document.getElementById('liveSearchResults');
-            if (q.length < 2) {
-                box.style.display = 'none';
-                renderProductsGrid(products);
-                return;
-            }
-            const matched = products.filter(p => p.title.toLowerCase().includes(q.toLowerCase()) || p.descr.toLowerCase().includes(q.toLowerCase()));
-            renderProductsGrid(matched);
-            box.style.display = 'block';
-            box.innerHTML = matched.length > 0 ? matched.map(p => `
-                <div class="search-item" onclick="document.getElementById('liveSearchResults').style.display='none'; openQuickView(${p.id});">
-                    <img src="${p.img}">
-                    <div><div style="font-size:0.82rem; font-weight:800;">${p.title}</div><div style="font-size:0.75rem; color:var(--gold);">${p.price} ج.م</div></div>
-                </div>
-            `).join('') : `<div style="padding:12px; font-size:0.8rem; text-align:center;">لا توجد نتائج</div>`;
-        }
-
-        /* --- 10. السلة والحاسبة الذكية (دفع 50% أو 75% + الشحن كاملاً والباقي عند الاستلام) --- */
         function toggleCartDrawer(open) {
             document.getElementById('cartOverlay').style.display = open ? 'block' : 'none';
             document.getElementById('cartDrawer').classList.toggle('open', open);
-            if (open) renderCartInsideDrawer();
+            if (open) {
+                const sub = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+                document.getElementById('cartItemsContainer').innerHTML = cart.length === 0 ? '<div style="text-align:center; color:var(--text-muted); padding:20px;">السلة فارغة</div>' :
+                    cart.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.8rem;"><span>${i.title} (×${i.qty})</span><strong>${i.price * i.qty} ج.م</strong></div>`).join('');
+                document.getElementById('cartTotalDisplay').textContent = `${sub} ج.م`;
+            }
         }
 
         function toggleMenuDrawer(open) {
@@ -1417,715 +545,199 @@
             document.getElementById('menuDrawer').classList.toggle('open', open);
         }
 
-        function addToCart(pid) {
-            const p = products.find(x => x.id === pid);
-            if (!p) return;
-            const existing = cart.find(item => item.id === pid);
-            if (existing) existing.qty++;
-            else cart.push({ id: p.id, title: p.title, price: p.price, img: p.img, qty: 1 });
-            saveAllToStorage();
-            updateCartBadgeAndUI();
-            toggleCartDrawer(true);
-        }
-
-        function changeCartQty(pid, delta) {
-            const item = cart.find(x => x.id === pid);
-            if (!item) return;
-            item.qty += delta;
-            if (item.qty <= 0) cart = cart.filter(x => x.id !== pid);
-            saveAllToStorage();
-            updateCartBadgeAndUI();
-            renderCartInsideDrawer();
-        }
-
-        function getCartSubtotal() {
-            return cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-        }
-
-        function updateCartBadgeAndUI() {
-            document.getElementById('cartBadgeCount').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-        }
-
-        function renderCartInsideDrawer() {
-            const container = document.getElementById('cartItemsContainer');
-            const subtotal = getCartSubtotal();
-            const pct = Math.min(100, Math.round((subtotal / 1500) * 100));
-            document.getElementById('cartProgressFill').style.width = `${pct}%`;
-
-            if (subtotal >= 1500) {
-                document.getElementById('cartProgressText').innerHTML = `<span style="color:var(--success); font-weight:900;">🎉 مبروك! تخطى طلبك 1500 ج.م واستحققت لفتين هدية أو منتج مجاني من صندوق الهدايا!</span>`;
-            } else {
-                document.getElementById('cartProgressText').innerHTML = `أضف منتجات بقيمة <strong style="color:var(--gold);">${1500 - subtotal} ج.م</strong> أخرى لتحصل على لفتين هدية أو منتج مجاني!`;
-            }
-
-            if (cart.length === 0) {
-                container.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:30px 0; font-size:0.85rem;">حقيبة التسوق فارغة</div>`;
-                document.getElementById('cartTotalDisplay').textContent = '0 ج.م';
-                return;
-            }
-
-            container.innerHTML = cart.map(item => `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:8px; border-radius:10px; margin-bottom:8px;">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <img src="${item.img}" style="width:42px; height:42px; border-radius:6px; object-fit:cover;">
-                        <div><div style="font-size:0.8rem; font-weight:800;">${item.title}</div><div style="font-size:0.75rem; color:var(--gold);">${item.price} ج.م</div></div>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:6px;">
-                        <button class="mini-circle-btn" onclick="changeCartQty(${item.id}, -1)">-</button>
-                        <strong style="font-size:0.82rem;">${item.qty}</strong>
-                        <button class="mini-circle-btn" onclick="changeCartQty(${item.id}, 1)">+</button>
-                    </div>
-                </div>
-            `).join('');
-
-            let netProducts = subtotal - (activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0);
-            document.getElementById('cartTotalDisplay').textContent = `${netProducts} ج.م`;
-        }
-
-        function applyCouponCode() {
-            const codeVal = document.getElementById('couponInput').value.trim().toUpperCase();
-            if (!codeVal) return;
-            const found = wheelCodesLog.find(c => c.code === codeVal && !c.used && c.expires > Date.now());
-            if (found) {
-                activeCoupon = found;
-                renderCartInsideDrawer();
-                showCustomModal("✅ تم تفعيل الخصم", `تم تطبيق كود الخصم (${found.code}) بنسبة ${found.pct}%!`, "alert");
-            } else {
-                showCustomModal("⚠️ كود غير صالح", "الكود غير صحيح أو انتهت صلاحيته اليومية!", "alert");
-            }
-        }
-
-        /* --- 11. نافذة الدفع الذكية (الـ 27 محافظة بالترتيب + دفع 50% أو 75% + الشحن كاملاً) --- */
-        let lastOrderTimestamp = 0;
-
         function openCheckoutForm() {
-            if (cart.length === 0) return;
+            if (cart.length === 0) { showCustomModal("تنبيه", "السلة فارغة!", "alert"); return; }
             toggleCartDrawer(false);
 
-            const savedClient = JSON.parse(localStorage.getItem('rehab_saved_client')) || { name: '', phone: '', address: '', gov: EGYPT_27_GOVS[0] };
-            const subtotal = getCartSubtotal();
-            const giftProducts = products.filter(p => p.isGift);
-
-            let giftRewardHTML = '';
-            if (subtotal >= 1500) {
-                const giftOpts = giftProducts.map(gp => `<option value="هدية مجانية: ${gp.title}">🎁 منتج هدية من الصندوق: ${gp.title}</option>`).join('');
-                giftRewardHTML = `
-                    <div style="background:rgba(16,185,129,0.12); border:1px solid var(--success); padding:9px; border-radius:8px; margin-bottom:10px; text-align:right;">
-                        <label style="font-size:0.76rem; color:var(--success); font-weight:900; display:block; margin-bottom:4px;">🎉 مكافأة تخطي 1500 ج.م (اختر هديتك):</label>
-                        <select id="chkGiftReward" class="custom-select" style="margin-bottom:0;">
-                            <option value="SPIN2">🎡 منح لفتين هدية إضافيتين في عجلة الحظ</option>
-                            ${giftOpts}
-                        </select>
-                    </div>
-                `;
-            }
-
-            // عرض الـ 27 محافظة بالترتيب بدون إظهار السعر بجانب الاسم كما طلبت
-            const govOptionsHTML = EGYPT_27_GOVS.map(g => `<option value="${g}" ${savedClient.gov === g ? 'selected' : ''}>${g}</option>`).join('');
-
+            const govOptions = Object.keys(storeData.shippingPrices).map(g => `<option value="${g}">${g} (شحن ${storeData.shippingPrices[g]} ج.م)</option>`).join('');
             const formHTML = `
-                <div style="text-align:right; font-size:0.8rem;">
-                    ${giftRewardHTML}
-                    <input type="text" id="chkName" class="custom-modal-input" placeholder="الاسم الثلاثي بالكامل" value="${savedClient.name}">
-                    <input type="tel" id="chkPhone" class="custom-modal-input" placeholder="رقم الموبايل المصري (11 رقم يبدأ بـ 01)" value="${savedClient.phone}">
-                    
-                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800;">اختر المحافظة (الـ 27 محافظة بالترتيب):</label>
-                    <select id="chkGov" class="custom-select" onchange="recalcSmartPaymentBreakdown()">
-                        ${govOptionsHTML}
-                    </select>
-                    <input type="text" id="chkAddress" class="custom-modal-input" placeholder="العنوان بالتفصيل (المركز/المنطقة، الشارع، علامة مميزة)" value="${savedClient.address}">
-
-                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800;">اختر وسيلة التحويل النقدي:</label>
-                    <select id="chkPayAccount" class="custom-select" onchange="updateDisplayedAccountNumber()">
-                        <option value="فودافون كاش / محفظة كاش">📲 محفظة كاش (فودافون كاش)</option>
-                        <option value="إنستا باي InstaPay">🏦 إنستا باي (InstaPay)</option>
-                        <option value="حساب بنكي">💳 تحويل لحساب بنكي</option>
-                    </select>
-
-                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800;">اختر نسبة الدفع المقدم (العربون + الشحن كاملاً):</label>
-                    <select id="chkDepositRatio" class="custom-select" onchange="recalcSmartPaymentBreakdown()">
-                        <option value="0.5">دفع نصف ثمن المنتجات (50%) + الشحن كاملاً (والنصف الباقي عند الاستلام)</option>
-                        <option value="0.75">دفع ثلاثة أرباع المنتجات (75%) + الشحن كاملاً (والربع الباقي عند الاستلام)</option>
-                        <option value="1">دفع إجمالي الفاتورة بالكامل (100%) + الشحن كاملاً الآن</option>
-                    </select>
-
-                    <!-- الحاسبة الذكية الفورية للعميل -->
-                    <div id="smartCalcSummaryBox" style="background:var(--bg-input); border:1px solid var(--gold); border-radius:10px; padding:10px; margin-bottom:10px; font-size:0.76rem;"></div>
-
-                    <div style="background:rgba(212,175,55,0.08); padding:10px; border-radius:8px; border:1px dashed var(--gold);">
-                        <div id="accountTargetDisplay" style="font-size:0.78rem; color:var(--gold); font-weight:900; margin-bottom:6px;"></div>
-                        <label style="font-size:0.73rem; display:block; margin-bottom:5px;">📸 أرفق صورة (إسكرين شوت) التحويل لإصدار فاتورتك فوراً:</label>
-                        <input type="file" id="chkTransferImg" accept="image/*" class="custom-modal-input" style="margin-bottom:0;">
-                    </div>
+                <input type="text" id="chkName" class="custom-modal-input" placeholder="الاسم الثلاثي">
+                <input type="tel" id="chkPhone" class="custom-modal-input" placeholder="رقم الموبايل (11 رقم يبدأ بـ 01)">
+                <label style="font-size:0.75rem; color:var(--gold);">المحافظة:</label>
+                <select id="chkGov" class="custom-select" onchange="updateCheckoutTotal()">${govOptions}</select>
+                <input type="text" id="chkAddress" class="custom-modal-input" placeholder="العنوان بالتفصيل">
+                
+                <label style="font-size:0.75rem; color:var(--gold);">طريقة الدفع (مقدم الشحن كامل + نصف المنتجات أو كلها):</label>
+                <select id="chkPayMethod" class="custom-select">
+                    <option value="إنستا باي">InstaPay (حساب: ${storeData.instaPay})</option>
+                    <option value="فودافون كاش">فودافون كاش (رقم: ${storeData.vodafone})</option>
+                    <option value="حساب بنكي">حساب بنكي (رقم: ${storeData.bankAcc})</option>
+                </select>
+                <div style="font-size:0.78rem; color:var(--success); background:var(--bg-input); padding:8px; border-radius:8px; margin-top:6px;" id="paymentNoticeBox">
+                    سيتم دفع قيمة الشحن كاملة مع نصف المنتجات مقدماً، والباقي عند الاستلام.
                 </div>
             `;
-
-            showCustomModal("👑 إتمام الطلب والحاسبة الذكية", "", "html", (confirmed) => {
-                if (confirmed) submitFinalOrder();
+            showCustomModal("👑 إتمام الطلب الذكي", "أدخل بياناتك لإصدار الفاتورة المعتمدة:", "html", (conf) => {
+                if (conf) processOrderSubmission();
             }, "", formHTML);
-
-            setTimeout(() => {
-                updateDisplayedAccountNumber();
-                recalcSmartPaymentBreakdown();
-            }, 60);
         }
 
-        function updateDisplayedAccountNumber() {
-            const method = document.getElementById('chkPayAccount')?.value;
-            const targetEl = document.getElementById('accountTargetDisplay');
-            if (!targetEl) return;
-            if (method.includes('إنستا')) {
-                targetEl.innerHTML = `🏦 حوّل الآن عبر إنستا باي (InstaPay) على:<br><span style="color:#FFF; font-size:0.9rem;">${storeData.instapay}</span>`;
-            } else if (method.includes('بنكي')) {
-                targetEl.innerHTML = `💳 حوّل الآن على الحساب البنكي:<br><span style="color:#FFF; font-size:0.85rem;">${storeData.bankAcc}</span>`;
-            } else {
-                targetEl.innerHTML = `📲 حوّل الآن على رقم محفظة الكاش:<br><span style="color:#FFF; font-size:0.9rem;">${storeData.cashNum}</span>`;
-            }
-        }
-
-        function recalcSmartPaymentBreakdown() {
-            const gov = document.getElementById('chkGov')?.value;
-            const ratio = parseFloat(document.getElementById('chkDepositRatio')?.value || '0.5');
-            const box = document.getElementById('smartCalcSummaryBox');
-            if (!box || !gov) return;
-
-            const subtotal = getCartSubtotal();
-            const discountVal = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
-            const netProducts = subtotal - discountVal;
-            const shippingCost = Number(storeData.govRates[gov] || 65);
-
-            // يدفع العميل (50% أو 75% أو 100% من المنتجات) + الشحن كاملاً 100% لأنه خارج حساب المنتجات
-            const productsDeposit = Math.round(netProducts * ratio);
-            const requiredNow = productsDeposit + shippingCost;
-            const remainingOnDelivery = netProducts - productsDeposit;
-
-            box.innerHTML = `
-                <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>صافي المنتجات:</span><strong>${netProducts} ج.م</strong></div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>شحن (${gov}) يُدفع كاملاً:</span><strong>${shippingCost} ج.م</strong></div>
-                <hr style="border-color:var(--border-color); margin:5px 0;">
-                <div style="display:flex; justify-content:space-between; color:var(--success); font-weight:900; font-size:0.84rem;">
-                    <span>✅ المطلوب تحويله الآن (شاملاً الشحن):</span><span>${requiredNow} ج.م</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; color:var(--gold); font-weight:900; font-size:0.82rem; margin-top:3px;">
-                    <span>💵 المتبقي للدفع عند الاستلام:</span><span>${remainingOnDelivery} ج.م</span>
-                </div>
-            `;
-        }
-
-        function submitFinalOrder() {
-            if (Date.now() - lastOrderTimestamp < 25000) {
-                showCustomModal("⏳ مهلاً", "تم تسجيل طلبك بالفعل!", "alert");
-                return;
-            }
-
+        function processOrderSubmission() {
             const name = document.getElementById('chkName').value.trim();
             const phone = document.getElementById('chkPhone').value.trim();
             const gov = document.getElementById('chkGov').value;
             const address = document.getElementById('chkAddress').value.trim();
-            const payAccount = document.getElementById('chkPayAccount').value;
-            const ratio = parseFloat(document.getElementById('chkDepositRatio').value || '0.5');
-            const transferInput = document.getElementById('chkTransferImg');
-            const giftChoiceEl = document.getElementById('chkGiftReward');
+            const payMethod = document.getElementById('chkPayMethod').value;
 
-            const egyptPhoneRegex = /^01[0125][0-9]{8}$/;
-            if (!name || !egyptPhoneRegex.test(phone) || !address) {
-                setTimeout(() => {
-                    showCustomModal("⚠️ بيانات غير مكتملة", "يرجى إدخال الاسم الثلاثي، ورقم موبايل مصري صحيح (11 رقم يبدأ بـ 01)، والعنوان بالتفصيل!", "alert", () => openCheckoutForm());
-                }, 100);
-                return;
-            }
+            if (!name || !phone || !address) { showCustomModal("تنبيه", "يرجى استكمال البيانات بدقة!", "alert"); return; }
 
-            if (!transferInput || !transferInput.files || transferInput.files.length === 0) {
-                setTimeout(() => {
-                    showCustomModal("⚠️ إسكرينة التحويل مطلوبة", "يرجى إرفاق صورة إسكرين التحويل للمبلغ المطلوب لتأكيد طلبك وإصدار الفاتورة!", "alert", () => openCheckoutForm());
-                }, 100);
-                return;
-            }
-
-            lastOrderTimestamp = Date.now();
-            localStorage.setItem('rehab_saved_client', JSON.stringify({ name, phone, address, gov }));
-
-            const subtotal = getCartSubtotal();
-            const discountVal = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
-            const netProducts = subtotal - discountVal;
-            const shippingCost = Number(storeData.govRates[gov] || 65);
-            const productsDeposit = Math.round(netProducts * ratio);
-            const paidNow = productsDeposit + shippingCost;
-            const remainingCOD = netProducts - productsDeposit;
+            const sub = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            const shipping = storeData.shippingPrices[gov] || 60;
+            const prepaidProducts = Math.round(sub / 2); // نصف المنتجات مقدماً
+            const totalPrepaid = prepaidProducts + shipping; // الشحن مدفوع كاملاً + نصف المنتجات
+            const remainingOnDelivery = sub - prepaidProducts; // الباقي عند الاستلام
 
             const orderId = 'RB' + Math.floor(100000 + Math.random() * 900000);
-            const dateStr = new Date().toLocaleString('ar-EG');
-
-            let rewardNote = 'لا يوجد';
-            if (subtotal >= 1500 && giftChoiceEl) {
-                if (giftChoiceEl.value === 'SPIN2') {
-                    let curBonus = parseInt(localStorage.getItem('rehab_bonus_spins') || '0');
-                    localStorage.setItem('rehab_bonus_spins', (curBonus + 2).toString());
-                    rewardNote = 'لفتين هدية إضافيتين في عجلة الحظ';
-                } else {
-                    rewardNote = giftChoiceEl.value;
-                }
-            }
-
-            const ratioLabel = ratio === 0.5 ? 'نصف المبلغ (50%)' : (ratio === 0.75 ? 'ثلاثة أرباع (75%)' : 'المبلغ كاملاً (100%)');
-
             const newOrder = {
-                id: orderId, date: dateStr, name, phone,
-                address: `${gov} — ${address}`,
-                payMethod: `${payAccount} (${ratioLabel})`,
-                items: [...cart],
-                netProducts, shipping: shippingCost, discount: discountVal,
-                paidNow, remainingCOD, total: netProducts + shippingCost,
-                reward: rewardNote, status: 'قيد المراجعة والتجهيز ⏳'
+                id: orderId, date: new Date().toLocaleString('ar-EG'), name, phone, address: `${gov} - ${address}`,
+                subtotal: sub, shipping, prepaid: totalPrepaid, remaining: remainingOnDelivery, payMethod, items: [...cart], status: 'قيد المراجعة والتجهيز'
             };
-
             ordersLog.unshift(newOrder);
-            if (activeCoupon) activeCoupon.used = true;
             cart = [];
-            activeCoupon = null;
-            saveAllToStorage();
-            updateCartBadgeAndUI();
+            saveAll();
+            updateCartBadge();
 
-            const itemsSummary = newOrder.items.map(i => `- ${i.title} (×${i.qty})`).join('\n');
-            notifyOwnerInstantly(`🛍️ أوردر جديد مؤكد #${orderId}\nالعميل: ${name}\nالهاتف: ${phone}\nالعنوان: ${newOrder.address}\nوسيلة التحويل: ${newOrder.payMethod}\n✅ المحول الآن (شاملاً الشحن): ${paidNow} ج.م\n💵 المتبقي عند الاستلام: ${remainingCOD} ج.م\nالهدية: ${rewardNote}\nالمنتجات:\n${itemsSummary}`);
-
-            displayOfficialInvoice(newOrder);
-        }
-
-        function displayOfficialInvoice(order) {
+            // عرض الفاتورة
             document.getElementById('invStoreName').textContent = storeData.name;
-            document.getElementById('invLogoImg').src = storeData.logo;
-            document.getElementById('invId').textContent = order.id;
-            document.getElementById('invDate').textContent = order.date;
-            document.getElementById('invName').textContent = order.name;
-            document.getElementById('invPhone').textContent = order.phone;
-            document.getElementById('invAddress').textContent = order.address;
-            document.getElementById('invPayMethod').textContent = order.payMethod;
-            document.getElementById('invNetProducts').textContent = `${order.netProducts} ج.م`;
-            document.getElementById('invShipping').textContent = `${order.shipping} ج.م`;
-            document.getElementById('invPaidNow').textContent = `${order.paidNow} ج.م`;
-            document.getElementById('invRemainingCOD').textContent = `${order.remainingCOD} ج.م`;
-
-            let itemsHTML = order.items.map(i => `
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <span>${i.title} (×${i.qty})</span>
-                    <strong>${i.price * i.qty} ج.م</strong>
-                </div>
-            `).join('');
-
-            if (order.reward && order.reward !== 'لا يوجد') {
-                itemsHTML += `<div style="color:#B48A1E; font-weight:800; margin-top:6px;">🎁 مكافأة +1500ج: ${order.reward}</div>`;
-            }
-
-            document.getElementById('invItemsList').innerHTML = itemsHTML;
+            document.getElementById('invId').textContent = orderId;
+            document.getElementById('invDate').textContent = newOrder.date;
+            document.getElementById('invName').textContent = name;
+            document.getElementById('invPhone').textContent = phone;
+            document.getElementById('invAddress').textContent = newOrder.address;
+            document.getElementById('invShipping').textContent = `${shipping} ج.م (مدفوع بالكامل)`;
+            document.getElementById('invPrepaid').textContent = `${totalPrepaid} ج.م (مقدم الشحن + نصف المنتجات)`;
+            document.getElementById('invRemaining').textContent = `${remainingOnDelivery} ج.م (يدفع عند الاستلام)`;
+            document.getElementById('invItemsList').innerHTML = newOrder.items.map(i => `<div style="display:flex; justify-content:space-between;"><span>${i.title} (×${i.qty})</span><strong>${i.price * i.qty} ج.م</strong></div>`).join('');
             document.getElementById('invoiceModal').style.display = 'flex';
         }
 
         function downloadInvoiceAsImage() {
-            const invoiceBox = document.getElementById('printableInvoice');
-            const btns = invoiceBox.querySelector('.no-print');
-            btns.style.display = 'none';
-            html2canvas(invoiceBox, { scale: 2, useCORS: true }).then(canvas => {
-                btns.style.display = 'flex';
-                const link = document.createElement('a');
-                link.download = `Invoice_${document.getElementById('invId').textContent}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+            html2canvas(document.getElementById('printableInvoice'), { scale: 2 }).then(canvas => {
+                const link = document.createElement('a'); link.download = 'Rehab_Invoice.png'; link.href = canvas.toDataURL(); link.click();
             });
         }
 
-        function openTrackModal() {
-            showCustomModal("🚚 تتبع حالة طلبك", "أدخل رقم هاتفك أو رقم الفاتورة (مثال: RB123456):", "prompt", (query) => {
-                if (!query) return;
-                const q = query.trim();
-                const found = ordersLog.find(o => o.id.toLowerCase() === q.toLowerCase() || o.phone === q);
-                if (found) {
-                    showCustomModal("✅ حالة طلبك", `رقم الطلب: ${found.id}\nالعميل: ${found.name}\nالمدفوع مقدماً: ${found.paidNow} ج.م\nالمتبقي عند الاستلام: ${found.remainingCOD} ج.م\n\nالحالة الحالية: [ ${found.status} ]`, "alert");
-                } else {
-                    showCustomModal("🔍 تتبع الطلب", "طلبك قيد المراجعة والتجهيز لدى الإدارة الملكية.", "alert");
-                }
-            }, "رقم الهاتف أو رقم الفاتورة");
+        /* --- تسجيل التجار (KYC + الكاميرا) --- */
+        function openMerchantRegisterModal() { document.getElementById('merchantModal').style.display = 'flex'; }
+        
+        function captureMerchantCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                const video = document.createElement('video'); video.srcObject = stream; video.play();
+                showCustomModal("📷 التقاط صورة الأمان", "انظر للكاميرا واضغط التقاط:", "html", () => {
+                    stream.getTracks().forEach(t => t.stop());
+                    document.getElementById('captureStatus').textContent = '✅ تم التقاط صورة الوجه والبطاقة والتحقق منها بنجاح!';
+                }, "", `<div style="text-align:center;"><video id="camView" autoplay style="width:100%; max-height:180px; border-radius:8px; background:#000;"></video></div>`);
+                setTimeout(() => { const vBox = document.getElementById('camView'); if(vBox) vBox.srcObject = stream; }, 300);
+            }).catch(() => { showCustomModal("تنبيه", "تعذر الوصول للكاميرا، تأكد من إعطاء الصلاحية.", "alert"); });
         }
 
-        /* --- 12. بوابة المالك السيادية (مع القفل الحصري على بصمة جهازك فقط) --- */
-        let logoTapCount = 0;
-        let logoTapTimer = null;
+        function submitMerchantApplication() {
+            const name = document.getElementById('mName').value;
+            const phone = document.getElementById('mPhone').value;
+            if (!name || !phone) { showCustomModal("تنبيه", "أدخل الاسم ورقم الهاتف!", "alert"); return; }
+            merchantRequests.push({ name, phone, details: document.getElementById('mProductTitle').value, date: new Date().toLocaleString('ar-EG') });
+            saveAll();
+            document.getElementById('merchantModal').style.display = 'none';
+            showCustomModal("✅ تم بنجاح", "تم إرسال طلبك وصور التوثيق للإدارة بنجاح، سيتم مراجعته والتواصل معك!", "alert");
+        }
 
+        /* --- بوابة المالك وحماية الجهاز الحالي --- */
+        let tapCount = 0, tapTimer = null;
         function handleLogoTap() {
-            const myFp = getMyDeviceFingerprint();
-            // إذا كان المالك قد فعّل القفل الحصري على هاتفه، فإن أي هاتف آخر يضغط 5 مرات لن يظهر له أي شيء إطلاقاً!
-            if (storeData.exclusiveDeviceFp && storeData.exclusiveDeviceFp !== myFp) {
-                return; // صمت تام وكأن اللوجو مجرد صورة عادية!
-            }
-
-            logoTapCount++;
-            clearTimeout(logoTapTimer);
-            if (logoTapCount >= 5) {
-                logoTapCount = 0;
-                showCustomModal("🔒 بوابة المالك السيادية", "أدخل كلمة مرور المالك لفتح لوحة التحكم:", "password", (enteredPin) => {
-                    if (enteredPin === storeData.adminPin) {
-                        isAdminAuthenticated = true;
-                        loadAdminDataIntoCMS();
-                        document.getElementById('adminModal').style.display = 'flex';
-                    } else if (enteredPin !== null) {
-                        showCustomModal("❌ دخول مرفوض", "كلمة المرور غير صحيحة!", "alert");
-                    }
-                }, "كلمة المرور");
-            } else {
-                logoTapTimer = setTimeout(() => { logoTapCount = 0; }, 1600);
-            }
+            tapCount++; clearTimeout(tapTimer);
+            if (tapCount >= 5) {
+                tapCount = 0;
+                if (isDeviceTrustedAdmin) {
+                    openAdminCMS();
+                } else {
+                    showCustomModal("🔒 بوابة المالك السرية", "أدخل كلمة المرور لدخول لوحة التحكم وتأكيد هذا الجهاز:", "password", (pin) => {
+                        if (pin === storeData.adminPin) {
+                            isDeviceTrustedAdmin = true;
+                            localStorage.setItem('rehab_trusted_device', 'yes');
+                            openAdminCMS();
+                        } else if(pin) {
+                            showCustomModal("خطأ", "كلمة المرور غير صحيحة!", "alert");
+                        }
+                    }, "كلمة المرور");
+                }
+            } else { tapTimer = setTimeout(() => tapCount = 0, 1500); }
         }
 
-        function closeAdminPanel() {
-            isAdminAuthenticated = false;
-            document.getElementById('adminModal').style.display = 'none';
-        }
-
-        function toggleExclusiveDeviceLock() {
-            const myFp = getMyDeviceFingerprint();
-            if (storeData.exclusiveDeviceFp === myFp) {
-                storeData.exclusiveDeviceFp = "";
-                saveAllToStorage();
-                loadAdminDataIntoCMS();
-                showCustomModal("🔓 تم فك قفل الجهاز", "يمكن الآن فتح نافذة الباسورد من الأجهزة الأخرى بـ 5 ضغطات.", "alert");
-            } else {
-                storeData.exclusiveDeviceFp = myFp;
-                saveAllToStorage();
-                loadAdminDataIntoCMS();
-                showCustomModal("🔐 تم قفل الإدارة على هاتفك هذا فقط!", "من هذه اللحظة، لو ضغط صديقك أو أي شخص في العالم 5 ضغطات على اللوجو من هاتفه، لن يظهر له مربع الباسورد نهائياً! الإدارة أصبحت حصرية لجهازك هذا فقط.", "alert");
-            }
-        }
-
-        function switchAdminTab(tabId, btn) {
-            if (!isAdminAuthenticated) return;
-            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function loadAdminDataIntoCMS() {
-            if (!isAdminAuthenticated) return;
-            const totalSales = ordersLog.reduce((sum, o) => sum + o.total, 0);
-            document.getElementById('statTotalSales').textContent = `${totalSales} ج.م`;
-            document.getElementById('statOrdersCount').textContent = ordersLog.length;
-            document.getElementById('statVendorsCount').textContent = vendorSubmissions.length;
-            document.getElementById('statCodesCount').textContent = wheelCodesLog.length;
-
-            document.getElementById('cfgStoreName').value = storeData.name;
-            document.getElementById('cfgLogoUrl').value = storeData.logo;
-            document.getElementById('cfgCashNum').value = storeData.cashNum;
-            document.getElementById('cfgInstapay').value = storeData.instapay;
+        function openAdminCMS() {
+            document.getElementById('adminModal').style.display = 'flex';
+            document.getElementById('cfgVodafone').value = storeData.vodafone;
+            document.getElementById('cfgInstaPay').value = storeData.instaPay;
             document.getElementById('cfgBankAcc').value = storeData.bankAcc;
-            document.getElementById('cfgTicker').value = storeData.ticker;
-            document.getElementById('cfgAboutStory').value = storeData.aboutStory;
-            document.getElementById('cfgAudioUrl').value = storeData.customAudioData || '';
-            document.getElementById('cfgAdminPin').value = storeData.adminPin;
-            document.getElementById('cfgCloudSyncUrl').value = storeData.cloudSyncUrl || '';
-            document.getElementById('cfgVendorCommission').value = storeData.vendorCommissionPct || 15;
-            document.getElementById('cfgFb').value = storeData.fb;
-            document.getElementById('cfgIg').value = storeData.ig;
-            document.getElementById('cfgTt').value = storeData.tt;
-            document.getElementById('cfgWa').value = storeData.wa;
-            document.getElementById('cfgTg').value = storeData.tg;
-            document.getElementById('cfgTgBotToken').value = storeData.tgBotToken || '';
-            document.getElementById('cfgTgChatId').value = storeData.tgChatId || '';
+            document.getElementById('uniStoreName').value = storeData.name;
+            document.getElementById('uniTicker').value = storeData.ticker;
+            document.getElementById('uniAbout').value = storeData.aboutStory;
 
-            // حالة قفل البصمة السيادي
-            const myFp = getMyDeviceFingerprint();
-            document.getElementById('currentDeviceFpDisplay').textContent = myFp;
-            const lockBtn = document.getElementById('btnLockDevice');
-            if (storeData.exclusiveDeviceFp === myFp) {
-                lockBtn.textContent = "✅ الإدارة مقفلة حصرياً على هاتفك هذا (اضغط لإلغاء القفل)";
-                lockBtn.style.background = "var(--success)";
-                lockBtn.style.color = "#FFF";
-            } else {
-                lockBtn.textContent = "🔒 تفعيل قفل الإدارة على جهازي هذا فقط وإخفاؤها عن العالم";
-                lockBtn.style.background = "var(--gold)";
-                lockBtn.style.color = "#000";
-            }
-
-            // جدول أسعار الـ 27 محافظة
-            const govGrid = document.getElementById('adminGovShippingGrid');
-            govGrid.innerHTML = EGYPT_27_GOVS.map(g => `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px solid var(--border-color); font-size:0.75rem;">
+            // تعبئة أسعار الشحن
+            document.getElementById('adminShippingPricesList').innerHTML = Object.keys(storeData.shippingPrices).map(g => `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; font-size:0.78rem;">
                     <span>${g}</span>
-                    <input type="number" data-gov="${g}" value="${storeData.govRates[g] || 65}" class="custom-modal-input gov-rate-inp" style="width:65px; margin-bottom:0; padding:4px; text-align:center;">
+                    <input type="number" id="ship_${g}" value="${storeData.shippingPrices[g]}" style="width:70px; padding:3px; background:var(--bg-input); border:1px solid var(--border-color); color:var(--text-main); border-radius:4px; text-align:center;">
                 </div>
             `).join('');
 
-            // قائمة المنتجات
-            document.getElementById('adminProductsList').innerHTML = products.map(p => `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:8px 10px; border-radius:8px; margin-bottom:6px; font-size:0.8rem;">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <img src="${p.img}" style="width:36px; height:36px; border-radius:6px; object-fit:cover;">
-                        <span><strong>${p.title}</strong> — ${p.price} ج.م ${p.isVendor ? '🤝(تاجر)' : ''}</span>
-                    </div>
-                    <div style="display:flex; gap:5px;">
-                        <button class="modal-btn cancel" style="color:var(--gold); border-color:var(--gold); padding:4px 8px;" onclick="adminEditProduct(${p.id})">تعديل</button>
-                        <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger); padding:4px 8px;" onclick="adminDeleteProduct(${p.id})">حذف نهائي</button>
-                    </div>
-                </div>
-            `).join('');
-
-            // قائمة طلبات توثيق التجار (KYC)
-            const vList = document.getElementById('adminVendorSubmissionsList');
-            vList.innerHTML = vendorSubmissions.length === 0 ? '<p style="color:var(--text-muted); font-size:0.8rem;">لا توجد طلبات توثيق تجار أو منتجات عملاء حالياً.</p>' : vendorSubmissions.map(v => `
-                <div style="background:var(--bg-input); border:1px solid var(--gold); border-radius:10px; padding:10px; margin-bottom:10px; font-size:0.78rem;">
-                    <div style="display:flex; justify-content:space-between; flex-wrap:wrap;">
-                        <strong>👤 البائع: ${v.name} (${v.age} سنة) | 📞 الرقم السري للإدارة: ${v.phone}</strong>
-                        <span style="color:var(--gold);">${v.status}</span>
-                    </div>
-                    <div style="color:var(--text-muted); margin:4px 0;">📍 العنوان: ${v.address}</div>
-                    <div style="margin:4px 0;">📦 المنتج: <strong>${v.prodTitle}</strong> (${v.prodCond}) — السعر: <strong>${v.prodPrice} ج.م</strong> | عمولتك: <strong style="color:var(--success);">${v.commissionAmt} ج.م</strong> | صافي للبائع: ${v.netToSeller} ج.م</div>
-                    <div style="display:flex; gap:8px; margin:8px 0; overflow-x:auto;">
-                        <div><div style="font-size:0.68rem;">وجه البطاقة:</div><img src="${v.files.idFront}" style="width:90px; height:60px; object-fit:cover; border-radius:6px; border:1px solid var(--gold);"></div>
-                        <div><div style="font-size:0.68rem;">ظهر البطاقة:</div><img src="${v.files.idBack}" style="width:90px; height:60px; object-fit:cover; border-radius:6px; border:1px solid var(--gold);"></div>
-                        <div><div style="font-size:0.68rem;">سيلفي الوجه:</div><img src="${v.files.faceSelfie}" style="width:65px; height:60px; object-fit:cover; border-radius:6px; border:1px solid var(--gold);"></div>
-                        ${v.files.prodImg ? `<div><div style="font-size:0.68rem;">صورة المنتج:</div><img src="${v.files.prodImg}" style="width:65px; height:60px; object-fit:cover; border-radius:6px;"></div>` : ''}
-                    </div>
-                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                        <button class="modal-btn confirm" style="padding:5px 10px;" onclick="approveVendorProduct('${v.id}')">✅ موافقة ونشر باسم المتجر</button>
-                        <button class="modal-btn cancel" style="padding:5px 10px; color:var(--gold); border-color:var(--gold);" onclick="downloadVendorKYCFile('${v.id}')">📥 تحميل ملف التوثيق والبطاقة</button>
-                        <button class="modal-btn cancel" style="padding:5px 10px; color:var(--danger); border-color:var(--danger);" onclick="deleteVendorKYC('${v.id}')">حذف</button>
-                    </div>
-                </div>
-            `).join('');
-
-            // سجل الطلبات
-            document.getElementById('adminOrdersLog').innerHTML = ordersLog.length === 0 ? '<p style="color:var(--text-muted);">لا توجد طلبات بعد.</p>' : ordersLog.map(o => `
-                <div style="background:var(--bg-input); padding:10px; border-radius:8px; margin-bottom:8px; border-right:3px solid var(--gold);">
-                    <div><strong>#${o.id}</strong> — ${o.name} (${o.phone})</div>
-                    <div style="color:var(--success); font-weight:800;">✅ محول مقدماً (شاملاً الشحن): ${o.paidNow} ج.م | 💵 متبقي عند الاستلام: ${o.remainingCOD} ج.م</div>
-                    <div style="color:var(--text-muted); font-size:0.72rem;">${o.address} | ${o.payMethod}</div>
-                    <div style="margin-top:6px; display:flex; align-items:center; gap:6px;">
-                        <span>تحديث الحالة للعميل:</span>
-                        <select class="custom-select" style="margin-bottom:0; padding:4px 8px; width:auto;" onchange="updateOrderStatus('${o.id}', this.value)">
-                            <option value="قيد المراجعة والتجهيز ⏳" ${o.status.includes('المراجعة') ? 'selected' : ''}>قيد المراجعة والتجهيز ⏳</option>
-                            <option value="تم التجهيز وخرج للشحن 🚚" ${o.status.includes('خرج') ? 'selected' : ''}>تم التجهيز وخرج للشحن 🚚</option>
-                            <option value="تم التسليم بنجاح ✅" ${o.status.includes('التسليم') ? 'selected' : ''}>تم التسليم بنجاح ✅</option>
-                        </select>
-                    </div>
-                </div>
-            `).join('');
-
-            // قائمة صندوق الهدايا
-            document.getElementById('adminGiftList').innerHTML = products.map(p => `
-                <label style="display:flex; align-items:center; gap:8px; background:var(--bg-input); padding:8px; border-radius:8px; margin-bottom:6px; font-size:0.8rem; cursor:pointer;">
-                    <input type="checkbox" ${p.isGift ? 'checked' : ''} onchange="toggleProductGiftStatus(${p.id}, this.checked)">
-                    <span>🎁 ${p.title} (${p.price} ج.م)</span>
-                </label>
-            `).join('');
+            // طلبات التجار
+            document.getElementById('adminMerchantsLog').innerHTML = merchantRequests.length === 0 ? 'لا توجد طلبات معلقة.' :
+                merchantRequests.map(m => `<div style="background:var(--bg-input); padding:8px; border-radius:6px; margin-bottom:6px;"><strong>${m.name}</strong> (${m.phone})<br>${m.details}</div>`).join('');
         }
 
-        function saveGovShippingPrices() {
-            document.querySelectorAll('.gov-rate-inp').forEach(inp => {
-                const g = inp.getAttribute('data-gov');
-                storeData.govRates[g] = Number(inp.value) || 65;
+        function closeAdminPanel() { document.getElementById('adminModal').style.display = 'none'; }
+        function switchAdminTab(secId, btn) {
+            document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
+            document.getElementById(secId).style.display = 'block';
+        }
+
+        function saveAdminGeneralSettings() {
+            storeData.vodafone = document.getElementById('cfgVodafone').value;
+            storeData.instaPay = document.getElementById('cfgInstaPay').value;
+            storeData.bankAcc = document.getElementById('cfgBankAcc').value;
+            Object.keys(storeData.shippingPrices).forEach(g => {
+                const val = document.getElementById(`ship_${g}`);
+                if (val) storeData.shippingPrices[g] = Number(val.value) || 60;
             });
-            saveAllToStorage();
-            pushDataToCloud();
+            saveAll();
+            showCustomModal("✅ تم الحفظ", "تم تحديث أرقام الحسابات وأسعار الشحن للمحافظات بنجاح!", "alert");
         }
 
-        function saveVendorCommission() {
-            storeData.vendorCommissionPct = Number(document.getElementById('cfgVendorCommission').value) || 15;
-            saveAllToStorage();
+        /* --- زر التعديل الشامل لكل حرف --- */
+        function saveUniversalEdits() {
+            storeData.name = document.getElementById('uniStoreName').value;
+            storeData.ticker = document.getElementById('uniTicker').value;
+            storeData.aboutStory = document.getElementById('uniAbout').value;
+            saveAll();
+            applyBranding();
+            showCustomModal("✅ تم التعديل الشامل", "تم تحديث وتغيير حروف ونصوص المتجر بالكامل بنجاح!", "alert");
         }
 
-        function saveCloudConfigAndPush() {
-            storeData.cloudSyncUrl = document.getElementById('cfgCloudSyncUrl').value.trim();
-            storeData.adminPin = document.getElementById('cfgAdminPin').value.trim() || "2026";
-            saveAllToStorage();
-            pushDataToCloud();
+        /* --- أداة الذكاء الاصطناعي لاقتراح الوصف --- */
+        function aiGenerateProductCopy() {
+            const title = document.getElementById('newPTitle').value;
+            const price = document.getElementById('newPPrice').value;
+            if(!title) { showCustomModal("تنبيه", "اكتب اسم المنتج أولاً ليقوم الذكاء الاصطناعي باقتراح البرومبت!", "alert"); return; }
+            document.getElementById('newPDesc').value = `✨ اكتشف روعة الفخامة مع (${title}) المصنوع خصيصاً ليناسب ذوقك الراقي بسعر حصري (${price} ج.م). اطلبه الآن قبل نفاد الكمية واحظ بإطلالة ملكية لا تُنسى! 👑`;
+            showCustomModal("✨ تم بنجاح", "قام الذكاء الاصطناعي باقتراح وصف إعلاني جذاب ومحترف للمنتج!", "alert");
         }
 
-        function applyStoreBrandingToUI() {
-            document.getElementById('pageTitle').textContent = `${storeData.name} | المتجر الملكي الموثق`;
-            document.getElementById('splashStoreName').textContent = storeData.name;
+        function adminAddNewProduct() {
+            const title = document.getElementById('newPTitle').value;
+            const price = Number(document.getElementById('newPPrice').value);
+            const img = document.getElementById('newPImg').value || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80';
+            const descr = document.getElementById('newPDesc').value;
+            if(!title || !price) { showCustomModal("تنبيه", "أدخل اسم السعر والمنتج!", "alert"); return; }
+            products.unshift({ id: Date.now(), title, price, img, descr });
+            saveAll(); renderProductsGrid();
+            showCustomModal("✅ تم", "تمت إضافة المنتج بنجاح وظهوره في المتجر فوراً!", "alert");
+        }
+
+        function applyBranding() {
+            document.getElementById('pageTitle').textContent = `${storeData.name} | المتجر الملكي`;
             document.getElementById('headerStoreName').innerHTML = storeData.name;
             document.getElementById('footerStoreName').textContent = storeData.name;
             document.getElementById('tickerTextDisplay').textContent = storeData.ticker;
-            document.getElementById('headerLogoImg').src = storeData.logo;
-            document.getElementById('faviconLink').href = storeData.logo;
-
-            document.getElementById('linkFb').href = storeData.fb;
-            document.getElementById('linkIg').href = storeData.ig;
-            document.getElementById('linkTt').href = storeData.tt;
-            document.getElementById('linkWa').href = `https://wa.me/${storeData.wa.replace(/[^0-9]/g, '')}`;
-            document.getElementById('linkTg').href = storeData.tg;
-        }
-
-        function handleLogoFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => { document.getElementById('cfgLogoUrl').value = e.target.result; };
-            reader.readAsDataURL(file);
-        }
-
-        function handleProductImgUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => { document.getElementById('newPImg').value = e.target.result; };
-            reader.readAsDataURL(file);
-        }
-
-        function saveStoreTexts() {
-            storeData.name = document.getElementById('cfgStoreName').value.trim() || storeData.name;
-            storeData.logo = document.getElementById('cfgLogoUrl').value.trim() || storeData.logo;
-            storeData.cashNum = document.getElementById('cfgCashNum').value.trim();
-            storeData.instapay = document.getElementById('cfgInstapay').value.trim();
-            storeData.bankAcc = document.getElementById('cfgBankAcc').value.trim();
-            storeData.ticker = document.getElementById('cfgTicker').value.trim();
-            storeData.aboutStory = document.getElementById('cfgAboutStory').value.trim();
-            storeData.customAudioData = document.getElementById('cfgAudioUrl').value.trim();
-            storeData.adminPin = document.getElementById('cfgAdminPin').value.trim() || "2026";
-            storeData.fb = document.getElementById('cfgFb').value.trim();
-            storeData.ig = document.getElementById('cfgIg').value.trim();
-            storeData.tt = document.getElementById('cfgTt').value.trim();
-            storeData.wa = document.getElementById('cfgWa').value.trim();
-            storeData.tg = document.getElementById('cfgTg').value.trim();
-
-            saveAllToStorage();
-            applyStoreBrandingToUI();
-            pushDataToCloud();
-        }
-
-        function adminSaveProduct() {
-            const editId = document.getElementById('editProdId').value;
-            const title = document.getElementById('newPTitle').value.trim();
-            const price = Number(document.getElementById('newPPrice').value);
-            const descr = document.getElementById('newPDesc').value.trim() || "قطعة ملكية فاخرة بجودة أصلية مضمونة.";
-            const img = document.getElementById('newPImg').value.trim() || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80";
-            const badge = document.getElementById('newPBadge').value.trim();
-            const scarcity = document.getElementById('newPScarcity').checked;
-
-            if (!title || !price) {
-                showCustomModal("تنبيه", "يرجى كتابة اسم وسعر المنتج!", "alert");
-                return;
-            }
-
-            if (editId) {
-                const idx = products.findIndex(p => String(p.id) === String(editId));
-                if (idx > -1) products[idx] = { ...products[idx], title, price, descr, img, badge, scarcity };
-                document.getElementById('editProdId').value = '';
-            } else {
-                products.unshift({ id: Date.now(), title, price, descr, img, badge, scarcity, isGift: false, isVendor: false });
-            }
-
-            document.getElementById('newPTitle').value = '';
-            document.getElementById('newPPrice').value = '';
-            document.getElementById('newPDesc').value = '';
-            document.getElementById('newPImg').value = '';
-            document.getElementById('newPBadge').value = '';
-            document.getElementById('newPScarcity').checked = false;
-
-            saveAllToStorage();
-            renderProductsGrid();
-            loadAdminDataIntoCMS();
-            pushDataToCloud();
-        }
-
-        function adminEditProduct(id) {
-            const p = products.find(x => Number(x.id) === Number(id));
-            if (!p) return;
-            document.getElementById('editProdId').value = p.id;
-            document.getElementById('newPTitle').value = p.title;
-            document.getElementById('newPPrice').value = p.price;
-            document.getElementById('newPDesc').value = p.descr;
-            document.getElementById('newPImg').value = p.img;
-            document.getElementById('newPBadge').value = p.badge || '';
-            document.getElementById('newPScarcity').checked = !!p.scarcity;
-        }
-
-        function adminDeleteProduct(id) {
-            products = products.filter(p => Number(p.id) !== Number(id));
-            cart = cart.filter(c => Number(c.id) !== Number(id));
-            saveAllToStorage();
-            renderProductsGrid();
-            updateCartBadgeAndUI();
-            loadAdminDataIntoCMS();
-            pushDataToCloud();
-        }
-
-        function toggleProductGiftStatus(id, isChecked) {
-            const p = products.find(x => Number(x.id) === Number(id));
-            if (p) { p.isGift = isChecked; saveAllToStorage(); }
-        }
-
-        function updateOrderStatus(orderId, newStatus) {
-            const ord = ordersLog.find(o => o.id === orderId);
-            if (ord) { ord.status = newStatus; saveAllToStorage(); }
-        }
-
-        function saveTelegramConfig() {
-            storeData.tgBotToken = document.getElementById('cfgTgBotToken').value.trim();
-            storeData.tgChatId = document.getElementById('cfgTgChatId').value.trim();
-            saveAllToStorage();
-            notifyOwnerInstantly("✅ تم ربط المتجر ببوت التليجرام بنجاح! يمكنك أيضاً إرسال صورة منتج للبوت بصيغة (الاسم | السعر | الوصف) لينتشر تلقائياً في المتجر.");
-            showCustomModal("🤖 تم ربط البوت", "تم حفظ إعدادات تليجرام وإرسال رسالة اختبار فورية لك!", "alert");
-        }
-
-        function toggleEmergencyLockAdmin() {
-            storeData.emergencyOff = !storeData.emergencyOff;
-            saveAllToStorage();
-            document.getElementById('emergency-lock').style.display = storeData.emergencyOff ? 'flex' : 'none';
-            pushDataToCloud();
-        }
-
-        function exportStoreBackupJSON() {
-            const backupObj = { storeData, products, ordersLog, wheelCodesLog, vendorSubmissions };
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupObj, null, 2));
-            const dlAnchor = document.createElement('a');
-            dlAnchor.setAttribute("href", dataStr);
-            dlAnchor.setAttribute("download", `${storeData.name}_Full_Backup.json`);
-            document.body.appendChild(dlAnchor);
-            dlAnchor.click();
-            dlAnchor.remove();
-        }
-
-        function importStoreBackupJSON(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    if (data.storeData) storeData = data.storeData;
-                    if (data.products) products = data.products;
-                    if (data.ordersLog) ordersLog = data.ordersLog;
-                    if (data.wheelCodesLog) wheelCodesLog = data.wheelCodesLog;
-                    if (data.vendorSubmissions) vendorSubmissions = data.vendorSubmissions;
-                    saveAllToStorage();
-                    applyStoreBrandingToUI();
-                    renderProductsGrid();
-                    loadAdminDataIntoCMS();
-                    showCustomModal("✅ تم الاسترجاع", "تم استعادة النسخة الاحتياطية للمتجر بالكامل!", "alert");
-                } catch (err) {
-                    showCustomModal("خطأ", "ملف غير صالح!", "alert");
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function changeStoreLanguage(langCode) {
-            const selectEl = document.querySelector('.goog-te-combo');
-            if (selectEl) {
-                selectEl.value = langCode;
-                selectEl.dispatchEvent(new Event('change'));
-            }
-            toggleMenuDrawer(false);
-        }
-
-        function showAboutUsModal() {
-            toggleMenuDrawer(false);
-            showCustomModal(`💎 قصتنا — ${storeData.name}`, storeData.aboutStory, "alert");
-        }
-
-        function showContactUsModal() {
-            toggleMenuDrawer(false);
-            showCustomModal("📞 الحسابات الرسمية وخدمة العملاء", `📲 محفظة الكاش: ${storeData.cashNum}\n🏦 إنستا باي: ${storeData.instapay}\n💳 الحساب البنكي: ${storeData.bankAcc}`, "alert");
         }
 
         function toggleThemeMode() {
@@ -2134,94 +746,21 @@
             document.getElementById('themeIcon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
 
-        function triggerLiveSalesPopup() {
-            if (!storeData.salesPopupActive || products.length === 0) return;
-            const cities = storeData.popupCities.split(',').map(c => c.trim()).filter(Boolean);
-            const randomCity = cities[Math.floor(Math.random() * cities.length)] || 'القاهرة';
-            const randomProd = products[Math.floor(Math.random() * products.length)];
-            const genderTitle = Math.random() > 0.3 ? 'عميلة من' : 'عميل من';
-
-            document.getElementById('popupProdImg').src = randomProd.img;
-            document.getElementById('popupSalesText').textContent = `${genderTitle} ${randomCity} قام/ت بشراء (${randomProd.title}) منذ قليل`;
-            const popup = document.getElementById('liveSalesPopup');
-            popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 6000);
-        }
-        setTimeout(triggerLiveSalesPopup, 20000);
-        setInterval(triggerLiveSalesPopup, 600000);
-
-        /* --- 13. PWA ذاتي التحديث الفوري (يرسخ التحديثات فوراً بدون تعليق الكاش القديم) --- */
-        let deferredPWAPrompt = null;
-        function setupDynamicPWA() {
-            const manifestObj = {
-                name: storeData.name,
-                short_name: storeData.name,
-                start_url: window.location.href,
-                display: "standalone",
-                background_color: "#0B0F19",
-                theme_color: "#D4AF37",
-                icons: [{ src: storeData.logo, sizes: "512x512", type: "image/png" }]
-            };
-            const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/json' });
-            const linkEl = document.createElement('link');
-            linkEl.rel = 'manifest';
-            linkEl.href = URL.createObjectURL(manifestBlob);
-            document.head.appendChild(linkEl);
-
-            if ('serviceWorker' in navigator) {
-                // Network-First Strategy لضمان وصول أي تعديل فوراً للتطبيق المثبت
-                const swCode = `
-                    self.addEventListener('install', e => self.skipWaiting());
-                    self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-                    self.addEventListener('fetch', e => {
-                        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-                    });
-                `;
-                const swBlob = new Blob([swCode], { type: 'application/javascript' });
-                navigator.serviceWorker.register(URL.createObjectURL(swBlob)).then(reg => reg.update()).catch(() => {});
-            }
+        function showAboutUsModal() { toggleMenuDrawer(false); showCustomModal("💎 قصتنا", storeData.aboutStory, "alert"); }
+        function showContactUsModal() { toggleMenuDrawer(false); showCustomModal("📞 اتصل بنا", `خدمة العملاء واتساب وفودافون كاش:\n${storeData.vodafone}`, "alert"); }
+        function openTrackModal() {
+            showCustomModal("🚚 تتبع طلبك", "أدخل رقم الطلب:", "prompt", (res) => {
+                if(res) {
+                    const found = ordersLog.find(o => o.id.toLowerCase() === res.trim().toLowerCase());
+                    showCustomModal("حالة الطلب", found ? `حالة طلبك (${found.id}): [ ${found.status} ]` : "لم يتم العثور على الطلب.", "alert");
+                }
+            }, "رقم الطلب (مثال: RB1234)");
         }
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPWAPrompt = e;
-            document.getElementById('pwaInstallBanner').style.display = 'flex';
-        });
-
-        function installPWAApp() {
-            if (!deferredPWAPrompt) return;
-            deferredPWAPrompt.prompt();
-            deferredPWAPrompt.userChoice.then(() => {
-                document.getElementById('pwaInstallBanner').style.display = 'none';
-                deferredPWAPrompt = null;
-            });
-        }
-
-        // حماية إضافية ضد فتح سورس الكود (F12 / Ctrl+U)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
-                e.preventDefault();
-            }
-        });
-
-        /* --- 14. تشغيل المتجر والمزامنة التلقائية عند الفتح --- */
-        window.addEventListener('DOMContentLoaded', async () => {
-            setTimeout(() => {
-                document.getElementById('splash-screen').classList.add('hidden');
-            }, 1600);
-
-            await pullDataFromCloud();
-            fetchNewPostsFromTelegramBot(false);
-
-            if (storeData.emergencyOff) {
-                document.getElementById('emergency-lock').style.display = 'flex';
-            }
-
-            applyStoreBrandingToUI();
+        window.addEventListener('DOMContentLoaded', () => {
+            applyBranding();
             renderProductsGrid();
-            updateCartBadgeAndUI();
-            document.getElementById('wishBadgeCount').textContent = wishlist.length;
-            setupDynamicPWA();
+            updateCartBadge();
         });
     </script>
 </body>
