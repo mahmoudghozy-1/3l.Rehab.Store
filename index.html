@@ -48,6 +48,11 @@
             padding: 0;
             font-family: 'Cairo', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            user-select: none; /* حماية النصوص من النسخ العشوائي */
+        }
+
+        input, textarea, select {
+            user-select: text !important;
         }
 
         html, body {
@@ -60,7 +65,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* إخفاء شريط ترجمة جوجل العلوي المزعج */
+        /* إخفاء شريط ترجمة جوجل العلوي */
         .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
         body { top: 0px !important; }
         #google_translate_element { display: none; }
@@ -123,7 +128,6 @@
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            user-select: none;
         }
         .store-logo-img {
             width: 42px;
@@ -132,6 +136,7 @@
             object-fit: cover;
             border: 2px solid var(--gold);
             background: #000;
+            pointer-events: none;
         }
         .brand-logo { font-size: 1.15rem; font-weight: 900; color: var(--text-main); letter-spacing: 0.5px; }
         .brand-logo span { color: var(--gold); }
@@ -399,6 +404,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
+            pointer-events: none;
         }
         .p-img-wrap:hover .p-img { transform: scale(1.15); }
 
@@ -428,7 +434,7 @@
             background: var(--bg-card);
             border-top: 2px solid rgba(212,175,55,0.3);
             margin-top: 40px;
-            padding: 30px 16px 20px;
+            padding: 30px 16px 25px;
             text-align: center;
         }
         .follow-us-title {
@@ -459,12 +465,32 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         .social-btn:hover { transform: translateY(-4px) scale(1.08); }
-        /* الألوان الأصلية الحقيقية للمنصات الـ 5 */
         .soc-fb { background: #1877F2; }
         .soc-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
         .soc-tt { background: #000000; border: 1px solid #25F4EE; box-shadow: 2px 2px 0px #FE2C55; }
         .soc-wa { background: #25D366; }
         .soc-tg { background: #229ED9; }
+
+        /* زر الواتساب العائم لخدمة العملاء */
+        .floating-wa-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 52px;
+            height: 52px;
+            background: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            z-index: 7500;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .floating-wa-btn:hover { transform: scale(1.1); }
 
         /* القائمة الجانبية وعربة التسوق المنزلقة */
         .side-drawer-overlay {
@@ -479,7 +505,7 @@
             position: fixed;
             top: 0;
             bottom: 0;
-            width: 320px;
+            width: 330px;
             max-width: 88vw;
             background: var(--bg-card);
             z-index: 9001;
@@ -537,7 +563,7 @@
         }
         .live-sales-popup.show { transform: translateY(0); }
 
-        /* النوافذ المنبثقة الملكية المخصصة (بديل الـ Alert نهائياً) */
+        /* النوافذ المنبثقة الملكية المخصصة */
         .custom-modal-overlay {
             display: none;
             position: fixed;
@@ -554,8 +580,8 @@
             border: 2px solid var(--gold);
             border-radius: var(--radius);
             width: 100%;
-            max-width: 440px;
-            max-height: 90vh;
+            max-width: 460px;
+            max-height: 92vh;
             overflow-y: auto;
             padding: 20px;
             text-align: center;
@@ -567,17 +593,17 @@
             100% { transform: scale(1); opacity: 1; }
         }
         .custom-modal-title { font-size: 1.1rem; font-weight: 900; color: var(--gold); margin-bottom: 10px; }
-        .custom-modal-text { font-size: 0.86rem; color: var(--text-main); margin-bottom: 15px; white-space: pre-line; }
+        .custom-modal-text { font-size: 0.85rem; color: var(--text-main); margin-bottom: 12px; white-space: pre-line; }
         .custom-modal-input, .custom-select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 9px 12px;
             background: var(--bg-input);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: var(--text-main);
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             outline: none;
-            margin-bottom: 10px;
+            margin-bottom: 9px;
             text-align: right;
         }
         .custom-modal-input:focus, .custom-select:focus { border-color: var(--gold); }
@@ -594,6 +620,35 @@
         .modal-btn.confirm { background: var(--gold); color: #000; }
         .modal-btn.cancel { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
 
+        /* صندوق الحساب الذكي للعربون والشحن في الدفع */
+        .smart-calc-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.14), rgba(16,185,129,0.08));
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            font-size: 0.78rem;
+            text-align: right;
+        }
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .copy-acc-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            border: 1px solid var(--gold);
+            padding: 7px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.82rem;
+            color: var(--gold);
+            font-weight: 900;
+        }
+
         /* نافذة الفاتورة الإلكترونية المعتمدة */
         .invoice-modal {
             display: none;
@@ -609,7 +664,7 @@
             background: #FFFFFF;
             color: #111827;
             width: 100%;
-            max-width: 500px;
+            max-width: 510px;
             max-height: 92vh;
             overflow-y: auto;
             border-radius: 12px;
@@ -633,13 +688,13 @@
             border: 2px solid var(--gold);
             border-radius: var(--radius);
             width: 100%;
-            max-width: 880px;
+            max-width: 920px;
             max-height: 92vh;
             overflow-y: auto;
             padding: 18px;
         }
         .admin-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); }
-        .admin-tab-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 7px 12px; border-radius: 7px; font-size: 0.78rem; font-weight: 800; white-space: nowrap; cursor: pointer; }
+        .admin-tab-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 7px 12px; border-radius: 7px; font-size: 0.76rem; font-weight: 800; white-space: nowrap; cursor: pointer; }
         .admin-tab-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
         .admin-section { display: none; }
         .admin-section.active { display: block; }
@@ -647,6 +702,19 @@
         .stat-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; text-align: center; }
         .stat-val { font-size: 1.1rem; font-weight: 900; color: var(--gold); }
         .stat-lbl { font-size: 0.7rem; color: var(--text-muted); }
+
+        .gov-shipping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px;
+            background: var(--bg-input);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+        }
 
         /* شاشة التحميل والطوارئ */
         #splash-screen {
@@ -663,7 +731,6 @@
             text-align: center; padding: 20px;
         }
 
-        /* تنسيق الطباعة للفاتورة فقط */
         @media print {
             body * { visibility: hidden; }
             #printableInvoice, #printableInvoice * { visibility: visible; }
@@ -676,10 +743,12 @@
 
     <!-- عنصر الترجمة الفورية المخفي -->
     <div id="google_translate_element"></div>
+    <!-- مشغل الصوت الخفي للصلاة على النبي ﷺ -->
+    <audio id="customSalawatPlayer" style="display:none;"></audio>
 
     <!-- الشريط الإعلاني العلوي المتحرك -->
     <div class="announcement-bar" id="topAnnouncementBar">
-        <div class="announcement-text" id="tickerTextDisplay">✨ أهلاً بكم في المتجر الملكي — جودة استثنائية وتوصيل سريع لكافة المحافظات ✨</div>
+        <div class="announcement-text" id="tickerTextDisplay">✨ أهلاً بكم في المتجر الملكي — جودة استثنائية وتوصيل سريع لكافة المحافظات الـ 27 ✨</div>
         <button class="close-announcement" onclick="document.getElementById('topAnnouncementBar').style.display='none'">✕</button>
     </div>
 
@@ -713,7 +782,7 @@
 
     <!-- الهيدر الملكي -->
     <header>
-        <div class="brand-area" onclick="handleLogoTap()" title="اضغط 5 مرات لدخول لوحة المالك">
+        <div class="brand-area" onclick="handleLogoTap()">
             <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="headerLogoImg" class="store-logo-img" alt="Logo">
             <div class="brand-logo" id="headerStoreName">3λ.Rehab<span>.Store</span></div>
         </div>
@@ -742,13 +811,13 @@
     </div>
 
     <div class="container">
-        <!-- زر تثبيت التطبيق PWA يظهر تلقائياً عند التوفر -->
+        <!-- زر تثبيت التطبيق PWA يظهر تلقائياً -->
         <div id="pwaInstallBanner" style="display:none; background:var(--bg-card); border:1px solid var(--gold); border-radius:12px; padding:10px 14px; margin-bottom:14px; justify-content:space-between; align-items:center;">
             <div style="font-size:0.8rem; font-weight:700;"><i class="fa-solid fa-mobile-screen-button" style="color:var(--gold);"></i> ثبّت تطبيق المتجر على هاتفك لوصول أسرع!</div>
             <button class="modal-btn confirm" style="padding:5px 12px; font-size:0.75rem;" onclick="installPWAApp()">تثبيت الآن</button>
         </div>
 
-        <!-- عجلة الحظ الكلاسيكية الصامتة (بدون كشف نسب الخصم نهائياً) -->
+        <!-- عجلة الحظ الكلاسيكية الصامتة -->
         <div class="wheel-section">
             <div class="wheel-title">🎡 لفتك اليومية</div>
             <div class="wheel-visual-wrap">
@@ -766,7 +835,10 @@
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- الفوتر وأيقونات "تابعنا" الـ 5 الأصلية بألوانها الحقيقية -->
+    <!-- زر واتساب العائم لخدمة العملاء السريعة -->
+    <a href="#" id="floatingWaLink" target="_blank" class="floating-wa-btn" title="تحدث معنا عبر واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <!-- الفوتر وأيقونات "تابعنا" الـ 5 الأصلية -->
     <footer id="footerFollowSection">
         <div class="follow-us-title">✨ تابعنا على منصاتنا الرسمية ✨</div>
         <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:16px;">كن أول من يعلم بأحدث التشكيلات الملكية والعروض اليومية الحصرية</p>
@@ -778,7 +850,7 @@
             <a href="#" id="linkTg" target="_blank" class="social-btn soc-tg" title="تليجرام"><i class="fa-brands fa-telegram"></i></a>
         </div>
         <div style="font-size:0.75rem; color:var(--text-muted); border-top:1px solid var(--border-color); padding-top:12px;">
-            جميع الحقوق محفوظة © <span id="footerStoreName">3λ.Rehab.Store</span> 2026
+            جميع الحقوق محفوظة ومؤمنة بالكامل © <span id="footerStoreName">3λ.Rehab.Store</span> 2026
         </div>
     </footer>
 
@@ -812,11 +884,11 @@
         </div>
 
         <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="showAboutUsModal()"><i class="fa-solid fa-gem" style="color:var(--gold); margin-left:6px;"></i> قصتنا (من نحن)</button>
-        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="showContactUsModal()"><i class="fa-solid fa-headset" style="color:var(--gold); margin-left:6px;"></i> اتصل بنا وخدمة العملاء</button>
+        <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="showContactUsModal()"><i class="fa-solid fa-headset" style="color:var(--gold); margin-left:6px;"></i> اتصل بنا وحسابات الدفع</button>
         <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:8px; color:var(--text-main);" onclick="toggleMenuDrawer(false); document.getElementById('footerFollowSection').scrollIntoView({behavior:'smooth'});"><i class="fa-solid fa-share-nodes" style="color:var(--gold); margin-left:6px;"></i> تابعنا على منصاتنا</button>
     </div>
 
-    <!-- عربة التسوق الجانبية المنزلقة + شريط تحفيز الـ 1500 جنيه -->
+    <!-- عربة التسوق الجانبية المنزلقة -->
     <div class="side-drawer-overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
     <div class="side-drawer drawer-left" id="cartDrawer">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px;">
@@ -824,7 +896,6 @@
             <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:1.2rem;" onclick="toggleCartDrawer(false)"></i>
         </div>
 
-        <!-- شريط التقدم التحفيزي للـ 1500 جنيه -->
         <div class="progress-motivation">
             <div id="cartProgressText">أضف منتجات بقيمة 1500 ج.م للحصول على هدية مجانية أو لفتين إضافيتين!</div>
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="cartProgressFill"></div></div>
@@ -838,14 +909,14 @@
                 <button class="modal-btn confirm" onclick="applyCouponCode()">تطبيق</button>
             </div>
             <div style="display:flex; justify-content:space-between; font-weight:900; font-size:0.95rem; margin-bottom:10px;">
-                <span>الإجمالي:</span>
+                <span>إجمالي المنتجات:</span>
                 <span style="color:var(--gold);" id="cartTotalDisplay">0 ج.م</span>
             </div>
-            <button class="p-btn" style="padding:11px; font-size:0.9rem;" onclick="openCheckoutForm()">إتمام الطلب في خطوة واحدة <i class="fa-solid fa-arrow-left"></i></button>
+            <button class="p-btn" style="padding:11px; font-size:0.9rem;" onclick="openCheckoutForm()">إتمام الطلب وحساب الدفعة <i class="fa-solid fa-arrow-left"></i></button>
         </div>
     </div>
 
-    <!-- إشعار المبيعات الحي (كل 10 دقائق) -->
+    <!-- إشعار المبيعات الحي -->
     <div class="live-sales-popup" id="liveSalesPopup">
         <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=100&q=80" id="popupProdImg" style="width:45px; height:45px; border-radius:8px; object-fit:cover;">
         <div style="font-size:0.75rem;">
@@ -854,15 +925,15 @@
         </div>
     </div>
 
-    <!-- نافذة الفاتورة الإلكترونية الحقيقية القابلة للحفظ كصورة والطباعة -->
+    <!-- نافذة الفاتورة الإلكترونية المعتمدة مع تفصيل المقدم والمتبقي عند الاستلام -->
     <div class="invoice-modal" id="invoiceModal">
         <div class="invoice-box" id="printableInvoice">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #D4AF37; padding-bottom:10px; margin-bottom:12px;">
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="invLogoImg" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="invLogoImg" style="width:42px; height:42px; border-radius:50%; object-fit:cover;">
                     <div>
                         <div style="font-size:1.05rem; font-weight:900; color:#000;" id="invStoreName">3λ.Rehab.Store</div>
-                        <div style="font-size:0.68rem; color:#4B5563;">فاتورة ضريبية وإلكترونية معتمدة</div>
+                        <div style="font-size:0.68rem; color:#4B5563;">فاتورة إلكترونية معتمدة وموثقة ✅</div>
                     </div>
                 </div>
                 <div style="text-align:left; font-size:0.72rem; color:#374151;">
@@ -872,34 +943,37 @@
             </div>
             <div style="font-size:0.8rem; margin-bottom:4px;">العميل: <strong id="invName"></strong> | الهاتف: <strong id="invPhone"></strong></div>
             <div style="font-size:0.8rem; margin-bottom:4px;">المحافظة والعنوان: <strong id="invAddress"></strong></div>
-            <div style="font-size:0.8rem; margin-bottom:10px;">طريقة الدفع: <strong id="invPayMethod"></strong></div>
+            <div style="font-size:0.8rem; margin-bottom:10px;">وسيلة الدفع ونظام السداد: <strong id="invPayMethod"></strong></div>
             <hr style="border-color:#E5E7EB; margin-bottom:10px;">
             <div id="invItemsList" style="font-size:0.8rem; margin-bottom:10px;"></div>
             <hr style="border-color:#E5E7EB; margin-bottom:10px;">
             <div style="font-size:0.78rem; display:flex; justify-content:space-between; margin-bottom:4px;">
-                <span>قيمة الشحن:</span><span id="invShipping"></span>
+                <span>صافي قيمة المنتجات (بعد الخصم):</span><strong id="invNetProducts"></strong>
             </div>
-            <div style="font-size:0.78rem; display:flex; justify-content:space-between; margin-bottom:6px; color:#10B981;">
-                <span>الخصم المطبق:</span><span id="invDiscount"></span>
+            <div style="font-size:0.78rem; display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span>مصاريف الشحن والتوصيل (تُدفع كاملة مقدماً):</span><strong id="invShipping"></strong>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:0.95rem; font-weight:900; color:#B48A1E; background:#FEF9C3; padding:8px; border-radius:6px;">
-                <span>الإجمالي النهائي المطلوب:</span><span id="invTotal"></span>
+            <div style="font-size:0.82rem; display:flex; justify-content:space-between; margin-bottom:6px; background:#DCFCE7; color:#065F46; padding:6px 8px; border-radius:6px; font-weight:800;">
+                <span>✅ المبلغ المدفوع مقدماً (شاملاً الشحن):</span><span id="invPaidNow"></span>
             </div>
-            <div style="text-align:center; font-size:0.7rem; color:#6B7280; margin-top:10px;">شكراً لثقتكم الغالية بنا — احتفظ بهذه الفاتورة لتتبع طلبك</div>
+            <div style="display:flex; justify-content:space-between; font-size:0.92rem; font-weight:900; color:#991B1B; background:#FEE2E2; padding:8px; border-radius:6px;">
+                <span>📦 المتبقي للدفع عند الاستلام للمندوب:</span><span id="invRemainingCOD"></span>
+            </div>
+            <div style="text-align:center; font-size:0.7rem; color:#6B7280; margin-top:10px;">شكراً لثقتكم الغالية — احتفظ بصورة الفاتورة لتسليمها للمندوب</div>
 
             <div class="no-print" style="display:flex; gap:6px; margin-top:14px; flex-wrap:wrap;">
-                <button class="modal-btn confirm" style="flex:1;" onclick="downloadInvoiceAsImage()"><i class="fa-solid fa-image"></i> حفظ كصورة على الهاتف</button>
+                <button class="modal-btn confirm" style="flex:1;" onclick="downloadInvoiceAsImage()"><i class="fa-solid fa-image"></i> حفظ الفاتورة كصورة</button>
                 <button class="modal-btn cancel" style="flex:1; color:#000; border-color:#000;" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> طباعة / PDF</button>
                 <button class="modal-btn cancel" style="width:100%; color:#EF4444; border-color:#EF4444; margin-top:4px;" onclick="document.getElementById('invoiceModal').style.display='none'">إغلاق النافذة</button>
             </div>
         </div>
     </div>
 
-    <!-- لوحة تحكم المالك الشاملة (CMS) -->
+    <!-- لوحة تحكم المالك الشاملة (Full CMS) - مخفية ومؤمنة بالكامل -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px;">
-                <h3 style="color:var(--gold); font-size:1rem;"><i class="fa-solid fa-crown"></i> لوحة تحكم المالك الشاملة (Full CMS)</h3>
+                <h3 style="color:var(--gold); font-size:1rem;"><i class="fa-solid fa-user-shield"></i> لوحة تحكم المالك المؤمنة (Full CMS)</h3>
                 <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger); padding:4px 10px;" onclick="closeAdminPanel()">إغلاق وقفل الأمان ✕</button>
             </div>
 
@@ -911,59 +985,68 @@
             </div>
 
             <div class="admin-tabs">
-                <button class="admin-tab-btn active" onclick="switchAdminTab('secTexts', this)">✏️ النصوص واللوجو</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secProducts', this)">🛍️ إدارة المنتجات</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secGifts', this)">🎁 صندوق الهدايا (+1500ج)</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secTelegram', this)">📲 ربط تليجرام وواتساب</button>
+                <button class="admin-tab-btn active" onclick="switchAdminTab('secTexts', this)">✏️ الهوية وحسابات الدفع</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secProducts', this)">🛍️ المنتجات + AI</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secShipping', this)">🚚 شحن الـ 27 محافظة</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secGifts', this)">🎁 الهدايا والصوتيات</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secTelegram', this)">🤖 بوت النشر التلقائي</button>
                 <button class="admin-tab-btn" onclick="switchAdminTab('secOrders', this)">📋 الطلبات والأكواد</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secSettings', this)">⚙️ الأمان والنسخ الاحتياطي</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secSettings', this)">⚙️ الأمان والنسخ</button>
             </div>
 
-            <!-- تبويب 1: النصوص واللوجو والروابط -->
+            <!-- تبويب 1: النصوص، اللوجو، و3 حسابات دفع مستقلة -->
             <div id="secTexts" class="admin-section active">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">تعديل الهوية واللوجو وأي كلمة في المتجر:</h4>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">1. الهوية واللوجو وباسورد المالك:</h4>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                     <div><label style="font-size:0.75rem;">اسم المتجر:</label><input type="text" id="cfgStoreName" class="custom-modal-input"></div>
                     <div><label style="font-size:0.75rem;">رفع صورة اللوجو من جهازك:</label><input type="file" accept="image/*" class="custom-modal-input" onchange="handleLogoFileUpload(event)"></div>
                 </div>
-                <label style="font-size:0.75rem;">أو رابط مباشر لصورة اللوجو:</label>
-                <input type="text" id="cfgLogoUrl" class="custom-modal-input" placeholder="https://...">
-                
-                <label style="font-size:0.75rem;">نص شريط الإعلانات العلوي المتحرك:</label>
-                <input type="text" id="cfgTicker" class="custom-modal-input">
+                <input type="text" id="cfgLogoUrl" class="custom-modal-input" placeholder="أو رابط مباشر لصورة اللوجو">
+                <input type="text" id="cfgTicker" class="custom-modal-input" placeholder="نص شريط الإعلانات العلوي المتحرك">
+                <textarea id="cfgAboutStory" class="custom-modal-input" rows="2" placeholder="قصة من نحن"></textarea>
 
-                <label style="font-size:0.75rem;">قصة "من نحن" الإقناعية:</label>
-                <textarea id="cfgAboutStory" class="custom-modal-input" rows="3"></textarea>
-
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <div><label style="font-size:0.75rem;">رقم فودافون كاش وإنستا باي:</label><input type="text" id="cfgVodafone" class="custom-modal-input"></div>
-                    <div><label style="font-size:0.75rem;">باسورد لوحة التحكم:</label><input type="text" id="cfgAdminPin" class="custom-modal-input"></div>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin:10px 0 6px;">2. أرقام وحسابات الدفع الثلاثة (تظهر للعميل عند الدفع):</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+                    <div><label style="font-size:0.72rem; color:var(--gold);">📲 رقم المحفظة (فودافون كاش):</label><input type="text" id="cfgCashNumber" class="custom-modal-input" placeholder="010xxxxxxxx"></div>
+                    <div><label style="font-size:0.72rem; color:var(--gold);">⚡ رقم / عنوان إنستا باي (InstaPay):</label><input type="text" id="cfgInstapay" class="custom-modal-input" placeholder="010xxxx أو username@instapay"></div>
+                    <div><label style="font-size:0.72rem; color:var(--gold);">🏦 رقم الحساب البنكي / IBAN:</label><input type="text" id="cfgBankAccount" class="custom-modal-input" placeholder="اسم البنك ورقم الحساب"></div>
                 </div>
 
-                <h4 style="font-size:0.82rem; color:var(--gold); margin:8px 0;">روابط منصات التواصل الـ 5 (تابعنا):</h4>
+                <h4 style="font-size:0.82rem; color:var(--gold); margin:8px 0;">3. روابط منصات التواصل الـ 5 + باسورد اللوحة:</h4>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                     <input type="text" id="cfgFb" class="custom-modal-input" placeholder="رابط فيسبوك">
                     <input type="text" id="cfgIg" class="custom-modal-input" placeholder="رابط إنستجرام">
                     <input type="text" id="cfgTt" class="custom-modal-input" placeholder="رابط تيك توك">
-                    <input type="text" id="cfgWa" class="custom-modal-input" placeholder="رقم واتساب (مثال: 201030084281)">
+                    <input type="text" id="cfgWa" class="custom-modal-input" placeholder="رقم واتساب للتواصل (2010...)">
                     <input type="text" id="cfgTg" class="custom-modal-input" placeholder="رابط قناة/حساب تليجرام">
+                    <input type="text" id="cfgAdminPin" class="custom-modal-input" placeholder="باسورد لوحة المالك السري">
                 </div>
-                <button class="modal-btn confirm" style="width:100%;" onclick="saveStoreTexts()">💾 حفظ وتحديث كافة النصوص فوراً</button>
+                <button class="modal-btn confirm" style="width:100%;" onclick="saveStoreTexts()">💾 حفظ وتحديث كافة البيانات فوراً</button>
             </div>
 
-            <!-- تبويب 2: إدارة المنتجات وإصلاح الحذف -->
+            <!-- تبويب 2: إدارة المنتجات + أداة الذكاء الاصطناعي لكتابة الوصف -->
             <div id="secProducts" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">إضافة أو تعديل منتج:</h4>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">إضافة أو تعديل منتج (مدعوم بالذكاء الاصطناعي 🪄):</h4>
                 <input type="hidden" id="editProdId">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <input type="text" id="newPTitle" class="custom-modal-input" placeholder="اسم المنتج">
+                    <input type="text" id="newPTitle" class="custom-modal-input" placeholder="اسم المنتج (مثال: ساعة رولكس ملكية)">
                     <input type="number" id="newPPrice" class="custom-modal-input" placeholder="السعر بالجنيه">
                 </div>
-                <input type="text" id="newPDesc" class="custom-modal-input" placeholder="وصف فخم للمنتج">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                     <input type="text" id="newPImg" class="custom-modal-input" placeholder="رابط صورة المنتج">
-                    <div><label style="font-size:0.7rem;">أو اختر صورة من هاتفك:</label><input type="file" accept="image/*" class="custom-modal-input" onchange="handleProductImgUpload(event)"></div>
+                    <div><input type="file" accept="image/*" class="custom-modal-input" onchange="handleProductImgUpload(event)" title="اختر صورة من هاتفك"></div>
                 </div>
+
+                <!-- أداة الذكاء الاصطناعي لاقتراح برومبت ووصف يشد العميل -->
+                <div style="background:rgba(212,175,55,0.1); border:1px dashed var(--gold); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:6px;">
+                        <span style="font-size:0.78rem; color:var(--gold); font-weight:800;"><i class="fa-solid fa-wand-magic-sparkles"></i> مساعد الذكاء الاصطناعي التسويقي (AI Copywriter):</span>
+                        <button type="button" class="modal-btn confirm" style="padding:4px 12px; font-size:0.74rem;" onclick="generateAISmartCopy()">🪄 اقترح وصفاً ساحراً يشد العميل</button>
+                    </div>
+                    <textarea id="newPDesc" class="custom-modal-input" rows="2" placeholder="اكتب وصف المنتج أو اضغط على زر الذكاء الاصطناعي بالأعلى ليقوم بكتابته لك فوراً..." style="margin-bottom:4px;"></textarea>
+                    <div id="aiSuggestionsBox" style="display:none; font-size:0.74rem; margin-top:6px;"></div>
+                </div>
+
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:center; margin-bottom:10px;">
                     <input type="text" id="newPBadge" class="custom-modal-input" placeholder="الشارة (مثال: الأكثر مبيعاً ✨)" style="margin-bottom:0;">
                     <label style="font-size:0.8rem; cursor:pointer;"><input type="checkbox" id="newPScarcity"> إظهار شارة (🔥 متبقي 3 قطع فقط)</label>
@@ -972,36 +1055,67 @@
                 <div style="margin-top:15px;" id="adminProductsList"></div>
             </div>
 
-            <!-- تبويب 3: صندوق الهدايا وإشعارات المبيعات -->
+            <!-- تبويب 3: التحكم الكامل في أسعار شحن الـ 27 محافظة بالترتيب -->
+            <div id="secShipping" class="admin-section">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:6px;">🚚 تحديد أسعار الشحن للـ 27 محافظة مصرية (أنت المتحكم بالكامل):</h4>
+                <p style="font-size:0.74rem; color:var(--text-muted); margin-bottom:10px;">العميل يختار اسم محافظته فقط من القائمة، ويقوم السيستم بإضافة السعر الذي تحدده أنت هنا تلقائياً ليُدفع كاملاً مع العربون:</p>
+                
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <input type="number" id="bulkShippingInput" class="custom-modal-input" placeholder="سعر موحد لكل المحافظات (اختياري)" style="margin-bottom:0; max-width:240px;">
+                    <button class="modal-btn cancel" style="color:var(--gold); border-color:var(--gold);" onclick="applyBulkShippingPrice()">تطبيق على الكل</button>
+                </div>
+
+                <div class="gov-shipping-grid" id="adminGovShippingGrid"></div>
+                <button class="modal-btn confirm" style="width:100%;" onclick="saveShippingPricesAdmin()">💾 حفظ أسعار الشحن للـ 27 محافظة</button>
+            </div>
+
+            <!-- تبويب 4: صندوق الهدايا + رفع صوت صلي على محمد خاص بالمالك -->
             <div id="secGifts" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🎁 تحديد منتجات "صندوق الهدايا" (لأوردرات فوق 1500 جنيه):</h4>
-                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">علم على المنتجات التي يحق للعميل اختيارها كهدية مجانية أو الفوز بها عند تخطي طلبه 1500 ج.م:</p>
-                <div id="adminGiftList" style="margin-bottom:16px;"></div>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🎙️ تخصيص صوت "صلي على محمد ﷺ" (رفع ملف صوتي خاص بالمالك):</h4>
+                <p style="font-size:0.74rem; color:var(--text-muted); margin-bottom:8px;">ارفع أي ملف صوتي (MP3/WAV) من هاتفك ليشتغل تلقائياً للعملاء كل 3 دقائق بدلاً من الصوت الآلي:</p>
+                <div style="display:flex; gap:8px; align-items:center; margin-bottom:14px; flex-wrap:wrap;">
+                    <input type="file" accept="audio/*" class="custom-modal-input" style="flex:1; margin-bottom:0;" onchange="handleCustomSalawatAudioUpload(event)">
+                    <button class="modal-btn confirm" onclick="playSalawatAudio(true)">🔊 تجربة الصوت الحالي</button>
+                    <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger);" onclick="resetSalawatAudioToDefault()">استعادة الصوت الافتراضي</button>
+                </div>
 
                 <hr style="border-color:var(--border-color); margin-bottom:12px;">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🔔 التحكم في إشعارات المبيعات الحية (كل 10 دقائق):</h4>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🎁 منتجات "صندوق الهدايا" (للأوردرات فوق 1500 جنيه):</h4>
+                <div id="adminGiftList" style="margin-bottom:14px;"></div>
+
+                <hr style="border-color:var(--border-color); margin-bottom:12px;">
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🔔 إشعارات المبيعات الحية (كل 10 دقائق):</h4>
                 <label style="font-size:0.8rem; display:block; margin-bottom:8px;"><input type="checkbox" id="cfgSalesPopupActive" onchange="savePopupSettings()"> تفعيل ظهور إشعارات الشراء الحية للعملاء</label>
-                <input type="text" id="cfgPopupCities" class="custom-modal-input" placeholder="المحافظات مفصولة بفاصلة (القاهرة, الإسكندرية, الدقهلية...)" onchange="savePopupSettings()">
+                <input type="text" id="cfgPopupCities" class="custom-modal-input" onchange="savePopupSettings()">
             </div>
 
-            <!-- تبويب 4: الربط الفوري بتليجرام وواتساب -->
+            <!-- تبويب 5: بوت تليجرام للنشر التلقائي في المتجر + إشعارات الطلبات -->
             <div id="secTelegram" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">📲 الربط التلقائي الفوري (Telegram Bot API & WhatsApp):</h4>
-                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">بمجرد وضع التوكن والـ ID هنا، سيصلك إشعار فوري في الخلفية بأي كود خصم يخرج من العجلة وأي أوردر جديد دون تدخل العميل:</p>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🤖 ربط بوت تليجرام للإشعارات + النشر التلقائي للمنتجات:</h4>
+                <div style="background:rgba(212,175,55,0.08); border:1px solid var(--gold); padding:10px; border-radius:8px; font-size:0.75rem; margin-bottom:12px; line-height:1.7;">
+                    <strong style="color:var(--gold);">💡 كيف تنشر منتجاً من تليجرام إلى المتجر تلقائياً توفيراً لوقتك؟</strong><br>
+                    1. ضع `Bot Token` و `Chat ID` بالأسفل واضغط حفظ.<br>
+                    2. افتح البوت في تليجرام وأرسل له <strong>صورة المنتج</strong> واكتب تحتها في الوصف (Caption) بهذا الترتيب:<br>
+                    <code style="color:#10B981; font-weight:800;">اسم المنتج | السعر | الوصف</code> (مثال: <code>ساعة ملكية | 650 | مقاومة للماء بضمان عامين</code>)<br>
+                    3. سيقوم المتجر بسحب المنتج من البوت ونشره في الواجهة تلقائياً عند فتح المتجر أو الضغط على زر المزامنة!
+                </div>
                 <input type="text" id="cfgTgBotToken" class="custom-modal-input" placeholder="Telegram Bot Token (من @BotFather)">
                 <input type="text" id="cfgTgChatId" class="custom-modal-input" placeholder="Telegram Chat ID الخاص بك">
-                <button class="modal-btn confirm" onclick="saveTelegramConfig()">حفظ واختبار إرسال إشعار فوري</button>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="modal-btn confirm" style="flex:1;" onclick="saveTelegramConfig()">💾 حفظ إعدادات البوت واختبار الإشعار</button>
+                    <button class="modal-btn cancel" style="flex:1; color:var(--gold); border-color:var(--gold);" onclick="syncProductsFromTelegramBot(true)">🔄 سحب المنتجات الجديدة من البوت الآن</button>
+                </div>
             </div>
 
-            <!-- تبويب 5: سجل الطلبات والأكواد -->
+            <!-- تبويب 6: سجل الطلبات والأكواد -->
             <div id="secOrders" class="admin-section">
-                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">📋 سجل الطلبات وتحديث حالة التتبع للعميل:</h4>
+                <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">📋 سجل الطلبات الواردة وتحديث حالة التتبع:</h4>
                 <div id="adminOrdersLog" style="font-size:0.78rem; margin-bottom:15px;"></div>
                 <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:8px;">🎡 سجل الأكواد الصادرة من عجلة الحظ:</h4>
                 <div id="adminWheelCodesLog" style="font-size:0.75rem;"></div>
             </div>
 
-            <!-- تبويب 6: الطوارئ والنسخ الاحتياطي -->
+            <!-- تبويب 7: الأمان والطوارئ والنسخ الاحتياطي -->
             <div id="secSettings" class="admin-section">
                 <h4 style="font-size:0.85rem; color:var(--danger); margin-bottom:8px;">🚨 قفل الطوارئ الأمني للمتجر:</h4>
                 <button class="modal-btn" style="background:var(--danger); color:#FFF; width:100%; margin-bottom:16px;" onclick="toggleEmergencyLockAdmin()">تشغيل / إيقاف وضع الطوارئ فوراً</button>
@@ -1027,16 +1141,42 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- =========================================================
-         الكود البرمجي الشامل والمتكامل (JavaScript) - جميع الـ 34 ميزة
+         الكود البرمجي الشامل والمؤمن (JavaScript)
     ========================================================= -->
     <script>
-        /* --- 1. البيانات الافتراضية والحفظ التلقائي في ذاكرة المتصفح --- */
+        /* --- 0. درع حماية المتجر ضد السرقة أو فتح الأكواد (Anti-Theft Shield) --- */
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) ||
+                (e.ctrlKey && e.key.toUpperCase() === 'U')
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        /* --- 1. الـ 27 محافظة مصرية بالترتيب الرسمي وأسعار الشحن القابلة للتعديل --- */
+        const EGYPT_27_GOVS = [
+            "القاهرة", "الجيزة", "الإسكندرية", "الدقهلية", "البحر الأحمر", "البحيرة",
+            "الفيوم", "الغربية", "الإسماعيلية", "المنوفية", "المنيا", "القليوبية",
+            "الوادي الجديد", "السويس", "أسوان", "أسيوط", "بني سويف", "بورسعيد",
+            "دمياط", "الشرقية", "جنوب سيناء", "كفر الشيخ", "مطروح", "الأقصر",
+            "قنا", "شمال سيناء", "سوهاج"
+        ];
+
+        const defaultGovShipping = {};
+        EGYPT_27_GOVS.forEach(g => { defaultGovShipping[g] = 65; });
+
         const defaultStoreData = {
             name: "3λ.Rehab.Store",
             logo: "https://cdn-icons-png.flaticon.com/512/679/679922.png",
-            ticker: "✨ 3λ.Rehab.Store ✨ أهلاً بكم في عالم الفخامة والأناقة — شحن سريع لكافة المحافظات — هدايا مجانية للطلبات فوق 1500 ج.م ✨",
+            ticker: "✨ 3λ.Rehab.Store ✨ أهلاً بكم في عالم الفخامة والأناقة — توصيل سريع للـ 27 محافظة — هدايا مجانية للطلبات فوق 1500 ج.م ✨",
             aboutStory: "منذ انطلاقتنا، لم يكن هدفنا مجرد بيع إكسسوارات أو مقتنيات عادية، بل صناعة قطعة فنية تروي قصة فخامتك. كل قطعة في متجرنا تمر عبر فحص دقيق على يد خبراء التصميم لضمان بريق يدوم لسنوات ويمنحك حضوراً ملكياً لا يُنسى في كل مناسبة.",
-            vodafone: "01030084281",
+            cashNumber: "01030084281",
+            instapay: "01030084281",
+            bankAccount: "بنك مصر - حساب رقم: 00000000000000",
             adminPin: "2026",
             emergencyOff: false,
             fb: "https://facebook.com",
@@ -1046,8 +1186,11 @@
             tg: "https://t.me",
             tgBotToken: "",
             tgChatId: "",
+            lastTgUpdateId: 0,
+            customSalawatAudio: "",
             salesPopupActive: true,
-            popupCities: "القاهرة, الإسكندرية, الدقهلية, المنصورة, الجيزة, طنطا, جنوب سيناء, بورسعيد"
+            popupCities: "القاهرة, الإسكندرية, الدقهلية, الجيزة, جنوب سيناء, بورسعيد, الغربية, الشرقية",
+            govShipping: defaultGovShipping
         };
 
         const defaultProducts = [
@@ -1057,14 +1200,16 @@
             { id: 104, title: 'خاتم سوليتير ملكي فضة إيطالي عيار 925', price: 450, descr: 'فص زركون نقي مع علبة قطيفة فاخرة مناسبة للهدايا القيمة.', badge: 'حصري 💎', scarcity: true, isGift: true, img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80' }
         ];
 
-        let storeData = JSON.parse(localStorage.getItem('rehab_store_cfg')) || defaultStoreData;
+        let storeData = Object.assign({}, defaultStoreData, JSON.parse(localStorage.getItem('rehab_store_cfg') || '{}'));
+        if (!storeData.govShipping) storeData.govShipping = defaultGovShipping;
+
         let products = JSON.parse(localStorage.getItem('rehab_products_list')) || defaultProducts;
         let cart = JSON.parse(localStorage.getItem('rehab_cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('rehab_wishlist')) || [];
         let ordersLog = JSON.parse(localStorage.getItem('rehab_orders_log')) || [];
         let wheelCodesLog = JSON.parse(localStorage.getItem('rehab_wheel_codes')) || [];
         let activeCoupon = null;
-        let isAdminAuthenticated = false; // يصفر دائماً عند إغلاق اللوحة
+        let isAdminAuthenticated = false;
 
         function saveAllToStorage() {
             localStorage.setItem('rehab_store_cfg', JSON.stringify(storeData));
@@ -1075,7 +1220,7 @@
             localStorage.setItem('rehab_wheel_codes', JSON.stringify(wheelCodesLog));
         }
 
-        /* --- 2. النوافذ المخصصة البديلة للـ Alert / Prompt (بدون أي نافذة متصفح شاذة) --- */
+        /* --- 2. النوافذ المخصصة البديلة للـ Alert / Prompt --- */
         function showCustomModal(title, text, type = 'alert', callback = null, placeholder = '', customHTML = '') {
             const overlay = document.getElementById('customModal');
             document.getElementById('customModalTitle').innerHTML = title;
@@ -1108,9 +1253,8 @@
             if (window.currentCustomCallback) window.currentCustomCallback(isConfirmed);
         }
 
-        /* --- 3. إرسال الإشعارات الفورية للمالك (Telegram Bot API + WhatsApp) --- */
+        /* --- 3. إرسال الإشعارات الفورية للمالك + سحب المنتجات التلقائي من بوت تليجرام --- */
         function notifyOwnerInstantly(messageText) {
-            // إرسال صامت وفوري إلى بوت تليجرام إذا تم إدخال التوكن
             if (storeData.tgBotToken && storeData.tgChatId) {
                 fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/sendMessage`, {
                     method: 'POST',
@@ -1123,10 +1267,78 @@
             }
         }
 
-        /* --- 4. المذكر الصوتي (صلي على محمد ﷺ) كل 3 دقائق تلقائياً --- */
+        async function syncProductsFromTelegramBot(manualNotify = false) {
+            if (!storeData.tgBotToken) {
+                if (manualNotify) showCustomModal("تنبيه", "يرجى إدخال Telegram Bot Token أولاً وحفظه!", "alert");
+                return;
+            }
+            try {
+                const offset = (storeData.lastTgUpdateId || 0) + 1;
+                const res = await fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/getUpdates?offset=${offset}`);
+                const data = await res.json();
+                if (!data.ok || !data.result) return;
+
+                let addedCount = 0;
+                for (const upd of data.result) {
+                    storeData.lastTgUpdateId = upd.update_id;
+                    const msg = upd.message || upd.channel_post;
+                    if (!msg) continue;
+
+                    const rawText = msg.caption || msg.text || '';
+                    if (rawText.includes('|')) {
+                        const parts = rawText.split('|').map(s => s.trim());
+                        const title = parts[0];
+                        const price = Number(parts[1]);
+                        const descr = parts[2] || "قطعة ملكية فاخرة مضافة حديثاً.";
+                        let imgUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80";
+
+                        // إذا أرسل المالك صورة مع الرسالة في البوت، نجلب رابطها المباشر
+                        if (msg.photo && msg.photo.length > 0) {
+                            const bestPhoto = msg.photo[msg.photo.length - 1];
+                            const fileRes = await fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/getFile?file_id=${bestPhoto.file_id}`);
+                            const fileData = await fileRes.json();
+                            if (fileData.ok && fileData.result.file_path) {
+                                imgUrl = `https://api.telegram.org/file/bot${storeData.tgBotToken}/${fileData.result.file_path}`;
+                            }
+                        }
+
+                        if (title && price > 0) {
+                            products.unshift({
+                                id: Date.now() + Math.floor(Math.random() * 1000),
+                                title,
+                                price,
+                                descr,
+                                badge: 'جديد عبر البوت ✨',
+                                scarcity: true,
+                                isGift: false,
+                                img: imgUrl
+                            });
+                            addedCount++;
+                        }
+                    }
+                }
+
+                saveAllToStorage();
+                if (addedCount > 0) {
+                    renderProductsGrid();
+                    if (isAdminAuthenticated) loadAdminDataIntoCMS();
+                }
+                if (manualNotify) {
+                    showCustomModal("🤖 مزامنة بوت التليجرام", addedCount > 0 ? `تم سحب ونشر (${addedCount}) منتج جديد من بوت التليجرام بنجاح!` : "لا توجد رسائل منتجات جديدة في البوت حالياً.", "alert");
+                }
+            } catch (e) {
+                if (manualNotify) showCustomModal("تنبيه", "تأكد من صحة Bot Token واتصالك بالإنترنت.", "alert");
+            }
+        }
+
+        /* --- 4. المذكر الصوتي (صلي على محمد ﷺ) كل 3 دقائق + دعم الملف الصوتي الخاص بالمالك --- */
         let salawatTimerStarted = false;
         function playSalawatAudio(manualTrigger = false) {
-            if ('speechSynthesis' in window) {
+            const player = document.getElementById('customSalawatPlayer');
+            if (storeData.customSalawatAudio) {
+                player.src = storeData.customSalawatAudio;
+                player.play().catch(() => {});
+            } else if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance("اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ");
                 utterance.lang = 'ar-SA';
@@ -1138,17 +1350,56 @@
             }
         }
 
+        function handleCustomSalawatAudioUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                storeData.customSalawatAudio = e.target.result;
+                saveAllToStorage();
+                showCustomModal("🎙️ تم حفظ الصوت", "تم رفع وتفعيل ملفك الصوتي الخاص للصلاة على النبي ﷺ بنجاح!", "alert");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetSalawatAudioToDefault() {
+            storeData.customSalawatAudio = "";
+            saveAllToStorage();
+            showCustomModal("✅ تم الاسترجاع", "تمت استعادة الصوت التلقائي الافتراضي.", "alert");
+        }
+
         function initSalawatAutoReminder() {
             if (salawatTimerStarted) return;
             salawatTimerStarted = true;
             setInterval(() => {
                 playSalawatAudio(false);
-            }, 180000); // كل 3 دقائق بالضبط (180,000 مللي ثانية)
+            }, 180000); // كل 3 دقائق
         }
-        // تفعيل الصوت مع أول لمسة للعميل في المتجر لتخطي حظر المتصفحات
         document.addEventListener('click', initSalawatAutoReminder, { once: true });
 
-        /* --- 5. عجلة الحظ الكلاسيكية الصامتة (خصم 1% إلى 10% صالح لآخر اليوم) --- */
+        /* --- 5. أداة الذكاء الاصطناعي لاقتراح برومبت ووصف يشد العميل (AI Copywriter) --- */
+        function generateAISmartCopy() {
+            const title = document.getElementById('newPTitle').value.trim() || "هذه القطعة الملكية";
+            const price = document.getElementById('newPPrice').value.trim();
+
+            const suggestions = [
+                `✨ تفرّد بإطلالة ملكية تخطف الأنظار مع (${title}) — تصميم عصري يجمع بين الفخامة السويسرية والجودة التي تدوم لسنوات. قطعة صُممت خصيصاً لصفوة العملاء!`,
+                `👑 لأنك تستحق الأفضل دائماً؛ نقدم لك (${title}) بخامات أصلية مقاومة للعوامل وبريق يضاهي الألماس الحقيقي. احصل عليه الآن قبل نفاد الكمية المحدودة!`,
+                `💎 الهدية المثالية لكل من يبحث عن الرقي والتميز: (${title}) يأتي بتقفيل احترافي فائق الدقة يمنحك حضوراً واثقاً وجاذبية لا تُقاوم في كل مناسبة.`
+            ];
+
+            const chosen = suggestions[Math.floor(Math.random() * suggestions.length)];
+            document.getElementById('newPDesc').value = chosen;
+
+            const box = document.getElementById('aiSuggestionsBox');
+            box.style.display = 'block';
+            box.innerHTML = `
+                <div style="color:var(--success); font-weight:800; margin-bottom:4px;">✅ تم توليد الوصف التسويقي الذكي! اضغط على أي صيغة أخرى لتبديلها:</div>
+                ${suggestions.map((s, idx) => `<div style="background:var(--bg-input); padding:6px; border-radius:6px; margin-bottom:4px; cursor:pointer; border:1px solid var(--border-color);" onclick="document.getElementById('newPDesc').value=this.innerText">💡 صيغة ${idx+1}: ${s}</div>`).join('')}
+            `;
+        }
+
+        /* --- 6. عجلة الحظ الكلاسيكية الصامتة (خصم 1% إلى 10% صالح لآخر اليوم) --- */
         let isWheelSpinning = false;
         function spinTheWheel() {
             if (isWheelSpinning) return;
@@ -1169,7 +1420,7 @@
 
             setTimeout(() => {
                 isWheelSpinning = false;
-                const discountPct = Math.floor(Math.random() * 10) + 1; // من 1% إلى 10%
+                const discountPct = Math.floor(Math.random() * 10) + 1;
                 const generatedCode = 'VIP' + Math.floor(1000 + Math.random() * 9000);
                 const endOfDay = new Date();
                 endOfDay.setHours(23, 59, 59, 999);
@@ -1191,10 +1442,8 @@
                 wheelCodesLog.unshift(newCodeObj);
                 saveAllToStorage();
 
-                // إبلاغ المالك فوراً بالكود الصادر
                 notifyOwnerInstantly(`🎡 عميل قام بلف عجلة الحظ الآن!\nالكود الصادر: ${generatedCode}\nنسبة الخصم: ${discountPct}%\nصالح حتى نهاية اليوم.`);
 
-                // تطبيق الكود تلقائياً في السلة وتبليغ العميل
                 document.getElementById('couponInput').value = generatedCode;
                 showCustomModal(
                     "🎉 مبروك! كود خصم ملكي",
@@ -1204,14 +1453,14 @@
             }, 3900);
         }
 
-        /* --- 6. عرض المنتجات + عداد المشاهدات الواقعي + النظرة السريعة + المشاركة --- */
+        /* --- 7. عرض المنتجات والنظرة السريعة --- */
         function renderProductsGrid(list = products) {
             const grid = document.getElementById('productsGrid');
             document.getElementById('productsCountText').textContent = `(${list.length} منتج ملكي)`;
 
             grid.innerHTML = list.map(p => {
                 const isWished = wishlist.includes(p.id);
-                const realisticViewers = Math.floor(Math.random() * 11) + 4; // رقم واقعي بين 4 و 14
+                const realisticViewers = Math.floor(Math.random() * 11) + 4;
                 return `
                 <div class="p-card">
                     ${p.badge ? `<div class="p-badge">${p.badge}</div>` : ''}
@@ -1240,7 +1489,6 @@
         function openQuickView(pid) {
             const p = products.find(x => x.id === pid);
             if (!p) return;
-            // اقتراح منتجين مكملين (Cross-Selling)
             const crossProds = products.filter(x => x.id !== pid).slice(0, 2);
             const crossHTML = crossProds.map(cp => `
                 <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:6px 10px; border-radius:8px; margin-top:6px; font-size:0.75rem;">
@@ -1255,7 +1503,7 @@
                 <div style="font-size:1.1rem; font-weight:900; color:var(--gold); margin-bottom:12px;">السعر: ${p.price} ج.م</div>
                 <button class="p-btn" style="margin-bottom:14px;" onclick="closeCustomModal(false); addToCart(${p.id});">أضف إلى حقيبة التسوق الآن</button>
                 <div style="text-align:right; border-top:1px solid var(--border-color); padding-top:8px;">
-                    <strong style="font-size:0.78rem; color:var(--gold);">✨ اشترِ المجموعة معاً واكسب خصماً إضافياً:</strong>
+                    <strong style="font-size:0.78rem; color:var(--gold);">✨ اشترِ المجموعة معاً:</strong>
                     ${crossHTML}
                 </div>
             `;
@@ -1269,13 +1517,10 @@
             window.open(`https://wa.me/?text=${text}`, '_blank');
         }
 
-        /* --- 7. المفضلة + البحث الذكي الفوري --- */
+        /* --- 8. المفضلة والبحث الفوري وعربة التسوق --- */
         function toggleWishlist(pid) {
-            if (wishlist.includes(pid)) {
-                wishlist = wishlist.filter(id => id !== pid);
-            } else {
-                wishlist.push(pid);
-            }
+            if (wishlist.includes(pid)) wishlist = wishlist.filter(id => id !== pid);
+            else wishlist.push(pid);
             saveAllToStorage();
             document.getElementById('wishBadgeCount').textContent = wishlist.length;
             renderProductsGrid();
@@ -1284,7 +1529,7 @@
         function openWishlistModal() {
             const wishedItems = products.filter(p => wishlist.includes(p.id));
             if (wishedItems.length === 0) {
-                showCustomModal("❤️ قائمة المفضلة", "قائمة مفضلتك فارغة حالياً. اضغط على علامة القلب أعلى أي منتج لحفظه هنا!", "alert");
+                showCustomModal("❤️ قائمة المفضلة", "قائمة مفضلتك فارغة حالياً.", "alert");
                 return;
             }
             const html = wishedItems.map(p => `
@@ -1323,7 +1568,6 @@
             }
         }
 
-        /* --- 8. عربة التسوق المنزلقة + شريط تحفيز الـ 1500 جنيه + الكوبونات --- */
         function toggleCartDrawer(open) {
             document.getElementById('cartOverlay').style.display = open ? 'block' : 'none';
             document.getElementById('cartDrawer').classList.toggle('open', open);
@@ -1339,11 +1583,8 @@
             const p = products.find(x => x.id === pid);
             if (!p) return;
             const existing = cart.find(item => item.id === pid);
-            if (existing) {
-                existing.qty++;
-            } else {
-                cart.push({ id: p.id, title: p.title, price: p.price, img: p.img, qty: 1 });
-            }
+            if (existing) existing.qty++;
+            else cart.push({ id: p.id, title: p.title, price: p.price, img: p.img, qty: 1 });
             saveAllToStorage();
             updateCartBadgeAndUI();
             toggleCartDrawer(true);
@@ -1353,9 +1594,7 @@
             const item = cart.find(x => x.id === pid);
             if (!item) return;
             item.qty += delta;
-            if (item.qty <= 0) {
-                cart = cart.filter(x => x.id !== pid);
-            }
+            if (item.qty <= 0) cart = cart.filter(x => x.id !== pid);
             saveAllToStorage();
             updateCartBadgeAndUI();
             renderCartInsideDrawer();
@@ -1374,7 +1613,6 @@
             const container = document.getElementById('cartItemsContainer');
             const subtotal = getCartSubtotal();
 
-            // تحديث شريط التقدم التحفيزي للـ 1500 جنيه
             const progressFill = document.getElementById('cartProgressFill');
             const progressText = document.getElementById('cartProgressText');
             const pct = Math.min(100, Math.round((subtotal / 1500) * 100));
@@ -1384,7 +1622,7 @@
                 progressText.innerHTML = `<span style="color:var(--success); font-weight:900;">🎉 مبروك! تخطى طلبك 1500 ج.م واستحققت لفتين هدية أو منتج مجاني من صندوق الهدايا!</span>`;
             } else {
                 const rem = 1500 - subtotal;
-                progressText.innerHTML = `أضف منتجات بقيمة <strong style="color:var(--gold);">${rem} ج.م</strong> أخرى لتحصل على لفتين هدية أو منتج مجاني من صندوق الهدايا!`;
+                progressText.innerHTML = `أضف منتجات بقيمة <strong style="color:var(--gold);">${rem} ج.م</strong> أخرى لتحصل على لفتين هدية أو منتج مجاني!`;
             }
 
             if (cart.length === 0) {
@@ -1431,7 +1669,7 @@
             }
         }
 
-        /* --- 9. إتمام الطلب في خطوة واحدة + مكافأة الـ 1500 جنيه + التحقق من الرقم المصري + الفاتورة --- */
+        /* --- 9. نظام الدفع الذكي (50% أو 75% أو 100% + الشحن كاملاً) + الـ 27 محافظة بالترتيب بدون إظهار السعر في القائمة --- */
         let lastOrderTimestamp = 0;
 
         function openCheckoutForm() {
@@ -1441,7 +1679,7 @@
             }
             toggleCartDrawer(false);
 
-            const savedClient = JSON.parse(localStorage.getItem('rehab_saved_client')) || { name: '', phone: '', address: '', gov: 'القاهرة|60' };
+            const savedClient = JSON.parse(localStorage.getItem('rehab_saved_client')) || { name: '', phone: '', address: '', gov: 'القاهرة' };
             const subtotal = getCartSubtotal();
             const giftProducts = products.filter(p => p.isGift);
 
@@ -1449,8 +1687,8 @@
             if (subtotal >= 1500) {
                 const giftOpts = giftProducts.map(gp => `<option value="هدية: ${gp.title}">🎁 منتج مجاني: ${gp.title}</option>`).join('');
                 giftRewardHTML = `
-                    <div style="background:rgba(16,185,129,0.12); border:1px solid var(--success); padding:10px; border-radius:8px; margin-bottom:10px; text-align:right;">
-                        <label style="font-size:0.78rem; color:var(--success); font-weight:900; display:block; margin-bottom:5px;">🎉 مكافأة تخطي 1500 ج.م (اختر هديتك المجانية الآن):</label>
+                    <div style="background:rgba(16,185,129,0.12); border:1px solid var(--success); padding:9px; border-radius:8px; margin-bottom:10px; text-align:right;">
+                        <label style="font-size:0.76rem; color:var(--success); font-weight:900; display:block; margin-bottom:4px;">🎉 مكافأة تخطي 1500 ج.م (اختر هديتك المجانية):</label>
                         <select id="chkGiftReward" class="custom-select" style="margin-bottom:0;">
                             <option value="SPIN2">🎡 منح لفتين هدية إضافيتين في عجلة الحظ</option>
                             ${giftOpts}
@@ -1459,62 +1697,128 @@
                 `;
             }
 
+            // الـ 27 محافظة بالترتيب بدون كتابة أسعار الشحن بجانبها في القائمة
+            const govOptionsHTML = EGYPT_27_GOVS.map(g => `<option value="${g}" ${savedClient.gov === g ? 'selected' : ''}>محافظة ${g}</option>`).join('');
+
             const formHTML = `
                 <div style="text-align:right;">
                     ${giftRewardHTML}
-                    <input type="text" id="chkName" class="custom-modal-input" placeholder="الاسم بالكامل" value="${savedClient.name}">
+                    <input type="text" id="chkName" class="custom-modal-input" placeholder="الاسم الثلاثي بالكامل" value="${savedClient.name}">
                     <input type="tel" id="chkPhone" class="custom-modal-input" placeholder="رقم الموبايل المصري (11 رقم يبدأ بـ 01)" value="${savedClient.phone}">
-                    <select id="chkGov" class="custom-select">
-                        <option value="القاهرة|60">القاهرة والجيزة (شحن 60 ج.م)</option>
-                        <option value="الدقهلية والمنصورة|65">الدقهلية والمنصورة (شحن 65 ج.م)</option>
-                        <option value="الإسكندرية|65">الإسكندرية والوجه البحري (شحن 65 ج.م)</option>
-                        <option value="مدن القناة وسيناء|80">مدن القناة وجنوب سيناء (شحن 80 ج.م)</option>
-                        <option value="الصعيد|85">محافظات الصعيد (شحن 85 ج.م)</option>
-                    </select>
-                    <input type="text" id="chkAddress" class="custom-modal-input" placeholder="العنوان بالتفصيل (المنطقة، الشارع، علامة مميزة)" value="${savedClient.address}">
                     
-                    <label style="font-size:0.78rem; color:var(--gold); font-weight:800; display:block; margin-bottom:5px;">طريقة الدفع:</label>
-                    <select id="chkPayMethod" class="custom-select" onchange="toggleTransferBox(this.value)">
-                        <option value="الدفع عند الاستلام">💵 الدفع عند الاستلام</option>
-                        <option value="فودافون كاش">📲 فودافون كاش (${storeData.vodafone})</option>
-                        <option value="إنستا باي InstaPay">🏦 إنستا باي InstaPay (${storeData.vodafone})</option>
+                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800; display:block; margin-bottom:4px;">📍 اختر المحافظة (توصيل للـ 27 محافظة):</label>
+                    <select id="chkGov" class="custom-select" onchange="recalculateSmartDeposit()">
+                        ${govOptionsHTML}
+                    </select>
+                    <input type="text" id="chkAddress" class="custom-modal-input" placeholder="العنوان بالتفصيل (المركز/الحي، الشارع، علامة مميزة)" value="${savedClient.address}">
+                    
+                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800; display:block; margin-bottom:4px;">💳 اختر وسيلة التحويل النقدي:</label>
+                    <select id="chkPayMethod" class="custom-select" onchange="updatePaymentAccountDisplay()">
+                        <option value="محفظة كاش (فودافون كاش)">📲 محفظة كاش (Vodafone Cash)</option>
+                        <option value="إنستا باي (InstaPay)">⚡ إنستا باي (InstaPay)</option>
+                        <option value="تحويل حساب بنكي">🏦 تحويل حساب بنكي</option>
                     </select>
 
-                    <div id="transferProofArea" style="display:none; background:var(--bg-input); padding:10px; border-radius:8px; border:1px dashed var(--gold); margin-bottom:10px;">
-                        <div style="font-size:0.75rem; color:var(--gold); margin-bottom:6px;">يرجى التحويل على الرقم <strong>${storeData.vodafone}</strong> ثم إرفاق صورة (إسكرين) التحويل لتأكيد الطلب:</div>
+                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800; display:block; margin-bottom:4px;">⚖️ اختر نسبة الدفعة المقدمة (والباقي عند الاستلام):</label>
+                    <select id="chkDepositRatio" class="custom-select" onchange="recalculateSmartDeposit()">
+                        <option value="0.5">دفع النصف (50% من المنتجات) + الشحن كاملاً (والنصف عند الاستلام)</option>
+                        <option value="0.75">دفع ثلاثة أرباع (75% من المنتجات) + الشحن كاملاً (والربع عند الاستلام)</option>
+                        <option value="1">دفع المبلغ بالكامل (100% + الشحن) مقدماً</option>
+                    </select>
+
+                    <!-- صندوق الحسبة الذكية الفورية -->
+                    <div class="smart-calc-box" id="smartCalcSummary"></div>
+
+                    <!-- صندوق عرض رقم التحويل مع زر النسخ وإرفاق الإسكرين -->
+                    <div style="background:var(--bg-input); padding:10px; border-radius:8px; border:1px dashed var(--gold); margin-bottom:6px;">
+                        <div style="font-size:0.74rem; color:var(--text-muted); margin-bottom:4px;" id="payAccTitleLabel">حوّل المبلغ المطلوب الآن إلى الرقم التالي:</div>
+                        <div class="copy-acc-box">
+                            <span id="payAccValueText">${storeData.cashNumber}</span>
+                            <button type="button" class="modal-btn confirm" style="padding:3px 10px; font-size:0.72rem;" onclick="copyPaymentAccount()">نسخ الرقم 📋</button>
+                        </div>
+                        <label style="font-size:0.74rem; color:var(--gold); font-weight:800; display:block; margin-bottom:4px;">📸 أرفق صورة (إسكرين) التحويل لتأكيد الطلب وإصدار الفاتورة:</label>
                         <input type="file" id="chkTransferImg" accept="image/*" class="custom-modal-input" style="margin-bottom:0;">
                     </div>
                 </div>
             `;
 
-            showCustomModal("👑 إتمام الطلب السريع", "أدخل بيانات التوصيل لإصدار فاتورتك المعتمدة فوراً:", "html", (confirmed) => {
+            showCustomModal("👑 إتمام الطلب الذكي", "", "html", (confirmed) => {
                 if (confirmed) submitFinalOrder();
             }, "", formHTML);
+
+            setTimeout(() => {
+                updatePaymentAccountDisplay();
+                recalculateSmartDeposit();
+            }, 50);
         }
 
-        function toggleTransferBox(val) {
-            const box = document.getElementById('transferProofArea');
-            if (box) box.style.display = (val === 'الدفع عند الاستلام') ? 'none' : 'block';
+        function updatePaymentAccountDisplay() {
+            const method = document.getElementById('chkPayMethod')?.value || '';
+            const valEl = document.getElementById('payAccValueText');
+            if (!valEl) return;
+
+            if (method.includes('إنستا')) {
+                valEl.textContent = storeData.instapay;
+            } else if (method.includes('بنكي')) {
+                valEl.textContent = storeData.bankAccount;
+            } else {
+                valEl.textContent = storeData.cashNumber;
+            }
+        }
+
+        function copyPaymentAccount() {
+            const txt = document.getElementById('payAccValueText')?.textContent || '';
+            navigator.clipboard.writeText(txt).catch(() => {});
+            const btn = event.target;
+            btn.textContent = "تم النسخ ✅";
+            setTimeout(() => { btn.textContent = "نسخ الرقم 📋"; }, 1500);
+        }
+
+        function recalculateSmartDeposit() {
+            const gov = document.getElementById('chkGov')?.value || 'القاهرة';
+            const ratio = parseFloat(document.getElementById('chkDepositRatio')?.value || '0.5');
+            const summaryBox = document.getElementById('smartCalcSummary');
+            if (!summaryBox) return;
+
+            const subtotal = getCartSubtotal();
+            const discountVal = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
+            const netProducts = subtotal - discountVal;
+            const shippingCost = Number(storeData.govShipping[gov] ?? 65);
+
+            const depositProductsPart = Math.round(netProducts * ratio);
+            const requiredNow = depositProductsPart + shippingCost; // يشمل الشحن كاملاً لأنه خارج حساب المنتجات
+            const remainingCOD = netProducts - depositProductsPart;
+
+            summaryBox.innerHTML = `
+                <div class="calc-row"><span>صافي المنتجات${discountVal > 0 ? ' (بعد الخصم)' : ''}:</span><strong>${netProducts} ج.م</strong></div>
+                <div class="calc-row"><span>مصاريف الشحن والتوصيل (${gov}):</span><strong>${shippingCost} ج.م</strong></div>
+                <hr style="border-color:rgba(212,175,55,0.3); margin:5px 0;">
+                <div class="calc-row" style="color:var(--success); font-size:0.84rem; font-weight:900;">
+                    <span>✅ المطلوب تحويله الآن (${Math.round(ratio*100)}% + الشحن كاملاً):</span>
+                    <span>${requiredNow} ج.م</span>
+                </div>
+                <div class="calc-row" style="color:var(--gold); font-size:0.82rem; font-weight:900;">
+                    <span>📦 المتبقي للدفع عند الاستلام للمندوب:</span>
+                    <span>${remainingCOD} ج.م</span>
+                </div>
+            `;
         }
 
         function submitFinalOrder() {
-            // حماية ضد الطلبات الوهمية المتتالية (Anti-Spam)
-            if (Date.now() - lastOrderTimestamp < 30000) {
-                showCustomModal("⏳ مهلاً", "تم تسجيل طلبك بالفعل! يرجى الانتظار قليلاً قبل إرسال طلب آخر.", "alert");
+            if (Date.now() - lastOrderTimestamp < 25000) {
+                showCustomModal("⏳ مهلاً", "تم تسجيل طلبك بالفعل! يرجى الانتظار قليلاً.", "alert");
                 return;
             }
 
             const name = document.getElementById('chkName').value.trim();
             const phone = document.getElementById('chkPhone').value.trim();
-            const govRaw = document.getElementById('chkGov').value.split('|');
-            const govName = govRaw[0];
-            const shippingCost = parseInt(govRaw[1] || '60');
+            const govName = document.getElementById('chkGov').value;
             const address = document.getElementById('chkAddress').value.trim();
             const payMethod = document.getElementById('chkPayMethod').value;
+            const ratio = parseFloat(document.getElementById('chkDepositRatio').value || '0.5');
             const transferInput = document.getElementById('chkTransferImg');
             const giftChoiceEl = document.getElementById('chkGiftReward');
 
-            // التحقق الصارم من رقم الهاتف المصري (11 رقم يبدأ بـ 01)
             const egyptPhoneRegex = /^01[0125][0-9]{8}$/;
             if (!name || !egyptPhoneRegex.test(phone) || !address) {
                 setTimeout(() => {
@@ -1523,20 +1827,26 @@
                 return;
             }
 
-            // التحقق من إسكرينة التحويل في حالة فودافون كاش أو إنستا باي
-            if (payMethod !== 'الدفع عند الاستلام' && (!transferInput || !transferInput.files || transferInput.files.length === 0)) {
+            if (!transferInput || !transferInput.files || transferInput.files.length === 0) {
                 setTimeout(() => {
-                    showCustomModal("⚠️ إسكرينة التحويل مطلوبة", "يرجى إرفاق صورة إسكرين التحويل لتأكيد الدفع عبر فودافون كاش أو إنستا باي!", "alert", () => openCheckoutForm());
+                    showCustomModal("⚠️ إسكرينة التحويل مطلوبة", "يرجى إرفاق صورة إسكرين تحويل الدفعة المقدمة والشحن لتأكيد طلبك فوراً!", "alert", () => openCheckoutForm());
                 }, 100);
                 return;
             }
 
             lastOrderTimestamp = Date.now();
-            localStorage.setItem('rehab_saved_client', JSON.stringify({ name, phone, address, gov: document.getElementById('chkGov').value }));
+            localStorage.setItem('rehab_saved_client', JSON.stringify({ name, phone, address, gov: govName }));
 
             const subtotal = getCartSubtotal();
             const discountVal = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
-            const finalTotal = subtotal - discountVal + shippingCost;
+            const netProducts = subtotal - discountVal;
+            const shippingCost = Number(storeData.govShipping[govName] ?? 65);
+
+            const depositProductsPart = Math.round(netProducts * ratio);
+            const paidNow = depositProductsPart + shippingCost;
+            const remainingCOD = netProducts - depositProductsPart;
+            const finalTotal = netProducts + shippingCost;
+
             const orderId = 'RB' + Math.floor(100000 + Math.random() * 900000);
             const dateStr = new Date().toLocaleString('ar-EG');
 
@@ -1557,13 +1867,16 @@
                 name,
                 phone,
                 address: `${govName} - ${address}`,
-                payMethod,
+                payMethod: `${payMethod} (مقدم ${Math.round(ratio*100)}% + الشحن)`,
                 items: [...cart],
+                netProducts,
                 shipping: shippingCost,
                 discount: discountVal,
+                paidNow,
+                remainingCOD,
                 total: finalTotal,
                 reward: rewardNote,
-                status: 'قيد المراجعة والتجهيز ⏳'
+                status: 'تم استلام العربون وقيد التجهيز ⏳'
             };
 
             ordersLog.unshift(newOrder);
@@ -1573,11 +1886,9 @@
             saveAllToStorage();
             updateCartBadgeAndUI();
 
-            // إرسال تفاصيل الأوردر فوراً للمالك على تليجرام
             const itemsSummary = newOrder.items.map(i => `- ${i.title} (×${i.qty})`).join('\n');
-            notifyOwnerInstantly(`🛍️ أوردر جديد رقم: #${orderId}\nالعميل: ${name}\nالهاتف: ${phone}\nالعنوان: ${newOrder.address}\nالدفع: ${payMethod}\nالهدية: ${rewardNote}\nالمنتجات:\n${itemsSummary}\nالإجمالي النهائي: ${finalTotal} ج.م`);
+            notifyOwnerInstantly(`🛍️ أوردر جديد مؤكد رقم: #${orderId}\nالعميل: ${name}\nالهاتف: ${phone}\nالمحافظة والعنوان: ${newOrder.address}\nوسيلة الدفع: ${newOrder.payMethod}\n✅ المدفوع مقدماً (بالشحن): ${paidNow} ج.م\n📦 المتبقي عند الاستلام: ${remainingCOD} ج.م\nالهدية: ${rewardNote}\nالمنتجات:\n${itemsSummary}`);
 
-            // عرض الفاتورة الإلكترونية المعتمدة فوراً للعميل
             displayOfficialInvoice(newOrder);
         }
 
@@ -1590,9 +1901,10 @@
             document.getElementById('invPhone').textContent = order.phone;
             document.getElementById('invAddress').textContent = order.address;
             document.getElementById('invPayMethod').textContent = order.payMethod;
+            document.getElementById('invNetProducts').textContent = `${order.netProducts} ج.م`;
             document.getElementById('invShipping').textContent = `${order.shipping} ج.م`;
-            document.getElementById('invDiscount').textContent = `${order.discount} ج.م`;
-            document.getElementById('invTotal').textContent = `${order.total} ج.م`;
+            document.getElementById('invPaidNow').textContent = `${order.paidNow} ج.م`;
+            document.getElementById('invRemainingCOD').textContent = `${order.remainingCOD} ج.م`;
 
             let itemsHTML = order.items.map(i => `
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
@@ -1622,21 +1934,20 @@
             });
         }
 
-        /* --- 10. تتبع حالة الطلب بالرقم أو الكود --- */
         function openTrackModal() {
             showCustomModal("🚚 تتبع حالة طلبك", "أدخل رقم هاتفك أو رقم الفاتورة (مثال: RB123456):", "prompt", (query) => {
                 if (!query) return;
                 const q = query.trim();
                 const found = ordersLog.find(o => o.id.toLowerCase() === q.toLowerCase() || o.phone === q);
                 if (found) {
-                    showCustomModal("✅ تفاصيل حالة طلبك", `رقم الطلب: ${found.id}\nالعميل: ${found.name}\nالإجمالي: ${found.total} ج.م\n\nالحالة الحالية: [ ${found.status} ]`, "alert");
+                    showCustomModal("✅ تفاصيل حالة طلبك", `رقم الطلب: ${found.id}\nالعميل: ${found.name}\nالمدفوع مقدماً: ${found.paidNow} ج.م\nالمتبقي عند الاستلام: ${found.remainingCOD} ج.م\n\nالحالة الحالية: [ ${found.status} ]`, "alert");
                 } else {
                     showCustomModal("🔍 تتبع الطلب", "لم نجد طلباً مسجلاً بهذا الرقم على هذا الجهاز، أو أن طلبك قيد المراجعة الأولية لدى الإدارة.", "alert");
                 }
             }, "رقم الهاتف أو رقم الطلب");
         }
 
-        /* --- 11. لوحة تحكم المالك المؤمنة بالكامل (5 ضغطات + تصفير الجلسة عند الإغلاق) --- */
+        /* --- 10. لوحة تحكم المالك المؤمنة بالكامل --- */
         let logoTapCount = 0;
         let logoTapTimer = null;
 
@@ -1645,7 +1956,6 @@
             clearTimeout(logoTapTimer);
             if (logoTapCount >= 5) {
                 logoTapCount = 0;
-                // يطلب الباسورد في كل مرة بدون استثناء طالما اللوحة مغلقة
                 showCustomModal("🔒 بوابة المالك السرية", "أدخل كلمة مرور المالك لفتح لوحة التحكم الشاملة:", "password", (enteredPin) => {
                     if (enteredPin === storeData.adminPin) {
                         isAdminAuthenticated = true;
@@ -1661,7 +1971,7 @@
         }
 
         function closeAdminPanel() {
-            isAdminAuthenticated = false; // تصفير فوري للأمان حتى لا تفتح بدون باسورد أبداً
+            isAdminAuthenticated = false;
             document.getElementById('adminModal').style.display = 'none';
         }
 
@@ -1675,18 +1985,18 @@
 
         function loadAdminDataIntoCMS() {
             if (!isAdminAuthenticated) return;
-            // تحديث الإحصائيات
             const totalSales = ordersLog.reduce((sum, o) => sum + o.total, 0);
             document.getElementById('statTotalSales').textContent = `${totalSales} ج.م`;
             document.getElementById('statOrdersCount').textContent = ordersLog.length;
             document.getElementById('statCodesCount').textContent = wheelCodesLog.length;
 
-            // تعبئة خانات النصوص والروابط
             document.getElementById('cfgStoreName').value = storeData.name;
             document.getElementById('cfgLogoUrl').value = storeData.logo;
             document.getElementById('cfgTicker').value = storeData.ticker;
             document.getElementById('cfgAboutStory').value = storeData.aboutStory;
-            document.getElementById('cfgVodafone').value = storeData.vodafone;
+            document.getElementById('cfgCashNumber').value = storeData.cashNumber;
+            document.getElementById('cfgInstapay').value = storeData.instapay;
+            document.getElementById('cfgBankAccount').value = storeData.bankAccount;
             document.getElementById('cfgAdminPin').value = storeData.adminPin;
             document.getElementById('cfgFb').value = storeData.fb;
             document.getElementById('cfgIg').value = storeData.ig;
@@ -1698,7 +2008,16 @@
             document.getElementById('cfgSalesPopupActive').checked = storeData.salesPopupActive;
             document.getElementById('cfgPopupCities').value = storeData.popupCities;
 
-            // قائمة المنتجات مع أزرار التعديل والحذف الفعلي النهائي
+            // بناء شبكة أسعار شحن الـ 27 محافظة
+            const shipGrid = document.getElementById('adminGovShippingGrid');
+            shipGrid.innerHTML = EGYPT_27_GOVS.map(g => `
+                <div style="background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:0.75rem; font-weight:700;">${g}:</span>
+                    <input type="number" class="gov-ship-inp" data-gov="${g}" value="${storeData.govShipping[g] ?? 65}" style="width:65px; padding:4px; background:var(--bg-input); border:1px solid var(--gold); color:var(--text-main); border-radius:5px; text-align:center; font-size:0.78rem;">
+                </div>
+            `).join('');
+
+            // قائمة المنتجات
             const pList = document.getElementById('adminProductsList');
             pList.innerHTML = products.map(p => `
                 <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:8px 10px; border-radius:8px; margin-bottom:6px; font-size:0.8rem;">
@@ -1713,7 +2032,7 @@
                 </div>
             `).join('');
 
-            // قائمة صندوق الهدايا (+1500ج)
+            // قائمة صندوق الهدايا
             const gList = document.getElementById('adminGiftList');
             gList.innerHTML = products.map(p => `
                 <label style="display:flex; align-items:center; gap:8px; background:var(--bg-input); padding:8px; border-radius:8px; margin-bottom:6px; font-size:0.8rem; cursor:pointer;">
@@ -1722,24 +2041,24 @@
                 </label>
             `).join('');
 
-            // سجل الطلبات وتغيير حالة الطلب
+            // سجل الطلبات
             const oLog = document.getElementById('adminOrdersLog');
             oLog.innerHTML = ordersLog.length === 0 ? '<p style="color:var(--text-muted);">لا توجد طلبات مسجلة بعد.</p>' : ordersLog.map(o => `
                 <div style="background:var(--bg-input); padding:10px; border-radius:8px; margin-bottom:8px; border-right:3px solid var(--gold);">
-                    <div><strong>#${o.id}</strong> — ${o.name} (${o.phone}) — <strong style="color:var(--gold);">${o.total} ج.م</strong></div>
+                    <div><strong>#${o.id}</strong> — ${o.name} (${o.phone})</div>
+                    <div style="color:var(--success); font-weight:800; font-size:0.75rem;">المدفوع مقدماً: ${o.paidNow || o.total} ج.م | المتبقي عند الاستلام: ${o.remainingCOD ?? 0} ج.م</div>
                     <div style="color:var(--text-muted); font-size:0.72rem;">${o.address} | ${o.payMethod} | مكافأة: ${o.reward}</div>
                     <div style="margin-top:6px; display:flex; align-items:center; gap:6px;">
                         <span>الحالة:</span>
                         <select class="custom-select" style="margin-bottom:0; padding:4px 8px; width:auto;" onchange="updateOrderStatus('${o.id}', this.value)">
-                            <option value="قيد المراجعة والتجهيز ⏳" ${o.status.includes('المراجعة') ? 'selected' : ''}>قيد المراجعة والتجهيز ⏳</option>
+                            <option value="تم استلام العربون وقيد التجهيز ⏳" ${o.status.includes('التجهيز') ? 'selected' : ''}>تم استلام العربون وقيد التجهيز ⏳</option>
                             <option value="تم التجهيز وخرج للشحن 🚚" ${o.status.includes('خرج') ? 'selected' : ''}>تم التجهيز وخرج للشحن 🚚</option>
-                            <option value="تم التسليم بنجاح ✅" ${o.status.includes('التسليم') ? 'selected' : ''}>تم التسليم بنجاح ✅</option>
+                            <option value="تم التسليم وتحصيل الباقي ✅" ${o.status.includes('التسليم') ? 'selected' : ''}>تم التسليم وتحصيل الباقي ✅</option>
                         </select>
                     </div>
                 </div>
             `).join('');
 
-            // سجل أكواد العجلة
             const wLog = document.getElementById('adminWheelCodesLog');
             wLog.innerHTML = wheelCodesLog.length === 0 ? '<p style="color:var(--text-muted);">لم تصدر أكواد بعد.</p>' : wheelCodesLog.map(c => `
                 <div style="background:var(--bg-input); padding:6px 10px; border-radius:6px; margin-bottom:4px; display:flex; justify-content:space-between;">
@@ -1747,6 +2066,21 @@
                     <span>${c.dateStr} — ${c.used ? 'تم استخدامه ✅' : 'نشط'}</span>
                 </div>
             `).join('');
+        }
+
+        function applyBulkShippingPrice() {
+            const val = Number(document.getElementById('bulkShippingInput').value);
+            if (!val && val !== 0) return;
+            document.querySelectorAll('.gov-ship-inp').forEach(inp => { inp.value = val; });
+        }
+
+        function saveShippingPricesAdmin() {
+            document.querySelectorAll('.gov-ship-inp').forEach(inp => {
+                const gov = inp.getAttribute('data-gov');
+                storeData.govShipping[gov] = Number(inp.value) || 0;
+            });
+            saveAllToStorage();
+            showCustomModal("🚚 تم الحفظ", "تم تحديث أسعار شحن الـ 27 محافظة بنجاح!", "alert");
         }
 
         function applyStoreBrandingToUI() {
@@ -1758,10 +2092,12 @@
             document.getElementById('headerLogoImg').src = storeData.logo;
             document.getElementById('faviconLink').href = storeData.logo;
 
+            const cleanWa = storeData.wa.replace(/[^0-9]/g, '');
             document.getElementById('linkFb').href = storeData.fb;
             document.getElementById('linkIg').href = storeData.ig;
             document.getElementById('linkTt').href = storeData.tt;
-            document.getElementById('linkWa').href = `https://wa.me/${storeData.wa.replace(/[^0-9]/g, '')}`;
+            document.getElementById('linkWa').href = `https://wa.me/${cleanWa}`;
+            document.getElementById('floatingWaLink').href = `https://wa.me/${cleanWa}`;
             document.getElementById('linkTg').href = storeData.tg;
         }
 
@@ -1769,9 +2105,7 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = (e) => {
-                document.getElementById('cfgLogoUrl').value = e.target.result;
-            };
+            reader.onload = (e) => { document.getElementById('cfgLogoUrl').value = e.target.result; };
             reader.readAsDataURL(file);
         }
 
@@ -1779,9 +2113,7 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = (e) => {
-                document.getElementById('newPImg').value = e.target.result;
-            };
+            reader.onload = (e) => { document.getElementById('newPImg').value = e.target.result; };
             reader.readAsDataURL(file);
         }
 
@@ -1790,7 +2122,9 @@
             storeData.logo = document.getElementById('cfgLogoUrl').value.trim() || storeData.logo;
             storeData.ticker = document.getElementById('cfgTicker').value.trim();
             storeData.aboutStory = document.getElementById('cfgAboutStory').value.trim();
-            storeData.vodafone = document.getElementById('cfgVodafone').value.trim();
+            storeData.cashNumber = document.getElementById('cfgCashNumber').value.trim();
+            storeData.instapay = document.getElementById('cfgInstapay').value.trim();
+            storeData.bankAccount = document.getElementById('cfgBankAccount').value.trim();
             storeData.adminPin = document.getElementById('cfgAdminPin').value.trim() || "2026";
             storeData.fb = document.getElementById('cfgFb').value.trim();
             storeData.ig = document.getElementById('cfgIg').value.trim();
@@ -1800,7 +2134,7 @@
 
             saveAllToStorage();
             applyStoreBrandingToUI();
-            showCustomModal("✅ تم الحفظ", "تم تحديث كافة نصوص المتجر واللوجو والروابط فوراً!", "alert");
+            showCustomModal("✅ تم الحفظ", "تم تحديث الهوية وحسابات الدفع الثلاثة والروابط بنجاح!", "alert");
         }
 
         function adminSaveProduct() {
@@ -1819,9 +2153,7 @@
 
             if (editId) {
                 const idx = products.findIndex(p => String(p.id) === String(editId));
-                if (idx > -1) {
-                    products[idx] = { ...products[idx], title, price, descr, img, badge, scarcity };
-                }
+                if (idx > -1) products[idx] = { ...products[idx], title, price, descr, img, badge, scarcity };
                 document.getElementById('editProdId').value = '';
             } else {
                 products.unshift({ id: Date.now(), title, price, descr, img, badge, scarcity, isGift: false });
@@ -1833,11 +2165,12 @@
             document.getElementById('newPImg').value = '';
             document.getElementById('newPBadge').value = '';
             document.getElementById('newPScarcity').checked = false;
+            document.getElementById('aiSuggestionsBox').style.display = 'none';
 
             saveAllToStorage();
             renderProductsGrid();
             loadAdminDataIntoCMS();
-            showCustomModal("✅ تم الحفظ", "تم حفظ المنتج وتحديث المتجر بنجاح!", "alert");
+            showCustomModal("✅ تم الحفظ", "تم حفظ المنتج في المتجر بنجاح!", "alert");
         }
 
         function adminEditProduct(id) {
@@ -1852,7 +2185,6 @@
             document.getElementById('newPScarcity').checked = !!p.scarcity;
         }
 
-        /* إصلاح جذري ونهائي لزر حذف المنتج */
         function adminDeleteProduct(id) {
             products = products.filter(p => Number(p.id) !== Number(id));
             cart = cart.filter(c => Number(c.id) !== Number(id));
@@ -1860,23 +2192,17 @@
             renderProductsGrid();
             updateCartBadgeAndUI();
             loadAdminDataIntoCMS();
-            showCustomModal("🗑️ تم الحذف النهائي", "تم حذف المنتج نهائياً من الواجهة ومن ذاكرة المتجر.", "alert");
+            showCustomModal("🗑️ تم الحذف النهائي", "تم حذف المنتج نهائياً من المتجر.", "alert");
         }
 
         function toggleProductGiftStatus(id, isChecked) {
             const p = products.find(x => Number(x.id) === Number(id));
-            if (p) {
-                p.isGift = isChecked;
-                saveAllToStorage();
-            }
+            if (p) { p.isGift = isChecked; saveAllToStorage(); }
         }
 
         function updateOrderStatus(orderId, newStatus) {
             const ord = ordersLog.find(o => o.id === orderId);
-            if (ord) {
-                ord.status = newStatus;
-                saveAllToStorage();
-            }
+            if (ord) { ord.status = newStatus; saveAllToStorage(); }
         }
 
         function savePopupSettings() {
@@ -1889,15 +2215,15 @@
             storeData.tgBotToken = document.getElementById('cfgTgBotToken').value.trim();
             storeData.tgChatId = document.getElementById('cfgTgChatId').value.trim();
             saveAllToStorage();
-            notifyOwnerInstantly("✅ تم ربط المتجر ببوت التليجرام بنجاح! ستصلك هنا جميع الأكواد والطلبات الفورية.");
-            showCustomModal("📲 تم الربط", "تم حفظ إعدادات تليجرام وإرسال رسالة اختبار فورية لك!", "alert");
+            notifyOwnerInstantly("✅ تم ربط المتجر ببوت التليجرام بنجاح! يمكنك الآن استقبال الإشعارات أو إرسال منتجات للبوت لنشرها تلقائياً.");
+            showCustomModal("🤖 تم ربط البوت", "تم حفظ إعدادات بوت تليجرام بنجاح!", "alert");
         }
 
         function toggleEmergencyLockAdmin() {
             storeData.emergencyOff = !storeData.emergencyOff;
             saveAllToStorage();
             document.getElementById('emergency-lock').style.display = storeData.emergencyOff ? 'flex' : 'none';
-            showCustomModal("حالة الطوارئ", storeData.emergencyOff ? "تم إغلاق المتجر مؤقتاً أمام الزوار." : "تم إعادة فتح المتجر للزوار.", "alert");
+            showCustomModal("حالة الطوارئ", storeData.emergencyOff ? "تم إغلاق المتجر مؤقتاً." : "تم إعادة فتح المتجر.", "alert");
         }
 
         function exportStoreBackupJSON() {
@@ -1926,7 +2252,7 @@
                     applyStoreBrandingToUI();
                     renderProductsGrid();
                     loadAdminDataIntoCMS();
-                    showCustomModal("✅ تم الاسترجاع", "تم استعادة النسخة الاحتياطية للمتجر بالكامل بنجاح!", "alert");
+                    showCustomModal("✅ تم الاسترجاع", "تم استعادة النسخة الاحتياطية للمتجر بنجاح!", "alert");
                 } catch (err) {
                     showCustomModal("خطأ", "ملف النسخة الاحتياطية غير صالح!", "alert");
                 }
@@ -1934,7 +2260,6 @@
             reader.readAsText(file);
         }
 
-        /* --- 12. الميزات التكميلية (15 لغة، قصتنا، الوضع الليلي، إشعارات الـ 10 دقائق، نافذة الخروج، PWA) --- */
         function changeStoreLanguage(langCode) {
             const selectEl = document.querySelector('.goog-te-combo');
             if (selectEl) {
@@ -1951,7 +2276,7 @@
 
         function showContactUsModal() {
             toggleMenuDrawer(false);
-            showCustomModal("📞 خدمة العملاء الملكية", `نحن متواجدون لخدمتكم على مدار الساعة!\n\nرقم التواصل المباشر واتساب وفودافون كاش:\n${storeData.vodafone}`, "alert");
+            showCustomModal("📞 خدمة العملاء وحسابات الدفع", `نسعد بخدمتكم على مدار الساعة:\n\n📲 محفظة كاش: ${storeData.cashNumber}\n⚡ إنستا باي: ${storeData.instapay}\n🏦 الحساب البنكي: ${storeData.bankAccount}`, "alert");
         }
 
         function toggleThemeMode() {
@@ -1960,7 +2285,6 @@
             document.getElementById('themeIcon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
 
-        // إشعارات المبيعات الحية كل 10 دقائق (مع ظهور أولي بعد 20 ثانية)
         function triggerLiveSalesPopup() {
             if (!storeData.salesPopupActive || products.length === 0) return;
             const cities = storeData.popupCities.split(',').map(c => c.trim()).filter(Boolean);
@@ -1975,18 +2299,16 @@
             setTimeout(() => popup.classList.remove('show'), 6000);
         }
         setTimeout(triggerLiveSalesPopup, 20000);
-        setInterval(triggerLiveSalesPopup, 600000); // كل 10 دقائق بالضبط
+        setInterval(triggerLiveSalesPopup, 600000);
 
-        // نافذة الخروج الذكية (Exit-Intent)
         let exitIntentShown = false;
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY < 10 && cart.length > 0 && !exitIntentShown) {
                 exitIntentShown = true;
-                showCustomModal("🎁 لا تفوت هديتك الملكية!", "لديك منتجات رائعة في حقيبة التسوق! أكمل طلبك الآن واستفد من خصم عجلة الحظ اليومي قبل انتهائه!", "alert");
+                showCustomModal("🎁 لا تفوت هديتك الملكية!", "لديك منتجات رائعة في حقيبة التسوق! أكمل طلبك الآن واستفد من خصم عجلة الحظ اليومي!", "alert");
             }
         });
 
-        // تحويل المتجر لتطبيق قابل للتنزيل (PWA) مع تحديث تلقائي فوري
         let deferredPWAPrompt = null;
         function setupDynamicPWA() {
             const manifestObj = {
@@ -1999,10 +2321,9 @@
                 icons: [{ src: storeData.logo, sizes: "512x512", type: "image/png" }]
             };
             const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/json' });
-            const manifestURL = URL.createObjectURL(manifestBlob);
             const linkEl = document.createElement('link');
             linkEl.rel = 'manifest';
-            linkEl.href = manifestURL;
+            linkEl.href = URL.createObjectURL(manifestBlob);
             document.head.appendChild(linkEl);
 
             if ('serviceWorker' in navigator) {
@@ -2031,7 +2352,6 @@
             });
         }
 
-        /* --- 13. تشغيل المتجر عند فتح الصفحة --- */
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('splash-screen').classList.add('hidden');
@@ -2046,6 +2366,8 @@
             updateCartBadgeAndUI();
             document.getElementById('wishBadgeCount').textContent = wishlist.length;
             setupDynamicPWA();
+            // مزامنة تلقائية صامتة مع بوت التليجرام عند فتح المتجر
+            syncProductsFromTelegramBot(false);
         });
     </script>
 </body>
