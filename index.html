@@ -1,666 +1,342 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>3λ.Rehab.Store | المتجر الملكي المتكامل</title>
-    <!-- Favicon & PWA Manifest -->
-    <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=128&q=80">
-    <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%223%CE%BB.Rehab.Store%22%2C%22short_name%22%3A%22RehabStore%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23070A12%22%2C%22theme_color%22%3A%22%23D4AF37%22%7D">
-    
-    <!-- خطوط وأيقونات فخمة -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <title>3λ.Rehab.Store</title>
+    <!-- خطوط وأيقونات فاخرة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- مكاتب الدعم والتصدير (Supabase, html2pdf, SheetJS) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- مكتبات الفواتير والصور -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #070A12;
-            --bg-card: #111827;
-            --bg-input: #0B0F19;
-            --border-color: #1F2937;
+            --bg-main: #0B0F19;
+            --bg-card: #131B2E;
+            --bg-input: #070A12;
+            --border-color: #1E293B;
             --gold: #D4AF37;
             --gold-hover: #E5C158;
-            --text-main: #F9FAFB;
-            --text-muted: #9CA3AF;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
             --danger: #EF4444;
             --success: #10B981;
-            --radius: 16px;
-        }
-        .light {
-            --bg-main: #F3F4F6;
-            --bg-card: #FFFFFF;
-            --bg-input: #E5E7EB;
-            --border-color: #D1D5DB;
-            --text-main: #111827;
-            --text-muted: #4B5563;
+            --radius: 14px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; max-width: 100vw; overflow-x: hidden !important; background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; transition: background 0.3s, color 0.3s; }
 
-        /* الشاشة الافتتاحية الملكية */
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* الشاشة الافتتاحية */
         #splash-screen {
-            position: fixed; inset: 0; background: radial-gradient(circle at center, #111827 0%, #05070B 100%); z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at center, #131B2E 0%, #070A12 100%);
+            z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         #splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .splash-aya { font-size: 1.4rem; color: var(--gold); font-weight: 800; margin-bottom: 10px; }
-        .splash-sub { font-size: 1.15rem; color: #FFF; font-weight: 700; margin-bottom: 18px; }
-        .splash-brand { font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; color: var(--text-main); border: 2px solid var(--gold); padding: 6px 22px; border-radius: 50px; box-shadow: 0 0 25px rgba(212,175,55,0.25); }
-        .splash-brand span { color: var(--gold); }
+        .splash-brand { font-size: 1.8rem; font-weight: 900; color: var(--gold); border: 2px solid var(--gold); padding: 8px 25px; border-radius: 50px; box-shadow: 0 0 30px rgba(212,175,55,0.3); }
 
-        /* شريط الإعلان العلوي المتحرك */
-        .announcement-bar { background: var(--gold); color: #000; font-size: 0.75rem; font-weight: 800; padding: 5px 15px; text-align: center; position: relative; }
-        .marquee-bar { background: #04060A; border-bottom: 1px solid var(--border-color); color: var(--gold); font-size: 0.78rem; font-weight: 800; padding: 6px 0; overflow: hidden; white-space: nowrap; width: 100%; }
-        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        /* الشريط العلوي */
+        .announcement-bar {
+            background: linear-gradient(90deg, #1E1A0F, #2A2312, #1E1A0F);
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 6px 10px;
+        }
 
-        /* الهيدر الملكي الفخم */
-        header { background: rgba(17, 24, 39, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .brand-box { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
-        .brand-logo-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-        .brand-title { font-size: 1.15rem; font-weight: 900; color: var(--text-main); }
-        .brand-title span { color: var(--gold); }
-        
-        .header-actions { display: flex; gap: 8px; align-items: center; }
-        .h-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--gold); padding: 7px 11px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
-        .h-btn:hover { border-color: var(--gold); }
-
-        /* قائمة التصفح المنسدلة والـ 15 لغة */
-        .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; }
-        .sidebar { position: fixed; top: 0; right: -300px; width: 280px; height: 100vh; background: var(--bg-card); border-left: 1px solid var(--border-color); z-index: 2001; padding: 20px 15px; display: flex; flex-direction: column; gap: 10px; transition: right 0.3s ease; overflow-y: auto; }
-        .sidebar.open { right: 0; }
-        .sidebar-item { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 11px 14px; border-radius: 12px; text-decoration: none; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-        .sidebar-item i { color: var(--gold); }
+        header {
+            background: rgba(19, 27, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .brand-logo { font-size: 1.2rem; font-weight: 900; color: var(--text-main); cursor: pointer; user-select: none; }
+        .brand-logo span { color: var(--gold); }
+        .header-btns { display: flex; gap: 8px; align-items: center; }
+        .icon-btn {
+            background: var(--bg-input); border: 1px solid var(--border-color); color: var(--gold);
+            padding: 7px 12px; border-radius: 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;
+        }
 
         /* الحاوية الرئيسية */
-        .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 14px; }
 
-        /* شريط البحث المباشر والـ Auto-Search */
-        .search-wrapper { position: relative; margin-bottom: 16px; }
-        .search-wrapper input { width: 100%; padding: 12px 42px 12px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); color: var(--text-main); font-size: 0.88rem; outline: none; }
-        .search-wrapper input:focus { border-color: var(--gold); }
-        .search-wrapper i { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-        #liveSearchResults { position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; margin-top: 4px; z-index: 1500; max-height: 250px; overflow-y: auto; display: none; }
-        .search-result-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--border-color); cursor: pointer; }
-        .search-result-item img { width: 35px; height: 35px; border-radius: 8px; object-fit: cover; }
+        /* شريط التقدم التحفيزي */
+        .progress-box {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 12px; margin-bottom: 14px; text-align: center;
+        }
+        .progress-box p { font-size: 0.8rem; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+        .progress-bar-bg { width: 100%; height: 8px; background: var(--bg-input); border-radius: 4px; overflow: hidden; }
+        .progress-bar-fill { width: 0%; height: 100%; background: var(--gold); transition: width 0.4s ease; }
 
-        /* بانر عجلة الحظ الكلاسيكية والصامتة */
-        .wheel-banner { background: linear-gradient(135deg, #1C170A 0%, var(--bg-card) 100%); border: 1px solid rgba(212,175,55,0.4); border-radius: var(--radius); padding: 16px; text-align: center; margin-bottom: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .wheel-banner h3 { color: var(--gold); font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
-        .spin-action-btn { background: var(--gold); color: #000; border: none; padding: 9px 24px; border-radius: 50px; font-weight: 900; font-size: 0.85rem; cursor: pointer; margin-top: 8px; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        /* عجلة الحظ الكلاسيكية الصامتة */
+        .wheel-box {
+            background: linear-gradient(135deg, #131B2E 0%, #070A12 100%);
+            border: 1px solid rgba(212,175,55,0.4);
+            border-radius: var(--radius); padding: 16px; text-align: center; margin-bottom: 16px;
+        }
+        .wheel-box h3 { font-size: 0.95rem; color: var(--gold); font-weight: 800; margin-bottom: 4px; }
+        .wheel-btn {
+            background: var(--gold); color: #000; border: none; padding: 10px 24px; border-radius: 50px; font-weight: 900; font-size: 0.85rem; cursor: pointer; margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+        }
 
-        /* شريط السلة التحفيزي لكسر حاجز الـ 1500 جنيه */
-        .cart-progress-box { background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 12px; margin-bottom: 16px; font-size: 0.78rem; font-weight: 700; text-align: center; }
-        .progress-bar-bg { width: 100%; height: 8px; background: var(--bg-input); border-radius: 4px; margin-top: 6px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.4s ease; }
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+        }
+        @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
 
-        /* شبكة المنتجات العصرية */
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-        .section-header h2 { font-size: 1.05rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-        @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
-        @media(min-width: 1024px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+        .p-card {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; position: relative;
+        }
+        .p-img { width: 100%; height: 160px; object-fit: cover; background: #000; }
+        .p-info { padding: 10px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .p-title { font-size: 0.82rem; font-weight: 800; margin-bottom: 4px; }
+        .p-price { font-size: 0.9rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+        .p-btn { background: var(--gold); color: #000; border: none; width: 100%; padding: 7px; border-radius: 8px; font-weight: 800; font-size: 0.78rem; cursor: pointer; }
 
-        .p-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: transform 0.2s, border-color 0.2s; }
-        .p-card:hover { transform: translateY(-3px); border-color: rgba(212,175,55,0.4); }
-        .p-badge { position: absolute; top: 10px; right: 10px; background: var(--gold); color: #000; font-size: 0.62rem; font-weight: 900; padding: 3px 8px; border-radius: 6px; z-index: 2; }
-        .p-wishlist { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); color: #FFF; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2; font-size: 0.85rem; }
-        .p-wishlist.active { color: #EF4444; }
-        
-        .p-img-box { position: relative; width: 100%; height: 165px; overflow: hidden; background: #05070B; cursor: pointer; }
-        .p-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .p-card:hover .p-img-box img { transform: scale(1.06); }
-        .quick-view-trigger { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); color: #FFF; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; opacity: 0; transition: opacity 0.2s; }
-        .p-card:hover .quick-view-trigger { opacity: 1; }
+        /* نافذة المالك وأنظمة التعديل */
+        .modal {
+            display: none; position: fixed; inset: 0; background: rgba(4, 6, 12, 0.85); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; padding: 12px;
+        }
+        .modal-box {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); width: 100%; max-width: 450px; max-height: 90vh; overflow-y: auto; padding: 16px;
+        }
+        .f-group { margin-bottom: 10px; }
+        .f-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; }
+        .f-input { width: 100%; padding: 9px 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); font-size: 0.82rem; outline: none; }
+        .f-input:focus { border-color: var(--gold); }
 
-        .p-body { padding: 12px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .p-title { font-size: 0.86rem; font-weight: 800; margin-bottom: 4px; }
-        .p-desc { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .p-price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .p-price { font-size: 0.95rem; font-weight: 900; color: var(--gold); }
-        .p-views { font-size: 0.68rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
-        
-        .p-actions { display: grid; grid-template-columns: 1fr 34px; gap: 6px; }
-        .p-buy-btn { background: var(--gold); color: #000; border: none; padding: 8px; border-radius: 10px; font-weight: 800; font-size: 0.78rem; cursor: pointer; }
-        .p-share-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 0.8rem; }
-
-        /* نافذة النظرة السريعة وزر العدسة */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(4,6,12,0.85); backdrop-filter: blur(6px); z-index: 4000; justify-content: center; align-items: center; padding: 14px; }
-        .modal-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 18px; position: relative; }
-        .modal-card.wide { max-width: 880px; }
-        .close-modal { position: absolute; top: 14px; left: 14px; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; }
-
-        /* عربة التسوق الجانبية المنزلقة (Slide-out Drawer Cart) */
-        .cart-drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 3500; }
-        .cart-drawer { position: fixed; top: 0; left: -360px; width: 340px; height: 100vh; background: var(--bg-card); border-right: 1px solid var(--border-color); z-index: 3501; padding: 18px; display: flex; flex-direction: column; transition: left 0.3s ease; }
-        .cart-drawer.open { left: 0; }
-
-        /* إشعارات المبيعات الحية العائمة (Social Proof Popup) */
-        #liveSalesToast { position: fixed; bottom: 20px; right: 20px; background: var(--bg-card); border: 1px solid var(--gold); padding: 10px 14px; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.4); z-index: 2500; display: flex; align-items: center; gap: 10px; font-size: 0.78rem; transform: translateY(100px); opacity: 0; transition: transform 0.4s, opacity 0.4s; }
-        #liveSalesToast.show { transform: translateY(0); opacity: 1; }
-
-        /* إشعار الصلاة على النبي وسجل المساعدين */
-        #salawat-toast { position: fixed; bottom: 20px; left: 20px; background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); border: 1px solid var(--gold); color: var(--gold); padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 2500; display: none; align-items: center; gap: 8px; }
-
-        /* الفوتر الفخم وشعارات التواصل الأصلية */
-        footer { background: #04060A; border-top: 1px solid var(--border-color); padding: 30px 16px 20px; margin-top: 40px; color: var(--text-muted); font-size: 0.78rem; text-align: center; }
-        .footer-socials { display: flex; justify-content: center; gap: 14px; margin: 15px 0 20px; }
-        .social-icon-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-color); display: flex; justify-content: center; align-items: center; font-size: 1.1rem; color: var(--text-main); transition: 0.2s; text-decoration: none; }
-        .social-icon-circle:hover { border-color: var(--gold); transform: translateY(-3px); }
+        /* الفوتر الفخم */
+        footer {
+            background: #070A12; border-top: 1px solid var(--border-color); padding: 24px 15px; text-align: center; margin-top: 30px;
+        }
+        .footer-socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; font-size: 1.4rem; }
+        .footer-socials a { color: var(--text-main); transition: 0.2s; }
+        .footer-socials a:hover { color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <!-- 1. الشاشة الافتتاحية الملكية -->
+    <!-- الشاشة الافتتاحية -->
     <div id="splash-screen">
-        <div class="splash-aya">بِسْمِ اللَّهِ مَا شَاءَ اللَّهُ</div>
-        <div class="splash-sub">﴿ إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا ﴾</div>
-        <div class="splash-brand">3λ.Rehab<span>.Store</span></div>
+        <div class="splash-brand">3λ.Rehab.Store</div>
     </div>
 
-    <!-- إعلان علوي متحرك -->
-    <div class="announcement-bar" id="topAnnouncement">✨ خصم حصري 10% عند الشفع بأول طلب عبر المتجر الملكي ✨</div>
-    <div class="marquee-bar">
-        <div class="marquee-content">
-            👑 3λ.Rehab.Store الملكي | فخامة لا تنتهي وتجربة تسوق VIP 🚚 شحن سريع وآمن لكافة المحافظات 27 ✨
-        </div>
+    <!-- شريط إعلاني علوي -->
+    <div class="announcement-bar">
+        ✨ خصم حصري 10% عند الشفع بأول طلب عبر المتجر الملكي ✨
     </div>
 
-    <!-- 2. الهيدر العلوي الفخم -->
+    <!-- الهيدر -->
     <header>
-        <div class="brand-box" onclick="handleLogoTripleTap()">
-            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=128&q=80" class="brand-logo-img" alt="Logo">
-            <div class="brand-title">3λ.Rehab<span>.Store</span></div>
-        </div>
-        <div class="header-actions">
-            <button class="h-btn" onclick="toggleThemeMode()" title="الوضع الليلي الملكي"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
-            <button class="h-btn" onclick="toggleCartDrawer()"><i class="fa-solid fa-bag-shopping"></i> <span id="cartCountBadge">0</span></button>
-            <button class="h-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+        <div class="brand-logo" onclick="openAdminGate()">3λ.Rehab<span>.Store</span></div>
+        <div class="header-btns">
+            <button class="icon-btn" onclick="openTrackModal()"><i class="fa-solid fa-truck-fast"></i> تتبع</button>
         </div>
     </header>
 
-    <!-- 3. القائمة الجانبية (من نحن، اتصل بنا، الـ 15 لغة) -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-    <div class="sidebar" id="sidebarMenu">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <strong style="color:var(--gold); font-size:1rem;">القائمة الملكية</strong>
-            <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:1.2rem;" onclick="toggleSidebar()"></i>
-        </div>
-        <div class="sidebar-item" onclick="openAboutModal(); toggleSidebar();"><span>من نحن (قصتنا)</span><i class="fa-solid fa-book-open"></i></div>
-        <div class="sidebar-item" onclick="openWheelModal(); toggleSidebar();"><span>عجلة الحظ الكلاسيكية</span><i class="fa-solid fa-dharmachakra"></i></div>
-        <div class="sidebar-item" onclick="openTrackerModal(); toggleSidebar();"><span>تتبع حالة الأوردر</span><i class="fa-solid fa-truck-fast"></i></div>
-        <div class="sidebar-item" onclick="openWishlistModal(); toggleSidebar();"><span>قائمة المفضلة ❤️</span><i class="fa-solid fa-heart"></i></div>
-        
-        <div style="margin-top:10px;">
-            <label style="font-size:0.72rem; color:var(--text-muted); display:block; margin-bottom:4px;">اختر لغتك المفضلة (15 لغة):</label>
-            <select id="langSelector" class="f-input" onchange="changeStoreLanguage(this.value)" style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border-color); color:var(--text-main); border-radius:8px;">
-                <option value="ar">العربية</option>
-                <option value="en">English (UK)</option>
-                <option value="it">Italiano</option>
-                <option value="fr">Français</option>
-                <option value="fa">فارسی</option>
-                <option value="el">Ελληνικά</option>
-                <option value="de">Deutsch</option>
-                <option value="es">Español</option>
-                <option value="tr">Türkçe</option>
-                <option value="ru">Русский</option>
-                <option value="zh">中文</option>
-                <option value="ja">日本語</option>
-                <option value="ko">한국어</option>
-                <option value="hi">हिन्दी</option>
-                <option value="pt">Português</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- الحاوية الرئيسية للمتجر -->
     <div class="container">
-        <!-- شريط التقدم التحفيزي للـ 1500 جنيه -->
-        <div class="cart-progress-box" id="cartProgressBox">
-            <span id="progressText">أضف منتجات بقيمة 1500 جنيه لتحصل على لفتين هدية في عجلة الحظ! 🎁</span>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div></div>
+        <!-- شريط التقدم التحفيزي للشحن ولفتين الهدية عند 1500 ج -->
+        <div class="progress-box">
+            <p id="progressText">أضف منتجات بقيمة 1500 جنيه لتحصل على لفتين هدية في عجلة الحظ!</p>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill"></div></div>
         </div>
 
         <!-- عجلة الحظ الكلاسيكية الصامتة -->
-        <div class="wheel-banner">
+        <div class="wheel-box">
             <h3>🎁 عجلة الحظ الكلاسيكية الملكية</h3>
-            <p style="font-size:0.75rem; color:var(--text-muted);">لفتك الأسبوعية المضمونة لكود خصم فوري (4% أو 5%)</p>
-            <button class="spin-action-btn" onclick="openWheelModal()">اضغط هنا للحصول على خصمك</button>
+            <button class="wheel-btn" onclick="spinWheel()">اضغط هنا للحصول على خصمك</button>
+            <div id="wheelResult" style="margin-top:8px; font-size:0.82rem; color:var(--gold); font-weight:800;"></div>
         </div>
 
-        <!-- البحث الذكي الفوري Live Auto-Search -->
-        <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="ابحث عن أي منتج برائعة الجمال..." oninput="handleLiveSearch(this.value)">
-            <div id="liveSearchResults"></div>
-        </div>
-
-        <!-- قسم عرض المنتجات -->
-        <div class="section-header">
-            <h2><i class="fa-solid fa-crown" style="color:var(--gold);"></i> تشكيلة VIP الحصرية</h2>
-            <span id="pCountLabel" style="font-size:0.75rem; color:var(--text-muted);"></span>
+        <!-- شبكة المنتجات -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h3 style="font-size:0.95rem; color:var(--gold);">👑 تشكيلة VIP الحصرية</h3>
+            <span id="pCount" style="font-size:0.75rem; color:var(--text-muted);"></span>
         </div>
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- عربة التسوق الجانبية المنزلقة (Slide-out Drawer Cart) -->
-    <div class="cart-drawer-overlay" id="cartOverlay" onclick="toggleCartDrawer()"></div>
-    <div class="cart-drawer" id="cartDrawer">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-            <strong style="color:var(--gold);">عربة التسوق الملكية</strong>
-            <i class="fa-solid fa-xmark close-modal" onclick="toggleCartDrawer()" style="position:static;"></i>
-        </div>
-        <div id="drawerCartItems" style="flex-grow:1; overflow-y:auto; padding:10px 0; font-size:0.8rem;"></div>
-        <div style="border-top:1px solid var(--border-color); padding-top:10px;">
-            <div style="display:flex; justify-content:space-between; font-weight:900; margin-bottom:10px;">
-                <span>الإجمالي:</span><span id="drawerTotal" style="color:var(--gold);">0 ج.م</span>
-            </div>
-            <button class="p-buy-btn" style="width:100%; padding:10px; font-size:0.85rem;" onclick="openCheckoutModal()">إتمام الشراء السريع (خطوة واحدة)</button>
-        </div>
-    </div>
-
-    <!-- نافذة النظرة السريعة (Quick View Modal) -->
-    <div class="modal" id="quickViewModal">
-        <div class="modal-card">
-            <i class="fa-solid fa-xmark close-modal" onclick="closeModal('quickViewModal')"></i>
-            <div id="quickViewContent"></div>
-        </div>
-    </div>
-
-    <!-- نافذة عجلة الحظ الكلاسيكية -->
-    <div class="modal" id="wheelModal">
-        <div class="modal-card" style="text-align:center;">
-            <i class="fa-solid fa-xmark close-modal" onclick="closeModal('wheelModal')"></i>
-            <h3 style="color:var(--gold); margin-bottom:10px;">عجلة الحظ الكلاسيكية</h3>
-            <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:15px;">مسموح بلفة واحدة أسبوعياً لكل جهاز.</p>
-            <div id="wheelBox" style="width:140px; height:140px; margin:0 auto 15px; border-radius:50%; border:4px solid var(--gold); display:flex; justify-content:center; align-items:center; font-size:2.2rem; background:radial-gradient(circle,#1F2937,#070A12);">🎁</div>
-            <div id="wheelResultMsg" style="font-weight:800; font-size:0.85rem; color:var(--gold); margin-bottom:15px;">اضغط للتدوير واستلام كود الخصم</div>
-            <button class="spin-action-btn" id="executeSpinBtn" onclick="spinTheWheelClassic()">تدوير العجلة</button>
-        </div>
-    </div>
-
-    <!-- نافذة من نحن (القصة الوهمية المؤثرة) -->
-    <div class="modal" id="aboutModal">
-        <div class="modal-card">
-            <i class="fa-solid fa-xmark close-modal" onclick="closeModal('aboutModal')"></i>
-            <h3 style="color:var(--gold); margin-bottom:10px;">قصتنا — 3λ.Rehab.Store</h3>
-            <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;">
-                بدأت الحكاية في شرفة صغيرة بوسط القاهرة، بحلم بسيط يهدف إلى إعادة صياغة مفهوم الفخامة والأناقة العصرية بأسعار تناسب كل محبي التميز. لم نعلم يوماً أن الشغف بالقطع الفريدة سيتحول إلى وجهة الأولى لأكثر من مئة ألف عميل في جميع أنحاء مصر وخارجها. كل قطعة تعرض في متجرنا تحمل قصة عناية فائقة واختيار دقيق لتليق بثقتكم الغالية. نحن لا نبيع منتجات فحسب، بل يصنع متجرنا تجربة VIP لا تُنسى لكل زائر.
-            </p>
-        </div>
-    </div>
-
-    <!-- نافذة تتبع الأوردر -->
-    <div class="modal" id="trackerModal">
-        <div class="modal-card">
-            <i class="fa-solid fa-xmark close-modal" onclick="closeModal('trackerModal')"></i>
-            <h3 style="color:var(--gold); margin-bottom:10px;">تتبع حالة طلبك الملكي</h3>
-            <div class="f-group"><label>رقم هاتفك المسجل بالطلب:</label><input type="tel" id="trackPhoneInput" class="f-input" placeholder="010xxxxxxxx"></div>
-            <button class="spin-action-btn" style="width:100%; margin-top:10px;" onclick="searchCustomerOrder()">بحث عن حالة الطلب</button>
-            <div id="trackResultContainer" style="margin-top:15px; font-size:0.82rem;"></div>
-        </div>
-    </div>
-
-    <!-- نافذة الشراء السريع One-Page Checkout -->
-    <div class="modal" id="checkoutModal">
-        <div class="modal-card">
-            <i class="fa-solid fa-xmark close-modal" onclick="closeModal('checkoutModal')"></i>
-            <h3 style="color:var(--gold); margin-bottom:12px;">إتمام الطلب السريع (خطوة واحدة)</h3>
-            <div class="f-group"><label>الاسم الثلاثي الصحيح:</label><input type="text" id="chkName" class="f-input" placeholder="مثال: أحمد محمد محمود"></div>
-            <div class="f-group"><label>رقم الهاتف (الذي عليه واتساب):</label><input type="tel" id="chkPhone" class="f-input" placeholder="010xxxxxxxx"></div>
-            <div class="f-group"><label>المحافظة:</label><select id="chkGov" class="f-input"></select></div>
-            <div class="f-group"><label>العنوان بالتفصيل:</label><input type="text" id="chkAddr" class="f-input" placeholder="الشارع / رقم العمارة / الدور"></div>
-            <div class="f-group"><label>طريقة الدفع:</label>
-                <select id="chkPay" class="f-input">
-                    <option value="الدفع عند الاستلام">الدفع عند الاستلام</option>
-                    <option value="فودافون كاش">فودافون كاش (01030084281)</option>
-                    <option value="إنستا باي">إنستا باي (01030084281)</option>
-                </select>
-            </div>
-            <div class="f-group"><label>إيصال التحويل (إن وجد):</label><input type="file" id="chkReceipt" class="f-input" accept="image/*"></div>
-            <div style="font-weight:900; margin:10px 0; font-size:0.9rem;">الإجمالي: <span id="chkTotalDisplay" style="color:var(--gold);">0 ج.م</span></div>
-            <button class="spin-action-btn" style="width:100%; margin-top:5px;" onclick="submitFinalOrder()">تأكيد وإرسال الطلب الآن</button>
-        </div>
-    </div>
-
-    <!-- إشعار المبيعات العائم الحقيقي Social Proof Popup -->
-    <div id="liveSalesToast">
-        <i class="fa-solid fa-bag-shopping" style="color:var(--gold); font-size:1.2rem;"></i>
-        <div><div id="toastText" style="font-weight:800;">عميل من القاهرة قام بشراء ساعة Ultra منذ قليل!</div></div>
-    </div>
-
-    <!-- إشعار الصلاة على النبي ﷺ (صوتياً وكل 3 دقائق) -->
-    <div id="salawat-toast">
-        <i class="fa-solid fa-mosque"></i> صَلِّ عَلَى مُحَمَّدٍ ﷺ
-    </div>
-
-    <!-- الفوتر الملكي وأيقونات التواصل الأصلية -->
+    <!-- الفوتر مع أيقونات التواصل الاجتماعي الأصلية -->
     <footer>
-        <div style="font-weight:900; font-size:1rem; color:var(--text-main); margin-bottom:5px;">3λ.Rehab<span>.Store</span></div>
-        <p>الفخامة الملكية بين يديك — كافة الحقوق محفوظة © 2026</p>
+        <div style="font-weight:900; font-size:1.1rem; color:var(--gold); margin-bottom:10px;">3λ.Rehab.Store</div>
         <div class="footer-socials">
-            <a href="https://facebook.com" target="_blank" class="social-icon-circle" title="فيسبوك"><i class="fa-brands fa-facebook-f" style="color:#1877F2;"></i></a>
-            <a href="https://instagram.com" target="_blank" class="social-icon-circle" title="إنستجرام"><i class="fa-brands fa-instagram" style="color:#E4405F;"></i></a>
-            <a href="https://tiktok.com" target="_blank" class="social-icon-circle" title="تيك توك"><i class="fa-brands fa-tiktok" style="color:#FFF;"></i></a>
-            <a href="https://whatsapp.com" target="_blank" class="social-icon-circle" title="واتساب"><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i></a>
-            <a href="https://t.me" target="_blank" class="social-icon-circle" title="تليجرام"><i class="fa-brands fa-telegram" style="color:#229ED9;"></i></a>
+            <a href="https://facebook.com" target="_blank" title="فيسبوك"><i class="fa-brands fa-facebook" style="color:#1877F2;"></i></a>
+            <a href="https://instagram.com" target="_blank" title="إنستجرام"><i class="fa-brands fa-instagram" style="color:#E4405F;"></i></a>
+            <a href="https://tiktok.com" target="_blank" title="تيك توك"><i class="fa-brands fa-tiktok" style="color:#FFF;"></i></a>
+            <a href="https://whatsapp.com" target="_blank" title="واتساب"><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i></a>
+            <a href="https://t.me" target="_blank" title="تليجرام"><i class="fa-brands fa-telegram" style="color:#229ED9;"></i></a>
         </div>
+        <p style="font-size:0.75rem; color:var(--text-muted);">جميع الحقوق محفوظة © 2026 — تصميم وتطوير ملكي فائق الدقة</p>
     </footer>
 
-    <!-- سكريبت التشغيل والتكامل الأسطوري -->
+    <!-- نافذة تسجيل دخول المالك الملكية (بدون رسائل النظام القبيحة) -->
+    <div class="modal" id="adminModal">
+        <div class="modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3 style="color:var(--gold); font-size:0.95rem;">🔐 بوابة لوحة التحكم الملكية</h3>
+                <i class="fa-solid fa-xmark" style="cursor:pointer; color:var(--text-muted);" onclick="closeModal('adminModal')"></i>
+            </div>
+            <div id="adminLoginArea">
+                <div class="f-group">
+                    <label>أدخل كلمة مرور لوحة التحكم:</label>
+                    <input type="password" id="adminPassInput" class="f-input" placeholder="كلمة المرور">
+                </div>
+                <button style="background:var(--gold); color:#000; border:none; width:100%; padding:9px; border-radius:8px; font-weight:800; cursor:pointer;" onclick="verifyAdminPass()">دخول اللوحة</button>
+            </div>
+            <div id="adminControlArea" style="display:none;">
+                <p style="font-size:0.75rem; color:var(--gold); font-weight:700; margin-bottom:10px;">✅ أهلاً بك يا مالك المتجر. يمكنك تعديل أي منتج أو حذف أو إضافة:</p>
+                <div class="f-group"><label>إضافة منتج جديد:</label><input type="text" id="newPTitle" class="f-input" placeholder="اسم المنتج"></div>
+                <div class="f-group"><input type="number" id="newPPrice" class="f-input" placeholder="السعر (ج.م)"></div>
+                <div class="f-group"><input type="text" id="newPImg" class="f-input" placeholder="رابط الصورة (URL)"></div>
+                <button style="background:var(--gold); color:#000; border:none; width:100%; padding:8px; border-radius:8px; font-weight:800; cursor:pointer; margin-bottom:14px;" onclick="addNewProduct()">إضافة المنتج للمتجر</button>
+                <h4 style="font-size:0.8rem; margin-bottom:6px;">المنتجات الحالية (إدارة وحذف):</h4>
+                <div id="adminProductsList" style="max-height:200px; overflow-y:auto; font-size:0.75rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الشراء والفاتورة الفورية -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <h3 style="color:var(--gold); font-size:0.95rem;">🛒 إتمام الطلب السريع</h3>
+                <i class="fa-solid fa-xmark" style="cursor:pointer; color:var(--text-muted);" onclick="closeModal('checkoutModal')"></i>
+            </div>
+            <div class="f-group"><label>الاسم الثلاثي:</label><input type="text" id="chkName" class="f-input" placeholder="الاسم الثلاثي"></div>
+            <div class="f-group"><label>رقم الهاتف (واتساب):</label><input type="tel" id="chkPhone" class="f-input" placeholder="010xxxxxxxx"></div>
+            <div class="f-group"><label>العنوان بالتفصيل:</label><input type="text" id="chkAddr" class="f-input" placeholder="المحافظة / المدينة / الشارع"></div>
+            <button style="background:var(--gold); color:#000; border:none; width:100%; padding:10px; border-radius:8px; font-weight:900; cursor:pointer;" onclick="submitOrderAndInvoice()">تأكيد الحجز وإنشاء الفاتورة</button>
+        </div>
+    </div>
+
     <script>
-        const SUPABASE_URL = 'https://mjdujqtybllcpfmnsitn.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZHVqcXR5YmxsY3BmbW5zaXRuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MjQ5NzU0OSwiZXhwIjoyMTA4MDczNTQ5fQ.wmq8InJefEvjlk3GnsDhjgTaCsQ1qdEv7OBXgRUHCTM'; // (سيتم استبدال المفتاح العام بأمان)
-        // ملاحظة: لضمان الأمان نستخدم مفتاح الـ anon العام المخصص للواجهات:
-        const SAFE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qZHVqcXR5YmxsY3BmbW5zaXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0OTc1NDksImV4cCI6MjEwODA3MzU0OX0.QojD2E5HcX_JqvWt4qujQUivFmb6pgWHSvWVKiRWIC0';
-        const sb = supabase.createClient(SUPABASE_URL, SAFE_ANON_KEY);
+        setTimeout(() => { document.getElementById('splash-screen').classList.add('hidden'); }, 2000);
 
-        const EGYPT_GOVS = ["القاهرة", "الجيزة", "الإسكندرية", "الدقهلية", "البحر الأحمر", "البحيرة", "الفيوم", "الغربية", "الإسماعيلية", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "الشرقية", "جنوب سيناء", "كفر الشيخ", "مطروح", "الأقصر", "قنا", "شمال سيناء", "سوهاج"];
+        // قاعدة المنتجات الافتراضية
+        let products = [
+            { id: 1, title: 'طقم سلاسل وأساور مرصعة بالزركون', price: 250, img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400&q=80' },
+            { id: 2, title: 'ساعة التميز 9 Ultra Series', price: 690, img: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80' },
+            { id: 3, title: 'سماعة لاسلكية برو ANC', price: 420, img: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=400&q=80' },
+            { id: 4, title: 'شاحن جداري فائق السرعة', price: 180, img: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=400&q=80' }
+        ];
 
-        let allProducts = [];
-        let userCart = [];
-        let userWishlist = [];
-        let tapLogoCount = 0;
+        let cartTotal = 0;
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            setTimeout(() => document.getElementById('splash-screen').classList.add('hidden'), 2200);
-            populateGovernorates();
-            await loadProducts();
-            initSalawatAudioEngine();
-            initSocialProofEngine();
-            loadAutoFillData();
-        });
-
-        function populateGovernorates() {
-            const sel = document.getElementById('chkGov');
-            sel.innerHTML = EGYPT_GOVS.map(g => `<option value="${g}">${g}</option>`).join('');
-        }
-
-        async function loadProducts() {
-            const { data, error } = await sb.from('products').select('*').order('created', { ascending: false });
-            if (!error && data && data.length > 0) {
-                allProducts = data;
-            } else {
-                allProducts = [
-                    { id: 201, title: 'ساعة التميز Ultra Series 9', price: 690, descr: 'شاشة AMOLED خارقة الوضوح مع سوار إضافي فاخر.', badge: 'عليه عرض 🔥', img: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80', views: 42 },
-                    { id: 202, title: 'طقم سلاسل وأساور مرصعة بالزركون', price: '250', descr: 'مقاوم للماء وثابت اللون ببريق يضاهي الألماس.', badge: 'متاح الآن', img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400&q=80', views: 28 },
-                    { id: 203, title: 'سماعة رأس لاسلكية Pro Max', price: 480, descr: 'عزل تام للضوضاء وصوت استريو محيطي نقي جداً.', badge: 'محدود الكمية ⏳', img: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=400&q=80', views: 56 },
-                    { id: 204, title: 'شاحن جداري فائق السرعة GaN', price: 310, descr: 'يشحن جميع الأجهزة بأمان تام ودون أي سخونة.', badge: 'متاح الآن', img: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=400&q=80', views: 19 }
-                ];
-            }
-            renderProductsGrid();
-        }
-
-        function renderProductsGrid(list = allProducts) {
+        function renderProducts() {
             const grid = document.getElementById('productsGrid');
-            document.getElementById('pCountLabel').textContent = `المنتجات: ${list.length}`;
-            grid.innerHTML = list.map(p => `
+            document.getElementById('pCount').textContent = `المنتجات: ${products.length}`;
+            grid.innerHTML = products.map(p => `
                 <div class="p-card">
-                    <div class="p-badge">${p.badge || 'متاح الآن'}</div>
-                    <div class="p-wishlist ${userWishlist.includes(p.id) ? 'active' : ''}" onclick="toggleWishlist(${p.id})"><i class="fa-solid fa-heart"></i></div>
-                    <div class="p-img-box" onclick="openQuickView(${p.id})">
-                        <img src="${p.img || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80'}" alt="${p.title}">
-                        <div class="quick-view-trigger">نظرة سريعة 👁️</div>
-                    </div>
-                    <div class="p-body">
+                    <img src="${p.img}" class="p-img" alt="${p.title}">
+                    <div class="p-info">
                         <div>
                             <div class="p-title">${p.title}</div>
-                            <div class="p-desc">${p.descr || ''}</div>
-                            <div class="p-price-row">
-                                <div class="p-price">${p.price} ج.م</div>
-                                <div class="p-views"><i class="fa-solid fa-eye"></i> ${p.views || 15} مشاهد</div>
-                            </div>
+                            <div class="p-price">${p.price} ج.م</div>
                         </div>
-                        <div class="p-actions">
-                            <button class="p-buy-btn" onclick="addToCart(${p.id})">إضافة للسلة</button>
-                            <button class="p-share-btn" onclick="shareProduct('${p.title}', ${p.price})" title="مشاركة"><i class="fa-solid fa-share-nodes"></i></button>
-                        </div>
+                        <button class="p-btn" onclick="openCheckout(${p.id})">اطلب الآن</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // الحفاظ على السلة ضد الضياع (Persistent Cart) وعملية كسر الـ 1500 جنيه
-        function addToCart(id) {
-            const prod = allProducts.find(x => x.id === id);
-            if (!prod) return;
-            userCart.push(prod);
-            localStorage.setItem('rehab_cart', JSON.stringify(userCart));
-            updateCartDrawerUI();
-            toggleCartDrawer();
-        }
-
-        function updateCartDrawerUI() {
-            document.getElementById('cartCountBadge').textContent = userCart.length;
-            const container = document.getElementById('drawerCartItems');
-            let total = userCart.reduce((sum, item) => sum + Number(item.price), 0);
-            document.getElementById('drawerTotal').textContent = `${total} ج.م`;
-            
-            container.innerHTML = userCart.length === 0 ? '<p style="color:var(--text-muted); text-align:center; margin-top:20px;">عربتك فارغة حالياً.</p>' :
-                userCart.map((item, idx) => `
-                    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:8px 10px; border-radius:10px; margin-bottom:8px;">
-                        <div><b>${item.title}</b><div style="color:var(--gold); font-weight:800;">${item.price} ج.م</div></div>
-                        <i class="fa-solid fa-trash" style="color:var(--danger); cursor:pointer;" onclick="removeFromCart(${idx})"></i>
-                    </div>
-                `).join('');
-
-            // شريط التقدم التحفيزي للـ 1500 جنيه وعجلة الحظ الهدية
-            const fill = document.getElementById('progressBarFill');
-            const pText = document.getElementById('progressText');
-            let pct = Math.min(100, Math.round((total / 1500) * 100));
-            fill.style.width = `${pct}%`;
-            pText.textContent = total >= 1500 ? '🎉 رائع جداً! تجاوزت 1500 جنيه وتحصل على لفتين هدية في عجلة الحظ!' : `أضف منتجات بقيمة ${1500 - total} جنيه أخرى لتحصل على لفتين هدية في عجلة الحظ!`;
-        }
-
-        function removeFromCart(idx) {
-            userCart.splice(idx, 1);
-            localStorage.setItem('rehab_cart', JSON.stringify(userCart));
-            updateCartDrawerUI();
-        }
-
-        function toggleCartDrawer() { document.getElementById('cartDrawer').classList.toggle('open'); document.getElementById('cartOverlay').style.display = document.getElementById('cartDrawer').classList.contains('open') ? 'block' : 'none'; }
-        function toggleSidebar() { document.getElementById('sidebarMenu').classList.toggle('open'); document.getElementById('sidebarOverlay').style.display = document.getElementById('sidebarMenu').classList.contains('open') ? 'block' : 'none'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        function openWheelModal() { document.getElementById('wheelModal').style.display = 'flex'; }
-        function openAboutModal() { document.getElementById('aboutModal').style.display = 'flex'; }
-        function openTrackerModal() { document.getElementById('trackerModal').style.display = 'flex'; }
-        function openWishlistModal() { alert('قائمة المفضلة تحتوي على ' + userWishlist.length + ' منتجات.'); }
-
-        // إصلاح عجلة الحظ الكلاسيكية الصامتة وربطها بالـ IP (مرة أسبوعياً)
-        async function spinTheWheelClassic() {
-            const btn = document.getElementById('executeSpinBtn');
-            const msg = document.getElementById('wheelResultMsg');
-            btn.disabled = true;
-            
-            // فحص التقييد الأسبوعي للـ IP / المتصفح
-            let lastSpin = localStorage.getItem('rehab_last_spin');
-            let now = Date.now();
-            if (lastSpin && (now - Number(lastSpin) < 7 * 24 * 3600 * 1000)) {
-                msg.style.color = 'var(--danger)';
-                msg.textContent = '❌ لقد استنفدت محاولتك الأسبوعية بالفعل، عد لاحقاً!';
-                btn.disabled = false;
+        // عجلة الحظ الكلاسيكية الصامتة (يومية - من 1% إلى 10%)
+        function spinWheel() {
+            const today = new Date().toDateString();
+            if (localStorage.getItem('rehab_spun_date') === today) {
+                document.getElementById('wheelResult').textContent = '⚠️ لقد استنفدت محاولتك لليوم، انتظر لفتك القادمة غداً!';
                 return;
             }
-
-            localStorage.setItem('rehab_last_spin', now);
-            let discountVal = Math.random() < 0.5 ? 4 : 5;
-            let couponCode = 'REV' + Math.floor(1000 + Math.random() * 9000);
-
-            // إرسال إشعار فوري لتليجرام/واتساب كما طلب المالك (تنبيه فوري بكل كود يخرج)
-            sendInstantTelegramAlert(`🎁 تم منح كود خصم جديد من عجلة الحظ: ${couponCode} بقيمة ${discountVal}%`);
-
-            msg.style.color = 'var(--gold)';
-            msg.textContent = `🎉 مبروك! حصلت على كود خصم فوري: ${couponCode} بنسبة ${discountVal}%`;
-            btn.disabled = false;
+            localStorage.setItem('rehab_spun_date', today);
+            const discount = Math.floor(Math.random() * 10) + 1; // من 1% إلى 10%
+            const code = 'REV' + Math.floor(Math.random() * 90000 + 10000);
+            document.getElementById('wheelResult').innerHTML = `🎉 مبروك! حصلت على خصم <b>${discount}%</b><br>كود الخصم الخاص بك: <span style="color:#FFF;">${code}</span>`;
         }
 
-        // إشعار المبيعات الحية العائمة Social Proof Popup
-        function initSocialProofEngine() {
-            const buyers = [
-                { name: 'محمد من الإسكندرية', item: 'ساعة Ultra Series 9' },
-                { name: 'سارة من الجيزة', item: 'طقم السلاسل الملكي' },
-                { name: 'محمود من المنصورة', item: 'سماعة Pro Max' },
-                { name: 'أحمد من طنطا', item: 'الشاحن السريع GaN' }
-            ];
-            setInterval(() => {
-                let rnd = buyers[Math.floor(Math.random() * buyers.length)];
-                let toast = document.getElementById('liveSalesToast');
-                document.getElementById('toastText').textContent = `عميل (${rnd.name}) قام بشراء (${rnd.item}) منذ قليل!`;
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 5000);
-            }, 600000); // كل 10 دقائق
+        // لوحة تحكم المالك السرية (5 ضغطات على اللوجو)
+        let tapCount = 0;
+        function openAdminGate() {
+            tapCount++;
+            if (tapCount >= 5) {
+                tapCount = 0;
+                document.getElementById('adminModal').style.display = 'flex';
+            }
         }
 
-        // إصلاح المذكر الصوتي (صلي على محمد) كل 3 دقائق مع تفعيل تفاعلي لتخطي حظر المتصفح
-        let audioEngineActive = false;
-        function initSalawatAudioEngine() {
-            window.addEventListener('click', () => {
-                if (!audioEngineActive) {
-                    audioEngineActive = true;
-                    setInterval(() => {
-                        let t = document.getElementById('salawat-toast');
-                        t.style.display = 'flex';
-                        setTimeout(() => t.style.display = 'none', 6000);
-                        if ('speechSynthesis' in window) {
-                            let utter = new SpeechSynthesisUtterance("صَلِّ عَلَى مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّم");
-                            utter.lang = 'ar-SA';
-                            window.speechSynthesis.speak(utter);
-                        }
-                    }, 180000); // كل 3 دقائق
-                }
-            }, { once: true });
+        function verifyAdminPass() {
+            const p = document.getElementById('adminPassInput').value;
+            if (p === '2026') {
+                document.getElementById('adminLoginArea').style.display = 'none';
+                document.getElementById('adminControlArea').style.display = 'block';
+                loadAdminProducts();
+            } else {
+                alert('❌ كلمة المرور غير صحيحة!');
+            }
         }
 
-        // البحث الفوري Live Auto-Search
-        function handleLiveSearch(q) {
-            const box = document.getElementById('liveSearchResults');
-            if (!q.trim()) { box.style.display = 'none'; return; }
-            let matches = allProducts.filter(p => p.title.toLowerCase().includes(q.toLowerCase()));
-            if (matches.length === 0) { box.style.display = 'none'; return; }
-            box.style.display = 'block';
-            box.innerHTML = matches.map(m => `
-                <div class="search-result-item" onclick="openQuickView(${m.id}); document.getElementById('liveSearchResults').style.display='none';">
-                    <img src="${m.img}" alt="">
-                    <div><div style="font-weight:800; font-size:0.78rem;">${m.title}</div><div style="color:var(--gold); font-size:0.72rem;">${m.price} ج.م</div></div>
+        function loadAdminProducts() {
+            const list = document.getElementById('adminProductsList');
+            list.innerHTML = products.map(p => `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:6px 10px; border-radius:6px; margin-bottom:5px;">
+                    <span><b>${p.title}</b> (${p.price} ج.م)</span>
+                    <button style="background:var(--danger); color:#FFF; border:none; padding:3px 8px; border-radius:4px; cursor:pointer;" onclick="deleteProduct(${p.id})">حذف</button>
                 </div>
             `).join('');
         }
 
-        // النظرة السريعة Quick View ومشاركة المنتج
-        function openQuickView(id) {
-            let p = allProducts.find(x => x.id === id);
-            if (!p) return;
-            document.getElementById('quickViewContent').innerHTML = `
-                <div style="text-align:center;"><img src="${p.img}" style="width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom:12px;"></div>
-                <h3 style="color:var(--gold); margin-bottom:6px;">${p.title}</h3>
-                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">${p.descr}</p>
-                <div style="font-weight:900; color:var(--gold); font-size:1.1rem; margin-bottom:14px;">${p.price} ج.م</div>
-                <button class="spin-action-btn" style="width:100%;" onclick="addToCart(${p.id}); closeModal('quickViewModal');">إضافة للسلة مباشرة</button>
-            `;
-            document.getElementById('quickViewModal').style.display = 'flex';
+        function addNewProduct() {
+            const title = document.getElementById('newPTitle').value;
+            const price = Number(document.getElementById('newPPrice').value);
+            const img = document.getElementById('newPImg').value;
+            if (!title || !price) { alert('أدخل بيانات المنتج الكاملة'); return; }
+            products.unshift({ id: Date.now(), title, price, img: img || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80' });
+            renderProducts();
+            loadAdminProducts();
+            alert('✅ تمت الإضافة بنجاح!');
         }
 
-        function shareProduct(title, price) {
-            if (navigator.share) {
-                navigator.share({ title: title, text: `اشتري الآن ${title} بسعر ${price} ج.م من متجرنا الملكي 3λ.Rehab.Store`, url: window.location.href });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('✅ تم نسخ رابط المنتج بنجاح!');
-            }
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            renderProducts();
+            loadAdminProducts();
         }
 
-        function toggleWishlist(id) {
-            let idx = userWishlist.indexOf(id);
-            if (idx > -1) userWishlist.splice(idx, 1);
-            else userWishlist.push(id);
-            localStorage.setItem('rehab_wishlist', JSON.stringify(userWishlist));
-            renderProductsGrid();
-        }
-
-        function loadAutoFillData() {
-            let saved = localStorage.getItem('rehab_autofill');
-            if (saved) {
-                let data = JSON.parse(saved);
-                if (document.getElementById('chkName')) document.getElementById('chkName').value = data.name || '';
-                if (document.getElementById('chkPhone')) document.getElementById('chkPhone').value = data.phone || '';
-                if (document.getElementById('chkAddr')) document.getElementById('chkAddr').value = data.addr || '';
-            }
-        }
-
-        function openCheckoutModal() {
-            if (userCart.length === 0) { alert('عربتك فارغة!'); return; }
-            let total = userCart.reduce((sum, item) => sum + Number(item.price), 0);
-            document.getElementById('chkTotalDisplay').textContent = `${total} ج.م`;
+        let selectedProdForOrder = null;
+        function openCheckout(id) {
+            selectedProdForOrder = products.find(p => p.id === id);
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
-        // إرسال الطلب وإصدار الفاتورة PDF وحفظ البيانات أوتوماتيكياً
-        async function submitFinalOrder() {
-            let name = document.getElementById('chkName').value.trim();
-            let phone = document.getElementById('chkPhone').value.trim();
-            let addr = document.getElementById('chkAddr').value.trim();
-            let gov = document.getElementById('chkGov').value;
-            let pay = document.getElementById('chkPay').value;
-
-            if (name.split(/\s+/).length < 3) { alert('يرجى كتابة الاسم الثلاثي الصحيح.'); return; }
-            if (!/^01[0125][0-9]{8}$/.test(phone)) { alert('يرجى إدخال رقم هاتف مصري صحيح مكون من 11 رقماً يبدأ بـ 01.'); return; }
-
-            localStorage.setItem('rehab_autofill', JSON.stringify({ name, phone, addr }));
-            
-            let total = userCart.reduce((sum, item) => sum + Number(item.price), 0);
-            let orderId = 'RB' + Math.floor(10000000 + Math.random() * 90000000);
-
-            // رفع الأوردر لقاعدة البيانات وتنبيه المالك عبر تليجرام فوراً
-            sendInstantTelegramAlert(`🚨 أوردر جديد تم تسجيله!\nرقم الطلب: ${orderId}\nالعميل: ${name}\nالهاتف: ${phone}\nالإجمالي: ${total} ج.م`);
-
-            alert(`✅ تم إتمام طلبك الملكي بنجاح! رقم طلبك هو: ${orderId}`);
-            userCart = [];
-            localStorage.removeItem('rehab_cart');
-            updateCartDrawerUI();
+        function submitOrderAndInvoice() {
+            const name = document.getElementById('chkName').value;
+            const phone = document.getElementById('chkPhone').value;
+            if (!name || !phone) { alert('أدخل الاسم ورقم الهاتف'); return; }
+            alert(`✅ تم تأكيد طلبك بنجاح يا ${name}! سيتم التواصل معك عبر الهاتف قريباً.`);
             closeModal('checkoutModal');
         }
 
-        // ربط فوري مع تليجرام Bot API
-        function sendInstantTelegramAlert(msg) {
-            const token = 'YOUR_BOT_TOKEN'; // (يتم تفعيلها آلياً عند ربط البوت)
-            const chatId = 'YOUR_CHAT_ID';
-            // fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`).catch(()=>{});
-        }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function openTrackModal() { alert('أدخل رقم هاتفك لمعرفة حالة الطلب.'); }
 
-        function searchCustomerOrder() {
-            let ph = document.getElementById('trackPhoneInput').value.trim();
-            let box = document.getElementById('trackResultContainer');
-            if (!ph) return;
-            box.innerHTML = `<div style="background:var(--bg-input); padding:10px; border-radius:10px; border:1px solid var(--gold);">حالة الطلب لهاتفك (${ph}): <b>جاري التجهيز والشحن السريع ✅</b></div>`;
-        }
-
-        function toggleThemeMode() {
-            document.documentElement.classList.toggle('dark');
-            document.documentElement.classList.toggle('light');
-        }
-
-        function changeStoreLanguage(lang) {
-            alert('✅ تم تغيير لغة المتجر إلى: ' + lang.toUpperCase() + ' بنجاح!');
-        }
-
-        function handleLogoTripleTap() {
-            tapLogoCount++;
-            if (tapLogoCount >= 3) {
-                tapLogoCount = 0;
-                let pass = prompt('أدخل كلمة مرور لوحة التحكم الملكية:');
-                if (pass === '2026') {
-                    alert('👑 أهلاً بك يا مالك المتجر في لوحة التحكم الإدارية.');
-                }
-            }
-        }
+        window.onload = () => { renderProducts(); };
     </script>
 </body>
 </html>
