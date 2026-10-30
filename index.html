@@ -6,6 +6,9 @@
     <title id="pageTitle">3λ.Rehab.Store | المتجر الملكي</title>
     <meta name="theme-color" content="#0B0F19">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- وسوم الانتشار والشهرة عند مشاركة الرابط على فيسبوك وواتساب وتليجرام -->
+    <meta property="og:title" content="3λ.Rehab.Store | المتجر الملكي الأول">
+    <meta property="og:description" content="تشكيلة VIP حصرية — أضف أصدقاءك لجروباتنا واكسب خصم يصل إلى 100% أو أموال كاش فورية!">
     <link id="faviconLink" rel="icon" href="https://cdn-icons-png.flaticon.com/512/679/679922.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -54,11 +57,10 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             line-height: 1.55;
-            padding-bottom: 65px;
+            padding-bottom: 70px;
             user-select: none;
         }
 
-        /* شريط تقدم القراءة العلوي */
         #scrollProgressBar {
             position: fixed;
             top: 0; right: 0;
@@ -66,13 +68,12 @@
             background: linear-gradient(90deg, var(--gold), #FFF);
             width: 0%;
             z-index: 99999;
-            transition: width 0.1s;
         }
 
-        /* إطار وضع التعديل الشامل الحي لكل حرف في المتجر */
+        /* وضع التعديل الشامل الحي لكل حرف في المتجر */
         body.live-edit-active *[contenteditable="true"] {
             outline: 1px dashed var(--gold) !important;
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.12);
             cursor: text !important;
             user-select: text !important;
         }
@@ -192,10 +193,8 @@
             cursor: pointer;
             font-weight: 800;
             font-size: 0.82rem;
-            position: relative;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .cart-header-btn:hover { box-shadow: 0 0 15px rgba(212,175,55,0.35); }
         .cart-pulse { animation: pulseGold 0.5s ease; }
         @keyframes pulseGold {
             0% { transform: scale(1); }
@@ -222,49 +221,12 @@
             justify-content: center;
             cursor: pointer;
             font-size: 1rem;
-            transition: 0.2s;
         }
-        .menu-header-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-        /* ستوري العروض الملكية (Instagram Style Stories) */
-        .stories-bar {
-            display: flex;
-            gap: 14px;
-            overflow-x: auto;
-            padding: 12px 14px 4px;
-            max-width: 1200px;
-            margin: 0 auto;
-            scrollbar-width: none;
-        }
-        .stories-bar::-webkit-scrollbar { display: none; }
-        .story-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .story-ring {
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            padding: 2px;
-            background: linear-gradient(45deg, var(--gold), #FFF, #B48A1E);
-        }
-        .story-ring img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--bg-main);
-        }
-        .story-lbl { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); }
-
-        /* البحث الذكي + البحث الصوتي */
+        /* شريط البحث الذكي + الصوتي */
         .search-container {
             max-width: 1200px;
-            margin: 8px auto 0;
+            margin: 12px auto 0;
             padding: 0 12px;
             position: relative;
         }
@@ -322,6 +284,65 @@
         .search-item img { width: 38px; height: 38px; border-radius: 6px; object-fit: cover; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 12px; }
+
+        /* شريط العروض الخاطفة + نقاط ولاء العميل */
+        .vip-status-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(212,175,55,0.15), var(--bg-card));
+            border: 1px solid rgba(212,175,55,0.35);
+            border-radius: 12px;
+            padding: 8px 14px;
+            margin-bottom: 12px;
+            font-size: 0.76rem;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .flash-timer-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .timer-digits {
+            background: #000;
+            color: var(--gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            font-family: monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* بانر محرك الانتشار الفيروسي الجديد (ضِف أعضاء واكسب خصم 100% أو كاش أو منتج مجاني) */
+        .viral-rewards-banner {
+            background: linear-gradient(135deg, #064E3B 0%, #131B2E 60%, #1E1B4B 100%);
+            border: 2px solid var(--gold);
+            border-radius: var(--radius);
+            padding: 15px;
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .viral-rewards-banner h3 {
+            font-size: 0.95rem;
+            color: var(--gold);
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+        .viral-rewards-banner p {
+            font-size: 0.76rem;
+            color: #E2E8F0;
+        }
 
         /* بانر بيع معنا */
         .merchant-banner {
@@ -457,12 +478,24 @@
             border-radius: 5px;
             z-index: 3;
         }
+        .watermark-tag {
+            position: absolute;
+            bottom: 6px; left: 6px;
+            background: rgba(0, 0, 0, 0.55);
+            color: rgba(212, 175, 55, 0.85);
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 1px 5px;
+            border-radius: 4px;
+            z-index: 3;
+            pointer-events: none;
+        }
         .scarcity-tag {
             position: absolute;
-            bottom: 7px; right: 7px;
+            bottom: 6px; right: 6px;
             background: rgba(239, 68, 68, 0.92);
             color: #FFF;
-            font-size: 0.6rem;
+            font-size: 0.58rem;
             font-weight: 800;
             padding: 2px 6px;
             border-radius: 4px;
@@ -479,7 +512,7 @@
         .mini-circle-btn {
             width: 26px; height: 26px;
             border-radius: 50%;
-            background: rgba(11, 15, 25, 0.78);
+            background: rgba(11, 15, 25, 0.8);
             border: 1px solid rgba(255,255,255,0.2);
             color: #FFF;
             display: flex; align-items: center; justify-content: center;
@@ -497,9 +530,26 @@
         .p-price { font-size: 0.92rem; font-weight: 900; color: var(--gold); margin-bottom: 7px; }
         .p-btn {
             background: var(--gold); color: #000; border: none; width: 100%;
-            padding: 7px; border-radius: 7px; font-weight: 800; font-size: 0.78rem;
+            padding: 7px; border-radius: 7px; font-weight: 800; font-size: 0.76rem;
             cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;
         }
+        .p-sub-actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 5px;
+        }
+        .p-Action-mini {
+            flex: 1;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 4px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .p-Action-mini:hover { border-color: var(--gold); color: var(--gold); }
 
         /* الفوتر وأيقونات تابعنا الـ 5 الأصلية */
         footer {
@@ -524,7 +574,7 @@
         .soc-wa { background: #25D366; }
         .soc-tg { background: #229ED9; }
 
-        /* شريط التطبيق السفلي للموبايل (Bottom App Bar) */
+        /* شريط التطبيق السفلي للموبايل */
         .bottom-app-bar {
             position: fixed;
             bottom: 0; right: 0; left: 0;
@@ -544,16 +594,15 @@
             align-items: center;
             gap: 2px;
             color: var(--text-muted);
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             font-weight: 700;
             cursor: pointer;
             background: none;
             border: none;
         }
         .b-nav-item i { font-size: 1.05rem; color: var(--gold); }
-        .b-nav-item:hover { color: var(--gold); }
 
-        /* الأدراج الجانبية (القائمة الشاملة والسلة) */
+        /* الأدراج الجانبية */
         .side-drawer-overlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 9000; backdrop-filter: blur(4px);
         }
@@ -578,17 +627,15 @@
             border-radius: 10px;
             padding: 10px 8px;
             color: var(--text-main);
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 800;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: 0.2s;
         }
         .menu-card-btn i { font-size: 1.15rem; color: var(--gold); }
-        .menu-card-btn:hover { border-color: var(--gold); }
 
         .progress-motivation {
             background: var(--bg-input); border: 1px solid var(--border-color);
@@ -604,7 +651,7 @@
         }
         .custom-modal-box {
             background: var(--bg-card); border: 2px solid var(--gold); border-radius: var(--radius);
-            width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto; padding: 18px; text-align: center;
+            width: 100%; max-width: 500px; max-height: 92vh; overflow-y: auto; padding: 18px; text-align: center;
         }
         .custom-modal-title { font-size: 1.05rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
         .custom-modal-text { font-size: 0.84rem; color: var(--text-main); margin-bottom: 12px; white-space: pre-line; }
@@ -619,7 +666,7 @@
         .modal-btn.confirm { background: var(--gold); color: #000; }
         .modal-btn.cancel { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
 
-        /* ستايل الكاميرا المزدوجة الاحترافية داخل فورم التجار */
+        /* استوديو الكاميرا المزدوجة */
         .camera-studio-box {
             background: #05070D;
             border: 2px solid var(--gold);
@@ -627,7 +674,6 @@
             padding: 10px;
             margin-bottom: 12px;
             text-align: center;
-            position: relative;
         }
         .camera-viewport-wrap {
             position: relative;
@@ -641,11 +687,7 @@
             display: none;
             border: 1px solid var(--gold);
         }
-        #kycLiveVideo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        #kycLiveVideo { width: 100%; height: 100%; object-fit: cover; }
         .camera-guide-overlay {
             position: absolute;
             inset: 15px;
@@ -683,8 +725,8 @@
         }
         .invoice-stamp {
             position: absolute;
-            bottom: 85px;
-            left: 25px;
+            bottom: 95px;
+            left: 20px;
             border: 3px double rgba(180, 138, 30, 0.35);
             color: rgba(180, 138, 30, 0.4);
             padding: 6px 14px;
@@ -697,10 +739,10 @@
 
         .admin-box {
             background: var(--bg-card); border: 2px solid var(--gold); border-radius: var(--radius);
-            width: 100%; max-width: 920px; max-height: 94vh; overflow-y: auto; padding: 16px;
+            width: 100%; max-width: 940px; max-height: 94vh; overflow-y: auto; padding: 16px;
         }
         .admin-tabs { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); }
-        .admin-tab-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 6px 11px; border-radius: 7px; font-size: 0.75rem; font-weight: 800; white-space: nowrap; cursor: pointer; }
+        .admin-tab-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 6px 11px; border-radius: 7px; font-size: 0.74rem; font-weight: 800; white-space: nowrap; cursor: pointer; }
         .admin-tab-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
         .admin-section { display: none; }
         .admin-section.active { display: block; }
@@ -746,7 +788,7 @@
 
     <!-- الشريط الإعلاني العلوي -->
     <div class="announcement-bar" id="topAnnouncementBar">
-        <div class="announcement-text" id="tickerTextDisplay">✨ أهلاً بكم في المتجر الملكي — جودة استثنائية وتوصيل سريع لكافة المحافظات الـ 27 ✨</div>
+        <div class="announcement-text" id="tickerTextDisplay">✨ أهلاً بكم في المتجر الملكي — ضِف أصدقاءك لجروباتنا وتابع صفحاتنا واكسب خصم يصل إلى 100% أو فلوس كاش فورية! ✨</div>
         <button class="close-announcement" onclick="document.getElementById('topAnnouncementBar').style.display='none'">✕</button>
     </div>
 
@@ -778,7 +820,7 @@
         <button class="modal-btn cancel" onclick="handleLogoTap()">دخول المالك</button>
     </div>
 
-    <!-- الهيدر الملكي المنظم والنقي (اللوجو + السلة والقائمة فقط كما طلبت) -->
+    <!-- الهيدر الملكي النظيف (اللوجو على اليمين + السلة والقائمة فقط على اليسار) -->
     <header>
         <div class="brand-area" onclick="handleLogoTap()">
             <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" id="headerLogoImg" class="store-logo-img" alt="Logo">
@@ -797,31 +839,7 @@
         </div>
     </header>
 
-    <!-- ستوري العروض الملكية السريعة -->
-    <div class="stories-bar">
-        <div class="story-item" onclick="spinTheWheel()">
-            <div class="story-ring"><img src="https://cdn-icons-png.flaticon.com/512/3209/3209955.png"></div>
-            <span class="story-lbl">لفتك اليومية</span>
-        </div>
-        <div class="story-item" onclick="openMerchantKYCModal()">
-            <div class="story-ring"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995574.png"></div>
-            <span class="story-lbl">بيع معنا</span>
-        </div>
-        <div class="story-item" onclick="openTrackModal()">
-            <div class="story-ring"><img src="https://cdn-icons-png.flaticon.com/512/2769/2769339.png"></div>
-            <span class="story-lbl">تتبع طلبك</span>
-        </div>
-        <div class="story-item" onclick="openAIAssistantModal()">
-            <div class="story-ring"><img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png"></div>
-            <span class="story-lbl">المساعد الذكي</span>
-        </div>
-        <div class="story-item" onclick="playSalawatAudio(true)">
-            <div class="story-ring"><img src="https://cdn-icons-png.flaticon.com/512/2913/2913465.png"></div>
-            <span class="story-lbl">صلي على النبي</span>
-        </div>
-    </div>
-
-    <!-- شريط البحث الذكي + البحث الصوتي بالمايكروفون -->
+    <!-- شريط البحث الذكي + الصوتي مباشرة تحت الهيدر -->
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <input type="text" id="liveSearchInput" class="search-box" placeholder="ابحث عن منتجك الملكي بالكتابة أو الصوت..." oninput="handleLiveSearch(this.value)">
@@ -830,6 +848,27 @@
     </div>
 
     <div class="container" id="mainCustomizableArea">
+        <!-- شريط العروض الخاطفة الملكي + رصيد نقاط ولاء العميل -->
+        <div class="vip-status-strip">
+            <div class="flash-timer-box">
+                <i class="fa-solid fa-bolt"></i>
+                <span>ينتهي العرض الملكي خلال:</span>
+                <span class="timer-digits" id="flashTimerDisplay">04:59:59</span>
+            </div>
+            <div style="font-weight:800; color:var(--text-main); cursor:pointer;" onclick="showVIPCoinsModal()">
+                👑 نقاطك الملكية: <strong style="color:var(--gold);" id="vipCoinsDisplay">100</strong> نقطة (كاش باك)
+            </div>
+        </div>
+
+        <!-- 🔥 بانر ميزة الانتشار الفيروسي الجديدة: ضِف أعضاء واعمل فولو واكسب خصم 100% أو فلوس كاش أو منتج مجاني 🔥 -->
+        <div class="viral-rewards-banner">
+            <div>
+                <h3>💰🔥 ضِف أصدقاءك لجروباتنا وتابع صفحاتنا واكسب فوراً!</h3>
+                <p>كل 20 عضو تضيفهم = <strong>خصم 10%</strong> (حتى <strong>100% مجاناً</strong> لـ 200 عضو!) أو <strong>10 ج.م كاش</strong> أو <strong>منتج هدية من اختيارك</strong>!</p>
+            </div>
+            <button class="wheel-btn" style="background:linear-gradient(135deg, #10B981, #059669); color:#FFF; padding:8px 18px; font-size:0.8rem;" onclick="openViralRewardsModal()">🎁 اكسب خصم 100% أو كاش الآن</button>
+        </div>
+
         <!-- بانر بيع منتجك معنا -->
         <div class="merchant-banner">
             <div class="merchant-banner-text">
@@ -883,13 +922,13 @@
     <!-- شريط التطبيق السفلي الثابت للموبايل -->
     <nav class="bottom-app-bar">
         <button class="b-nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
+        <button class="b-nav-item" onclick="openViralRewardsModal()"><i class="fa-solid fa-users-rays"></i><span>اكسب 100%</span></button>
         <button class="b-nav-item" onclick="openMerchantKYCModal()"><i class="fa-solid fa-camera-retro"></i><span>بيع معنا</span></button>
         <button class="b-nav-item" onclick="toggleCartDrawer(true)"><i class="fa-solid fa-bag-shopping"></i><span>السلة</span></button>
-        <button class="b-nav-item" onclick="openAIAssistantModal()"><i class="fa-solid fa-robot"></i><span>المساعد الذكي</span></button>
         <button class="b-nav-item" onclick="toggleMenuDrawer(true)"><i class="fa-solid fa-grip"></i><span>القائمة</span></button>
     </nav>
 
-    <!-- القائمة الجانبية الشاملة (تضم جميع الأزرار التي تم نقلها من الهيدر بشكل فخم ومنظم) -->
+    <!-- القائمة الجانبية الشاملة -->
     <div class="side-drawer-overlay" id="menuOverlay" onclick="toggleMenuDrawer(false)"></div>
     <div class="side-drawer drawer-right" id="menuDrawer">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px;">
@@ -897,8 +936,11 @@
             <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:1.2rem;" onclick="toggleMenuDrawer(false)"></i>
         </div>
 
-        <!-- شبكة أزرار الأدوات المنقولة من الهيدر بشكل أنيق -->
         <div class="menu-grid-btns">
+            <button class="menu-card-btn" onclick="toggleMenuDrawer(false); openViralRewardsModal();" style="border-color:var(--success);">
+                <i class="fa-solid fa-sack-dollar" style="color:var(--success);"></i>
+                <span>ضِف أعضاء واكسب</span>
+            </button>
             <button class="menu-card-btn" onclick="toggleMenuDrawer(false); openMerchantKYCModal();">
                 <i class="fa-solid fa-handshake"></i>
                 <span>بيع منتجك معنا</span>
@@ -918,10 +960,6 @@
             <button class="menu-card-btn" onclick="toggleMenuDrawer(false); playSalawatAudio(true);">
                 <i class="fa-solid fa-volume-high"></i>
                 <span>المذكر الصوتي ﷺ</span>
-            </button>
-            <button class="menu-card-btn" onclick="toggleMenuDrawer(false); openAIAssistantModal();">
-                <i class="fa-solid fa-robot"></i>
-                <span>المساعد الذكي AI</span>
             </button>
         </div>
 
@@ -969,11 +1007,13 @@
                 <input type="text" id="couponInput" class="custom-modal-input" placeholder="كود الخصم" style="margin-bottom:0;">
                 <button class="modal-btn confirm" onclick="applyCouponCode()">تطبيق</button>
             </div>
-            <div style="display:flex; justify-content:space-between; font-weight:900; font-size:0.92rem; margin-bottom:10px;">
+            <div id="cartSavingsBanner" style="display:none; font-size:0.73rem; color:var(--success); font-weight:800; margin-bottom:6px; text-align:center;"></div>
+            <div style="display:flex; justify-content:space-between; font-weight:900; font-size:0.92rem; margin-bottom:8px;">
                 <span>إجمالي المنتجات:</span>
                 <span style="color:var(--gold);" id="cartTotalDisplay">0 ج.م</span>
             </div>
-            <button class="p-btn" style="padding:10px; font-size:0.88rem;" onclick="openCheckoutForm()">إتمام الطلب وتحديد الدفع <i class="fa-solid fa-arrow-left"></i></button>
+            <button class="p-btn" style="padding:10px; font-size:0.86rem; margin-bottom:6px;" onclick="openCheckoutForm()">إتمام الطلب وتحديد الدفع <i class="fa-solid fa-arrow-left"></i></button>
+            <button class="modal-btn cancel" style="width:100%; font-size:0.73rem; color:var(--gold); border-color:var(--gold);" onclick="shareCartWithFriendToPay()"><i class="fa-brands fa-whatsapp"></i> شارك السلة مع صديق/قريب ليدفع لك</button>
         </div>
     </div>
 
@@ -986,7 +1026,7 @@
         </div>
     </div>
 
-    <!-- نافذة الفاتورة الإلكترونية المفصلة مع الباركود والختم المائي -->
+    <!-- نافذة الفاتورة الإلكترونية المفصلة -->
     <div class="invoice-modal" id="invoiceModal">
         <div class="invoice-box" id="printableInvoice">
             <div class="invoice-stamp">معتمد ✓ 3λ.Rehab.Store</div>
@@ -998,14 +1038,15 @@
                         <div style="font-size:0.65rem; color:#4B5563;">فاتورة ضريبية وإلكترونية معتمدة</div>
                     </div>
                 </div>
-                <div style="text-align:left; font-size:0.7rem; color:#374151;">
-                    <div>رقم الفاتورة: <strong id="invId" style="color:#B48A1E;"></strong></div>
-                    <div>التاريخ: <span id="invDate"></span></div>
-                </div>
+                <img id="invQrCodeImg" src="" style="width:52px; height:52px; border:1px solid #D4AF37; padding:2px; border-radius:6px;" alt="QR">
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.74rem; color:#374151; margin-bottom:6px;">
+                <div>رقم الفاتورة: <strong id="invId" style="color:#B48A1E;"></strong></div>
+                <div>التاريخ: <span id="invDate"></span></div>
             </div>
             <div style="font-size:0.78rem; margin-bottom:3px;">العميل: <strong id="invName"></strong> | الهاتف: <strong id="invPhone"></strong></div>
             <div style="font-size:0.78rem; margin-bottom:3px;">العنوان: <strong id="invAddress"></strong></div>
-            <div style="font-size:0.78rem; margin-bottom:8px;">وسيلة التحويل: <strong id="invPayMethod"></strong></div>
+            <div style="font-size:0.78rem; margin-bottom:8px;">وسيلة التحويل: <strong id="invPayMethod"></strong> | الاستلام: <strong id="invDeliveryTime"></strong></div>
             <hr style="border-color:#E5E7EB; margin-bottom:8px;">
             <div id="invItemsList" style="font-size:0.78rem; margin-bottom:8px;"></div>
             <hr style="border-color:#E5E7EB; margin-bottom:8px;">
@@ -1025,7 +1066,8 @@
             <div class="no-print" style="display:flex; gap:6px; margin-top:12px; flex-wrap:wrap;">
                 <button class="modal-btn confirm" style="flex:1;" onclick="downloadInvoiceAsImage()"><i class="fa-solid fa-image"></i> حفظ كصورة</button>
                 <button class="modal-btn cancel" style="flex:1; color:#000; border-color:#000;" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> طباعة / PDF</button>
-                <button class="modal-btn cancel" style="width:100%; color:#EF4444; border-color:#EF4444; margin-top:4px;" onclick="document.getElementById('invoiceModal').style.display='none'">إغلاق</button>
+                <button class="modal-btn confirm" style="width:100%; background:#25D366; color:#FFF;" onclick="sendInvoiceToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> إرسال نسخة الفاتورة على واتساب</button>
+                <button class="modal-btn cancel" style="width:100%; color:#EF4444; border-color:#EF4444; margin-top:2px;" onclick="document.getElementById('invoiceModal').style.display='none'">إغلاق</button>
             </div>
         </div>
     </div>
@@ -1034,7 +1076,7 @@
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
-                <h3 style="color:var(--gold); font-size:0.95rem;"><i class="fa-solid fa-crown"></i> لوحة تحكم المالك الشاملة (100 ميزة)</h3>
+                <h3 style="color:var(--gold); font-size:0.95rem;"><i class="fa-solid fa-crown"></i> لوحة تحكم المالك الشاملة</h3>
                 <div style="display:flex; gap:6px; flex-wrap:wrap;">
                     <button class="modal-btn confirm" style="padding:5px 10px; font-size:0.73rem;" onclick="enableLiveVisualEditMode()">✏️ زر التعديل الشامل لكل حرف بالمتجر</button>
                     <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger); padding:5px 10px; font-size:0.73rem;" onclick="closeAdminPanel()">إغلاق وقفل ✕</button>
@@ -1042,17 +1084,52 @@
             </div>
 
             <div class="admin-tabs">
-                <button class="admin-tab-btn active" onclick="switchAdminTab('secTexts', this)">🏦 الدفع واللوجو والصوت</button>
+                <button class="admin-tab-btn active" onclick="switchAdminTab('secViralGroups', this)">🚀 الجروبات ومكافآت الأعضاء (<span id="viralReqCountBadge">0</span>)</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secTexts', this)">🏦 الدفع واللوجو والصوت</button>
                 <button class="admin-tab-btn" onclick="switchAdminTab('secShipping', this)">🚚 أسعار شحن الـ 27 محافظة</button>
                 <button class="admin-tab-btn" onclick="switchAdminTab('secProducts', this)">🤖 المنتجات + أداة الـ AI</button>
                 <button class="admin-tab-btn" onclick="switchAdminTab('secMerchants', this)">🪪 طلبات التجار والكاميرا (<span id="kycCountBadge">0</span>)</button>
                 <button class="admin-tab-btn" onclick="switchAdminTab('secTelegram', this)">📲 بوت النشر التلقائي وتليجرام</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secOrders', this)">📋 الطلبات وتصدير Excel</button>
-                <button class="admin-tab-btn" onclick="switchAdminTab('secSecurity', this)">🔐 قفل جهازي فقط + نشر للعالم</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secOrders', this)">📋 الطلبات وبوليصة الشحن</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('secSecurity', this)">🔐 قفل جهازي فقط + القائمة السوداء</button>
             </div>
 
             <!-- تبويب 1 -->
-            <div id="secTexts" class="admin-section active">
+            <div id="secViralGroups" class="admin-section active">
+                <div style="background:rgba(212,175,55,0.08); border:1px solid var(--gold); padding:12px; border-radius:10px; margin-bottom:12px;">
+                    <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:6px;">📢 أداة المالك لبث التذكيرات والعروض لأعضاء جروباتك (واتساب / تليجرام / فيسبوك):</h4>
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-bottom:8px;">
+                        <input type="text" id="cfgWaGroupUrl" class="custom-modal-input" placeholder="رابط جروب الواتساب بتاعك">
+                        <input type="text" id="cfgTgGroupUrl" class="custom-modal-input" placeholder="رابط جروب التليجرام بتاعك">
+                        <input type="text" id="cfgFbGroupUrl" class="custom-modal-input" placeholder="رابط جروب/صفحة الفيسبوك">
+                    </div>
+                    <div style="display:flex; gap:6px; margin-bottom:8px;">
+                        <textarea id="broadcastMsgInput" class="custom-modal-input" rows="2" placeholder="اكتب رسالة التذكير بالخصم لأعضاء جروبك أو اضغط زر التوليد التلقائي..." style="margin-bottom:0;"></textarea>
+                        <button class="modal-btn confirm" style="white-space:nowrap; font-size:0.72rem;" onclick="generateGroupReminderOffer()">✨ توليد عرض للأعضاء</button>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <button class="modal-btn confirm" style="flex:1; background:#25D366; color:#FFF;" onclick="sendBroadcastToGroup('wa')"><i class="fa-brands fa-whatsapp"></i> إرسال التذكير لجروب الواتساب</button>
+                        <button class="modal-btn confirm" style="flex:1; background:#229ED9; color:#FFF;" onclick="sendBroadcastToGroup('tg')"><i class="fa-brands fa-telegram"></i> نشر تلقائي في جروب التليجرام</button>
+                        <button class="modal-btn confirm" style="flex:1; background:#1877F2; color:#FFF;" onclick="sendBroadcastToGroup('fb')"><i class="fa-brands fa-facebook"></i> نشر في جروب الفيسبوك</button>
+                    </div>
+                </div>
+
+                <div style="background:var(--bg-input); border:1px solid var(--border-color); padding:12px; border-radius:10px; margin-bottom:12px;">
+                    <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">⚙️ التحكم في قوانين (ضِف أعضاء واعمل فولو واكسب):</h4>
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
+                        <div><label style="font-size:0.7rem;">كل كام عضو (مثلاً 20):</label><input type="number" id="cfgViralStepMembers" class="custom-modal-input" value="20"></div>
+                        <div><label style="font-size:0.7rem;">يأخذ خصم كام % (مثلاً 10%):</label><input type="number" id="cfgViralStepDiscount" class="custom-modal-input" value="10"></div>
+                        <div><label style="font-size:0.7rem;">أو يأخذ فلوس كام ج.م (مثلاً 10ج):</label><input type="number" id="cfgViralStepCash" class="custom-modal-input" value="10"></div>
+                    </div>
+                    <button class="modal-btn confirm" style="width:100%;" onclick="saveViralGroupSettings()">💾 حفظ روابط الجروبات وقوانين المكافآت</button>
+                </div>
+
+                <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">🕵️‍♂️ طلبات الأعضاء والفولو المرسلة للمراجعة (مع فاحص كشف النصب والتكرار):</h4>
+                <div id="adminViralSubmissionsList"></div>
+            </div>
+
+            <!-- تبويب 2 -->
+            <div id="secTexts" class="admin-section">
                 <h4 style="font-size:0.82rem; color:var(--gold); margin-bottom:6px;">🏦 أرقام وحسابات الدفع الـ 3:</h4>
                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
                     <div><label style="font-size:0.7rem;">رقم الكاش:</label><input type="text" id="cfgVodafone" class="custom-modal-input"></div>
@@ -1083,7 +1160,7 @@
                 <button class="modal-btn confirm" style="width:100%;" onclick="saveStoreTexts()">💾 حفظ كافة التعديلات فوراً</button>
             </div>
 
-            <!-- تبويب 2 -->
+            <!-- تبويب 3 -->
             <div id="secShipping" class="admin-section">
                 <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">🚚 أسعار الشحن للـ 27 محافظة:</h4>
                 <div style="display:flex; gap:6px; margin-bottom:10px;">
@@ -1094,7 +1171,7 @@
                 <button class="modal-btn confirm" style="width:100%; margin-top:10px;" onclick="saveGovShippingPrices()">💾 حفظ أسعار الشحن</button>
             </div>
 
-            <!-- تبويب 3 -->
+            <!-- تبويب 4 -->
             <div id="secProducts" class="admin-section">
                 <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:8px;">🛍️ إضافة منتج + أداة الذكاء الاصطناعي (AI Copywriter):</h4>
                 <input type="hidden" id="editProdId">
@@ -1113,13 +1190,13 @@
                 <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
                     <input type="text" id="newPBadge" class="custom-modal-input" placeholder="الشارة (مثال: عرض ملكي 🔥)" style="width:180px; margin-bottom:0;">
                     <label style="font-size:0.76rem;"><input type="checkbox" id="newPScarcity"> شارة (🔥 متبقي 3 قطع)</label>
-                    <label style="font-size:0.76rem;"><input type="checkbox" id="newPGift"> ضمن صندوق هدايا (+1500ج)</label>
+                    <label style="font-size:0.76rem;"><input type="checkbox" id="newPGift"> ضمن صندوق هدايا وجوائز الأعضاء</label>
                 </div>
                 <button class="modal-btn confirm" style="width:100%;" onclick="adminSaveProduct()">➕ حفظ المنتج في المتجر</button>
                 <div style="margin-top:12px;" id="adminProductsList"></div>
             </div>
 
-            <!-- تبويب 4 -->
+            <!-- تبويب 5 -->
             <div id="secMerchants" class="admin-section">
                 <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">🪪 ملفات توثيق البائعين والعملاء (صورة الوجه + البطاقة وش وضهر + تحديد العمولة السرية):</h4>
                 <div style="display:flex; gap:6px; align-items:center; margin-bottom:10px;">
@@ -1129,7 +1206,7 @@
                 <div id="adminMerchantSubmissionsList"></div>
             </div>
 
-            <!-- تبويب 5 -->
+            <!-- تبويب 6 -->
             <div id="secTelegram" class="admin-section">
                 <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">📲 ربط بوت تليجرام للنشر التلقائي والإشعارات السرية:</h4>
                 <input type="text" id="cfgTgBotToken" class="custom-modal-input" placeholder="Telegram Bot Token">
@@ -1140,22 +1217,27 @@
                 </div>
             </div>
 
-            <!-- تبويب 6 -->
+            <!-- تبويب 7 -->
             <div id="secOrders" class="admin-section">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                    <h4 style="font-size:0.84rem; color:var(--gold);">📋 سجل الطلبات:</h4>
+                    <h4 style="font-size:0.84rem; color:var(--gold);">📋 سجل الطلبات وبوليصة الشحن:</h4>
                     <button class="modal-btn confirm" style="padding:4px 10px; font-size:0.72rem;" onclick="exportOrdersToCSV()"><i class="fa-solid fa-file-excel"></i> تصدير الطلبات Excel</button>
                 </div>
                 <div id="adminOrdersLog" style="font-size:0.76rem; margin-bottom:14px;"></div>
-                <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">🎡 سجل أكواد عجلة الحظ:</h4>
+                <h4 style="font-size:0.84rem; color:var(--gold); margin-bottom:6px;">🎡 سجل أكواد عجلة الحظ ومكافآت الأعضاء:</h4>
                 <div id="adminWheelCodesLog" style="font-size:0.74rem;"></div>
             </div>
 
-            <!-- تبويب 7 -->
+            <!-- تبويب 8 -->
             <div id="secSecurity" class="admin-section">
                 <div style="background:rgba(212,175,55,0.1); border:1px solid var(--gold); padding:12px; border-radius:10px; margin-bottom:12px;">
                     <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:6px;">🔒 قفل ميزة الـ 5 ضغطات على هذا الجهاز فقط دون أجهزة العالم كله:</h4>
                     <button class="modal-btn confirm" id="btnLockDeviceOnly" style="width:100%;" onclick="toggleOwnerDeviceLock()">🔐 تفعيل قفل اللوجو الحصري على جهازي فقط</button>
+                </div>
+
+                <div style="background:var(--bg-input); border:1px solid var(--border-color); padding:12px; border-radius:10px; margin-bottom:12px;">
+                    <h4 style="font-size:0.82rem; color:var(--danger); margin-bottom:6px;">🚫 القائمة السوداء (حظر أرقام الهواتف المزعجة):</h4>
+                    <input type="text" id="cfgBlacklistPhones" class="custom-modal-input" placeholder="أدخل الأرقام المحظورة مفصولة بفاصلة (010xxxx, 011xxxx)" onchange="storeData.blacklist=this.value; saveAllToStorage();">
                 </div>
 
                 <div style="background:var(--bg-input); border:1px solid var(--success); padding:12px; border-radius:10px; margin-bottom:12px;">
@@ -1176,7 +1258,9 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- =========================================================
-         الكود البرمجي الشامل (JavaScript) - 100 ميزة + إصلاح الكاميرا الشامل
+         الجزء الثاني: المحرك البرمجي الشامل (JavaScript)
+         يشمل محرك الانتشار الفيروسي (200 عضو = 100% خصم أو كاش أو هدية)
+         + كاشف التزوير والنصب + أداة بث الجروبات + الكاميرا المزدوجة + 200 ميزة
     ========================================================= -->
     <script id="mainStoreScript">
         const EGYPT_27_GOVS = [
@@ -1192,7 +1276,7 @@
         const INITIAL_STORE_DATA = {
             name: "3λ.Rehab.Store",
             logo: "https://cdn-icons-png.flaticon.com/512/679/679922.png",
-            ticker: "✨ 3λ.Rehab.Store ✨ أهلاً بكم في عالم الفخامة والأناقة — توصيل سريع للـ 27 محافظة — اعرض منتجك للبيع معنا ✨",
+            ticker: "✨ 3λ.Rehab.Store ✨ ضِف أصدقاءك لجروباتنا وتابع صفحاتنا واكسب خصم يصل إلى 100% أو فلوس كاش فورية! ✨",
             aboutStory: "منذ انطلاقتنا، نصنع الفخامة وننتقي كل قطعة بعناية فائقة لتمنحك حضوراً ملكياً استثنائياً.",
             vodafone: "01030084281",
             instapay: "01030084281",
@@ -1205,12 +1289,21 @@
             tt: "https://tiktok.com",
             wa: "201030084281",
             tg: "https://t.me",
+            waGroupUrl: "https://chat.whatsapp.com/",
+            tgGroupUrl: "https://t.me/",
+            fbGroupUrl: "https://facebook.com/groups/",
+            viralStepMembers: 20,
+            viralStepDiscount: 10,
+            viralStepCash: 10,
             tgBotToken: "",
             tgChatId: "",
             lastTgUpdateId: 0,
             customAudio: "",
             govPrices: defaultGovPrices,
             ownerDeviceToken: "",
+            blacklist: "",
+            usedReceiptHashes: [],
+            usedViralProofHashes: [],
             customTextsMap: {}
         };
 
@@ -1221,14 +1314,20 @@
 
         let storeData = Object.assign({}, INITIAL_STORE_DATA, JSON.parse(localStorage.getItem('rehab_store_cfg') || '{}'));
         if (!storeData.govPrices) storeData.govPrices = defaultGovPrices;
+        if (!storeData.usedReceiptHashes) storeData.usedReceiptHashes = [];
+        if (!storeData.usedViralProofHashes) storeData.usedViralProofHashes = [];
+
         let products = JSON.parse(localStorage.getItem('rehab_products_list')) || INITIAL_PRODUCTS;
         let cart = JSON.parse(localStorage.getItem('rehab_cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('rehab_wishlist')) || [];
         let ordersLog = JSON.parse(localStorage.getItem('rehab_orders_log')) || [];
         let wheelCodesLog = JSON.parse(localStorage.getItem('rehab_wheel_codes')) || [];
         let merchantRequests = JSON.parse(localStorage.getItem('rehab_merchant_kyc')) || [];
+        let viralSubmissions = JSON.parse(localStorage.getItem('rehab_viral_subs')) || [];
+        let vipCoins = parseInt(localStorage.getItem('rehab_vip_coins') || '100');
         let activeCoupon = null;
         let isAdminAuthenticated = false;
+        let lastGeneratedOrder = null;
 
         let myDeviceId = localStorage.getItem('rehab_my_device_id');
         if (!myDeviceId) {
@@ -1244,16 +1343,48 @@
             localStorage.setItem('rehab_orders_log', JSON.stringify(ordersLog));
             localStorage.setItem('rehab_wheel_codes', JSON.stringify(wheelCodesLog));
             localStorage.setItem('rehab_merchant_kyc', JSON.stringify(merchantRequests));
+            localStorage.setItem('rehab_viral_subs', JSON.stringify(viralSubmissions));
+            localStorage.setItem('rehab_vip_coins', vipCoins.toString());
         }
 
-        // شريط تقدم القراءة العلوي
+        // عداد العروض الخاطفة المتحرك
+        let flashSecondsLeft = 4 * 3600 + 59 * 60 + 59;
+        setInterval(() => {
+            flashSecondsLeft = flashSecondsLeft > 0 ? flashSecondsLeft - 1 : 18000;
+            const h = String(Math.floor(flashSecondsLeft / 3600)).padStart(2, '0');
+            const m = String(Math.floor((flashSecondsLeft % 3600) / 60)).padStart(2, '0');
+            const s = String(flashSecondsLeft % 60).padStart(2, '0');
+            const el = document.getElementById('flashTimerDisplay');
+            if (el) el.textContent = `${h}:${m}:${s}`;
+        }, 1000);
+
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('scrollProgressBar').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + "%";
         });
 
-        /* --- النافذة الملكية المخصصة --- */
+        function launchGoldenConfetti() {
+            for (let i = 0; i < 35; i++) {
+                const conf = document.createElement('div');
+                conf.style.position = 'fixed';
+                conf.style.top = '-10px';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.width = '8px';
+                conf.style.height = '14px';
+                conf.style.background = i % 2 === 0 ? '#D4AF37' : '#10B981';
+                conf.style.zIndex = '999999';
+                conf.style.borderRadius = '2px';
+                conf.style.transition = `transform ${1.5 + Math.random()}s linear, top ${1.5 + Math.random()}s ease-in`;
+                document.body.appendChild(conf);
+                setTimeout(() => {
+                    conf.style.top = '105vh';
+                    conf.style.transform = `rotate(${Math.random() * 720}deg)`;
+                }, 30);
+                setTimeout(() => conf.remove(), 3000);
+            }
+        }
+
         function showCustomModal(title, text, type = 'alert', callback = null, placeholder = '', customHTML = '') {
             const overlay = document.getElementById('customModal');
             document.getElementById('customModalTitle').innerHTML = title;
@@ -1300,12 +1431,314 @@
             }
         }
 
-        /* ---=========================================================
-           إصلاح جذري وشامل لنظام الكاميرا (تصوير الوجه + البطاقة وش وضهر + المنتج)
-           يعمل بالبث الحي المباشر WebRTC + دعم كاميرا الموبايل الأصلية المباشرة
-        =========================================================--- */
+        /* =========================================================
+           🔥 محرك الانتشار الفيروسي (Viral Growth & Anti-Cheat Engine)
+           العميل يضيف أعضاء ويعمل فولو ويكسب خصم حتى 100% أو كاش أو منتج مجاني
+        ========================================================= */
+        function openViralRewardsModal() {
+            const stepM = storeData.viralStepMembers || 20;
+            const stepD = storeData.viralStepDiscount || 10;
+            const stepC = storeData.viralStepCash || 10;
+            const giftProds = products.filter(p => p.isGift);
+            const giftOptions = giftProds.map(gp => `<option value="منتج مجاني: ${gp.title}">🎁 منتج مجاني: ${gp.title} (عند إضافة 200 عضو)</option>`).join('');
+
+            const html = `
+                <div style="text-align:right; font-size:0.78rem;">
+                    <div style="background:rgba(16,185,129,0.12); border:1px solid var(--success); padding:10px; border-radius:10px; margin-bottom:10px;">
+                        <strong style="color:var(--gold); display:block; margin-bottom:4px;">🚀 كيف تربح خصم يصل إلى 100% أو أموال كاش فورية؟</strong>
+                        <div>1️⃣ تابع صفحاتنا الرسمية وانضم لجروباتنا من الأزرار بالأسفل.</div>
+                        <div>2️⃣ أضف أصدقاءك في جروباتنا (واتساب / تليجرام / فيسبوك).</div>
+                        <div>3️⃣ كل <strong>${stepM} عضو</strong> تضيفهم = <strong>${stepD}% خصم</strong> (200 عضو = <strong>100% مجاناً!</strong>) أو <strong>${stepC} ج.م كاش</strong> لمحفظتك!</div>
+                    </div>
+
+                    <!-- أزرار المهام المباشرة للانضمام والمتابعة -->
+                    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; margin-bottom:10px;">
+                        <a href="${storeData.waGroupUrl}" target="_blank" class="modal-btn confirm" style="background:#25D366; color:#FFF; text-decoration:none; text-align:center; font-size:0.72rem;"><i class="fa-brands fa-whatsapp"></i> 1. جروب الواتساب</a>
+                        <a href="${storeData.tgGroupUrl}" target="_blank" class="modal-btn confirm" style="background:#229ED9; color:#FFF; text-decoration:none; text-align:center; font-size:0.72rem;"><i class="fa-brands fa-telegram"></i> 2. جروب التليجرام</a>
+                        <a href="${storeData.fbGroupUrl || storeData.fb}" target="_blank" class="modal-btn confirm" style="background:#1877F2; color:#FFF; text-decoration:none; text-align:center; font-size:0.72rem;"><i class="fa-brands fa-facebook"></i> 3. متابعة فيسبوك</a>
+                        <a href="${storeData.tt}" target="_blank" class="modal-btn confirm" style="background:#000; color:#FFF; border:1px solid #25F4EE; text-decoration:none; text-align:center; font-size:0.72rem;"><i class="fa-brands fa-tiktok"></i> 4. متابعة تيك توك</a>
+                    </div>
+
+                    <!-- حاسبة المكافآت التفاعلية الحية -->
+                    <div style="background:var(--bg-input); border:1px solid var(--gold); padding:10px; border-radius:10px; margin-bottom:10px; text-align:center;">
+                        <label style="font-size:0.78rem; color:var(--gold); font-weight:900; display:block; margin-bottom:6px;">🎚️ حرك المؤشر لتحديد عدد الأعضاء الذين أضفتهم:</label>
+                        <input type="range" id="viralMembersSlider" min="${stepM}" max="200" step="${stepM}" value="${stepM}" style="width:100%; accent-color:var(--gold); cursor:pointer;" oninput="updateViralCalcPreview()">
+                        <div id="viralLiveResultText" style="font-size:0.86rem; font-weight:900; color:var(--success); margin-top:6px;"></div>
+                    </div>
+
+                    <input type="text" id="vClientName" class="custom-modal-input" placeholder="اسمك الثلاثي">
+                    <input type="tel" id="vClientPhone" class="custom-modal-input" placeholder="رقم موبايلك (لاستلام الكاش أو كود الخصم)">
+                    
+                    <label style="font-size:0.74rem; color:var(--gold); font-weight:800;">اختر نوع المكافأة التي تريدها:</label>
+                    <select id="vRewardType" class="custom-select" onchange="updateViralCalcPreview()">
+                        <option value="discount">🎟️ كود خصم فوري (يتدرج حتى 100% مجاناً)</option>
+                        <option value="cash">💵 تحويل أموال كاش على محفظتك</option>
+                        ${giftOptions}
+                    </select>
+
+                    <!-- نظام منع النصب والتزوير -->
+                    <div style="background:rgba(239,68,68,0.1); border:1px dashed var(--danger); padding:10px; border-radius:8px; margin-top:6px;">
+                        <strong style="color:var(--gold); font-size:0.75rem; display:block; margin-bottom:5px;">🛡️ إثبات الإضافة والمتابعة (فاحص ذكي ضد التكرار والغش):</strong>
+                        <input type="text" id="vSampleNames" class="custom-modal-input" placeholder="اكتب أسماء أو أرقام آخر 3 أعضاء أضفتهم للجروب للمراجعة">
+                        
+                        <label style="font-size:0.7rem; display:block; margin-bottom:3px;">📸 أرفق إسكرين شوت لإضافتك للأعضاء داخل الجروب:</label>
+                        <input type="file" id="vScreenAdd" accept="image/*" class="custom-modal-input">
+                        
+                        <label style="font-size:0.7rem; display:block; margin-bottom:3px;">📸 أرفق إسكرين شوت لمتابعتك لصفحاتنا (فيس / تيك توك / تليجرام):</label>
+                        <input type="file" id="vScreenFollow" accept="image/*" class="custom-modal-input" style="margin-bottom:0;">
+                    </div>
+                </div>
+            `;
+
+            showCustomModal("🎁 ضِف أعضاء وتابعنا واكسب حتى 100% أو كاش!", "", "html", (confirmed) => {
+                if (confirmed) submitViralRewardClaim();
+            }, "", html);
+
+            setTimeout(updateViralCalcPreview, 60);
+        }
+
+        function updateViralCalcPreview() {
+            const slider = document.getElementById('viralMembersSlider');
+            const resEl = document.getElementById('viralLiveResultText');
+            if (!slider || !resEl) return;
+
+            const members = parseInt(slider.value);
+            const stepM = storeData.viralStepMembers || 20;
+            const stepD = storeData.viralStepDiscount || 10;
+            const stepC = storeData.viralStepCash || 10;
+
+            const units = Math.floor(members / stepM);
+            const calcDiscount = Math.min(100, units * stepD);
+            const calcCash = units * stepC;
+
+            resEl.innerHTML = `إضافة <span style="color:#FFF;">${members} عضو</span> = خصم <span style="color:var(--gold);">${calcDiscount}%</span> ${calcDiscount === 100 ? '(مجاني بالكامل 🔥)' : ''} أو <span style="color:var(--gold);">${calcCash} ج.م كاش</span>!`;
+        }
+
+        /* --- فاحص البصمة الرقمية للصور لمنع رفع نفس الإسكرين مرتين أو الغش --- */
+        function computeImageAntiCheatHash(fileInput) {
+            return new Promise((resolve) => {
+                if (!fileInput || !fileInput.files || !fileInput.files[0]) return resolve(null);
+                const f = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const dataUrl = e.target.result;
+                    const midSample = dataUrl.substring(Math.floor(dataUrl.length / 2), Math.floor(dataUrl.length / 2) + 120);
+                    const hashSig = `${f.size}_${midSample}`;
+                    resolve({ hashSig, dataUrl });
+                };
+                reader.readAsDataURL(f);
+            });
+        }
+
+        async function submitViralRewardClaim() {
+            const name = document.getElementById('vClientName').value.trim();
+            const phone = document.getElementById('vClientPhone').value.trim();
+            const membersCount = parseInt(document.getElementById('viralMembersSlider').value || '20');
+            const rewardType = document.getElementById('vRewardType').value;
+            const sampleNames = document.getElementById('vSampleNames').value.trim();
+            const addInput = document.getElementById('vScreenAdd');
+            const followInput = document.getElementById('vScreenFollow');
+
+            const egyptPhoneRegex = /^01[0125][0-9]{8}$/;
+            if (!name || !egyptPhoneRegex.test(phone) || !sampleNames) {
+                setTimeout(() => showCustomModal("⚠️ بيانات ناقصة", "يرجى كتابة اسمك، ورقم هاتف مصري صحيح، وأسماء آخر 3 أعضاء قمت بإضافتهم للتأكد!", "alert", () => openViralRewardsModal()), 120);
+                return;
+            }
+
+            if (storeData.blacklist && storeData.blacklist.includes(phone)) {
+                showCustomModal("🚫 رقم محظور", "تم حظر هذا الرقم من نظام المكافآت بسبب محاولة غش سابقة.", "alert");
+                return;
+            }
+
+            const proofAdd = await computeImageAntiCheatHash(addInput);
+            const proofFollow = await computeImageAntiCheatHash(followInput);
+
+            if (!proofAdd || !proofFollow) {
+                setTimeout(() => showCustomModal("⚠️ الإسكرينات مطلوبة", "يجب إرفاق صورة إسكرين إضافة الأعضاء وصورة إسكرين متابعة الصفحات للتأكد!", "alert", () => openViralRewardsModal()), 120);
+                return;
+            }
+
+            if (proofAdd.hashSig === proofFollow.hashSig ||
+                storeData.usedViralProofHashes.includes(proofAdd.hashSig) ||
+                storeData.usedViralProofHashes.includes(proofFollow.hashSig)) {
+                notifyOwnerInstantly(`🚨 محاولة نصب في نظام الأعضاء!\nالعميل: ${name} (${phone})\nحاول رفع إسكرين مكرر أو مزيف!`);
+                setTimeout(() => showCustomModal("🚨 كاشف التزوير الذكي", "تم رفض الطلب! إحدى صور الإسكرين المرفوعة مكررة أو تم استخدامها من قبل. يرجى رفع إسكرين حقيقي وجديد حتى لا يتم حظر رقمك.", "alert"), 120);
+                return;
+            }
+
+            storeData.usedViralProofHashes.push(proofAdd.hashSig, proofFollow.hashSig);
+
+            const stepM = storeData.viralStepMembers || 20;
+            const units = Math.floor(membersCount / stepM);
+            const calcDiscount = Math.min(100, units * (storeData.viralStepDiscount || 10));
+            const calcCash = units * (storeData.viralStepCash || 10);
+
+            const compressedAdd = await compressDataUrlImage(proofAdd.dataUrl, 450);
+            const compressedFollow = await compressDataUrlImage(proofFollow.dataUrl, 450);
+
+            const claimObj = {
+                id: 'VIRAL_' + Date.now(),
+                date: new Date().toLocaleString('ar-EG'),
+                name, phone, membersCount,
+                rewardType, calcDiscount, calcCash,
+                sampleNames,
+                imgAdd: compressedAdd,
+                imgFollow: compressedFollow,
+                status: 'pending'
+            };
+
+            viralSubmissions.unshift(claimObj);
+            saveAllToStorage();
+
+            notifyOwnerInstantly(`🚀 طلب مكافأة إضافة أعضاء جديد!\nالعميل: ${name} (${phone})\nعدد الأعضاء المضافين: ${membersCount} عضو\nأسماء عينة للمراجعة: ${sampleNames}\nالمكافأة المطلوبة: ${rewardType === 'discount' ? `خصم ${calcDiscount}%` : rewardType === 'cash' ? `كاش ${calcCash} ج.م` : rewardType}\n(افتح لوحة التحكم لمشاهدة الإسكرينات والموافقة وإصدار الكود).`);
+
+            showCustomModal("✅ تم إرسال الإثبات للمراجعة!", `شكراً لك يا ${name}! تم فحص الصور مبدئياً وإرسالها لمالك المتجر للتحقق من وجود الـ (${membersCount} عضو) في الجروب، وسيتم إرسال جائزتك على رقمك (${phone}) فور التأكيد!`, "alert");
+        }
+
+        function compressDataUrlImage(dataUrl, maxW = 450) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const scale = Math.min(1, maxW / img.width);
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                    resolve(canvas.toDataURL('image/jpeg', 0.68));
+                };
+                img.src = dataUrl;
+            });
+        }
+
+        /* --- دوال المالك لإدارة الجروبات وبث العروض ومراجعة طلبات الأعضاء --- */
+        function saveViralGroupSettings() {
+            storeData.waGroupUrl = document.getElementById('cfgWaGroupUrl').value.trim() || storeData.waGroupUrl;
+            storeData.tgGroupUrl = document.getElementById('cfgTgGroupUrl').value.trim() || storeData.tgGroupUrl;
+            storeData.fbGroupUrl = document.getElementById('cfgFbGroupUrl').value.trim() || storeData.fbGroupUrl;
+            storeData.viralStepMembers = Number(document.getElementById('cfgViralStepMembers').value) || 20;
+            storeData.viralStepDiscount = Number(document.getElementById('cfgViralStepDiscount').value) || 10;
+            storeData.viralStepCash = Number(document.getElementById('cfgViralStepCash').value) || 10;
+            saveAllToStorage();
+            showCustomModal("✅ تم الحفظ", "تم حفظ روابط جروباتك وقوانين مكافآت الأعضاء بنجاح!", "alert");
+        }
+
+        function generateGroupReminderOffer() {
+            const groupCode = 'GRP' + Math.floor(100 + Math.random() * 900);
+            const endOfDay = new Date(); endOfDay.setHours(23, 59, 59, 999);
+            wheelCodesLog.unshift({ code: groupCode, pct: 15, expires: endOfDay.getTime(), dateStr: new Date().toLocaleString('ar-EG'), used: false });
+            saveAllToStorage();
+
+            const randomProd = products[Math.floor(Math.random() * products.length)] || { title: 'تشكيلة VIP الملكية', price: 450 };
+            const msg = `👑 *تذكير ملكي خاص لأعضاء جروبنا الغاليين في (${storeData.name})!* 👑\n\n🔥 عرض اليوم الحصري للأعضاء فقط على: *(${randomProd.title})* بسعر *${randomProd.price} ج.م*!\n🎁 استخدم كود خصم الأعضاء السري: *[ ${groupCode} ]* للحصول على خصم *15%* إضافي!\n\n💰 *مفاجأة الجروب:* ضِف أصدقاءك لجروبنا الآن؛ كل ${storeData.viralStepMembers} عضو = خصم ${storeData.viralStepDiscount}% (حتى 100% مجاناً!) أو ${storeData.viralStepCash} ج.م كاش فوري!\n\n👇 ادخل المتجر واطلب الآن قبل انتهاء العرض:\n${window.location.href}`;
+            document.getElementById('broadcastMsgInput').value = msg;
+        }
+
+        function sendBroadcastToGroup(platform) {
+            let msg = document.getElementById('broadcastMsgInput').value.trim();
+            if (!msg) {
+                generateGroupReminderOffer();
+                msg = document.getElementById('broadcastMsgInput').value.trim();
+            }
+            copyTextToClipboard(msg);
+
+            if (platform === 'tg') {
+                if (storeData.tgBotToken && storeData.tgChatId) {
+                    fetch(`https://api.telegram.org/bot${storeData.tgBotToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: storeData.tgChatId, text: msg })
+                    }).catch(() => {});
+                }
+                window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(msg)}`, '_blank');
+            } else if (platform === 'wa') {
+                window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            } else if (platform === 'fb') {
+                window.open(storeData.fbGroupUrl || storeData.fb, '_blank');
+                showCustomModal("📋 تم نسخ رسالة العرض!", "تم نسخ رسالة التذكير وكود خصم الأعضاء في حافظة هاتفك وفتح جروب الفيسبوك؛ فقط اضغط (لصق) وانشرها لأعضائك!", "alert");
+            }
+        }
+
+        function approveViralSubmission(subId) {
+            const sub = viralSubmissions.find(s => s.id === subId);
+            if (!sub) return;
+            sub.status = 'approved';
+
+            let replyMsg = '';
+            if (sub.rewardType === 'discount') {
+                const specialCode = 'MEM' + sub.calcDiscount + '_' + Math.floor(100 + Math.random() * 900);
+                const exp = Date.now() + (7 * 24 * 3600 * 1000);
+                wheelCodesLog.unshift({ code: specialCode, pct: sub.calcDiscount, expires: exp, dateStr: new Date().toLocaleString('ar-EG'), used: false });
+                sub.issuedCode = specialCode;
+                replyMsg = `🎉 مبروك يا ${sub.name}! تمت مراجعة وتأكيد إضافتك لـ (${sub.membersCount} عضو) في جروبات ${storeData.name} بنجاح!\n\n🎁 كود الخصم الخاص بك بنسبة (${sub.calcDiscount}%) هو:\n*${specialCode}*\n\nاستخدمه الآن في سلة المشتريات:\n${window.location.href}`;
+            } else if (sub.rewardType === 'cash') {
+                replyMsg = `🎉 مبروك يا ${sub.name}! تمت مراجعة وتأكيد إضافتك لـ (${sub.membersCount} عضو) في جروبات ${storeData.name} بنجاح!\n\n💵 تم اعتماد مكافأتك النقدية بقيمة (${sub.calcCash} ج.م) وجاري تحويلها لرقمك!`;
+            } else {
+                replyMsg = `🎉 مبروك يا ${sub.name}! تمت مراجعة إضافتك لـ (${sub.membersCount} عضو) بنجاح واستحققت (${sub.rewardType})! تواصل معنا لتأكيد عنوان الشحن.`;
+            }
+
+            saveAllToStorage();
+            loadAdminDataIntoCMS();
+            window.open(`https://wa.me/2${sub.phone}?text=${encodeURIComponent(replyMsg)}`, '_blank');
+        }
+
+        function rejectAndBlockViralCheater(subId) {
+            const sub = viralSubmissions.find(s => s.id === subId);
+            if (!sub) return;
+            storeData.blacklist = (storeData.blacklist ? storeData.blacklist + ', ' : '') + sub.phone;
+            viralSubmissions = viralSubmissions.filter(s => s.id !== subId);
+            saveAllToStorage();
+            loadAdminDataIntoCMS();
+            showCustomModal("🚫 تم الحظر والرفض", `تم حذف الطلب المزيف وإضافة الرقم (${sub.phone}) إلى القائمة السوداء نهائياً!`, "alert");
+        }
+
+        /* --- الميزات التفاعلية الأخرى (تفاوض، حجز 24 ساعة، اتصال، نقاط ولاء، كاميرا التجار) --- */
+        function negotiateProductPrice(pid) {
+            const p = products.find(x => x.id === pid);
+            if (!p) return;
+            const html = `
+                <input type="text" id="negName" class="custom-modal-input" placeholder="اسمك الكريم">
+                <input type="tel" id="negPhone" class="custom-modal-input" placeholder="رقم هاتفك للتواصل (01xxxxxxxxx)">
+                <input type="number" id="negOfferPrice" class="custom-modal-input" placeholder="السعر الذي تعرضه لشراء (${p.title}) بدلاً من ${p.price} ج.م">
+            `;
+            showCustomModal(`🤝 تفاوض على سعر: ${p.title}`, "قدم عرض السعر المناسب لك وسيقوم المالك بمراجعته والرد عليك فوراً:", "html", (ok) => {
+                if (!ok) return;
+                const name = document.getElementById('negName').value.trim();
+                const phone = document.getElementById('negPhone').value.trim();
+                const offer = document.getElementById('negOfferPrice').value.trim();
+                if (name && phone && offer) {
+                    notifyOwnerInstantly(`💰 عرض تفاوض سعر جديد!\nالعميل: ${name} (${phone})\nالمنتج: ${p.title} (سعره الأصلي ${p.price} ج.م)\nالسعر المعروض من العميل: ${offer} ج.م`);
+                    showCustomModal("✅ تم إرسال عرضك", "وصل عرض السعر الخاص بك لإدارة المتجر! سنتواصل معك قريباً.", "alert");
+                }
+            }, "", html);
+        }
+
+        function reserveProduct24h(pid) {
+            const p = products.find(x => x.id === pid);
+            if (!p) return;
+            showCustomModal(`⏳ حجز (${p.title}) لمدة 24 ساعة`, "أدخل رقم هاتفك لحجز هذه القطعة باسمك لمدة 24 ساعة:", "prompt", (phone) => {
+                if (phone) {
+                    notifyOwnerInstantly(`⏳ طلب حجز منتج 24 ساعة!\nالمنتج: ${p.title}\nرقم هاتف العميل: ${phone}`);
+                    showCustomModal("✅ تم الحجز المبدئي", `تم حجز (${p.title}) برقم هاتفك لمدة 24 ساعة!`, "alert");
+                }
+            }, "رقم الموبايل (01xxxxxxxxx)");
+        }
+
+        function showVIPCoinsModal() {
+            const cashValue = Math.floor(vipCoins / 10);
+            showCustomModal("👑 محفظة نقاط الولاء الملكية (VIP Coins)", `رصيدك الحالي: ${vipCoins} نقطة ذهبية!\n(تساوي خصماً نقدياً بقيمة ${cashValue} ج.م).\n\nمع كل طلب شراء جديد أو إضافة أعضاء لجروباتنا تزداد نقاطك تلقائياً!`, "alert");
+        }
+
+        function shareCartWithFriendToPay() {
+            if (!cart.length) return showCustomModal("تنبيه", "السلة فارغة حالياً!", "alert");
+            const itemsTxt = cart.map(i => `• ${i.title} (${i.price} ج.م)`).join('\n');
+            const total = getCartSubtotal();
+            const msg = encodeURIComponent(`🎁 أهلاً! هذه قائمة مشترياتي المفضلة من متجر ${storeData.name}:\n\n${itemsTxt}\n\nالإجمالي: ${total} ج.م\nهل يمكنك إتمام الطلب لي من هنا؟ ❤️\n${window.location.href}`);
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
+        }
+
+        /* --- استوديو الكاميرا المزدوجة للتجار والعملاء --- */
         let activeVideoStream = null;
-        let currentCameraTarget = 'selfie'; // 'selfie' | 'idFront' | 'idBack' | 'prodImg'
+        let currentCameraTarget = 'selfie';
         let kycCapturedImages = { selfie: "", idFront: "", idBack: "", prodImg: "" };
 
         function stopAnyActiveCamera() {
@@ -1339,7 +1772,6 @@
                     </div>
                     <input type="text" id="mAddress" class="custom-modal-input" placeholder="العنوان بالتفصيل">
 
-                    <!-- استوديو الكاميرا الحية المزدوجة (أمامية للوجه + خلفية للبطاقة والمنتج) -->
                     <div class="camera-studio-box">
                         <strong style="color:var(--gold); display:block; margin-bottom:6px; font-size:0.8rem;">📸 استوديو الكاميرا المباشرة للتوثيق الأمني:</strong>
                         
@@ -1349,7 +1781,6 @@
                             <button type="button" class="wheel-btn" style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); padding:5px 16px; font-size:0.76rem; z-index:10;" onclick="captureLiveFrameNow()">📸 التقط الصورة الآن</button>
                         </div>
 
-                        <!-- أزرار تشغيل الكاميرا لكل مطلوب -->
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
                             <button type="button" class="modal-btn confirm" style="font-size:0.72rem; padding:7px;" onclick="launchSmartCamera('selfie', 'user')">1. كاميرا الوجه (سيلفي)</button>
                             <button type="button" class="modal-btn confirm" style="font-size:0.72rem; padding:7px;" onclick="launchSmartCamera('idFront', 'environment')">2. تصوير البطاقة (وش)</button>
@@ -1357,13 +1788,11 @@
                             <button type="button" class="modal-btn confirm" style="font-size:0.72rem; padding:7px;" onclick="launchSmartCamera('prodImg', 'environment')">4. تصوير المنتج</button>
                         </div>
 
-                        <!-- مدخلات كاميرا الهاتف الأصلية الاحتياطية (تعمل تلقائياً لو المتصفح منع البث) -->
                         <input type="file" id="fallbackCam_selfie" accept="image/*" capture="user" style="display:none;" onchange="handleFallbackCameraFile(event, 'selfie')">
                         <input type="file" id="fallbackCam_idFront" accept="image/*" capture="environment" style="display:none;" onchange="handleFallbackCameraFile(event, 'idFront')">
                         <input type="file" id="fallbackCam_idBack" accept="image/*" capture="environment" style="display:none;" onchange="handleFallbackCameraFile(event, 'idBack')">
                         <input type="file" id="fallbackCam_prodImg" accept="image/*" style="display:none;" onchange="handleFallbackCameraFile(event, 'prodImg')">
 
-                        <!-- معاينة الصور الـ 4 الملتقطة -->
                         <div class="kyc-thumbs-grid">
                             <div class="kyc-thumb-slot"><img id="prev_selfie"><span id="status_selfie">الوجه ⏳</span></div>
                             <div class="kyc-thumb-slot"><img id="prev_idFront"><span id="status_idFront">بطاقة وش ⏳</span></div>
@@ -1405,7 +1834,6 @@
                     await vid.play();
                     return;
                 } catch (err) {
-                    // إذا كان المتصفح داخل تطبيق يمنع البث المباشر، يفتح كاميرا الهاتف الأصلية فوراً!
                     document.getElementById('fallbackCam_' + targetKey).click();
                 }
             } else {
@@ -1422,15 +1850,13 @@
             const ctx = canvas.getContext('2d');
             ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
-            // ختم التاريخ والوقت على الصورة لمنع الغش
             ctx.fillStyle = "rgba(0,0,0,0.6)";
             ctx.fillRect(0, canvas.height - 26, canvas.width, 26);
             ctx.fillStyle = "#D4AF37";
             ctx.font = "bold 12px Cairo";
             ctx.fillText("توثيق حي: " + new Date().toLocaleString('ar-EG'), 10, canvas.height - 8);
 
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.72);
-            saveCapturedSlotImage(currentCameraTarget, dataUrl);
+            saveCapturedSlotImage(currentCameraTarget, canvas.toDataURL('image/jpeg', 0.72));
             stopAnyActiveCamera();
         }
 
@@ -1438,18 +1864,9 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const maxW = 500;
-                    const scale = Math.min(1, maxW / img.width);
-                    canvas.width = img.width * scale;
-                    canvas.height = img.height * scale;
-                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-                    saveCapturedSlotImage(targetKey, canvas.toDataURL('image/jpeg', 0.72));
-                };
-                img.src = e.target.result;
+            reader.onload = async (e) => {
+                const compressed = await compressDataUrlImage(e.target.result, 500);
+                saveCapturedSlotImage(targetKey, compressed);
             };
             reader.readAsDataURL(file);
         }
@@ -1494,34 +1911,14 @@
 
             merchantRequests.unshift(reqObj);
             saveAllToStorage();
-
-            notifyOwnerInstantly(`🪪 طلب توثيق وبيع منتج جديد بالكاميرا!\nالبائع: ${name} (${gender} - ${age} سنة)\nالهاتف السري: ${phone}\nالعنوان: ${address}\nالمنتج: ${prodTitle} (${condition})\nالسعر: ${prodPrice} ج.م\n(تم حفظ صور السيلفي والبطاقة وش وضهر في لوحة التحكم).`);
-
-            showCustomModal("✅ تم التوثيق والإرسال بنجاح", "تم إرسال صور التحقق وبيانات منتجك للإدارة بنجاح! سيتم مراجعتها ونشر المنتج في المتجر.", "alert");
+            notifyOwnerInstantly(`🪪 طلب توثيق وبيع منتج جديد بالكاميرا!\nالبائع: ${name} (${gender} - ${age} سنة)\nالهاتف السري: ${phone}\nالمنتج: ${prodTitle} (${condition}) — ${prodPrice} ج.م`);
+            showCustomModal("✅ تم التوثيق والإرسال بنجاح", "تم إرسال صور التحقق وبيانات منتجك للإدارة بنجاح!", "alert");
         }
 
-        /* --- المساعد الذكي داخل الموقع (AI Shopping Assistant) --- */
-        function openAIAssistantModal() {
-            const html = `
-                <div style="text-align:right; font-size:0.8rem;">
-                    <div style="background:var(--bg-input); padding:10px; border-radius:10px; border:1px solid var(--gold); margin-bottom:10px;">
-                        <strong style="color:var(--gold);">🤖 أهلاً بك في المساعد الملكي الذكي! كيف أساعدك اليوم؟</strong>
-                    </div>
-                    <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:6px; color:var(--text-main);" onclick="showCustomModal('💳 نظام الدفع الذكي','تسهيلاً لعملائنا، يمكنك دفع 50% أو 75% فقط من قيمة المنتجات + مصاريف الشحن عبر الكاش أو إنستا باي أو الحساب البنكي، ودفع باقي المبلغ عند الاستلام والمعاينة!','alert')">❓ كيف يعمل نظام الدفع والعربون؟</button>
-                    <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:6px; color:var(--text-main);" onclick="showCustomModal('🎁 هدايا طلبات +1500 ج.م','عندما تتخطى سلة مشترياتك 1500 ج.م، يمنحك النظام تلقائياً اختيار هدية مجانية من صندوق الهدايا أو لفتين إضافيتين في عجلة الحظ!','alert')">❓ كيف أحصل على هدية مجانية؟</button>
-                    <button class="modal-btn cancel" style="width:100%; text-align:right; margin-bottom:6px; color:var(--text-main);" onclick="closeCustomModal(false); openMerchantKYCModal();">🤝 أريد عرض منتج جديد أو مستعمل للبيع</button>
-                </div>
-            `;
-            showCustomModal("🤖 المساعد الملكي الذكي", "", "html", null, "", html);
-        }
-
-        /* --- البحث الصوتي بالمايكروفون --- */
+        /* --- البحث الصوتي + المذكر الصوتي + التعديل الشامل --- */
         function startVoiceSearch() {
             const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRec) {
-                showCustomModal("🎤 البحث الصوتي", "متصفحك الحالي لا يدعم البحث الصوتي، يمكنك الكتابة في شريط البحث مباشرة.", "alert");
-                return;
-            }
+            if (!SpeechRec) return showCustomModal("🎤 البحث الصوتي", "متصفحك الحالي لا يدعم البحث الصوتي.", "alert");
             const recognition = new SpeechRec();
             recognition.lang = 'ar-EG';
             recognition.onresult = (event) => {
@@ -1532,7 +1929,6 @@
             recognition.start();
         }
 
-        /* --- المذكر الصوتي (صلي على محمد ﷺ) --- */
         let salawatTimerStarted = false;
         function playSalawatAudio(manualTrigger = false) {
             if (storeData.customAudio) {
@@ -1546,14 +1942,11 @@
                 utterance.rate = 0.9;
                 window.speechSynthesis.speak(utterance);
             }
-            if (manualTrigger) {
-                showCustomModal("ﷺ صَلِّ عَلَى النَّبِيِّ", "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ ❤️", "alert");
-            }
+            if (manualTrigger) showCustomModal("ﷺ صَلِّ عَلَى النَّبِيِّ", "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ ❤️", "alert");
         }
 
         function handleSalawatAudioUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+            const file = event.target.files[0]; if (!file) return;
             const reader = new FileReader();
             reader.onload = (e) => {
                 storeData.customAudio = e.target.result;
@@ -1570,7 +1963,6 @@
             }
         }, { once: true });
 
-        /* --- زر التعديل الشامل الحي لكل حرف في المتجر --- */
         function enableLiveVisualEditMode() {
             closeAdminPanel();
             document.body.classList.add('live-edit-active');
@@ -1582,7 +1974,7 @@
                     el.dataset.editKey = 'txt_' + idx;
                 }
             });
-            showCustomModal("✏️ وضع التعديل الشامل مفعل", "اضغط على أي كلمة أو حرف في المتجر لتعديله مباشرة على الشاشة! ثم اضغط (حفظ وإنهاء) بالأسفل.", "alert");
+            showCustomModal("✏️ وضع التعديل الشامل مفعل", "اضغط على أي كلمة أو حرف في المتجر لتعديله مباشرة! ثم اضغط (حفظ وإنهاء) بالأسفل.", "alert");
         }
 
         function saveAndExitLiveEditMode() {
@@ -1631,7 +2023,8 @@
                     </div>
                     <div class="p-img-wrap" onclick="openQuickView(${p.id})">
                         <img src="${p.img}" class="p-img" alt="${p.title}" loading="lazy">
-                        ${p.scarcity ? `<div class="scarcity-tag">🔥 متبقي 3 قطع فقط</div>` : ''}
+                        <div class="watermark-tag">${storeData.name}</div>
+                        ${p.scarcity ? `<div class="scarcity-tag">🔥 متبقي 3 قطع</div>` : ''}
                     </div>
                     <div class="p-body">
                         <div>
@@ -1640,7 +2033,13 @@
                             <div class="live-viewers">👁️ يشاهده الآن ${realisticViewers} عميلاً</div>
                             <div class="p-price">${p.price} ج.م</div>
                         </div>
-                        <button class="p-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> أضف إلى السلة</button>
+                        <div>
+                            <button class="p-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> أضف إلى السلة</button>
+                            <div class="p-sub-actions">
+                                <button class="p-Action-mini" onclick="negotiateProductPrice(${p.id})">💬 تفاوض سعر</button>
+                                <button class="p-Action-mini" onclick="reserveProduct24h(${p.id})">⏳ حجز 24س</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `}).join('');
@@ -1656,7 +2055,7 @@
             document.getElementById('newPDesc').value = templates[Math.floor(Math.random() * templates.length)];
         }
 
-        /* --- إتمام الشراء الذكي (عربون 50% أو 75% + الشحن كامل مقدماً + نسخ الرقم بضغطة زر) --- */
+        /* --- إتمام الشراء الذكي + الفاتورة --- */
         let lastOrderTimestamp = 0;
 
         function openCheckoutForm() {
@@ -1688,10 +2087,19 @@
                     <input type="text" id="chkName" class="custom-modal-input" placeholder="الاسم الثلاثي" value="${savedClient.name}">
                     <input type="tel" id="chkPhone" class="custom-modal-input" placeholder="رقم الموبايل المصري (11 رقم يبدأ بـ 01)" value="${savedClient.phone}">
                     
-                    <label style="font-size:0.75rem; color:var(--gold); font-weight:800;">اختر المحافظة (27 محافظة بالترتيب):</label>
-                    <select id="chkGov" class="custom-select" onchange="recalcSmartDepositPreview()">
-                        ${govOptionsHTML}
-                    </select>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                        <div>
+                            <label style="font-size:0.72rem; color:var(--gold); font-weight:800;">المحافظة (27 محافظة):</label>
+                            <select id="chkGov" class="custom-select" onchange="recalcSmartDepositPreview()">${govOptionsHTML}</select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.72rem; color:var(--gold); font-weight:800;">وقت الاستلام المفضل:</label>
+                            <select id="chkDeliveryTime" class="custom-select">
+                                <option value="مساءً (بعد الظهر)">🌙 مساءً</option>
+                                <option value="صباحاً">☀️ صباحاً</option>
+                            </select>
+                        </div>
+                    </div>
                     <input type="text" id="chkAddress" class="custom-modal-input" placeholder="العنوان بالتفصيل" value="${savedClient.address}">
 
                     <label style="font-size:0.75rem; color:var(--gold); font-weight:800;">وسيلة التحويل المعتمدة:</label>
@@ -1728,10 +2136,6 @@
             }, 60);
         }
 
-        function copyTextToClipboard(txt) {
-            navigator.clipboard.writeText(txt).catch(() => {});
-        }
-
         function updatePaymentAccountDisplay() {
             const method = document.getElementById('chkPayMethod')?.value;
             const targetEl = document.getElementById('payTargetAccountText');
@@ -1752,14 +2156,14 @@
             const subtotal = getCartSubtotal();
             const wrapFee = document.getElementById('giftWrapCheck')?.checked ? 35 : 0;
             const discountVal = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
-            const netProducts = subtotal - discountVal + wrapFee;
+            const netProducts = Math.max(0, subtotal - discountVal) + wrapFee;
 
             const depositProductsPart = Math.round(netProducts * ratio);
             const paidNowTotal = depositProductsPart + shipCost;
             const remainingOnDelivery = netProducts - depositProductsPart;
 
             box.innerHTML = `
-                <div style="display:flex; justify-content:space-between;"><span>صافي المنتجات:</span><strong>${netProducts} ج.م</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>صافي المنتجات بعد الخصم:</span><strong>${netProducts} ج.م</strong></div>
                 <div style="display:flex; justify-content:space-between;"><span>شحن محافظة ${gov} (يُدفع كاملاً):</span><strong>${shipCost} ج.م</strong></div>
                 <hr style="border-color:var(--border-color); margin:5px 0;">
                 <div style="display:flex; justify-content:space-between; color:var(--success); font-weight:900;"><span>✅ المطلوب تحويله الآن (${ratio*100}% + الشحن):</span><span>${paidNowTotal} ج.م</span></div>
@@ -1773,12 +2177,18 @@
             const name = document.getElementById('chkName').value.trim();
             const phone = document.getElementById('chkPhone').value.trim();
             const govName = document.getElementById('chkGov').value;
+            const deliveryTime = document.getElementById('chkDeliveryTime').value;
             const shippingCost = Number(storeData.govPrices[govName] || 70);
             const address = document.getElementById('chkAddress').value.trim();
             const payMethod = document.getElementById('chkPayMethod').value;
             const ratio = parseFloat(document.getElementById('chkDepositRatio').value || '0.5');
             const transferInput = document.getElementById('chkTransferImg');
             const giftChoiceEl = document.getElementById('chkGiftReward');
+
+            if (storeData.blacklist && storeData.blacklist.includes(phone)) {
+                showCustomModal("🚫 عفواً", "تم حظر هذا الرقم من إجراء طلبات جديدة.", "alert");
+                return;
+            }
 
             const egyptPhoneRegex = /^01[0125][0-9]{8}$/;
             if (!name || !egyptPhoneRegex.test(phone) || !address) {
@@ -1791,13 +2201,21 @@
                 return;
             }
 
+            const f = transferInput.files[0];
+            const receiptSignature = `${f.name}_${f.size}_${f.lastModified}`;
+            if (storeData.usedReceiptHashes.includes(receiptSignature)) {
+                setTimeout(() => showCustomModal("🚨 تحذير أمني", "صورة إسكرين التحويل هذه تم استخدامها مسبقاً في طلب قديم! يرجى رفع إسكرين التحويل الجديد الصحيح.", "alert", () => openCheckoutForm()), 100);
+                return;
+            }
+            storeData.usedReceiptHashes.push(receiptSignature);
+
             lastOrderTimestamp = Date.now();
             localStorage.setItem('rehab_saved_client', JSON.stringify({ name, phone, address, gov: govName }));
 
             const subtotal = getCartSubtotal();
             const wrapFee = document.getElementById('giftWrapCheck')?.checked ? 35 : 0;
             const discountVal = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
-            const netProducts = subtotal - discountVal + wrapFee;
+            const netProducts = Math.max(0, subtotal - discountVal) + wrapFee;
             const depositPart = Math.round(netProducts * ratio);
             const paidNow = depositPart + shippingCost;
             const remainingCOD = netProducts - depositPart;
@@ -1820,18 +2238,23 @@
             const newOrder = {
                 id: orderId, date: dateStr, name, phone,
                 address: `${govName} - ${address}`,
-                payMethod, items: [...cart],
+                deliveryTime, payMethod, items: [...cart],
                 netProducts, shipping: shippingCost, discount: discountVal,
                 paidNow, remainingCOD, total: finalTotal,
                 reward: rewardNote, status: 'قيد المراجعة والتجهيز ⏳'
             };
 
             ordersLog.unshift(newOrder);
+            lastGeneratedOrder = newOrder;
+            vipCoins += Math.round(finalTotal / 10);
+            document.getElementById('vipCoinsDisplay').textContent = vipCoins;
+
             if (activeCoupon) activeCoupon.used = true;
             cart = [];
             activeCoupon = null;
             saveAllToStorage();
             updateCartBadgeAndUI();
+            launchGoldenConfetti();
 
             let merchantCommissionNote = '';
             newOrder.items.forEach(item => {
@@ -1844,7 +2267,7 @@
             });
 
             const itemsSummary = newOrder.items.map(i => `- ${i.title} (×${i.qty})`).join('\n');
-            notifyOwnerInstantly(`🛍️ أوردر جديد #${orderId}\nالعميل: ${name} (${phone})\nالعنوان: ${newOrder.address}\nوسيلة التحويل: ${payMethod}\n✅ المدفوع مقدماً (العربون + الشحن): ${paidNow} ج.م\n📦 المتبقي عند الاستلام: ${remainingCOD} ج.م\nالمنتجات:\n${itemsSummary}${merchantCommissionNote}`);
+            notifyOwnerInstantly(`🛍️ أوردر جديد #${orderId}\nالعميل: ${name} (${phone})\nالعنوان: ${newOrder.address} (${deliveryTime})\nوسيلة التحويل: ${payMethod}\n✅ المدفوع مقدماً (العربون + الشحن): ${paidNow} ج.م\n📦 المتبقي عند الاستلام: ${remainingCOD} ج.م\nالمنتجات:\n${itemsSummary}${merchantCommissionNote}`);
 
             displayOfficialInvoice(newOrder);
         }
@@ -1858,10 +2281,12 @@
             document.getElementById('invPhone').textContent = order.phone;
             document.getElementById('invAddress').textContent = order.address;
             document.getElementById('invPayMethod').textContent = order.payMethod;
+            document.getElementById('invDeliveryTime').textContent = order.deliveryTime || 'مساءً';
             document.getElementById('invProductsNet').textContent = `${order.netProducts} ج.م`;
             document.getElementById('invShipping').textContent = `${order.shipping} ج.م`;
             document.getElementById('invPaidNow').textContent = `${order.paidNow} ج.م`;
             document.getElementById('invRemainingCOD').textContent = `${order.remainingCOD} ج.م`;
+            document.getElementById('invQrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(storeData.name + ' - Order:' + order.id + ' - Paid:' + order.paidNow)}`;
 
             document.getElementById('invItemsList').innerHTML = order.items.map(i => `
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
@@ -1871,6 +2296,13 @@
             `).join('');
 
             document.getElementById('invoiceModal').style.display = 'flex';
+        }
+
+        function sendInvoiceToWhatsApp() {
+            if (!lastGeneratedOrder) return;
+            const o = lastGeneratedOrder;
+            const txt = encodeURIComponent(`👑 *فاتورة معتمدة من ${storeData.name}*\nرقم الطلب: #${o.id}\nالعميل: ${o.name}\nالعنوان: ${o.address}\n✅ المدفوع مقدماً: ${o.paidNow} ج.م\n📦 المتبقي عند الاستلام: ${o.remainingCOD} ج.م`);
+            window.open(`https://wa.me/${storeData.wa.replace(/[^0-9]/g, '')}?text=${txt}`, '_blank');
         }
 
         function downloadInvoiceAsImage() {
@@ -1886,7 +2318,6 @@
             });
         }
 
-        /* --- تصدير الطلبات لملف إكسيل CSV --- */
         function exportOrdersToCSV() {
             if (!ordersLog.length) return showCustomModal("تنبيه", "لا توجد طلبات لتصديرها!", "alert");
             let csv = "\uFEFFرقم الطلب,التاريخ,العميل,الهاتف,العنوان,المدفوع مقدماً,المتبقي عند الاستلام,الحالة\n";
@@ -1909,7 +2340,7 @@
             let bonusSpins = parseInt(localStorage.getItem('rehab_bonus_spins') || '0');
 
             if (lastSpinDate === todayStr && bonusSpins <= 0) {
-                showCustomModal("🎡 لفتك اليومية", "لقد حصلت على هديتك اليوم! جرب حظك غداً.", "alert");
+                showCustomModal("🎡 لفتك اليومية", "لقد حصلت على هديتك اليوم! يمكنك الحصول على خصم يصل إلى 100% فوراً عبر إضافة أصدقائك لجروباتنا من زر (اكسب 100%).", "alert");
                 return;
             }
 
@@ -1928,6 +2359,7 @@
 
                 wheelCodesLog.unshift({ code: generatedCode, pct: discountPct, expires: endOfDay.getTime(), dateStr: new Date().toLocaleString('ar-EG'), used: false });
                 saveAllToStorage();
+                launchGoldenConfetti();
                 notifyOwnerInstantly(`🎡 كود خصم صادر من العجلة: ${generatedCode} (${discountPct}%)`);
                 document.getElementById('couponInput').value = generatedCode;
                 showCustomModal("🎉 مبروك!", `ربحت كود خصم (${discountPct}%)!\nالكود: [ ${generatedCode} ]`, "alert");
@@ -2024,6 +2456,7 @@
             if (!cart.length) {
                 container.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:25px 0; font-size:0.82rem;">السلة فارغة</div>`;
                 document.getElementById('cartTotalDisplay').textContent = '0 ج.م';
+                document.getElementById('cartSavingsBanner').style.display = 'none';
                 return;
             }
             container.innerHTML = cart.map(item => `
@@ -2040,13 +2473,20 @@
                 </div>
             `).join('');
             const disc = activeCoupon ? Math.round(subtotal * (activeCoupon.pct / 100)) : 0;
-            document.getElementById('cartTotalDisplay').textContent = `${subtotal - disc + wrapFee} ج.م`;
+            const savEl = document.getElementById('cartSavingsBanner');
+            if (disc > 0) {
+                savEl.style.display = 'block';
+                savEl.textContent = `🎉 لقد وفرت ${disc} ج.م في هذا الطلب بفضل كود الخصم!`;
+            } else {
+                savEl.style.display = 'none';
+            }
+            document.getElementById('cartTotalDisplay').textContent = `${Math.max(0, subtotal - disc) + wrapFee} ج.م`;
         }
 
         function applyCouponCode() {
             const val = document.getElementById('couponInput').value.trim().toUpperCase();
             const found = wheelCodesLog.find(c => c.code === val && !c.used && c.expires > Date.now());
-            if (found) { activeCoupon = found; renderCartInsideDrawer(); showCustomModal("✅ تم الخصم", `تم تفعيل خصم ${found.pct}%!`, "alert"); }
+            if (found) { activeCoupon = found; renderCartInsideDrawer(); showCustomModal("✅ تم الخصم", `تم تفعيل خصم ${found.pct}% بنجاح!`, "alert"); }
             else showCustomModal("⚠️ عفواً", "الكود غير صالح أو منتهي", "alert");
         }
 
@@ -2064,9 +2504,7 @@
         let logoTapTimer = null;
 
         function handleLogoTap() {
-            if (storeData.ownerDeviceToken && storeData.ownerDeviceToken !== myDeviceId) {
-                return;
-            }
+            if (storeData.ownerDeviceToken && storeData.ownerDeviceToken !== myDeviceId) return;
             logoTapCount++;
             clearTimeout(logoTapTimer);
             if (logoTapCount >= 5) {
@@ -2113,6 +2551,12 @@
             btn.classList.add('active');
         }
 
+        function printOrderShippingLabel(orderId) {
+            const o = ordersLog.find(x => x.id === orderId);
+            if (!o) return;
+            showCustomModal(`📦 بوليصة شحن #${o.id}`, `المستلم: ${o.name}\nالهاتف: ${o.phone}\nالعنوان: ${o.address}\nالوقت المفضل: ${o.deliveryTime || 'مساءً'}\n\n💰 المطلوب تحصيله عند الاستلام: ${o.remainingCOD} ج.م فقط`, "alert");
+        }
+
         function loadAdminDataIntoCMS() {
             if (!isAdminAuthenticated) return;
             document.getElementById('cfgStoreName').value = storeData.name;
@@ -2128,9 +2572,16 @@
             document.getElementById('cfgTt').value = storeData.tt;
             document.getElementById('cfgWa').value = storeData.wa;
             document.getElementById('cfgTg').value = storeData.tg;
+            document.getElementById('cfgWaGroupUrl').value = storeData.waGroupUrl || '';
+            document.getElementById('cfgTgGroupUrl').value = storeData.tgGroupUrl || '';
+            document.getElementById('cfgFbGroupUrl').value = storeData.fbGroupUrl || '';
+            document.getElementById('cfgViralStepMembers').value = storeData.viralStepMembers || 20;
+            document.getElementById('cfgViralStepDiscount').value = storeData.viralStepDiscount || 10;
+            document.getElementById('cfgViralStepCash').value = storeData.viralStepCash || 10;
             document.getElementById('cfgTgBotToken').value = storeData.tgBotToken || '';
             document.getElementById('cfgTgChatId').value = storeData.tgChatId || '';
             document.getElementById('cfgDefaultCommission').value = storeData.commissionPct || 10;
+            document.getElementById('cfgBlacklistPhones').value = storeData.blacklist || '';
 
             const lockBtn = document.getElementById('btnLockDeviceOnly');
             if (storeData.ownerDeviceToken === myDeviceId) {
@@ -2142,6 +2593,27 @@
                 lockBtn.style.background = "var(--gold)";
                 lockBtn.style.color = "#000";
             }
+
+            document.getElementById('viralReqCountBadge').textContent = viralSubmissions.filter(s => s.status === 'pending').length;
+            const vList = document.getElementById('adminViralSubmissionsList');
+            vList.innerHTML = viralSubmissions.length === 0 ? '<p style="font-size:0.76rem; color:var(--text-muted);">لا توجد طلبات مكافآت أعضاء حالياً.</p>' : viralSubmissions.map(s => `
+                <div style="background:var(--bg-input); border:1px solid var(--gold); border-radius:10px; padding:10px; margin-bottom:10px; font-size:0.76rem;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                        <strong>👤 العميل: ${s.name} (${s.phone})</strong>
+                        <span style="color:var(--success); font-weight:900;">أضاف: ${s.membersCount} عضو</span>
+                    </div>
+                    <div style="margin-bottom:4px; color:var(--gold);">المكافأة المطلوبة: <strong>${s.rewardType === 'discount' ? `كود خصم ${s.calcDiscount}%` : s.rewardType === 'cash' ? `تحويل كاش ${s.calcCash} ج.م` : s.rewardType}</strong></div>
+                    <div style="margin-bottom:6px; color:var(--text-muted);">أسماء عينة للمراجعة في الجروب: <strong>${s.sampleNames}</strong></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; text-align:center;">
+                        <div><img src="${s.imgAdd}" style="width:100%; height:90px; object-fit:cover; border-radius:6px; border:1px solid var(--border-color);"><div>إسكرين إضافة الأعضاء</div></div>
+                        <div><img src="${s.imgFollow}" style="width:100%; height:90px; object-fit:cover; border-radius:6px; border:1px solid var(--border-color);"><div>إسكرين متابعة الصفحات</div></div>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        ${s.status === 'pending' ? `<button class="modal-btn confirm" style="flex:1;" onclick="approveViralSubmission('${s.id}')">✅ تأكيد وإرسال المكافأة على واتساب</button>` : `<span style="color:var(--success); font-weight:900;">تم الاعتماد ${s.issuedCode ? `(الكود: ${s.issuedCode})` : ''} ✅</span>`}
+                        <button class="modal-btn cancel" style="color:var(--danger); border-color:var(--danger);" onclick="rejectAndBlockViralCheater('${s.id}')">🚫 رفض وحظر المزور</button>
+                    </div>
+                </div>
+            `).join('');
 
             const shipGrid = document.getElementById('govShippingGrid');
             shipGrid.innerHTML = EGYPT_27_GOVS.map(g => `
@@ -2185,9 +2657,19 @@
             `).join('');
 
             document.getElementById('adminOrdersLog').innerHTML = ordersLog.map(o => `
-                <div style="background:var(--bg-input); padding:8px; border-radius:8px; margin-bottom:6px; border-right:3px solid var(--gold);">
-                    <div><strong>#${o.id}</strong> — ${o.name} (${o.phone})</div>
-                    <div style="color:var(--success);">مدفوع مقدماً: ${o.paidNow} ج.م | متبقي استلام: ${o.remainingCOD} ج.م | ${o.payMethod}</div>
+                <div style="background:var(--bg-input); padding:8px; border-radius:8px; margin-bottom:6px; border-right:3px solid var(--gold); display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div><strong>#${o.id}</strong> — ${o.name} (${o.phone})</div>
+                        <div style="color:var(--success);">مدفوع مقدماً: ${o.paidNow} ج.م | متبقي استلام: ${o.remainingCOD} ج.م | ${o.payMethod}</div>
+                    </div>
+                    <button class="modal-btn confirm" style="padding:4px 8px; font-size:0.7rem;" onclick="printOrderShippingLabel('${o.id}')">🖨️ بوليصة</button>
+                </div>
+            `).join('');
+
+            document.getElementById('adminWheelCodesLog').innerHTML = wheelCodesLog.map(c => `
+                <div style="background:var(--bg-input); padding:6px 10px; border-radius:6px; margin-bottom:4px; display:flex; justify-content:space-between;">
+                    <span>الكود: <strong style="color:var(--gold);">${c.code}</strong> (خصم ${c.pct}%)</span>
+                    <span>${c.dateStr} — ${c.used ? 'تم استخدامه ✅' : 'نشط'}</span>
                 </div>
             `).join('');
         }
@@ -2417,6 +2899,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => document.getElementById('splash-screen').classList.add('hidden'), 1400);
             if (storeData.emergencyOff) document.getElementById('emergency-lock').style.display = 'flex';
+            document.getElementById('vipCoinsDisplay').textContent = vipCoins;
             applyStoreBrandingToUI();
             renderProductsGrid();
             updateCartBadgeAndUI();
